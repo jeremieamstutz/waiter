@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    background: white;
+}
+
+/* .imageWrapper {
+    position: sticky;
+    top: 0;
+    z-index: -1;
+} */
+/* 
+.imageWrapper {
+    padding: 1rem;
+    padding-bottom: 0;
+    margin-bottom: -0.5rem;
+} */
+
+.image {
+    border-radius: 0;
+    /* border-radius: 1rem; */
+}
+
+.actions {
+    padding: 0 1rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}

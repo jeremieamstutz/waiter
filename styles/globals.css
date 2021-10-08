@@ -1,16 +1,85 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+:root {
+	--color-primary: #aa0000;
+	--color-ok: green;
+	--color-warning: orange;
+	--color-danger: #aa0000;
+	--color-text-primary: #333333;
+	--color-text-secondary: #666666;
+	--color-text-tertiary: #999999;
+	--color-text-inverted: #ffffff;
+	--color-ui-primary: #aa0000;
+	--color-ui-secondary: #000;
+	--color-ui-tertiary: #eeeeee;
+	--color-ui-hover: #666;
+	--color-ui-ok: green;
+	--color-ui-warning: orange;
+	--color-ui-danger: red;
+
+	--margins: 1rem;
+	--paddings: 1rem;
+	--gaps: 1rem;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@font-face {
+	font-family: 'Gilroy';
+	src: url('/fonts/Gilroy/Gilroy-SemiBold.otf');
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'DM Sans';
+	src: url('/fonts/DM_Sans/DMSans-Medium.ttf');
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+}
+
+::selection {
+	background: var(--color-primary);
+	color: #fff;
+	/* color: var(--color-primary);
+	background: rgb(255, 220, 220); */
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+	font-weight: 500;
+	font-family: 'Gilroy', -apple-system, Segoe UI, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#__next {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+p,
+p * {
+	font-family: 'DM Sans', sans-serif;
+	line-height: 1.4em;
+	font-size: 1.0625em;
+	color: var(--color-text-secondary);
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 1.25rem;
+}
+
+.danger {
+	color: var(--color-danger);
+	border-color: var(--color-danger);
 }

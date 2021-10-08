@@ -1,0 +1,31 @@
+.container {
+	padding: 1rem;
+}
+
+.header {
+	margin: 2rem 0;
+}
+
+.logs {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.log {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.date {
+    color: var(--color-text-secondary)
+}
+
+.title {
+	margin: 0;
+}
+
+.text {
+	margin: 0;
+}

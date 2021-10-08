@@ -1,0 +1,97 @@
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a,
+button {
+	touch-action: manipulation;
+}
+
+button,
+a.button {
+	background: transparent;
+	border: 2px solid var(--color-ui-secondary);
+	height: 48px;
+	padding: calc(var(--paddings) / 2) var(--paddings);
+	font-size: 1.0625em;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.1s ease-in-out;
+	outline: none;
+}
+
+button.secondary,
+a.button.secondary {
+	background: var(--color-ui-secondary);
+	color: var(--color-text-inverted);
+}
+
+button:hover,
+button.secondary:hover,
+a.button:hover,
+button:focus,
+button.secondary:focus,
+a.button:focus {
+	color: white;
+	background: var(--color-ui-hover);
+	border: 2px solid var(--color-ui-hover);
+}
+
+input,
+textarea,
+select {
+	border: 2px solid transparent;
+    outline: none;
+    background: var(--color-ui-tertiary);
+    border-radius: 0.5rem;
+    line-height: 1.5rem;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    resize: none;
+}
+
+input,
+textarea {
+    font-family: 'DM Sans', sans-serif;
+}
+
+select {
+    min-width: 6rem;
+}
+
+::placeholder {
+	color: var(--color-text-secondary)
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	border: 2px solid var(--color-ui-hover);
+}
+
+label {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--color-ui-tertiary);
+    border-radius: 0.5rem;
+}
+
+.input-group input {
+    flex: 1;
+}
+
+img {
+	border-radius: 0.5rem;
+	background: var(--color-ui-tertiary);
+}

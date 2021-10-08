@@ -1,0 +1,7 @@
+.button {
+    padding: 0;
+    height: 3rem;
+    width: 3rem;
+    z-index: 2;
+    border-radius: 50%;
+}

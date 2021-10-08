@@ -1,0 +1,45 @@
+.container {
+    cursor: pointer;
+    background: var(--color-ui-tertiary);
+    border-radius: 0.5rem;
+	font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: 2px solid transparent;
+    width: 100%;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+}
+
+.container:focus,
+.active {
+    border-color: var(--color-ui-hover);
+}
+
+.logo {
+    color: var(--color-text-secondary);
+}
+
+.text {
+    margin: 0;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.reject {
+    background: #ffdddd;
+    border-color: var(--color-ui-danger);
+}
+
+.image {
+    align-self: stretch;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: left;
+}

@@ -1,0 +1,39 @@
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.ring {
+	display: inline-block;
+	width: 4rem;
+	height: 4rem;
+}
+
+.ring:after {
+	content: ' ';
+	display: block;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+	border: 6px solid var(--color-primary);
+	border-color: var(--color-primary) transparent var(--color-primary) transparent;
+	animation: ring 0.8s linear infinite;
+}
+
+
+@keyframes ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

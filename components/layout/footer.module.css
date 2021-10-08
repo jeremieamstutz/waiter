@@ -1,0 +1,22 @@
+.footer {
+    background: var(--color-ui-tertiary);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: auto;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.0625rem;
+}
+
+.slogan {
+    margin: 0;
+}
+
+.link {
+    color: var(--color-primary);
+}

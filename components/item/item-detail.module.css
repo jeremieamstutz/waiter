@@ -1,0 +1,44 @@
+.image {
+    border-radius: 0;
+}
+
+.container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.name {
+    margin: 0;
+}
+
+.description {
+    margin: 0;
+}
+
+.price {
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.allergies {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.allergy {
+    display: flex;
+    align-items: center;
+    background: var(--color-ui-tertiary);
+    height: 2rem;
+    padding: 0 1.125rem;
+    border-radius: 1rem;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}

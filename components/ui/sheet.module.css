@@ -1,0 +1,42 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: #000000;
+    opacity: 0.5;
+}
+
+/* .container {
+    pointer-events: none;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+} */
+
+/* .modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: all;
+    background: #ffffff;
+    width: 100vw;
+    height: 200px;
+} */
+
+.sheet {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 20;
+    background: white;
+    padding: 1rem;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

@@ -1,0 +1,40 @@
+.container {
+    /* background: white; */
+}
+
+.header {
+    padding: 0.5rem 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    margin: 0;
+}
+
+.description {
+    margin: 0;
+    margin-top: 0.125rem;
+}
+
+.actions {
+    padding: 0;
+    display: flex;
+    border: none;
+    width: 3rem;
+    height: 3rem;
+}
+
+.list {
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 1rem;
+    align-items: stretch;
+}
+
+.newItem {
+
+}
