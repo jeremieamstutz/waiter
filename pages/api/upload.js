@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid'
 import AWS from 'aws-sdk'
+import { DateTime } from 'luxon'
 
 import statusCode from '../../utils/statusCodes'
 import { createUploadedImage } from 'utils/db'
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
 
 			const params = {
 				Bucket: process.env.SPACE_BUCKET,
-				Expires: 30,
+				Expires: 3600,
 				Key: uuid(),
 				ContentType: type,
 				ACL: 'public-read',
