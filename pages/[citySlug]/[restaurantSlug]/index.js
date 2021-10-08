@@ -14,7 +14,7 @@ import {
 	getRestaurant,
 	getRestaurantItems,
 	getRestaurantCategories,
-	// getRestaurantsSlugs,
+	getRestaurantsSlugs,
 } from 'utils/db'
 
 import classes from 'styles/restaurant.module.css'
@@ -139,15 +139,15 @@ export default function RestaurantPage({ restaurant }) {
 	)
 }
 
-// export async function getStaticPaths() {
-// 	const restaurantsSlug = await getRestaurantsSlugs()
-// 	return {
-// 		paths: restaurantsSlug.map((restaurant) => ({ params: restaurant })),
-// 		fallback: 'blocking',
-// 	}
-// }
+export async function getStaticPaths() {
+	const restaurantsSlug = await getRestaurantsSlugs()
+	return {
+		paths: restaurantsSlug.map((restaurant) => ({ params: restaurant })),
+		fallback: 'blocking',
+	}
+}
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
 	const { restaurantSlug, citySlug } = params
 	const restaurant = await getRestaurant({ restaurantSlug, citySlug })
 
@@ -173,5 +173,6 @@ export async function getServerSideProps({ params }) {
 		props: {
 			restaurant: restaurant,
 		},
+		revalidate: 1
 	}
 }
