@@ -1,6 +1,7 @@
 .footer {
     background: var(--color-ui-tertiary);
     padding: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
     align-items: center;

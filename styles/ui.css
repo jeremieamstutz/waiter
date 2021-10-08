@@ -10,11 +10,12 @@ button {
 
 button,
 a.button {
+	color: var(--color-ui-secondary);
 	background: transparent;
 	border: 2px solid var(--color-ui-secondary);
 	height: 48px;
 	padding: calc(var(--paddings) / 2) var(--paddings);
-	font-size: 1.0625em;
+	font-size: 1.125em;
 	border-radius: 0.5rem;
 	cursor: pointer;
 	display: flex;
