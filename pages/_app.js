@@ -14,7 +14,7 @@ import 'styles/ui.css'
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default function Waiter({ Component, pageProps, router }) {
-	useScrollRestoration(router)
+	// useScrollRestoration(router)
 
 	useEffect(() => {
 		const handleRouteChange = () => {
