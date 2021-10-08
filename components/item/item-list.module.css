@@ -6,6 +6,7 @@
     padding: 0.5rem 1rem 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .name {
@@ -21,8 +22,16 @@
     padding: 0;
     display: flex;
     border: none;
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    
+}
+
+.actions:focus, .actions:hover {
+    color: var(--color-primary-secondary);
+    border: none;
+    background: var(--color-ui-tertiary);
 }
 
 .list {
@@ -33,8 +42,4 @@
     scroll-snap-type: x mandatory;
     scroll-padding: 1rem;
     align-items: stretch;
-}
-
-.newItem {
-
 }

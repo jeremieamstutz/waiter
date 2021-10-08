@@ -1,12 +1,16 @@
 import Link from 'next/link'
+import { useState } from 'react'
 
 import ItemCard from './item-card'
+import Sheet from 'components/ui/sheet'
 
 import classes from './item-list.module.css'
 import { useRouter } from 'next/router'
 
 export default function ItemList({ category, items }) {
 	const router = useRouter()
+	
+	const [showSheet, setShowSheet] = useState(false)
 	return (
 		<section className={classes.container}>
 			<div className={classes.header}>
@@ -16,7 +20,8 @@ export default function ItemList({ category, items }) {
 						{category.description}
 					</p>
 				</div>
-				<button className={classes.actions}>
+				<button className={classes.actions} onClick={(event) => {setShowSheet(true)
+				event.target.blur()}}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width={24}
@@ -33,6 +38,49 @@ export default function ItemList({ category, items }) {
 						/>
 					</svg>
 				</button>
+				{showSheet && (
+					<Sheet onClose={() => setShowSheet(false)}>
+						<h2 style={{margin: 0, marginBottom: '0.75rem', textAlign: 'center'}}>Options</h2>
+						<Link
+							href={{
+								pathname: router.pathname + '/new-item',
+								query: {
+									...router.query,
+								},
+							}}
+						>
+							<a className="button secondary">New item</a>
+						</Link>
+						<div />
+						<Link
+							href={{
+								pathname: router.pathname + '/edit-category',
+								query: {
+									...router.query,
+								},
+							}}
+						>
+							<a className="button">Edit category</a>
+						</Link>
+						<Link
+							href={{
+								pathname: router.pathname + '/new-category',
+								query: {
+									...router.query,
+								},
+							}}
+						>
+							<a className="button">New category</a>
+						</Link>
+						<button
+							className="button danger"
+							onClick={() => setShowSheet(false)}
+							style={{ marginTop: '0.75rem' }}
+						>
+							Cancel
+						</button>
+					</Sheet>
+				)}
 			</div>
 			<div className={classes.list}>
 				{/* <ItemCard

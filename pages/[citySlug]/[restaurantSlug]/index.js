@@ -1,11 +1,13 @@
+
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 
 import Header from 'components/restaurant/header'
 import Footer from 'components/layout/footer'
 import ItemList from 'components/item/item-list'
-import Sheet from 'components/ui/sheet'
 
 import { RestaurantProvider } from 'contexts/restaurant'
 import {
@@ -16,8 +18,6 @@ import {
 } from 'utils/db'
 
 import classes from 'styles/restaurant.module.css'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
 
 export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
@@ -25,29 +25,7 @@ export default function RestaurantPage({ restaurant }) {
 
 	return (
 		<RestaurantProvider initialValue={restaurant}>
-			<Sheet>
-				<h2 style={{margin: 0}}>Sheet</h2>
-				<Link
-					href={{
-						pathname: router.pathname + '/new-category',
-						query: {
-							...router.query,
-						},
-					}}
-				>
-					<a className="button">New category</a>
-				</Link>
-				<Link
-					href={{
-						pathname: router.pathname + '/new-item',
-						query: {
-							...router.query
-						},
-					}}
-				>
-					<a className="button">New item</a>
-				</Link>
-			</Sheet>
+			
 			<Head>
 				<title>{restaurant.name} - Waiter</title>
 				<meta name="description" content={restaurant.description} />
@@ -119,7 +97,7 @@ export default function RestaurantPage({ restaurant }) {
 						/>
 						{!loading && session && (
 							<div className={classes.actions}>
-								<Link
+								{/* <Link
 									href={{
 										pathname: router.pathname + '/new-item',
 										query: {
@@ -129,7 +107,7 @@ export default function RestaurantPage({ restaurant }) {
 									}}
 								>
 									<a className="button">New item</a>
-								</Link>
+								</Link> */}
 							</div>
 						)}
 					</div>

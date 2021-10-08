@@ -7,31 +7,34 @@ export default function Home() {
 
 	return (
 		<div>
-			{!loading && !session ? (
-				<button
-					onClick={() =>
-						signIn(null, {
-							callbackUrl: 'http://localhost:3000/test',
-						})
-					}
-				>
-					Sign in
-				</button>
-			) : (
-				<button
-					onClick={() =>
-						signOut({ callbackUrl: 'http://localhost:3000/test' })
-					}
-				>
-					Sign out
-				</button>
-			)}
+			{!loading &&
+				(!session ? (
+					<button
+						onClick={() =>
+							signIn(null, {
+								callbackUrl: 'http://localhost:3000/test',
+							})
+						}
+					>
+						Sign in
+					</button>
+				) : (
+					<button
+						onClick={() =>
+							signOut({
+								callbackUrl: 'http://localhost:3000/test',
+							})
+						}
+					>
+						Sign out
+					</button>
+				))}
 			<Link
 				href={{
 					pathname: '/[citySlug]/[restaurantSlug]',
 					query: {
 						citySlug: 'lausanne',
-						restaurantSlug: 'holycow'
+						restaurantSlug: 'holycow',
 					},
 				}}
 			>

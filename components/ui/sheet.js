@@ -1,6 +1,8 @@
 import { useEffect, useCallback } from 'react'
 import Portal from 'components/misc/portal'
 
+import useLockBodyScroll from 'hooks/useLockBodyScroll'
+
 import classes from './sheet.module.css'
 
 const Backdrop = ({ onClick }) => (
@@ -8,14 +10,12 @@ const Backdrop = ({ onClick }) => (
 )
 
 const Overlay = ({ children, onClose }) => {
-	return (
-		<div className={classes.sheet}>
-			<div className={classes.body}>{children}</div>
-		</div>
-	)
+	return <div className={classes.sheet}>{children}</div>
 }
 
 export default function Sheet({ children, onClose }) {
+	useLockBodyScroll()
+
 	const escape = useCallback(
 		(event) => {
 			if (event.keyCode === 27) {
