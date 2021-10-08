@@ -5,9 +5,9 @@ import statusCode from '../../utils/statusCodes'
 import { createUploadedImage } from 'utils/db'
 
 const s3 = new AWS.S3({
-	endpoint: new AWS.Endpoint(process.env.SPACES_ENDPOINT),
-	accessKeyId: process.env.SPACES_ACCESS_KEY_ID,
-	secretAccessKey: process.env.SPACE_SECRET_ACCESS_KEY,
+	endpoint: new AWS.Endpoint(process.env.SPACE_ENDPOINT),
+	accessKeyId: process.env.SPACE_ID,
+	secretAccessKey: process.env.SPACE_SECRET,
 	signatureVersion: 'v4',
 })
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 			}
 
 			const params = {
-				Bucket: process.env.SPACES_BUCKET,
+				Bucket: process.env.SPACE_BUCKET,
 				Expires: 30,
 				Key: uuid(),
 				ContentType: type,
