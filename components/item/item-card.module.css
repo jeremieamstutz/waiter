@@ -1,12 +1,14 @@
 .container {
-    flex-shrink: 0;
     scroll-snap-align: start;
-    width: 144px;
     cursor: pointer;
-    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
+    height: 100%;
+}
+
+.image {
+    width: 10rem;
 }
 
 .title {
