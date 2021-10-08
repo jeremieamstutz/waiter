@@ -24,7 +24,7 @@
 
 .description {
     margin: 0;
-    line-height: 1.25rem;
+    line-height: 120%;
     /* height: 2.5rem; */
     display: -webkit-box;
 	-webkit-line-clamp: 2;

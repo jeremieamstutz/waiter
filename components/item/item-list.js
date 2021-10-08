@@ -40,7 +40,7 @@ export default function ItemList({ category, items }) {
 				</button>
 				{showSheet && (
 					<Sheet onClose={() => setShowSheet(false)}>
-						<h2 style={{margin: 0, marginBottom: '0.75rem', textAlign: 'center'}}>Options</h2>
+						{/* <h2 style={{margin: 0, marginBottom: '0.75rem', textAlign: 'center'}}>Options</h2> */}
 						<Link
 							href={{
 								pathname: router.pathname + '/new-item',
