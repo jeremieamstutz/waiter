@@ -12,9 +12,8 @@ export default function AboutPage({ restaurant }) {
 			<div className={classes.container}>
 				<h1>About {restaurant.name}</h1>
 				<p>{restaurant.description}</p>
-				<p>{restaurant.address}</p>
 				<Image
-					src={`${process.env.NEXT_PUBLIC_DOMAIN}/api/qrcode?url=${process.env.NEXT_PUBLIC_DOMAIN}/lausanne/holycow`}
+					src={`${process.env.NEXT_PUBLIC_DOMAIN}/api/qrcode?url=${process.env.NEXT_PUBLIC_DOMAIN}/${restaurant.citySlug}/${restaurant.restaurantSlug}`}
 					alt={`${restaurant.name}'s QR code`}
 					width={375}
 					height={375}

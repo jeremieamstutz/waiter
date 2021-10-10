@@ -102,7 +102,7 @@ export async function getItemsSlugs() {
 
 export async function getRestaurant({ restaurantSlug, citySlug }) {
 	const result = await query(
-		`SELECT restaurants.*, addresses.* FROM restaurants 
+		`SELECT restaurants.*, restaurants.slug AS "restaurantSlug", cities.slug as "citySlug" FROM restaurants 
 		JOIN addresses ON addresses.id = restaurants.address 
 		JOIN cities ON cities.id = addresses.city 
 		WHERE restaurants.slug = $1 AND cities.slug = $2`,
