@@ -50,7 +50,13 @@ export default function ItemForm({ item }) {
 					})
 				}
 				// await sleep(2000)
-				router.push('/lausanne/holycow')
+				router.push({
+					pathname: '/[citySlug]/[restaurantSlug]',
+					query: {
+						citySlug: router.query.citySlug,
+						restaurantSlug: router.query.restaurantSlug
+					}
+				})
 			}}
 		>
 			{({ values, setFieldValue, isSubmitting }) => (

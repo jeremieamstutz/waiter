@@ -25,7 +25,6 @@ export default function RestaurantPage({ restaurant }) {
 
 	return (
 		<RestaurantProvider initialValue={restaurant}>
-			
 			<Head>
 				<title>{restaurant.name} - Waiter</title>
 				<meta name="description" content={restaurant.description} />
@@ -122,7 +121,7 @@ export default function RestaurantPage({ restaurant }) {
 								},
 							}}
 						>
-							<a className="button secondary">New category</a>
+							<a className="button">New category</a>
 						</Link>
 						<Link
 							href={{
@@ -168,11 +167,12 @@ export async function getStaticProps({ params }) {
 		value: 4.9,
 		count: 10,
 	}
+	restaurant.isOpen = true
 
 	return {
 		props: {
 			restaurant: restaurant,
 		},
-		revalidate: 1
+		revalidate: 60
 	}
 }

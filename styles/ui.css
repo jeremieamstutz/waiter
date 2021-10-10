@@ -11,8 +11,10 @@ button {
 button,
 a.button {
 	color: var(--color-ui-secondary);
-	background: transparent;
-	border: 2px solid var(--color-ui-secondary);
+	/* background: transparent; */
+	/* border: 2px solid var(--color-ui-secondary); */
+	background: var(--color-ui-tertiary);
+	border: 1px solid #ddd;
 	height: 48px;
 	padding: calc(var(--paddings) / 2) var(--paddings);
 	font-size: 1.125em;
@@ -28,18 +30,28 @@ a.button {
 button.secondary,
 a.button.secondary {
 	background: var(--color-ui-secondary);
+	border: 1px solid #000;
 	color: var(--color-text-inverted);
 }
 
-button:hover,
-button.secondary:hover,
-a.button:hover,
-button:focus,
-button.secondary:focus,
-a.button:focus {
+button.danger,
+a.button.danger {
+	background: rgb(226, 0, 0);
 	color: white;
-	background: var(--color-ui-hover);
-	border: 2px solid var(--color-ui-hover);
+}
+
+button:hover,
+button:focus,
+a.button:hover,
+a.button:focus {
+	background: #ddd;
+}
+
+button.secondary:hover,
+button.secondary:focus,
+a.button.secondary:hover,
+a.button.secondary:focus {
+	background: #444;
 }
 
 input,

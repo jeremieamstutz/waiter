@@ -3,12 +3,12 @@
 	--color-ok: green;
 	--color-warning: orange;
 	--color-danger: #aa0000;
-	--color-text-primary: #333333;
+	--color-text-primary: #222222;
 	--color-text-secondary: #666666;
 	--color-text-tertiary: #999999;
 	--color-text-inverted: #ffffff;
 	--color-ui-primary: #aa0000;
-	--color-ui-secondary: #000;
+	--color-ui-secondary: #222222;
 	--color-ui-tertiary: #eeeeee;
 	--color-ui-hover: #666;
 	--color-ui-ok: green;
@@ -47,6 +47,7 @@
 	box-sizing: border-box;
 	font-weight: 500;
 	font-family: 'Gilroy', -apple-system, Segoe UI, sans-serif;
+	color: var(--color-text-primary);
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: transparent;
 }
@@ -76,6 +77,10 @@ h1 {
 }
 
 h2 {
+	font-size: 1.375rem;
+}
+
+h3 {
 	font-size: 1.25rem;
 }
 

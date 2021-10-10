@@ -3,7 +3,7 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: 0.25rem;
     height: 100%;
 }
 
@@ -24,8 +24,6 @@
 
 .description {
     margin: 0;
-    line-height: 120%;
-    /* height: 2.5rem; */
     display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;

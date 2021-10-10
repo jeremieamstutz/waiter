@@ -1,17 +1,22 @@
 import ItemForm from 'components/item/item-form'
-import { 
-	getItem, 
-	// getItemsSlugs 
+import Footer from 'components/layout/footer'
+
+import {
+	getItem,
+	// getItemsSlugs
 } from 'utils/db'
 
 import classes from 'styles/edit-item.module.css'
 
 export default function EditItemPage({ item }) {
 	return (
-		<div className={classes.container}>
-			<h1 className={classes.title}>Edit item</h1>
-			<ItemForm item={item} />
-		</div>
+		<>
+			<div className={classes.container}>
+				<h1 className={classes.title}>Edit item</h1>
+				<ItemForm item={item} />
+			</div>
+			<Footer />
+		</>
 	)
 }
 

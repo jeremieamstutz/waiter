@@ -49,9 +49,8 @@ export default function ItemList({ category, items }) {
 								},
 							}}
 						>
-							<a className="button secondary">New item</a>
+							<a className="button">New item</a>
 						</Link>
-						<div />
 						<Link
 							href={{
 								pathname: router.pathname + '/edit-category',
@@ -62,7 +61,7 @@ export default function ItemList({ category, items }) {
 						>
 							<a className="button">Edit category</a>
 						</Link>
-						<Link
+						{/* <Link
 							href={{
 								pathname: router.pathname + '/new-category',
 								query: {
@@ -71,9 +70,9 @@ export default function ItemList({ category, items }) {
 							}}
 						>
 							<a className="button">New category</a>
-						</Link>
+						</Link> */}
 						<button
-							className="button danger"
+							className="button secondary"
 							onClick={() => setShowSheet(false)}
 							style={{ marginTop: '0.75rem' }}
 						>
@@ -83,14 +82,6 @@ export default function ItemList({ category, items }) {
 				)}
 			</div>
 			<div className={classes.list}>
-				{/* <ItemCard
-					item={{
-						name: 'New item',
-						description: 'Add a new item to Beef Burgers',
-						price: 0,
-						image: '/',
-					}}
-				/> */}
 				{items.map((item, index) => (
 					<Link
 						href={{
