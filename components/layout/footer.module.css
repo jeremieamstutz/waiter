@@ -31,8 +31,3 @@
     color: var(--color-text-tertiary);
     font-family: 'DM Sans', sans-serif;
 }
-
-.separator {
-    color: var(--color-text-tertiary);
-    opacity: 0.8;
-}

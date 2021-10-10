@@ -11,15 +11,11 @@ export default function Footer() {
 					<a className={classes.brand}>waiter.so</a>
 				</Link>
 			</h3>
-            <div className={classes.links}>
-			<Link href="/terms">
-				<a className={classes.link}>Terms</a>
-			</Link>
-            <span className={classes.separator}>·</span>
-            <Link href="/terms">
-				<a className={classes.link}>Privacy</a>
-			</Link>
-            </div>
+			<div className={classes.links}>
+				<Link href="/terms">
+					<a className={classes.link}>Terms & Privacy</a>
+				</Link>
+			</div>
 			{/* <p className={classes.slogan}>Commandez en ligne. Dégustez sur place.</p> */}
 		</footer>
 	)

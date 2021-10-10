@@ -87,7 +87,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-	border: 2px solid var(--color-ui-hover);
+	border-color: var(--color-ui-hover);
 }
 
 label {

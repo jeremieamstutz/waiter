@@ -61,6 +61,7 @@ export default function ItemList({ category, items }) {
 						>
 							<a className="button">Edit category</a>
 						</Link>
+						<button>Delete category</button>
 						{/* <Link
 							href={{
 								pathname: router.pathname + '/new-category',
