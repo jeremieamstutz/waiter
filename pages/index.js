@@ -16,7 +16,7 @@ export default function Home({ restaurants }) {
 				<h1 style={{}}>waiter.so</h1>
 				<h2>Burgers</h2>
 				<div style={{ display: 'flex' }}>
-					{restaurants.map((restaurant) => (
+					{restaurants.map((restaurant, index) => (
 						<Link
 							href={{
 								pathname: '/[citySlug]/[restaurantSlug]',
@@ -25,6 +25,7 @@ export default function Home({ restaurants }) {
 									restaurantSlug: restaurant.restaurantSlug,
 								},
 							}}
+							key={index}
 						>
 							<a>
 								<div>

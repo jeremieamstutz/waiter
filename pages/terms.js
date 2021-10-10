@@ -58,7 +58,7 @@ export default function TermsPage() {
 				Les présentes Conditions Générales de Service s’appliquent sans
 				limitation ni réserve à tout achat des services suivants:
 				<ul>
-					<li>Présence d'un restaurant sur la plateforme</li>
+					<li>Présence d&apos;un restaurant sur la plateforme</li>
 					<li>Achat de crédits de marketing</li>
 				</ul>
 			</p>
@@ -184,7 +184,7 @@ export default function TermsPage() {
 			<p>
 				Le Client peut souscrire à deux formes d’abonnement:
 				<ul>
-					<li>Version d'essai pour une durée de 30 jours</li>
+					<li>Version d&apos;essai pour une durée de 30 jours</li>
 					<li>Abonnement standard</li>
 				</ul>
 			</p>
