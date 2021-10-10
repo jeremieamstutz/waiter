@@ -169,3 +169,5 @@ CREATE TABLE uploadedImages (
     url VARCHAR(500) PRIMARY KEY UNIQUE,
     createdAt TIMESTAMPTZ NOT NULL DEFAULT NOW()
 )
+
+UPDATE restaurants SET name = 'Burger Company';
