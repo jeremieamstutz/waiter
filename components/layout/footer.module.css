@@ -18,6 +18,21 @@
     margin: 0;
 }
 
-.link {
+.brand {
     color: var(--color-primary);
+}
+
+.links {
+    display: flex;
+    gap: 0.5rem
+}
+
+.link {
+    color: var(--color-text-tertiary);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.separator {
+    color: var(--color-text-tertiary);
+    opacity: 0.8;
 }
