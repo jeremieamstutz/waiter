@@ -14,7 +14,7 @@ import 'styles/ui.css'
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default function Waiter({ Component, pageProps, router }) {
-	useScrollRestoration(router)
+	// useScrollRestoration(router)
 
 	useEffect(() => {
 		const handleRouteChange = () => {
@@ -49,12 +49,11 @@ export default function Waiter({ Component, pageProps, router }) {
 				}}
 			>
 				<Providers>
-					<SessionProvider
-						session={pageProps.session}
-					></SessionProvider>
+					<SessionProvider session={pageProps.session}>
+						<Component {...pageProps} />
+					</SessionProvider>
 				</Providers>
 			</SWRConfig>
-			<Component {...pageProps} />
 		</>
 	)
 }
