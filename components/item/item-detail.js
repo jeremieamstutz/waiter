@@ -29,7 +29,7 @@ export default function ItemDetail({ item }) {
 	// 	'Celery',
 	// 	'Sulphite'
 	// ]
-	// item.allergies = ['Gluten', 'Mustard']
+	item.allergies = ['Gluten', 'Mustard']
 	const handleDeleteItem = async () => {
 		await axios.delete(`/api/items/${item.id}`)
 		router.push({
@@ -67,7 +67,7 @@ export default function ItemDetail({ item }) {
 					objectFit="cover"
 					objectPosition="left"
 					width={375}
-					height={500}
+					height={470} // 500
 					priority={true}
 				/>
 				<div className={classes.container}>

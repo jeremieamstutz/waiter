@@ -80,7 +80,7 @@ export default function RestaurantPage({ restaurant }) {
 					layout="responsive"
 					objectFit="cover"
 					width={375}
-					height={500}
+					height={470} // 500
 					priority={true}
 				/>
 			</div>
