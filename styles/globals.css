@@ -68,7 +68,7 @@ p,
 p * {
 	font-family: 'DM Sans', sans-serif;
 	line-height: 130%;
-	font-size: 1.125em;
+	font-size: 1.125rem;
 	color: var(--color-text-secondary);
 }
 

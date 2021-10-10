@@ -8,6 +8,10 @@ button {
 	touch-action: manipulation;
 }
 
+.link {
+	color: var(--color-primary);
+}
+
 button,
 a.button {
 	color: var(--color-ui-secondary);
