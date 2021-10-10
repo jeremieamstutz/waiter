@@ -49,11 +49,12 @@ export default function Waiter({ Component, pageProps, router }) {
 				}}
 			>
 				<Providers>
-					<SessionProvider session={pageProps.session}>
-						<Component {...pageProps} />
-					</SessionProvider>
+					<SessionProvider
+						session={pageProps.session}
+					></SessionProvider>
 				</Providers>
 			</SWRConfig>
+			<Component {...pageProps} />
 		</>
 	)
 }
