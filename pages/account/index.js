@@ -16,7 +16,7 @@ export default function AccountPage({ user }) {
 				{session && (
 					<div style={{ padding: '1rem' }}>
 						<button
-							onClick={signOut}
+							onClick={() => signOut({ callbackUrl: '/' })}
 							style={{ width: '100%' }}
 							className="secondary"
 						>
