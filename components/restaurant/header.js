@@ -7,27 +7,19 @@ import { useRestaurant } from 'contexts/restaurant'
 import classes from './header.module.css'
 import { useEffect } from 'react'
 import axios from 'axios'
+import useSWR, { useSWRConfig } from 'swr'
 
 export default function Header() {
 	const { restaurant, setRestaurant } = useRestaurant()
 	const router = useRouter()
 	const [session, loading] = useSession()
 
-	useEffect(() => {
-		const fetchLike = async () => {
-			if (!session) return
-			const res = await axios.get(
-				`/api/restaurants/${restaurant.id}/like`,
-			)
-			setRestaurant((restaurant) => ({
-				...restaurant,
-				like: res.data.like,
-			}))
-		}
-		fetchLike()
-	}, [session, restaurant.id, setRestaurant])
+	const { mutate } = useSWRConfig()
+	const { data } = useSWR(`/api/restaurants/${restaurant.id}/like`)
 
-	const handleLikeRestaurant = () => {
+	const favorite = data?.like
+
+	const handleLikeRestaurant = async () => {
 		if (!session) {
 			return router.push({
 				pathname: '/account/login',
@@ -37,13 +29,20 @@ export default function Header() {
 			})
 		}
 
-		axios.post(`/api/restaurants/${restaurant.id}/like`, {
-			like: !restaurant.like,
-		})
-		setRestaurant((restaurant) => ({
-			...restaurant,
-			like: !restaurant.like,
-		}))
+		mutate(
+			`/api/restaurants/${restaurant.id}/like`,
+			{ like: !favorite },
+			false,
+		)
+
+
+		mutate(
+			`/api/restaurants/${restaurant.id}/like`,
+			axios.post(`/api/restaurants/${restaurant.id}/like`, {
+				like: !favorite,
+			}).then((res) => res.data),
+			false,
+		)
 	}
 
 	return (
@@ -53,7 +52,7 @@ export default function Header() {
 					{restaurant.name}
 					<button
 						className={`${classes.like} ${
-							restaurant.like ? classes.active : ''
+							favorite ? classes.active : ''
 						}`}
 						onClick={handleLikeRestaurant}
 					>
