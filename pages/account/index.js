@@ -13,18 +13,18 @@ export default function AccountPage({ user }) {
 				<select>
 					<option>Français</option>
 				</select>
+				{session && (
+					<div style={{ padding: '1rem' }}>
+						<button
+							onClick={signOut}
+							style={{ width: '100%' }}
+							className="secondary"
+						>
+							Sign out
+						</button>
+					</div>
+				)}
 			</div>
-			{session && (
-				<div style={{ padding: '1rem' }}>
-					<button
-						onClick={signOut}
-						style={{ width: '100%' }}
-						className="secondary"
-					>
-						Sign out
-					</button>
-				</div>
-			)}
 			<Header />
 		</>
 	)
@@ -34,8 +34,8 @@ export async function getServerSideProps() {
 	return {
 		props: {
 			user: {
-				name: 'Jérémie'
-			}
-		}
+				name: 'Jérémie',
+			},
+		},
 	}
 }
