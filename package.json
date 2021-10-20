@@ -5,18 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap --config sitemap.js",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "aws-sdk": "^2.1004.0",
-    "axios": "^0.21.4",
+    "aws-sdk": "^2.1007.0",
+    "axios": "^0.22.0",
     "formik": "^2.2.9",
     "knex": "^0.95.11",
     "luxon": "^2.0.2",
-    "next": "11.0.1",
-    "next-auth": "^3.29.0",
-    "next-sitemap": "^1.6.179",
+    "next": "^11.1.2",
+    "next-auth": "*",
+    "next-sitemap": "^1.6.184",
     "pg": "^8.7.1",
     "qrcode": "^1.4.4",
     "react": "17.0.2",
@@ -24,11 +25,10 @@
     "react-dropzone": "^11.4.2",
     "sharp": "^0.29.1",
     "slugify": "^1.6.1",
-    "sqlite3": "^5.0.2",
     "swiper": "^7.0.8",
     "swr": "^1.0.1",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "eslint": "7.32.0",

@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { getSession, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 
 import Header from 'components/layout/header'
 import RestaurantHeader from 'components/restaurant/header'
@@ -163,12 +163,6 @@ export async function getStaticProps({ params }) {
 		restaurantSlug,
 		citySlug,
 	})
-
-	// const session = await getSession({ req })
-
-	// restaurant.like = (await getLike(restaurant.id, session.user.id))
-	// 	? true
-	// 	: false
 
 	restaurant.items = items
 	restaurant.categories = categories

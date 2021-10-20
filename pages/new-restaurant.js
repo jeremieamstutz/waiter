@@ -1,3 +1,7 @@
 export default function NewRestaurantPage() {
-    return (<h1>New restaurant</h1>)
+    return (
+        <div className="container">
+            <h1>New restaurant</h1>
+        </div>
+    )
 }
