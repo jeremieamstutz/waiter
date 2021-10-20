@@ -10,7 +10,11 @@ const Backdrop = ({ onClick }) => (
 )
 
 const Overlay = ({ children, onClose }) => {
-	return <div className={classes.sheet}>{children}</div>
+	return (
+		<div className={classes.container}>
+			<div className={classes.sheet}>{children}</div>
+		</div>
+	)
 }
 
 export default function Sheet({ children, onClose }) {

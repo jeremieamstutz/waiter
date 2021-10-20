@@ -5,8 +5,6 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
 import axios from 'axios'
 
-import Footer from 'components/layout/footer'
-
 import classes from './item-detail.module.css'
 
 export default function ItemDetail({ item }) {
@@ -29,7 +27,6 @@ export default function ItemDetail({ item }) {
 	// 	'Celery',
 	// 	'Sulphite'
 	// ]
-	item.allergies = ['Gluten', 'Mustard']
 	const handleDeleteItem = async () => {
 		await axios.delete(`/api/items/${item.id}`)
 		router.push({
@@ -105,7 +102,6 @@ export default function ItemDetail({ item }) {
 					)}
 				</div>
 			</section>
-			<Footer />
 		</>
 	)
 }

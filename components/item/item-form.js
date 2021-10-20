@@ -40,22 +40,23 @@ export default function ItemForm({ item }) {
 			onSubmit={async (values) => {
 				if (!item) {
 					await axios.post('/api/items', {
-						...values,
-						category: router.query.category,
+						item: {
+							...values,
+							category: router.query.category,
+						},
+						citySlug: router.query.citySlug,
+						restaurantSlug: router.query.restaurantSlug,
 					})
 				} else {
-					await axios.put(`/api/items/${item.id}`, {
-						...values,
-						category: router.query.category,
-					})
+					await axios.put(`/api/items/${item.id}`, values)
 				}
 				// await sleep(2000)
 				router.push({
 					pathname: '/[citySlug]/[restaurantSlug]',
 					query: {
 						citySlug: router.query.citySlug,
-						restaurantSlug: router.query.restaurantSlug
-					}
+						restaurantSlug: router.query.restaurantSlug,
+					},
 				})
 			}}
 		>
@@ -91,15 +92,13 @@ export default function ItemForm({ item }) {
 						<option value={category.slug}>Beef burgers</option>
 					</select>
 				</label> */}
-					<div className={classes.actions}>
-						<button type="submit" className="secondary">
-							{isSubmitting
-								? 'Loading....'
-								: item
-								? 'Update'
-								: 'Save'}
-						</button>
-					</div>
+					<button type="submit" className="secondary">
+						{isSubmitting
+							? 'Loading....'
+							: item
+							? 'Update'
+							: 'Save'}
+					</button>
 				</Form>
 			)}
 		</Formik>

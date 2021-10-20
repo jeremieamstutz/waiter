@@ -30,7 +30,7 @@ const Overlay = ({ onClose, children, size }) => {
 }
 
 export default function Modal({ onClose, children, size }) {
-	useLockBodyScroll()
+	useLockBodyScroll(true)
 
 	const escape = useCallback(
 		(event) => {
