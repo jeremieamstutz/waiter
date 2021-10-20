@@ -1,11 +1,23 @@
 {
 	"short_name": "Waiter",
 	"name": "Waiter",
+	"icons": [
+		{
+			"src": "/android-chrome-192x192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "//android-chrome-512x512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
 	"start_url": "/",
 	"scope": "/",
 	"display": "fullscreen",
-    "orientation": "portrait",
+	"orientation": "portrait",
 	"background_color": "#FFFFFF",
 	"theme_color": "#000000",
-    "description": "A digital assistant"
+	"description": "A digital assistant"
 }
