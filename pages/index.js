@@ -1,19 +1,16 @@
 import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/client'
 import { getAllRestaurants } from 'utils/db'
 import Image from 'next/image'
 
 import classes from 'styles/home.module.css'
-import Footer from 'components/layout/footer'
+import Header from 'components/layout/header'
 
 export default function Home({ restaurants }) {
-	const [session, loading] = useSession()
-	// console.log(session)
-
 	return (
 		<>
 			<div className={classes.container}>
-				<h1 style={{}}>waiter.so</h1>
+				<h1>Waiter</h1>
+				{/* <div>Mon restaurant</div> */}
 				<h2>Burgers</h2>
 				<div style={{ display: 'flex' }}>
 					{restaurants.map((restaurant, index) => (
@@ -29,7 +26,13 @@ export default function Home({ restaurants }) {
 						>
 							<a>
 								<div>
-									<div className={classes.image} style={{display: 'flex', gap: '1rem', overflowX: 'scroll'}}>
+									<div
+										className={classes.image}
+										style={{
+											display: 'flex',
+											gap: '1rem',
+										}}
+									>
 										<Image
 											src={restaurant.image}
 											alt={restaurant.name}
@@ -58,42 +61,19 @@ export default function Home({ restaurants }) {
 						</Link>
 					))}
 				</div>
-				{!loading &&
-					(!session ? (
-						<button
-							onClick={() =>
-								signIn(null, {
-									callbackUrl: 'http://localhost:3000/test',
-								})
-							}
-							style={{
-								position: 'fixed',
-								bottom: '1rem',
-								left: '1rem',
-								right: '1rem',
-							}}
-						>
-							Sign in
-						</button>
-					) : (
-						<button
-							onClick={() =>
-								signOut({
-									callbackUrl: 'http://localhost:3000/test',
-								})
-							}
-							style={{
-								position: 'fixed',
-								bottom: '1rem',
-								left: '1rem',
-								right: '1rem',
-							}}
-						>
-							Sign out
-						</button>
-					))}
+				<div className={classes.cta}>
+					<h3>Ajouter votre restaurant ?</h3>
+					<p>Découvrez les nombreux avantages que Waiter peut vous offrir</p>
+					<Link
+						href={{
+							pathname: '/advantages',
+						}}
+					>
+						<a className="button secondary">Voir</a>
+					</Link>
+				</div>
 			</div>
-			<Footer />
+			<Header />
 		</>
 	)
 }
