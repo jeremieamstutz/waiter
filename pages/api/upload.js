@@ -3,7 +3,6 @@ import AWS from 'aws-sdk'
 import { DateTime } from 'luxon'
 
 import statusCode from '../../utils/statusCodes'
-import { createUploadedImage } from 'utils/db'
 
 const s3 = new AWS.S3({
 	endpoint: new AWS.Endpoint(process.env.SPACE_ENDPOINT),
@@ -34,8 +33,6 @@ export default async function handler(req, res) {
 			}
 
 			const url = await s3.getSignedUrl('putObject', params)
-
-			await createUploadedImage({ url })
 
 			res.status(statusCode.ok).json({ success: true, url: url })
 			break
