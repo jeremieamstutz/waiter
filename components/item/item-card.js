@@ -36,7 +36,7 @@ export default function Item({ item }) {
 	return (
 		<div className={classes.container}>
 			<div className={classes.image}>
-				<div
+				{/* <div
 					className={classes.picker}
 					onClick={(event) => event.preventDefault()}
 				>
@@ -79,10 +79,11 @@ export default function Item({ item }) {
 							</span>
 						</>
 					)}
-				</div>
+				</div> */}
 				<Image
 					src={item.image}
 					alt={item.name}
+					layout="fill"
 					objectFit="cover"
 					objectPosition="left"
 					width={168}
@@ -99,7 +100,7 @@ export default function Item({ item }) {
 				{/* <span className={classes.grade}>
 					{(2 * Math.random() + 3).toFixed(2)}
 				</span> */}
-				{quantity > 0 ? (
+				{/* {quantity > 0 ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width={24}
@@ -133,7 +134,7 @@ export default function Item({ item }) {
 							d="M12 4v16m8-8H4"
 						/>
 					</svg>
-				)}
+				)} */}
 			</p>
 		</div>
 	)
