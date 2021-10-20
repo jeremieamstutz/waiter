@@ -19,14 +19,13 @@ export default function Header() {
 			const res = await axios.get(
 				`/api/restaurants/${restaurant.id}/like`,
 			)
-			console.log(res.data.like)
 			setRestaurant((restaurant) => ({
 				...restaurant,
 				like: res.data.like,
 			}))
 		}
 		fetchLike()
-	}, [restaurant.id, setRestaurant])
+	}, [session, restaurant.id, setRestaurant])
 
 	const handleLikeRestaurant = () => {
 		if (!session) {
