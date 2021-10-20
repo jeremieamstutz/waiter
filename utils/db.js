@@ -244,6 +244,29 @@ export async function getLike(objectId, userId) {
 	return result.rows[0]
 }
 
+export async function getAllLikes(userId) {
+	const result = await query(
+		`
+		SELECT * FROM likes 
+		WHERE user_id = $1`,
+		[userId]
+	)
+	return result.rows[0]
+}
+
+export async function getFavoriteRestaurants(userId) {
+	const result = await query(
+		`
+		SELECT restaurants.*, restaurants.slug as "restaurantSlug", cities.slug AS "citySlug" FROM restaurants
+		JOIN likes ON likes.object_id = restaurants.id 
+		JOIN addresses ON addresses.id = restaurants.address 
+		JOIN cities ON cities.id = addresses.city 
+		WHERE likes.user_id = $1`,
+		[userId]
+	)
+	return result.rows
+}
+
 export async function deleteLike(objectId, userId) {
 	const result = await query(
 		`
