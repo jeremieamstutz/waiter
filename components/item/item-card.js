@@ -86,8 +86,8 @@ export default function Item({ item }) {
 					layout="fill"
 					objectFit="cover"
 					objectPosition="left"
-					width={168}
-					height={256}
+					// width={168}
+					// height={256}
 					priority={true}
 				/>
 			</div>
