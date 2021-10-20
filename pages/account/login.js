@@ -5,6 +5,7 @@ import classes from 'styles/login.module.css'
 
 export default function LoginPage({ providers }) {
 	const router = useRouter()
+
 	return (
 		<div className={classes.container}>
 			<div>
@@ -31,16 +32,18 @@ export default function LoginPage({ providers }) {
 				))}
 			</div>
 			<p className={classes.details}>
-				It doesn&apos;t matter if you already have a Waiter account or not
+				It doesn&apos;t matter if you already have a Waiter account or
+				not
 			</p>
 		</div>
 	)
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	return {
 		props: {
 			providers: await getProviders(),
 		},
+		revalidate: 60,
 	}
 }
