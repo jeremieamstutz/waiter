@@ -16,12 +16,6 @@ class MyDocument extends Document {
 						as="font"
 						crossOrigin=""
 					/>
-					<link
-						rel="preload"
-						href="/fonts/DM_Sans/DMSans-Medium.ttf"
-						as="font"
-						crossOrigin=""
-					/>
 					<link rel="manifest" href="/manifest.json" />
 					{isProduction && (
 						<>

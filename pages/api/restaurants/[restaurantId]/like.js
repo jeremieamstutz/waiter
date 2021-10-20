@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 			} else {
 				result = await deleteLike(restaurantId, session.user.id)
 			}
-			res.status(statusCodes.ok).json(result)
+			res.status(statusCodes.ok).json({ like: body.like})
 			break
 		}
 		default:

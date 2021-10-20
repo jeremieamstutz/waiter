@@ -108,7 +108,7 @@ export default function RestaurantPage({ restaurant }) {
 						>
 							<a className="button">New category</a>
 						</Link>
-						<Link
+						{/* <Link
 							href={{
 								pathname: '/help',
 							}}
@@ -124,7 +124,7 @@ export default function RestaurantPage({ restaurant }) {
 						</Link>
 						<select>
 							<option>English</option>
-						</select>
+						</select> */}
 					</div>
 				)}
 			</main>
