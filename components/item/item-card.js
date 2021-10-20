@@ -83,11 +83,11 @@ export default function Item({ item }) {
 				<Image
 					src={item.image}
 					alt={item.name}
-					layout="fill"
+					layout="responsive"
 					objectFit="cover"
 					objectPosition="left"
-					// width={168}
-					// height={256}
+					width={168}
+					height={256}
 					priority={true}
 				/>
 			</div>
