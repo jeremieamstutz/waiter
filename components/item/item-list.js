@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import axios from 'axios'
 
 import ItemCard from './item-card'
 import Sheet from 'components/ui/sheet'
@@ -9,8 +10,19 @@ import { useRouter } from 'next/router'
 
 export default function ItemList({ category, items }) {
 	const router = useRouter()
-	
+
 	const [showSheet, setShowSheet] = useState(false)
+
+	const handleDeleteCategory = async () => {
+		await axios.delete(`/api/categories/${category.id}`)
+		router.push({
+			pathname: '/[citySlug]/[restaurantSlug]',
+			query: {
+				citySlug: router.query.citySlug,
+				restaurantSlug: router.query.restaurantSlug
+			},
+		})
+	}
 	return (
 		<section className={classes.container}>
 			<div className={classes.header}>
@@ -20,8 +32,10 @@ export default function ItemList({ category, items }) {
 						{category.description}
 					</p>
 				</div>
-				<button className={classes.actions} onClick={(event) => {setShowSheet(true)
-				event.target.blur()}}>
+				<button
+					className={classes.actions}
+					onClick={() => setShowSheet(true)}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width={24}
@@ -46,6 +60,7 @@ export default function ItemList({ category, items }) {
 								pathname: router.pathname + '/new-item',
 								query: {
 									...router.query,
+									category: category.id
 								},
 							}}
 						>
@@ -53,15 +68,21 @@ export default function ItemList({ category, items }) {
 						</Link>
 						<Link
 							href={{
-								pathname: router.pathname + '/edit-category',
+								pathname: `${router.pathname}/categories/[categoryId]/edit`,
 								query: {
 									...router.query,
+									categoryId: category.id
 								},
 							}}
 						>
 							<a className="button">Edit category</a>
 						</Link>
-						<button>Delete category</button>
+						<button
+								className="button"
+								onClick={handleDeleteCategory}
+							>
+								Delete category
+							</button>
 						{/* <Link
 							href={{
 								pathname: router.pathname + '/new-category',
