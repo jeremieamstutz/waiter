@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { signIn, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 
 import { useRestaurant } from 'contexts/restaurant'
 
@@ -30,9 +30,14 @@ export default function Header() {
 
 	const handleLikeRestaurant = () => {
 		if (!session) {
-			return signIn()
+			return router.push({
+				pathname: '/account/login',
+				query: {
+					callbackUrl: window?.location.href,
+				},
+			})
 		}
-		
+
 		axios.post(`/api/restaurants/${restaurant.id}/like`, {
 			like: !restaurant.like,
 		})
@@ -68,11 +73,11 @@ export default function Header() {
 						</svg>
 					</button>
 				</h1>
-				<div className={classes.details}>
+				<div className={classes.body}>
 					<p className={classes.description}>
 						{restaurant.description}
 					</p>
-					<p className={classes.misc}>
+					<p className={classes.details}>
 						<span
 							className={`${classes.opening} ${
 								restaurant.isOpen
@@ -89,8 +94,8 @@ export default function Header() {
 						</span>
 					</p>
 				</div>
-				<div className={classes.actions}>
-					{!loading && !session ? (
+				{/* <div className={classes.actions}> */}
+				{/* {!loading && !session ? (
 						restaurant.allowBooking ? (
 							<Link
 								href={{
@@ -118,20 +123,20 @@ export default function Header() {
 								Bookings
 							</a>
 						</Link>
-					)}
-					{/* {restaurant.allowBooking ? (
+					)} */}
+				{/* {restaurant.allowBooking ? (
 					<Link href="/lausanne/holycow/booking">
 						<a className={`${classes.booking} button secondary`}>
 							Book a table
 						</a>
 					</Link>
 				) : null} */}
-					{/* <Link href="/lausanne/holycow/bookings">
+				{/* <Link href="/lausanne/holycow/bookings">
 					<a className={`${classes.booking} button secondary`}>
 						Bookings
 					</a>
 				</Link> */}
-					<Link
+				{/* <Link
 						href={{
 							pathname: router.pathname + '/about',
 							query: router.query,
@@ -140,8 +145,8 @@ export default function Header() {
 						<a className={`${classes.moreInfo} button`}>
 							More info
 						</a>
-					</Link>
-				</div>
+					</Link> */}
+				{/* </div> */}
 			</div>
 		</section>
 	)
