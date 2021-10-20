@@ -10,11 +10,11 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'PUT':
-			const newItem = req.body
-			newItem.slug = slugify(newItem.name, { lower: true })
-			newItem.category = '890be6ae-8b2c-4150-bb99-0716e6cef54a'
+			const item = req.body
+			item.id = itemId
+			item.slug = slugify(item.name, { lower: true })
 			
-            await updateItem(itemId, newItem)
+            await updateItem(item)
 
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break

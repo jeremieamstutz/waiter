@@ -12,12 +12,12 @@ export async function query(text, values) {
 		const start = Date.now()
 		const result = await pool.query(text, values)
 		const duration = Date.now() - start
-		console.log('Query: ', {
-			text,
-			values,
-			duration,
-			rows: result.rowCount,
-		})
+		// console.log('Query: ', {
+		// 	text,
+		// 	values,
+		// 	duration,
+		// 	rows: result.rowCount,
+		// })
 		return result
 	} catch (error) {
 		console.log(error)
@@ -47,6 +47,33 @@ export async function getClient() {
 	return client
 }
 
+export async function getAllUsers() {
+	const result = await query(`SELECT id, name, email, image, created_at FROM users`)
+	return result.rows
+}
+
+export async function createItem(item) {
+	const result = await query(
+		`
+		INSERT INTO items
+			(restaurant, slug, category, name, description, price, currency, image)
+		VALUES
+			($1, $2, $3, $4, $5, $6, $7, $8)
+		`,
+		[
+			item.restaurant,
+			item.slug,
+			item.category,
+			item.name,
+			item.description,
+			item.price,
+			item.currency,
+			item.image,
+		],
+	)
+	return result.rows[0]
+}
+
 export async function getItem({ itemSlug, restaurantSlug, citySlug }) {
 	const result = await query(
 		`SELECT items.* FROM items 
@@ -64,15 +91,14 @@ export async function getAllItems() {
 	return result.rows
 }
 
-export async function updateItem(id, item) {
+export async function updateItem(item) {
 	await query(
 		`UPDATE items 
-		SET slug = $2, category = $3, name = $4, description = $5, price = $6, currency = $7, image = $8
+		SET slug = $2, name = $3, description = $4, price = $5, currency = $6, image = $7
 		WHERE items.id = $1`,
 		[
-			id,
+			item.id,
 			item.slug,
-			item.category,
 			item.name,
 			item.description,
 			item.price,
@@ -98,6 +124,51 @@ export async function getItemsSlugs() {
 		JOIN cities ON cities.id = addresses.city`,
 	)
 	return result.rows
+}
+
+export async function createCategory({ category }) {
+	const result = await query(
+		`
+		INSERT INTO categories (name, description, restaurant)
+		VALUES ($1, $2, $3)
+		`,
+		[category.name, category.description, category.restaurant],
+	)
+	return result.rows[0]
+}
+
+export async function getCategory(categoryId) {
+	const result = await query(
+		`
+		SELECT categories.* FROM categories 
+		WHERE categories.id = $1
+		`,
+		[categoryId],
+	)
+	return result.rows[0]
+}
+
+export async function updateCategory(category) {
+	const result = await query(
+		`
+		UPDATE categories 
+		SET name = $2, description = $3
+		WHERE categories.id = $1
+		`,
+		[category.id, category.name, category.description],
+	)
+	return result.rows[0]
+}
+
+export async function deleteCategory(categoryId) {
+	const result = await query(
+		`
+		DELETE FROM categories
+		WHERE categories.id = $1
+		`,
+		[categoryId],
+	)
+	return result.rows[0]
 }
 
 export async function getRestaurant({ restaurantSlug, citySlug }) {
@@ -153,10 +224,32 @@ export async function getRestaurantCategories({ restaurantSlug, citySlug }) {
 	return result.rows
 }
 
-export async function createUploadedImage({ url }) {
-	await query(
-		`INSERT INTO uploadedImages (url)
-		VALUES ($1)`,
-		[url],
+export async function createLike(objectId, userId) {
+	const result = await query(
+		`
+		INSERT INTO likes (object_id, user_id)
+		values ($1, $2)`,
+		[objectId, userId]
 	)
+	return result.rows[0]
+}
+
+export async function getLike(objectId, userId) {
+	const result = await query(
+		`
+		SELECT * FROM likes 
+		WHERE object_id = $1 AND user_id = $2`,
+		[objectId, userId]
+	)
+	return result.rows[0]
+}
+
+export async function deleteLike(objectId, userId) {
+	const result = await query(
+		`
+		DELETE FROM likes
+		WHERE object_id = $1 AND user_id = $2`,
+		[objectId, userId]
+	)
+	return result.rows[0]
 }

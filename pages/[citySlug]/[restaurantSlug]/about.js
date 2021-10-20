@@ -17,6 +17,7 @@ export default function AboutPage({ restaurant }) {
 					alt={`${restaurant.name}'s QR code`}
 					width={375}
 					height={375}
+					priority={true}
 				/>
 			</div>
 			<Footer />

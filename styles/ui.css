@@ -1,5 +1,5 @@
 a {
-	color: inherit;
+	color: var(--color-primary);
 	text-decoration: none;
 }
 
@@ -8,15 +8,10 @@ button {
 	touch-action: manipulation;
 }
 
-.link {
-	color: var(--color-primary);
-}
-
 button,
 a.button {
 	color: var(--color-ui-secondary);
-	/* background: transparent; */
-	/* border: 2px solid var(--color-ui-secondary); */
+	user-select: none;
 	background: var(--color-ui-tertiary);
 	border: 1px solid #ddd;
 	height: 48px;
@@ -35,6 +30,11 @@ button.secondary,
 a.button.secondary {
 	background: var(--color-ui-secondary);
 	border: 1px solid #000;
+	color: var(--color-text-inverted);
+}
+
+button.secondary *,
+a.button.secondary * {
 	color: var(--color-text-inverted);
 }
 
@@ -61,7 +61,7 @@ a.button.secondary:focus {
 input,
 textarea,
 select {
-	border: 2px solid transparent;
+	border: 1px solid #ddd;
     outline: none;
     background: var(--color-ui-tertiary);
     border-radius: 0.5rem;
@@ -73,7 +73,8 @@ select {
 
 input,
 textarea {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Rubik', sans-serif;
+	caret-color: var(--color-primary);
 }
 
 select {
@@ -87,7 +88,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-	border-color: var(--color-ui-hover);
+	outline: 2px solid var(--color-ui-hover);
 }
 
 label {

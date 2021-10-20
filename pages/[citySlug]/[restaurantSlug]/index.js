@@ -1,12 +1,11 @@
-
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/client'
 
-import Header from 'components/restaurant/header'
-import Footer from 'components/layout/footer'
+import Header from 'components/layout/header'
+import RestaurantHeader from 'components/restaurant/header'
 import ItemList from 'components/item/item-list'
 
 import { RestaurantProvider } from 'contexts/restaurant'
@@ -15,12 +14,14 @@ import {
 	getRestaurantItems,
 	getRestaurantCategories,
 	getRestaurantsSlugs,
+	// getLike,
 } from 'utils/db'
 
 import classes from 'styles/restaurant.module.css'
 
 export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
+
 	const [session, loading] = useSession()
 
 	return (
@@ -85,37 +86,21 @@ export default function RestaurantPage({ restaurant }) {
 				/>
 			</div>
 			<main className={classes.container}>
-				<Header />
+				<RestaurantHeader />
 				{restaurant.categories.map((category, index) => (
-					<div key={index}>
-						<ItemList
-							category={category}
-							items={restaurant.items.filter(
-								(item) => (item.category = category.id),
-							)}
-						/>
-						{!loading && session && (
-							<div className={classes.actions}>
-								{/* <Link
-									href={{
-										pathname: router.pathname + '/new-item',
-										query: {
-											...router.query,
-											category: category.slug,
-										},
-									}}
-								>
-									<a className="button">New item</a>
-								</Link> */}
-							</div>
+					<ItemList
+						category={category}
+						items={restaurant.items.filter(
+							(item) => item.category === category.id,
 						)}
-					</div>
+						key={index}
+					/>
 				))}
 				{!loading && session && (
 					<div className={classes.actions}>
 						<Link
 							href={{
-								pathname: router.pathname + '/new-category',
+								pathname: router.pathname + '/categories/new',
 								query: {
 									...router.query,
 								},
@@ -128,12 +113,30 @@ export default function RestaurantPage({ restaurant }) {
 								pathname: '/help',
 							}}
 						>
-							<a className="button">Help</a>
+							<a className="button">Get help</a>
 						</Link>
+						<Link
+							href={{
+								pathname: '/bugs',
+							}}
+						>
+							<a className="button">Report a bug</a>
+						</Link>
+						<select>
+							<option>English</option>
+						</select>
 					</div>
 				)}
 			</main>
-			<Footer />
+			<Header>
+				{/* <Link href="/deal"><a style={{color: 'white', background: 'var(--color-primary)', padding: '1rem', display: 'block'}}>GET AN INCREDIBLE DEAL !</a></Link> */}
+				{/* <div style={{ padding: '0 1rem 1rem', background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%)' }}>
+					<button className="secondary" style={{ width: '100%', justifyContent: 'space-between' }}>
+						<span>Cart · 2 items</span>
+						<span>12.90 CHF</span>
+					</button>
+				</div> */}
+			</Header>
 		</RestaurantProvider>
 	)
 }
@@ -161,6 +164,12 @@ export async function getStaticProps({ params }) {
 		citySlug,
 	})
 
+	// const session = await getSession({ req })
+
+	// restaurant.like = (await getLike(restaurant.id, session.user.id))
+	// 	? true
+	// 	: false
+
 	restaurant.items = items
 	restaurant.categories = categories
 	restaurant.rating = {
@@ -173,6 +182,6 @@ export async function getStaticProps({ params }) {
 		props: {
 			restaurant: restaurant,
 		},
-		revalidate: 60
+		revalidate: 5,
 	}
 }

@@ -4,18 +4,17 @@ import axios from 'axios'
 import { SWRConfig } from 'swr'
 import { Provider as SessionProvider } from 'next-auth/client'
 
-import useScrollRestoration from 'hooks/useScrollRestauration'
 import * as gtag from 'utils/gtag'
 import Providers from 'components/misc/providers'
 
 import 'styles/globals.css'
+import 'styles/layout.css'
 import 'styles/ui.css'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default function Waiter({ Component, pageProps, router }) {
-	// useScrollRestoration(router)
-
+	
 	useEffect(() => {
 		const handleRouteChange = () => {
 			const title = document.title

@@ -15,7 +15,7 @@ export async function getStaticProps({ params }) {
 		}
 	}
 
-	return { props: { item } }
+	return { props: { item }, revalidate: 5 }
 }
 
 export async function getStaticPaths() {

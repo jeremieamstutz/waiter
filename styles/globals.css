@@ -28,13 +28,7 @@
 	font-display: swap;
 }
 
-@font-face {
-	font-family: 'DM Sans';
-	src: url('/fonts/DM_Sans/DMSans-Medium.ttf');
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@420&display=swap');
 
 ::selection {
 	background: var(--color-primary);
@@ -66,14 +60,15 @@ body {
 
 p,
 p * {
-	font-family: 'DM Sans', sans-serif;
+	font-family: 'Rubik', sans-serif;
 	line-height: 130%;
+	line-height: 140%;
 	font-size: 1.125rem;
 	color: var(--color-text-secondary);
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 1.75rem;
 }
 
 h2 {

@@ -31,20 +31,20 @@ export default function TermsPage() {
 					<li>Emplacement: Lausanne, Suisse</li>
 					<li>
 						Adresse URL du site:{' '}
-						<a href="https://www.waiter.so" className="link">
+						<a href="https://www.waiter.so">
 							waiter.so
 						</a>
 					</li>
 					<li>
 						E-mail:{' '}
-						<a href="mailto:support@waiter.so" className="link">
+						<a href="mailto:support@waiter.so">
 							{' '}
 							support@waiter.so
 						</a>
 					</li>
 					<li>
 						Numéro de téléphone:{' '}
-						<a href="tel:+41768222705" className="link">
+						<a href="tel:+41768222705">
 							+41 76 XXX XX XX
 						</a>
 					</li>
@@ -59,7 +59,7 @@ export default function TermsPage() {
 				limitation ni réserve à tout achat des services suivants:
 				<ul>
 					<li>Présence d&apos;un restaurant sur la plateforme</li>
-					<li>Achat de crédits de marketing</li>
+					<li>Crédits de communication</li>
 				</ul>
 			</p>
 			<p>
