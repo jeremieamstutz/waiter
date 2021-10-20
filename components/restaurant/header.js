@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/client'
 
 import { useRestaurant } from 'contexts/restaurant'
 
@@ -15,6 +15,7 @@ export default function Header() {
 
 	useEffect(() => {
 		const fetchLike = async () => {
+			if (!session) return
 			const res = await axios.get(
 				`/api/restaurants/${restaurant.id}/like`,
 			)
@@ -28,6 +29,10 @@ export default function Header() {
 	}, [restaurant.id, setRestaurant])
 
 	const handleLikeRestaurant = () => {
+		if (!session) {
+			return signIn()
+		}
+		
 		axios.post(`/api/restaurants/${restaurant.id}/like`, {
 			like: !restaurant.like,
 		})
@@ -42,7 +47,7 @@ export default function Header() {
 			<div className={classes.container}>
 				<h1 className={classes.title}>
 					{restaurant.name}
-					{/* <button
+					<button
 						className={`${classes.like} ${
 							restaurant.like ? classes.active : ''
 						}`}
@@ -61,7 +66,7 @@ export default function Header() {
 								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
 							/>
 						</svg>
-					</button> */}
+					</button>
 				</h1>
 				<div className={classes.details}>
 					<p className={classes.description}>

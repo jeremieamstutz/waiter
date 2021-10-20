@@ -13,11 +13,15 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET': {
+			if (!session) return res.status(statusCodes.forbidden).end()
+
 			const result = await getLike(restaurantId, session.user.id)
 			res.status(statusCodes.ok).json({ like: result ? true : false })
 			break
 		}
 		case 'POST': {
+			if (!session) return res.status(statusCodes.forbidden).end()
+			
 			let result
 			if (body.like) {
 				result = await createLike(restaurantId, session.user.id)
