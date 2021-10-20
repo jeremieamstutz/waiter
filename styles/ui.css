@@ -14,7 +14,7 @@ a.button {
 	user-select: none;
 	background: var(--color-ui-tertiary);
 	border: 1px solid #ddd;
-	height: 48px;
+	height: 3rem;
 	padding: calc(var(--paddings) / 2) var(--paddings);
 	font-size: 1.125em;
 	border-radius: 0.5rem;
@@ -61,6 +61,7 @@ a.button.secondary:focus {
 input,
 textarea,
 select {
+	height: 3rem;
 	border: 1px solid #ddd;
     outline: none;
     background: var(--color-ui-tertiary);
