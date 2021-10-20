@@ -9,15 +9,25 @@ export default function Menu() {
 
 	const router = useRouter()
 	const path = router.pathname
-	
-	if (loading) return null
 
 	return (
 		<div className={classes.menu}>
-			{!session ? (
-				<button onClick={signIn} className={classes.button}>
-					Log in
-				</button>
+			{!loading && !session ? (
+				<Link
+					href={{
+						pathname: '/account/login',
+						query: {
+							callbackUrl: window?.location.href,
+						},
+					}}
+				>
+					<a
+						className="button"
+						style={{ flex: 1, margin: '0.5rem 1rem' }}
+					>
+						Log in
+					</a>
+				</Link>
 			) : (
 				<nav className={classes.navbar}>
 					<Link href="/">
