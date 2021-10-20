@@ -1,0 +1,46 @@
+.container {
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.tab {
+    padding: 0.75rem 1rem;
+    font-size: 1.125rem;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.selected {
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.body {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.step h3 {
+    margin: 0;
+    font-size: 1.0625rem;
+}
+
+.screenshot {
+    height: 4rem;
+    background: var(--color-ui-tertiary);
+    border-radius: 0.5rem;
+}
