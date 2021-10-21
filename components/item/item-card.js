@@ -1,10 +1,15 @@
-import useLongPress from 'hooks/useLongPress'
-import Image from 'next/image'
 import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import useLongPress from 'hooks/useLongPress'
 
 import classes from './item-card.module.css'
 
 export default function Item({ item }) {
+	const router = useRouter()
+
 	const [quantity, setQuantity] = useState(0)
 
 	const handleIncreaseQuantity = (event) => {
@@ -34,9 +39,18 @@ export default function Item({ item }) {
 	})
 
 	return (
-		<div className={classes.container}>
-			<div className={classes.image}>
-				{/* <div
+		<Link
+			href={{
+				pathname: '/[citySlug]/[restaurantSlug]/[itemSlug]',
+				query: {
+					...router.query,
+					itemSlug: item.slug,
+				},
+			}}
+		>
+			<a className={classes.card}>
+				<div className={classes.image}>
+					{/* <div
 					className={classes.picker}
 					onClick={(event) => event.preventDefault()}
 				>
@@ -80,27 +94,27 @@ export default function Item({ item }) {
 						</>
 					)}
 				</div> */}
-				<Image
-					src={item.image}
-					alt={item.name}
-					layout="responsive"
-					objectFit="cover"
-					objectPosition="left"
-					width={168}
-					height={256}
-					priority={true}
-				/>
-			</div>
-			<h3 className={classes.title}>{item.name}</h3>
-			<p className={classes.description}>{item.description}</p>
-			<p className={classes.details}>
-				<span className={classes.price}>
-					CHF {parseFloat(item.price).toFixed(2)}
-				</span>
-				{/* <span className={classes.grade}>
+					<Image
+						src={item.image}
+						alt={item.name}
+						layout="responsive"
+						objectFit="cover"
+						objectPosition="left"
+						width={168}
+						height={256}
+						priority={true}
+					/>
+				</div>
+				<h3 className={classes.title}>{item.name}</h3>
+				<p className={classes.description}>{item.description}</p>
+				<p className={classes.details}>
+					<span className={classes.price}>
+						CHF {parseFloat(item.price).toFixed(2)}
+					</span>
+					{/* <span className={classes.grade}>
 					{(2 * Math.random() + 3).toFixed(2)}
 				</span> */}
-				{/* {quantity > 0 ? (
+					{/* {quantity > 0 ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width={24}
@@ -135,7 +149,8 @@ export default function Item({ item }) {
 						/>
 					</svg>
 				)} */}
-			</p>
-		</div>
+				</p>
+			</a>
+		</Link>
 	)
 }

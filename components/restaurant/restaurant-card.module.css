@@ -1,5 +1,5 @@
 .card {
-    width: calc(100vw - 4rem);
+    width: calc(100vw - 3rem);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

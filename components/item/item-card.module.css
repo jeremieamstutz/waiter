@@ -1,8 +1,9 @@
-.container {
+.card {
 	scroll-snap-align: start;
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
 	gap: 0.25rem;
 }
 

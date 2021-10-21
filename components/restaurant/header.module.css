@@ -28,6 +28,7 @@
 	stroke: var(--color-ui-secondary);
     margin-right: -0.5rem;
     margin-left: 1rem;
+	margin-top: -0.25rem;
 }
 
 .like:hover {

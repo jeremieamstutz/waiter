@@ -19,7 +19,7 @@ export default function ItemList({ category, items }) {
 			pathname: '/[citySlug]/[restaurantSlug]',
 			query: {
 				citySlug: router.query.citySlug,
-				restaurantSlug: router.query.restaurantSlug
+				restaurantSlug: router.query.restaurantSlug,
 			},
 		})
 	}
@@ -60,7 +60,7 @@ export default function ItemList({ category, items }) {
 								pathname: router.pathname + '/new-item',
 								query: {
 									...router.query,
-									category: category.id
+									category: category.id,
 								},
 							}}
 						>
@@ -71,18 +71,18 @@ export default function ItemList({ category, items }) {
 								pathname: `${router.pathname}/categories/[categoryId]/edit`,
 								query: {
 									...router.query,
-									categoryId: category.id
+									categoryId: category.id,
 								},
 							}}
 						>
 							<a className="button">Edit category</a>
 						</Link>
 						<button
-								className="button"
-								onClick={handleDeleteCategory}
-							>
-								Delete category
-							</button>
+							className="button"
+							onClick={handleDeleteCategory}
+						>
+							Delete category
+						</button>
 						{/* <Link
 							href={{
 								pathname: router.pathname + '/new-category',
@@ -105,20 +105,7 @@ export default function ItemList({ category, items }) {
 			</div>
 			<div className={classes.list}>
 				{items.map((item, index) => (
-					<Link
-						href={{
-							pathname: router.pathname + '/[itemSlug]',
-							query: {
-								...router.query,
-								itemSlug: item.slug,
-							},
-						}}
-						key={index}
-					>
-						<a>
-							<ItemCard item={item} />
-						</a>
-					</Link>
+					<ItemCard item={item} key={index} />
 				))}
 			</div>
 		</section>
