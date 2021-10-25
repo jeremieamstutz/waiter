@@ -1,18 +1,18 @@
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 import classes from 'styles/advantages.module.css'
 
 export default function AdvantagesPage() {
-	const [session, loading] = useSession()
+	const { data: session, status } = useSession()
 
 	return (
 		<>
 			<div className="container">
 				<h1>Avantages</h1>
 				<p style={{ marginTop: 0 }}>
-					Découvrez pourquoi Waiter est l&apos;outil parfait pour votre
-					restaurant.
+					Découvrez pourquoi Waiter est l&apos;outil parfait pour
+					votre restaurant.
 				</p>
 				<h2 className={classes.header}>Restaurateurs</h2>
 				<div className={classes.list}>
@@ -64,7 +64,7 @@ export default function AdvantagesPage() {
 						</div>
 					))}
 				</div>
-				<div className={classes.cta}>
+				{/* <div className={classes.cta}>
 					<h3>Convaincu ?</h3>
 					<p>Alors rejoignez Waiter sans tarder !</p>
 					<Link
@@ -83,7 +83,9 @@ export default function AdvantagesPage() {
 								  }
 						}
 					>
-						<a className="button" style={{background: 'white'}}>S&apos;inscrire</a>
+						<a className="button" style={{ background: 'white' }}>
+							S&apos;inscrire
+						</a>
 					</Link>
 				</div>
 				<div className={classes.faq}>
@@ -94,7 +96,7 @@ export default function AdvantagesPage() {
 							Consultez la foire aux questions
 						</Link>
 					</p>
-				</div>
+				</div> */}
 			</div>
 		</>
 	)
