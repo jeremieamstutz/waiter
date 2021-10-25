@@ -87,8 +87,8 @@ export default function AdvantagesPage() {
 							S&apos;inscrire
 						</a>
 					</Link>
-				</div>
-				<div className={classes.faq}>
+				</div> */}
+				{/* <div className={classes.faq}>
 					<h3>Une interrogation ?</h3>
 					<p>
 						{' '}

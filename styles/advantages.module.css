@@ -1,79 +1,92 @@
 .header {
-    margin: 0;
-    margin-top: 0.5rem;
+	margin: 0;
+	margin-top: 0.5rem;
 }
 
 .list {
-    margin: 0 -1rem;
-    padding: 1rem;
-    display: flex;
-    gap: 1rem;
-    overflow: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 1rem;
+	margin: 0 -1rem;
+	padding: 1rem;
+	display: flex;
+	gap: 1rem;
+	overflow: auto;
+	scroll-snap-type: x mandatory;
+	scroll-padding: 1rem;
 }
 
 .card {
-    min-width: calc(100vw - 4rem);
-    background: #f5f5f5;
-    padding: 1.5rem 1rem;
-    border-radius: 1rem;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    scroll-snap-align: start;
+	flex-shrink: 0;
+	min-width: 16rem;
+	max-width: 24rem;
+	width: calc(100vw - 4rem);
+	background: #f5f5f5;
+	padding: 1.5rem 1rem;
+	border-radius: 1rem;
+	border: 1px solid #eee;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	scroll-snap-align: start;
 }
 
 .card svg {
-    stroke: #B8302B;
+	stroke: #b8302b;
 }
 
 .title {
-    margin: 0;
+	margin: 0;
 }
 
 .description {
-    margin: 0;
+	margin: 0;
 }
 
 .cta {
-    background: var(--color-primary);
-    border-radius: 1rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
+	background: var(--color-primary);
+	border-radius: 1rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
 }
 
 .cta h3 {
-    margin: 0;
-    margin-top: 0.25rem;
-    margin-bottom: -0.25rem;
-    color: white;
+	margin: 0;
+	margin-top: 0.25rem;
+	margin-bottom: -0.25rem;
+	color: white;
 }
 
 .cta p {
-    color: rgb(255, 230, 230);
-    margin: 0;
+	color: rgb(255, 230, 230);
+	margin: 0;
 }
 
 .cta button {
-    background: white;
+	background: white;
 }
 
 .faq {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+	margin-top: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
 }
 
 .faq h3 {
-    margin: 0;
+	margin: 0;
 }
 
 .faq p {
-    margin: 0;
+	margin: 0;
+}
+
+@media screen and (min-width: 560px) {
+	.list {
+		flex-wrap: wrap;
+	}
+
+	.card {
+		flex: 1;
+	}
 }
