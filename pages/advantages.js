@@ -1,3 +1,4 @@
+import Container from 'components/layout/container'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
@@ -8,7 +9,7 @@ export default function AdvantagesPage() {
 
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<h1>Avantages</h1>
 				<p style={{ marginTop: 0 }}>
 					Découvrez pourquoi Waiter est l&apos;outil parfait pour
@@ -97,7 +98,7 @@ export default function AdvantagesPage() {
 						</Link>
 					</p>
 				</div> */}
-			</div>
+			</Container>
 		</>
 	)
 }

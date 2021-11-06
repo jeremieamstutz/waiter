@@ -1,7 +1,11 @@
+import Container from "components/layout/container";
+import RestaurantForm from "components/restaurant/restaurant-form";
+
 export default function NewRestaurantPage() {
     return (
-        <div className="container">
+        <Container>
             <h1>New restaurant</h1>
-        </div>
+            <RestaurantForm />
+        </Container>
     )
 }

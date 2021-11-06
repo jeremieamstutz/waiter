@@ -1,11 +1,12 @@
 import Image from 'next/image'
 
-import { getAllUsers } from 'utils/db'
+import { getAllUsers } from 'pages/api/users'
+import Container from 'components/layout/container'
 
 export default function UsersPage({ users }) {
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<h1>Users</h1>
 				<div>
 					{users.map((user, index) => (
@@ -15,7 +16,7 @@ export default function UsersPage({ users }) {
 						</div>
 					))}
 				</div>
-			</div>
+			</Container>
 		</>
 	)
 }
@@ -25,7 +26,7 @@ export async function getServerSideProps() {
 
 	return {
 		props: {
-			users: JSON.parse(JSON.stringify(users)),
+			users: users,
 		},
 	}
 }

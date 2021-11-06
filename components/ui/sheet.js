@@ -1,24 +1,39 @@
 import { useEffect, useCallback } from 'react'
-import Portal from 'components/misc/portal'
+import { AnimatePresence, motion } from 'framer-motion'
 
+import Portal from 'components/misc/portal'
 import useLockBodyScroll from 'hooks/useLockBodyScroll'
 
 import classes from './sheet.module.css'
+import { fadeIn, fadeInUp } from 'animations'
 
 const Backdrop = ({ onClick }) => (
-	<div className={classes.backdrop} onClick={onClick} />
+	<motion.div
+		className={classes.backdrop}
+		onClick={onClick}
+		initial="initial"
+		animate="animate"
+		exit="initial"
+		variants={fadeIn}
+	/>
 )
 
 const Overlay = ({ children, onClose }) => {
 	return (
-		<div className={classes.container}>
+		<motion.div
+			className={classes.container}
+			initial="initial"
+			animate="animate"
+			exit="initial"
+			variants={fadeInUp}
+		>
 			<div className={classes.sheet}>{children}</div>
-		</div>
+		</motion.div>
 	)
 }
 
-export default function Sheet({ children, onClose }) {
-	useLockBodyScroll()
+export default function Sheet({ children, show, onClose }) {
+	useLockBodyScroll(show)
 
 	const escape = useCallback(
 		(event) => {
@@ -37,8 +52,14 @@ export default function Sheet({ children, onClose }) {
 
 	return (
 		<Portal selector="#sheets">
-			<Backdrop onClick={onClose} />
-			<Overlay onClose={onClose}>{children}</Overlay>
+			<AnimatePresence>
+				{show && (
+					<>
+						<Backdrop onClick={onClose} />
+						<Overlay onClose={onClose}>{children}</Overlay>
+					</>
+				)}
+			</AnimatePresence>
 		</Portal>
 	)
 }

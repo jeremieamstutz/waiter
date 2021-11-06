@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 import { SWRConfig } from 'swr'
-import { Provider as SessionProvider } from 'next-auth/client'
+import { SessionProvider } from 'next-auth/react'
 
 import * as gtag from 'utils/gtag'
 import Providers from 'components/misc/providers'
@@ -10,11 +10,11 @@ import Providers from 'components/misc/providers'
 import 'styles/globals.css'
 import 'styles/layout.css'
 import 'styles/ui.css'
+import { AnimatePresence } from 'framer-motion'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
 export default function Waiter({ Component, pageProps, router }) {
-	
 	useEffect(() => {
 		const handleRouteChange = () => {
 			const title = document.title
@@ -41,18 +41,20 @@ export default function Waiter({ Component, pageProps, router }) {
 					content="initial-scale=1.0, width=device-width, viewport-fit=cover"
 				/>
 			</Head>
-			<SWRConfig
-				value={{
-					refreshInterval: 3000,
-					fetcher: (url) => axios.get(url).then((res) => res.data),
-				}}
-			>
-				<Providers>
-					<SessionProvider session={pageProps.session}>
-						<Component {...pageProps} />
-					</SessionProvider>
-				</Providers>
-			</SWRConfig>
+			<SessionProvider session={pageProps.session}>
+				<SWRConfig
+					value={{
+						fetcher: (url) =>
+							axios.get(url).then((res) => res.data),
+					}}
+				>
+					<Providers>
+						<AnimatePresence>
+							<Component {...pageProps} />
+						</AnimatePresence>
+					</Providers>
+				</SWRConfig>
+			</SessionProvider>
 		</>
 	)
 }

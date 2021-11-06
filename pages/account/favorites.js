@@ -3,15 +3,27 @@ import useSWR from 'swr'
 import RestaurantCard from 'components/restaurant/restaurant-card'
 import { Ring } from 'components/ui/spinner'
 import Header from 'components/layout/header'
+import Container from 'components/layout/container'
+import RestaurantList from 'components/restaurant/restaurant-list'
+import { groupBy } from 'utils/processing'
+import axios from 'axios'
 
 export default function FavoritesPage() {
-	const { data, error } = useSWR('/api/favorites')
+	const {
+		data: { restaurants },
+		error,
+	} = useSWR('/api/restaurants/favorites', {
+		fallbackData: {
+			restaurants: undefined,
+		},
+	})
 
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<h1>Favorites</h1>
-				{!error && !data ? (
+
+				{!error && !restaurants ? (
 					<div
 						style={{
 							display: 'flex',
@@ -22,12 +34,25 @@ export default function FavoritesPage() {
 					>
 						<Ring />
 					</div>
-				) : data.restaurants.length > 0 ? (
-					<RestaurantCard restaurant={data.restaurants[0]} />
+				) : restaurants.length > 0 ? (
+					[
+						...groupBy(
+							restaurants,
+							(restaurant) => restaurant.city,
+						),
+					].map(([key, value]) => (
+						<RestaurantList
+							key={key}
+							restaurants={value}
+							list={{
+								name: key,
+							}}
+						/>
+					))
 				) : (
 					<p>No favorite restaurant yet</p>
 				)}
-			</div>
+			</Container>
 			<Header />
 		</>
 	)
