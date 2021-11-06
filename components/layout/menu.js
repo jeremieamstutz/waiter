@@ -1,39 +1,32 @@
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/client'
+import { useSession, signIn } from 'next-auth/react'
 
 import classes from './menu.module.css'
 import { useRouter } from 'next/router'
 
 export default function Menu() {
-	const [session, loading] = useSession()
+	const { data: session, status } = useSession()
 
 	const router = useRouter()
 	const path = router.pathname
 
 	return (
 		<div className={classes.menu}>
-			{!loading && !session ? (
-				<Link
-					href={{
-						pathname: '/account/login',
-						query: {
-							callbackUrl: window?.location.href,
-						},
-					}}
+			{status === 'unauthenticated' && (
+				<button
+					className="button"
+					onClick={signIn}
+					style={{ flex: 1, margin: '0.5rem 1rem' }}
 				>
-					<a
-						className="button"
-						style={{ flex: 1, margin: '0.5rem 1rem' }}
-					>
-						Log in
-					</a>
-				</Link>
-			) : (
+					Log in
+				</button>
+			)}
+			{status === 'authenticated' && (
 				<nav className={classes.navbar}>
 					<Link href="/">
 						<a
 							className={
-								path === '/' || path.startsWith('/[citySlug]')
+								path === '/'
 									? classes.active
 									: ''
 							}

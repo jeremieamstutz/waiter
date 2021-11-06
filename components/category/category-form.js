@@ -31,16 +31,16 @@ export default function CategoryForm({ category }) {
 				if (!category) {
 					await axios.post('/api/categories', {
 						category: values,
-						citySlug: router.query.citySlug,
 						restaurantSlug: router.query.restaurantSlug,
 					})
 				} else {
-					await axios.put(`/api/categories/${category.id}`, values)
+					await axios.put(`/api/categories/${category.id}`, {
+						category: values,
+					})
 				}
 				router.push({
-					pathname: '/[citySlug]/[restaurantSlug]',
+					pathname: '/[restaurantSlug]',
 					query: {
-						citySlug: router.query.citySlug,
 						restaurantSlug: router.query.restaurantSlug,
 					},
 				})

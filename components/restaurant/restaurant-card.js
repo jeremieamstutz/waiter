@@ -22,10 +22,9 @@ export default function RestaurantCard({ restaurant }) {
 	return (
 		<Link
 			href={{
-				pathname: '/[citySlug]/[restaurantSlug]',
+				pathname: '/[restaurantSlug]',
 				query: {
-					citySlug: restaurant.citySlug,
-					restaurantSlug: restaurant.restaurantSlug,
+					restaurantSlug: restaurant.slug,
 				},
 			}}
 		>
@@ -38,15 +37,18 @@ export default function RestaurantCard({ restaurant }) {
 							objectFit="cover"
 							layout="responsive"
 							width={176}
-							height={234}
+							height={256}
 						/>
 					</div>
 					<h3 className={classes.title}>{restaurant.name}</h3>
-					<p className={classes.description}>
+					{/* <p className={classes.description}>
 						{restaurant.description}
+					</p> */}
+					<p className={classes.description}>
+						{restaurant.cuisine} · 4.9
 					</p>
 					<p className={classes.details}>
-						<span
+						{/* <span
 							className={`${classes.opening} ${
 								restaurant.isOpen
 									? classes.opened
@@ -55,14 +57,25 @@ export default function RestaurantCard({ restaurant }) {
 						>
 							Opened until 23:00
 						</span>
-						·
-						<span>
+						· */}
+						<span
+							className={`${classes.opening} ${
+								restaurant.isOpen ? classes.open : classes.close
+							}`}
+						>
+							Ouvert jusqu&apos;à 23:00
+						</span>
+						{/* <span className={classes.rating}>
 							{restaurant.rating.value} ({restaurant.rating.count}
 							)
-						</span>
+						</span> */}
 					</p>
 				</div>
 			</a>
 		</Link>
 	)
+}
+
+export function RestaurantCardSkeleton() {
+	return <div></div>
 }

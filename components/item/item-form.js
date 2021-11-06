@@ -1,15 +1,15 @@
 import { Formik, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import { Input, Textarea } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
 
 import classes from './item-form.module.css'
 import sleep from 'utils/sleep'
-import axios from 'axios'
 
-export default function ItemForm({ item }) {
+export default function ItemForm({ restaurantId, item }) {
 	const router = useRouter()
 
 	return (
@@ -43,18 +43,18 @@ export default function ItemForm({ item }) {
 						item: {
 							...values,
 							category: router.query.category,
+							restaurantId,
 						},
-						citySlug: router.query.citySlug,
-						restaurantSlug: router.query.restaurantSlug,
 					})
 				} else {
-					await axios.put(`/api/items/${item.id}`, values)
+					await axios.put(`/api/items/${item.id}`, {
+						item: values,
+					})
 				}
 				// await sleep(2000)
 				router.push({
-					pathname: '/[citySlug]/[restaurantSlug]',
+					pathname: '/[restaurantSlug]',
 					query: {
-						citySlug: router.query.citySlug,
 						restaurantSlug: router.query.restaurantSlug,
 					},
 				})

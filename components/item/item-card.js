@@ -7,7 +7,7 @@ import useLongPress from 'hooks/useLongPress'
 
 import classes from './item-card.module.css'
 
-export default function Item({ item }) {
+export default function ItemCard({ item }) {
 	const router = useRouter()
 
 	const [quantity, setQuantity] = useState(0)
@@ -41,7 +41,7 @@ export default function Item({ item }) {
 	return (
 		<Link
 			href={{
-				pathname: '/[citySlug]/[restaurantSlug]/[itemSlug]',
+				pathname: '/[restaurantSlug]/[itemSlug]',
 				query: {
 					...router.query,
 					itemSlug: item.slug,
@@ -100,7 +100,7 @@ export default function Item({ item }) {
 						layout="responsive"
 						objectFit="cover"
 						objectPosition="left"
-						width={168}
+						width={171}
 						height={256}
 						priority={true}
 					/>
@@ -152,5 +152,47 @@ export default function Item({ item }) {
 				</p>
 			</a>
 		</Link>
+	)
+}
+
+export function NewItemCard({ category }) {
+	const router = useRouter()
+
+	return (
+		<div className={classes.skeleton}>
+			<Link
+				href={{
+					pathname: '/[restaurantSlug]/new-item',
+					query: {
+						...router.query,
+						category,
+					},
+				}}
+			>
+				<a className={classes.card}>
+					<div className={classes.image}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width={24}
+							height={24}
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M12 4v16m8-8H4"
+							/>
+						</svg>
+					</div>
+					<h3 className={classes.title}>Nouvel élément</h3>
+					<p className={classes.description}>
+						Ajouter un élément à cette liste
+					</p>
+				</a>
+			</Link>
+		</div>
 	)
 }
