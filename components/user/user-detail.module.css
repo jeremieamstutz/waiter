@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.image {
+    flex-shrink: 0;
+}
+
+.image img {
+    border-radius: 50%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.name {
+    margin: 0;
+}
+
+.email {
+    margin: 0;
+}
+
+.edit {
+    font-size: 1.125rem;
+}

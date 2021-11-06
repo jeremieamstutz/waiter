@@ -1,38 +1,52 @@
 import Link from 'next/link'
-import { useSession, signOut } from 'next-auth/client'
+import { useSession, signOut } from 'next-auth/react'
 
+import Container from 'components/layout/container'
 import Header from 'components/layout/header'
+import UserDetail from 'components/user/user-detail'
 
 export default function AccountPage() {
-	const [session, loading] = useSession()
-
+	const { status } = useSession()
+	
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<h1>Account</h1>
-				<img src={session?.user.image} />
-				<h2>{session?.user.name}</h2>
-				<p>{session?.user.email}</p>
-				<select>
-					<option>Français</option>
-				</select>
-				<p>
-					<Link href={{ pathname: '/terms' }}>
-						<a>Terms & Privacy</a>
-					</Link>
-				</p>
-				{session && (
-					<div style={{ padding: '1rem' }}>
-						<button
-							onClick={() => signOut({ callbackUrl: '/' })}
-							style={{ width: '100%' }}
-							className="secondary"
+				{status === 'authenticated' && (
+					<>
+						<UserDetail />
+						{/* <select>
+							<option>Français</option>
+						</select> */}
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								gap: '1rem',
+							}}
 						>
-							Sign out
-						</button>
-					</div>
+							<Link href="/account/edit">
+								<a className="button">Edit profile</a>
+							</Link>
+							<Link href={{ pathname: '/terms' }}>
+								<a className="button">Terms</a>
+							</Link>
+							<button
+								onClick={() =>
+									signOut({
+										callbackUrl:
+											process.env.NEXT_PUBLIC_DOMAIN,
+									})
+								}
+								style={{ width: '100%' }}
+								className="secondary"
+							>
+								Log out
+							</button>
+						</div>
+					</>
 				)}
-			</div>
+			</Container>
 			<Header />
 		</>
 	)
