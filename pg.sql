@@ -1,78 +1,168 @@
+DROP TABLE accounts;
 CREATE TABLE accounts (
-    id SERIAL PRIMARY KEY,
-    compoundId VARCHAR(255) NOT NULL,
-    userId INTEGER NOT NULL,
-    providerType VARCHAR(255) NOT NULL,
-    providerId VARCHAR(255) NOT NULL,
-    providerAccountId VARCHAR(255) NOT NULL,
-    refreshToken TEXT,
-    accessToken TEXT,
-    accessTokenExpires TIMESTAMPTZ,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users ON DELETE CASCADE,
+    type VARCHAR(255),
+    provider VARCHAR(255) NOT NULL,
+    provider_account_id VARCHAR(65535) NOT NULL,
+    refresh_token VARCHAR(65535),
+    access_token VARCHAR(65535) NULL,
+    expires_at INTEGER NULL,
+    token_type VARCHAR(255) NULL,
+    scope VARCHAR(255),
+    id_token VARCHAR(65535),
+    oauth_token_secret VARCHAR(65535),
+    oauth_token VARCHAR(65535),
+    session_state VARCHAR(65535),
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+DROP TABLE sessions;
 CREATE TABLE sessions (
-    id SERIAL PRIMARY KEY,
-    userId INTEGER NOT NULL,
-    expires TIMESTAMPTZ NOT NULL,
-    sessionToken VARCHAR(255) NOT NULL,
-    accessToken VARCHAR(255) NOT NULL,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users ON DELETE CASCADE,
+    expires_at TIMESTAMP WITH TIME ZONE,
+    session_token VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+DROP TABLE users;
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    emailVerified TIMESTAMPTZ,
-    image TEXT,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    email_verified TIMESTAMP WITH TIME ZONE NULL,
+    phone VARCHAR(255) NULL,
+    role VARCHAR(255) NOT NULL DEFAULT 'user',
+    image VARCHAR(1024) NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE verificationRequests (
-    id SERIAL PRIMARY KEY,
-    identifier VARCHAR(255) NOT NULL,
-    token VARCHAR(255) NOT NULL,
-    expires TIMESTAMPTZ NOT NULL,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+DELETE FROM users
+WHERE email = 'radiojeje@hotmail.com';
+DELETE FROM users;
+DELETE FROM accounts;
+DELETE FROM sessions;
+DROP TABLE verification_tokens;
+DELETE FROM verification_tokens;
+CREATE TABLE verification_tokens (
+    token VARCHAR(255) PRIMARY KEY,
+    expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    identifier VARCHAR(255) NOT NULL
 );
 CREATE TABLE cities (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    slug VARCHAR(48),
-    name VARCHAR(32),
-    description TEXT,
-    latitude REAL,
-    longitude REAL
+    slug VARCHAR(32) NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL
 );
-INSERT INTO cities (slug, name, description, latitude, longitude)
+INSERT INTO cities (slug, name, latitude, longitude)
 VALUES (
         'lausanne',
         'Lausanne',
-        'Nice city next to the lake',
         40,
         8
     );
-CREATE TABLE address (
+CREATE TABLE regions (
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    address VARCHAR(64),
-    city UUID,
-    postalCode INT
+    code VARCHAR(5) NOT NULL,
+    slug VARCHAR(32) NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL
 );
-INSERT INTO address (address, city, postalcode) VALUES ('Avenue des Figuiers 13', '72705907-664b-40fb-9289-63f65cc05ea1', 1007);
-ALTER TABLE address RENAME TO addresses;
+INSERT INTO regions (code, slug, name, latitude, longitude)
+VALUES (
+        'vd',
+        'vaud',
+        'Vaud',
+        40,
+        8
+    );
+CREATE TABLE countries (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    code VARCHAR(3) NOT NULL,
+    slug VARCHAR(32) NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL
+);
+INSERT INTO countries (code, slug, name, latitude, longitude)
+VALUES (
+        'CH',
+        'switzerland',
+        'Switzerland',
+        40,
+        8
+    );
+DROP TABLE addresses;
+CREATE TABLE addresses (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    address VARCHAR(255) NOT NULL,
+    street VARCHAR(64) NOT NULL,
+    number INTEGER,
+    city UUID NOT NULL REFERENCES cities,
+    postal_code INT NOT NULL,
+    region UUID NOT NULL REFERENCES regions,
+    country UUID NOT NULL REFERENCES countries,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL
+);
+INSERT INTO addresses (
+        address,
+        street,
+        number,
+        postal_code,
+        city,
+        region,
+        country,
+        latitude,
+        longitude
+    )
+VALUES (
+        'Avenue des Figuiers 13, 1007 Lausanne, Suisse',
+        'Avenue des Figuiers',
+        13,
+        1007,
+        '72705907-664b-40fb-9289-63f65cc05ea1',
+        'a86575e3-246d-436e-bdce-35c7e66ea8d0',
+        '1d4569c6-d469-4873-84da-f2673e13bec6',
+        40,
+        8
+    );
+ALTER TABLE address
+    RENAME TO addresses;
 CREATE TABLE restaurants (
-    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-    owner UUID,
-    address UUID,
-    slug VARCHAR(48),
-    name VARCHAR(32),
-    intro VARCHAR(140),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    slug VARCHAR(255),
+    owner_id UUID NOT NULL REFERENCES users,
+    name VARCHAR(255) NOT NULL,
     description TEXT,
-    image VARCHAR(500)
+    cuisine VARCHAR(255) NOT NULL,
+    image VARCHAR(500) NOT NULL,
+    phone VARCHAR(255),
+    address VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    street_number INTEGER NOT NULL,
+    postal_code INTEGER NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    region VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-ALTER TABLE restaurants ADD address UUID;
-UPDATE restaurants SET address = '2167b4b7-3eb1-4e5c-86bc-0e4146d851e6';
+ALTER TABLE restaurants
+ALTER COLUMN cuisine DROP DEFAULT;
+DROP TABLE restaurants CASCADE;
+92c6e519-dc99-4778-bc73-f593e9071163
+ALTER TABLE restaurants ALTER owner_id DROP DEFAULT;
+ALTER TABLE restaurants
+ADD address UUID;
+UPDATE restaurants
+SET address = '2f124fe1-90a0-4ee3-9f91-1477b8ef4b88';
 INSERT INTO restaurants (slug, name, intro, description, image)
 VALUES (
         'holycow',
@@ -83,7 +173,7 @@ VALUES (
     );
 CREATE TABLE items (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-    restaurant UUID NOT NULL,
+    restaurant_id UUID NOT NULL REFERENCES restaurants ON DELETE CASCADE,
     slug VARCHAR(48) NOT NULL,
     category UUID NOT NULL,
     name VARCHAR(32) NOT NULL,
@@ -91,12 +181,19 @@ CREATE TABLE items (
     price NUMERIC(6, 2) NOT NULL,
     currency VARCHAR(3) NOT NULL,
     available BOOLEAN DEFAULT TRUE NOT NULL,
-    image VARCHAR(500) NOT NULL
+    image VARCHAR(500) NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE items
+ADD COLUMN created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE items
+    RENAME COLUMN restaurant TO restaurant_id;
 ALTER TABLE items
 ADD restaurantId UUID;
 DROP TABLE items;
-UPDATE items SET restaurantId = '92c6e519-dc99-4778-bc73-f593e9071163';
+UPDATE items
+SET restaurantId = '92c6e519-dc99-4778-bc73-f593e9071163';
 INSERT INTO items (slug, category, name, description, price, image)
 VALUES (
         'big-beef',
@@ -138,13 +235,15 @@ VALUES (
 RETURNING *;
 CREATE TABLE categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-    restaurant UUID,
-    slug VARCHAR(48) NOT NULL,
+    restaurant_id UUID REFERENCES restaurants ON DELETE CASCADE,
     name VARCHAR(32) NOT NULL,
     description VARCHAR(240)
 );
-ALTER TABLE categories ADD restaurant UUID;
-UPDATE categories SET restaurant = '92c6e519-dc99-4778-bc73-f593e9071163';
+ALTER TABLE categories
+ADD restaurant UUID;
+ALTER TABLE categories DROP COLUMN slug;
+UPDATE categories
+SET restaurant = '92c6e519-dc99-4778-bc73-f593e9071163';
 INSERT INTO categories (slug, name, description)
 VALUES (
         'beef-burgers',
@@ -161,13 +260,23 @@ CREATE TABLE subscriptions (
     user_id INTEGER NOT NULL,
     plan VARCHAR(255),
     amount NUMERIC(6, 2),
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE uploadedImages (
-    url VARCHAR(500) PRIMARY KEY UNIQUE,
-    createdAt TIMESTAMPTZ NOT NULL DEFAULT NOW()
-)
-
-UPDATE restaurants SET name = 'Burger Company';
+UPDATE restaurants
+SET name = 'Burger Company';
+DELETE FROM categories
+WHERE categories.id = '6e458376-b059-47f9-ac0d-df9bad1005b0';
+CREATE TABLE schedules (
+    restaurant_id UUID NOT NULL REFERENCES restaurants ON DELETE CASCADE,
+    day_of_week INTEGER NOT NULL,
+    open TIME NOT NULL,
+    close TIME NOT NULL
+) CREATE TABLE favorites (
+    user_id UUID NOT NULL REFERENCES users ON DELETE CASCADE,
+    restaurant_id UUID NOT NULL REFERENCES restaurants ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+DROP TABLE favorites
+ALTER TABLE favorites
+ADD COLUMN create_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
