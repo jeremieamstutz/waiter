@@ -1,6 +1,6 @@
 import CategoryForm from 'components/category/category-form'
 
-import { getCategory } from 'utils/db'
+import { getCategory } from 'pages/api/categories/[categoryId]'
 
 import classes from 'styles/new-category.module.css'
 
@@ -22,8 +22,6 @@ export async function getServerSideProps({ params }) {
 			notFound: true,
 		}
 	}
-
-	console.log(category)
 
 	return { props: { category } }
 }

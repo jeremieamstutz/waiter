@@ -1,28 +1,20 @@
+import Container from 'components/layout/container'
 import ItemForm from 'components/item/item-form'
-import Footer from 'components/layout/footer'
 
-import {
-	getItem,
-	// getItemsSlugs
-} from 'utils/db'
-
-import classes from 'styles/edit-item.module.css'
+import { getItem } from 'pages/api/items/[itemId]'
 
 export default function EditItemPage({ item }) {
 	return (
-		<>
-			<div className={classes.container}>
-				<h1 className={classes.title}>Edit item</h1>
-				<ItemForm item={item} />
-			</div>
-			<Footer />
-		</>
+		<Container>
+			<h1>Edit item</h1>
+			<ItemForm item={item} />
+		</Container>
 	)
 }
 
 export async function getServerSideProps({ params }) {
-	const { itemSlug, restaurantSlug, citySlug } = params
-	const item = await getItem({ itemSlug, restaurantSlug, citySlug })
+	const { itemSlug, restaurantSlug } = params
+	const item = await getItem({ itemSlug, restaurantSlug })
 
 	if (!item) {
 		return {

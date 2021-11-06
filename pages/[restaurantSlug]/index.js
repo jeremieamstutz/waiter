@@ -2,27 +2,27 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/react'
 
 import Header from 'components/layout/header'
-import RestaurantHeader from 'components/restaurant/header'
+import RestaurantHeader from 'components/restaurant/restaurant-header'
 import ItemList from 'components/item/item-list'
 
 import { RestaurantProvider } from 'contexts/restaurant'
+import { getAllRestaurantsSlugs } from 'pages/api/restaurants/'
 import {
 	getRestaurant,
 	getRestaurantItems,
 	getRestaurantCategories,
-	getRestaurantsSlugs,
-	// getLike,
-} from 'utils/db'
+} from 'pages/api/restaurants/[restaurantId]'
 
 import classes from 'styles/restaurant.module.css'
+import Container from 'components/layout/container'
 
 export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
 
-	const [session, loading] = useSession()
+	const { status } = useSession()
 
 	return (
 		<RestaurantProvider initialValue={restaurant}>
@@ -73,42 +73,44 @@ export default function RestaurantPage({ restaurant }) {
 					<p>Fill in all the details</p>
 				</Modal>
 			)} */}
-			<div className={classes.imageWrapper}>
-				<Image
-					className={classes.image}
-					src={restaurant.image}
-					alt={restaurant.name}
-					layout="responsive"
-					objectFit="cover"
-					width={375}
-					height={470} // 500
-					priority={true}
-				/>
-			</div>
-			<main className={classes.container}>
-				<RestaurantHeader />
-				{restaurant.categories.map((category, index) => (
-					<ItemList
-						category={category}
-						items={restaurant.items.filter(
-							(item) => item.category === category.id,
-						)}
-						key={index}
+			<Container>
+				<div className={classes.imageWrapper}>
+					<Image
+						className={classes.image}
+						src={restaurant.image}
+						alt={restaurant.name}
+						layout="responsive"
+						objectFit="cover"
+						width={375}
+						height={470} // 500
+						priority={true}
 					/>
-				))}
-				{!loading && session && (
-					<div className={classes.actions}>
-						<Link
-							href={{
-								pathname: router.pathname + '/categories/new',
-								query: {
-									...router.query,
-								},
-							}}
-						>
-							<a className="button">New category</a>
-						</Link>
-						{/* <Link
+				</div>
+				<main className={classes.container}>
+					<RestaurantHeader />
+					{restaurant.categories.map((category, index) => (
+						<ItemList
+							category={category}
+							items={restaurant.items.filter(
+								(item) => item.category === category.id,
+							)}
+							key={index}
+						/>
+					))}
+					{status === 'authenticated' && (
+						<div className={classes.actions}>
+							<Link
+								href={{
+									pathname:
+										router.pathname + '/categories/new',
+									query: {
+										...router.query,
+									},
+								}}
+							>
+								<a className="button">New category</a>
+							</Link>
+							{/* <Link
 							href={{
 								pathname: '/help',
 							}}
@@ -125,9 +127,10 @@ export default function RestaurantPage({ restaurant }) {
 						<select>
 							<option>English</option>
 						</select> */}
-					</div>
-				)}
-			</main>
+						</div>
+					)}
+				</main>
+			</Container>
 			<Header>
 				{/* <Link href="/deal"><a style={{color: 'white', background: 'var(--color-primary)', padding: '1rem', display: 'block'}}>GET AN INCREDIBLE DEAL !</a></Link> */}
 				{/* <div style={{ padding: '0 1rem 1rem', background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,1) 100%)' }}>
@@ -142,7 +145,7 @@ export default function RestaurantPage({ restaurant }) {
 }
 
 export async function getStaticPaths() {
-	const restaurantsSlug = await getRestaurantsSlugs()
+	const restaurantsSlug = await getAllRestaurantsSlugs()
 	return {
 		paths: restaurantsSlug.map((restaurant) => ({ params: restaurant })),
 		fallback: 'blocking',
@@ -150,18 +153,17 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-	const { restaurantSlug, citySlug } = params
-	const restaurant = await getRestaurant({ restaurantSlug, citySlug })
+	const { restaurantSlug } = params
+	const restaurant = await getRestaurant({ restaurantSlug })
 
 	if (!restaurant) {
 		return {
 			notFound: true,
 		}
 	}
-	const items = await getRestaurantItems({ restaurantSlug, citySlug })
+	const items = await getRestaurantItems({ restaurantSlug })
 	const categories = await getRestaurantCategories({
 		restaurantSlug,
-		citySlug,
 	})
 
 	restaurant.items = items
@@ -174,7 +176,7 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			restaurant: restaurant,
+			restaurant,
 		},
 		revalidate: 5,
 	}
