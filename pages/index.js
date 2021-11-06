@@ -1,80 +1,40 @@
 import Link from 'next/link'
-import { getAllRestaurants } from 'utils/db'
+import { getAllRestaurants } from 'pages/api/restaurants'
 
-import RestaurantCard from 'components/restaurant/restaurant-card'
+import Container from 'components/layout/container'
+import RestaurantList from 'components/restaurant/restaurant-list'
 import Header from 'components/layout/header'
 
 import classes from 'styles/home.module.css'
+import { groupBy } from 'utils/processing'
 
-export default function Home({ restaurants }) {
-	restaurants = [...restaurants, ...restaurants, ...restaurants]
-
+export default function HomePage({ restaurants }) {
 	return (
 		<>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					// borderBottom: '1px solid #ccc',
-					padding: '1.25rem 1rem 0.5rem',
-					background: 'white',
-					gap: '0.5rem',
-					zIndex: 2,
-				}}
-			>
-				<div>Waiter</div>
-				<h1 style={{ margin: 0 }}>Search</h1>
-			</div>
-			<div className={'container ' + classes.container}>
-				{/* <h1>Home</h1> */}
+			<Container>
+				<h1>Accueil</h1>
 				{/* <p>Commandez en ligne. Régalez vous sur place.</p> */}
 				{/* <div>Mon restaurant</div> */}
-				<div>
-					<h2 style={{ margin: 0 }}>Recommandations</h2>
-					<div
-						style={{
-							display: 'flex',
-							gap: '1rem',
-							margin: '0 -1rem',
-							padding: '1rem',
-							overflow: 'auto',
-							scrollSnapType: 'x mandatory',
-							scrollPadding: '1rem',
-							marginBottom: '1rem',
-						}}
-					>
-						{restaurants.map((restaurant, index) => (
-							<RestaurantCard
-								restaurant={restaurant}
-								key={index}
-							/>
-						))}
-					</div>
-				</div>
-				<div>
-					<h2 style={{ margin: 0 }}>Burgers</h2>
-					<div
-						style={{
-							display: 'flex',
-							gap: '1rem',
-							margin: '0 -1rem',
-							padding: '1rem',
-							overflow: 'auto',
-							scrollSnapType: 'x mandatory',
-							scrollPadding: '1rem',
-						}}
-					>
-						{restaurants.map((restaurant, index) => (
-							<RestaurantCard
-								restaurant={restaurant}
-								key={index}
-							/>
-						))}
-					</div>
-				</div>
+				{/* <RestaurantList
+					list={{
+						name: 'Recommandations',
+						description: 'Ces restaurants risquent de vous plaire',
+					}}
+					restaurants={restaurants}
+				/> */}
+				{[...groupBy(restaurants, (restaurant) => restaurant.city)].map(
+					([key, value]) => (
+						<RestaurantList
+							key={key}
+							restaurants={value}
+							list={{
+								name: key,
+							}}
+						/>
+					),
+				)}
 				<div className={classes.cta}>
-					<h3>Et votre restaurant ?</h3>
+					<h2>Et votre restaurant ?</h2>
 					<p>
 						Découvrez les nombreux avantages que Waiter peut vous
 						offrir
@@ -87,7 +47,7 @@ export default function Home({ restaurants }) {
 						<a className="button secondary">Voir</a>
 					</Link>
 				</div>
-			</div>
+			</Container>
 			<Header />
 		</>
 	)
