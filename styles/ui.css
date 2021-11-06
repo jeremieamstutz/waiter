@@ -58,6 +58,12 @@ a.button.secondary:focus {
 	background: #444;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
 input,
 textarea,
 select {

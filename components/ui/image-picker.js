@@ -7,7 +7,7 @@ import classes from './image-picker.module.css'
 import { Ring } from './spinner'
 import sleep from 'utils/sleep'
 
-const FilePicker = ({ url, setUrl }) => {
+export default function ImagePicker({ url, setUrl }) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
 
@@ -123,5 +123,3 @@ const FilePicker = ({ url, setUrl }) => {
 		</>
 	)
 }
-
-export default FilePicker

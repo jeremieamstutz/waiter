@@ -7,6 +7,8 @@ import useLocalStorage from 'hooks/useLocalStorage'
 
 import classes from './add-to-home-screen.module.css'
 
+// https://web.dev/customize-install/
+
 export default function AddToHomeScreen() {
 	const standalone = useStandalone()
 	const [hidden, setHidden] = useLocalStorage('hideAddToHomeScreen', false)

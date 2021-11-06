@@ -1,15 +1,17 @@
 .card {
-	scroll-snap-align: start;
-	cursor: pointer;
+	flex-shrink: 0;
+	width: calc((100vw - 2.5rem)/2);
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	gap: 0.25rem;
+	gap: 0.125rem;
+	cursor: pointer;
+	scroll-snap-align: start;
+	/* margin-bottom: 0.5rem; */
 }
 
 .image {
 	position: relative;
-	width: calc((100vw - 2.5rem)/2);
 }
 
 /* .picker {
@@ -79,4 +81,14 @@
 
 .grade {
 	color: var(--color-text-secondary);
+}
+
+.skeleton .image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc((100vw - 2.5rem)*0.75);
+	border-radius: 0.5rem;
+	background: var(--color-ui-tertiary);
+	border: 1px solid #ddd;
 }
