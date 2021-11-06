@@ -1,5 +1,6 @@
 import statusCodes from 'utils/statusCodes'
-import { createCategory, getRestaurant } from 'utils/db'
+import { query } from 'utils/db'
+import { getRestaurant } from 'pages/api/restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -11,11 +12,10 @@ export default async function handler(req, res) {
 		case 'POST':
 			console.log(req.body)
 
-			const { category, restaurantSlug, citySlug } = req.body
+			const { category, restaurantSlug } = req.body
 
 			const restaurant = await getRestaurant({
 				restaurantSlug,
-				citySlug,
 			})
 			category.restaurant = restaurant.id
 
@@ -27,4 +27,15 @@ export default async function handler(req, res) {
 			res.status(statusCodes.methodNotAllowed).end()
 			break
 	}
+}
+
+export async function createCategory({ category }) {
+	const result = await query(
+		`
+		INSERT INTO categories (name, description, restaurant)
+		VALUES ($1, $2, $3)
+		`,
+		[category.name, category.description, category.restaurant],
+	)
+	return result.rows[0]
 }

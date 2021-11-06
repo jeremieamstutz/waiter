@@ -1,5 +1,5 @@
 import statusCodes from 'utils/statusCodes'
-import { updateCategory, deleteCategory, getCategory } from 'utils/db'
+import { query } from 'utils/db'
 
 export default async function handler(req, res) {
 	const {
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 			break
 		}
 		case 'PUT': {
-			const category = req.body
+			const { category } = req.body
 			category.id = categoryId
 
 			await updateCategory(category)
@@ -33,4 +33,38 @@ export default async function handler(req, res) {
 			break
 		}
 	}
+}
+
+export async function getCategory(categoryId) {
+	const result = await query(
+		`
+		SELECT categories.* FROM categories 
+		WHERE categories.id = $1
+		`,
+		[categoryId],
+	)
+	return result.rows[0]
+}
+
+export async function updateCategory(category) {
+	const result = await query(
+		`
+		UPDATE categories 
+		SET name = $2, description = $3
+		WHERE categories.id = $1
+		`,
+		[category.id, category.name, category.description],
+	)
+	return result.rows[0]
+}
+
+export async function deleteCategory(categoryId) {
+	const result = await query(
+		`
+		DELETE FROM categories
+		WHERE categories.id = $1
+		`,
+		[categoryId],
+	)
+	return result.rows[0]
 }
