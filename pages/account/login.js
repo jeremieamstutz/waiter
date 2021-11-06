@@ -99,7 +99,6 @@ export default function LoginPage() {
 					}}
 				>
 					<input
-						autoFocus
 						type="email"
 						name="email"
 						placeholder="Email"
