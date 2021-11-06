@@ -1,7 +1,7 @@
 import Spinner from 'components/ui/spinner'
-import { getProviders, getCsrfToken, signIn } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import classes from 'styles/login.module.css'
 
@@ -25,7 +25,6 @@ export default function LoginPage() {
 
 	const { error } = router.query
 
-	// const [providers, setProviders] = useState({})
 	const [email, setEmail] = useState('')
 	const [loading, setLoading] = useState(false)
 
@@ -60,29 +59,10 @@ export default function LoginPage() {
 		},
 	}
 
-	// useEffect(() => {
-	// async function fetchCsrfToken() {
-	// 	setCsrfToken(await getCsrfToken())
-	// }
-	// fetchCsrfToken()
-
-	// async function fetchProviders() {
-	// 	setProviders(await getProviders())
-	// }
-	// fetchProviders()
-	// }, [])
-
 	return (
 		<div className={classes.container}>
 			{loading && <Spinner />}
 			<div>
-				{/* <img
-					src="/android-chrome-512x512.png"
-					width="128"
-					height="128"
-					style={{ background: 'none' }}
-				/> */}
-
 				<h1 className={classes.title}>Waiter</h1>
 			</div>
 			<div className={classes.list}>
