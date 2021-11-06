@@ -162,10 +162,10 @@ export function NewItemCard({ category }) {
 		<div className={classes.skeleton}>
 			<Link
 				href={{
-					pathname: '/[restaurantSlug]/new-item',
+					pathname: '/[restaurantSlug]/items/new',
 					query: {
-						...router.query,
-						category,
+						restaurantSlug: router.query.restaurantSlug,
+						category: category,
 					},
 				}}
 			>

@@ -62,17 +62,7 @@ export default function RestaurantPage({ restaurant }) {
 						}
 					/>
 				</Modal>
-			)}
-			{!!router.asPath.split('?')[0].endsWith('/new-item') && (
-				<Modal
-					onClose={() =>
-						router.back()
-					}
-				>
-					<h1>New Item</h1>
-					<p>Fill in all the details</p>
-				</Modal>
-			)} */}
+			)}*/}
 			<Container>
 				<div className={classes.imageWrapper}>
 					<Image

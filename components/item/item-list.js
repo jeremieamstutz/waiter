@@ -54,9 +54,9 @@ export default function ItemList({ category, items }) {
 					{/* <h2 style={{margin: 0, marginBottom: '0.75rem', textAlign: 'center'}}>Options</h2> */}
 					<Link
 						href={{
-							pathname: router.pathname + '/new-item',
+							pathname: '[restaurantSlug]/items/new',
 							query: {
-								...router.query,
+								restaurantSlug: router.query.restaurantSlug,
 								category: category.id,
 							},
 						}}
