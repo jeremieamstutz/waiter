@@ -60,5 +60,6 @@ export async function getStaticProps() {
 		props: {
 			restaurants,
 		},
+		revalidate: 5,
 	}
 }
