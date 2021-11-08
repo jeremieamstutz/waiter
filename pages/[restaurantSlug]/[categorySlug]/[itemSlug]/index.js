@@ -29,7 +29,7 @@ export default function ItemDetailPage({ item, url }) {
 
 export async function getStaticProps({ params }) {
 	const { restaurantSlug, categorySlug, itemSlug } = params
-	const item = await getItem({ restaurantSlug, itemSlug })
+	const item = await getItem({ restaurantSlug, categorySlug, itemSlug })
 
 	if (!item) {
 		return {

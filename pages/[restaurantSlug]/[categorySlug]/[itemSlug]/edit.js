@@ -14,7 +14,7 @@ export default function EditItemPage({ item }) {
 
 export async function getServerSideProps({ params }) {
 	const { itemSlug, restaurantSlug } = params
-	const item = await getItem({ itemSlug, restaurantSlug })
+	const item = await getItem({ restaurantSlug, categorySlug, itemSlug })
 
 	if (!item) {
 		return {
