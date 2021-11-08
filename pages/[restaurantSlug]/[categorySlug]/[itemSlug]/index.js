@@ -28,7 +28,7 @@ export default function ItemDetailPage({ item, url }) {
 }
 
 export async function getStaticProps({ params }) {
-	const { restaurantSlug, itemSlug } = params
+	const { restaurantSlug, categorySlug, itemSlug } = params
 	const item = await getItem({ restaurantSlug, itemSlug })
 
 	if (!item) {
@@ -38,7 +38,8 @@ export async function getStaticProps({ params }) {
 	}
 
 	const url =
-		process.env.NEXT_PUBLIC_DOMAIN + `/${restaurantSlug}/${itemSlug}`
+		process.env.NEXT_PUBLIC_DOMAIN +
+		`/${restaurantSlug}/${categorySlug}/${itemSlug}`
 
 	return {
 		props: { item, url },
