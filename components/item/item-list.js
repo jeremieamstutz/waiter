@@ -19,6 +19,7 @@ export default function ItemList({ category, items }) {
 		await axios.delete(`/api/categories/${category.id}`)
 		router.reload()
 	}
+
 	return (
 		<section className={classes.container}>
 			<div className={classes.header}>
@@ -65,10 +66,11 @@ export default function ItemList({ category, items }) {
 					</Link>
 					<Link
 						href={{
-							pathname: `${router.pathname}/categories/[categoryId]/edit`,
+							pathname:
+								'[restaurantSlug]/[categorySlug]/edit',
 							query: {
 								...router.query,
-								categoryId: category.id,
+								categorySlug: category.slug,
 							},
 						}}
 					>
@@ -98,10 +100,10 @@ export default function ItemList({ category, items }) {
 			</div>
 			<div className={classes.list}>
 				{items.map((item, index) => (
-					<ItemCard item={item} key={index} />
+					<ItemCard item={item} category={category} key={index} />
 				))}
 				{status === 'authenticated' && (
-					<NewItemCard category={category.id} />
+					<NewItemCard category={category} />
 				)}
 			</div>
 		</section>

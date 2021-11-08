@@ -1,6 +1,6 @@
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
-import { getRestaurant } from 'pages/api/restaurants/[restaurantId]'
+import slugify from 'slugify'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -12,12 +12,10 @@ export default async function handler(req, res) {
 		case 'POST':
 			console.log(req.body)
 
-			const { category, restaurantSlug } = req.body
+			const { category, restaurantId } = req.body
 
-			const restaurant = await getRestaurant({
-				restaurantSlug,
-			})
-			category.restaurant = restaurant.id
+			category.slug = slugify(category.name, { lower: true })
+			category.restaurant = restaurantId
 
 			const result = await createCategory({ category })
 
@@ -30,12 +28,14 @@ export default async function handler(req, res) {
 }
 
 export async function createCategory({ category }) {
+	const { slug, name, description, restaurant} = category
+
 	const result = await query(
 		`
-		INSERT INTO categories (name, description, restaurant)
-		VALUES ($1, $2, $3)
+		INSERT INTO categories (slug, name, description, restaurant)
+		VALUES ($1, $2, $3, $4)
 		`,
-		[category.name, category.description, category.restaurant],
+		[slug, name, description, restaurant],
 	)
 	return result.rows[0]
 }

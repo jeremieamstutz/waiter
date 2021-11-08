@@ -7,7 +7,7 @@ import useLongPress from 'hooks/useLongPress'
 
 import classes from './item-card.module.css'
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, category }) {
 	const router = useRouter()
 
 	const [quantity, setQuantity] = useState(0)
@@ -41,9 +41,10 @@ export default function ItemCard({ item }) {
 	return (
 		<Link
 			href={{
-				pathname: '/[restaurantSlug]/[itemSlug]',
+				pathname: '/[restaurantSlug]/[categorySlug]/[itemSlug]',
 				query: {
 					...router.query,
+					categorySlug: category.slug,
 					itemSlug: item.slug,
 				},
 			}}
@@ -103,6 +104,7 @@ export default function ItemCard({ item }) {
 						width={171}
 						height={256}
 						priority={true}
+						sizes="50vw"
 					/>
 				</div>
 				<h3 className={classes.title}>{item.name}</h3>
@@ -165,7 +167,7 @@ export function NewItemCard({ category }) {
 					pathname: '/[restaurantSlug]/items/new',
 					query: {
 						restaurantSlug: router.query.restaurantSlug,
-						category: category,
+						categoryId: category.id,
 					},
 				}}
 			>

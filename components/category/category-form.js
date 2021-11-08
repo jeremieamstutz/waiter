@@ -8,9 +8,9 @@ import classes from './category-form.module.css'
 import sleep from 'utils/sleep'
 import axios from 'axios'
 
-export default function CategoryForm({ category }) {
+export default function CategoryForm({ category, restaurant }) {
 	const router = useRouter()
-
+	
 	return (
 		<Formik
 			initialValues={{
@@ -31,7 +31,7 @@ export default function CategoryForm({ category }) {
 				if (!category) {
 					await axios.post('/api/categories', {
 						category: values,
-						restaurantSlug: router.query.restaurantSlug,
+						restaurantId: restaurant.id,
 					})
 				} else {
 					await axios.put(`/api/categories/${category.id}`, {
