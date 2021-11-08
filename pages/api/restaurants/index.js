@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import { query } from 'utils/db'
 import statusCodes from 'utils/statusCodes'
+import { getRestaurant } from './[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -18,6 +19,16 @@ export default async function handler(req, res) {
 			const session = await getSession({ req })
 
 			restaurant.slug = slugify(restaurant.name, { lower: true })
+
+			const existingRestaurant = getRestaurant({
+				restaurantSlug: restaurant.slug,
+			})
+
+			if (existingRestaurant) {
+				res.status(statusCodes.badRequest).json({
+					error: 'Existing slug',
+				})
+			}
 
 			restaurant.ownerId = session.user.id
 
@@ -87,13 +98,6 @@ export async function getAllRestaurants() {
 	const result = await query(
 		`SELECT * FROM restaurants
         ORDER BY created_at DESC`,
-	)
-	return result.rows
-}
-
-export async function getAllRestaurantsSlugs() {
-	const result = await query(
-		`SELECT restaurants.slug as "restaurantSlug" FROM restaurants`,
 	)
 	return result.rows
 }
