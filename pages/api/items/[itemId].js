@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
 export async function getItem({ itemSlug, restaurantSlug }) {
 	const result = await query(
-		`SELECT items.* FROM items 
+		`SELECT items.*, items.category_id AS "categoryId" FROM items 
 		JOIN restaurants ON restaurants.id = items.restaurant_id
 		WHERE items.slug = $1 AND restaurants.slug = $2`,
 		[itemSlug, restaurantSlug],

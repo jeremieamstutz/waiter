@@ -46,14 +46,15 @@ export async function createItem(item) {
 }
 
 export async function getAllItems() {
-	const result = await query(`SELECT items.* FROM items`)
+	const result = await query(`SELECT items.*, items.category_id AS "categoryId" FROM items`)
 	return result.rows
 }
 
 export async function getAllItemsSlugs() {
 	const result = await query(
-		`SELECT items.slug AS "itemSlug", restaurants.slug AS "restaurantSlug" FROM items 
-		JOIN restaurants ON restaurants.id = items.restaurant_id`,
+		`SELECT restaurants.slug AS "restaurantSlug", categories.slug AS "categorySlug", items.slug AS "itemSlug" FROM items 
+		JOIN restaurants ON restaurants.id = items.restaurant_id
+		JOIN categories on categories.id = items.category_id`,
 	)
 	return result.rows
 }

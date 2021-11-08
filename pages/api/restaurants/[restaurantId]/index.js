@@ -109,7 +109,7 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 
 export async function getRestaurantItems({ restaurantSlug }) {
 	const result = await query(
-		`SELECT items.* FROM items 
+		`SELECT items.*, items.category_id AS "categoryId" FROM items 
 		JOIN restaurants ON restaurants.id = items.restaurant_id  
 		WHERE restaurants.slug = $1`,
 		[restaurantSlug],
