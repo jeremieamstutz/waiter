@@ -1,55 +1,51 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import Router from 'next/router'
+function saveScrollPos(id, list, type) {
+	const newScrollPosition = {
+		x: list.scrollLeft,
+		y: window.scrollTop,
+		type: type,
+	}
 
-function saveScrollPos(url) {
-	const scrollPos = { x: window.scrollX, y: window.scrollY }
-	sessionStorage.setItem(url, JSON.stringify(scrollPos))
+	const scrollPositions =
+		JSON.parse(sessionStorage.getItem('scrollPositions')) || {}
+
+	scrollPositions[id] = newScrollPosition
+	sessionStorage.setItem('scrollPositions', JSON.stringify(scrollPositions))
 }
 
-function restoreScrollPos(url) {
-	const scrollPos = JSON.parse(sessionStorage.getItem(url))
-	if (scrollPos) {
-		window.scrollTo(scrollPos.x, scrollPos.y)
+function restoreScrollPos(id, list) {
+	const scrollPositions =
+		JSON.parse(sessionStorage.getItem('scrollPositions')) || {}
+
+	if (scrollPositions[id]) {
+		list.scrollLeft = scrollPositions[id].x
+		list.scrollTop = scrollPositions[id].y
 	}
 }
 
-export default function useScrollRestoration(router) {
-	useEffect(() => {
-		if ('scrollRestoration' in window.history) {
-			let shouldScrollRestore = false
-			window.history.scrollRestoration = 'manual'
-			restoreScrollPos(router.asPath)
+export default function useScrollRestoration(element, id, type) {
+	const router = useRouter()
 
-			const onBeforeUnload = (event) => {
-				saveScrollPos(router.asPath)
-				delete event['returnValue']
+	useEffect(() => {
+		if (element.current) {
+			restoreScrollPos(id, element.current)
+
+			const onBeforeUnload = () => {
+				saveScrollPos(id, element.current, type)
 			}
 
 			const onRouteChangeStart = () => {
-				saveScrollPos(router.asPath)
-			}
-
-			const onRouteChangeComplete = (url) => {
-				if (shouldScrollRestore) {
-					shouldScrollRestore = false
-					restoreScrollPos(url)
-				}
+				saveScrollPos(id, element.current, type)
 			}
 
 			window.addEventListener('beforeunload', onBeforeUnload)
-			Router.events.on('routeChangeStart', onRouteChangeStart)
-			Router.events.on('routeChangeComplete', onRouteChangeComplete)
-			Router.beforePopState(() => {
-				shouldScrollRestore = true
-				return true
-			})
+			router.events.on('routeChangeStart', onRouteChangeStart)
 
 			return () => {
 				window.removeEventListener('beforeunload', onBeforeUnload)
-				Router.events.off('routeChangeStart', onRouteChangeStart)
-				Router.events.off('routeChangeComplete', onRouteChangeComplete)
-				Router.beforePopState(() => true)
+				router.events.off('routeChangeStart', onRouteChangeStart)
 			}
 		}
 	}, [router])

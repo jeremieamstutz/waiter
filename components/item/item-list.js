@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import axios from 'axios'
 
 import ItemCard, { NewItemCard } from './item-card'
@@ -8,6 +8,7 @@ import Sheet from 'components/ui/sheet'
 import classes from './item-list.module.css'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import useScrollRestoration from 'hooks/useScrollRestauration'
 
 export default function ItemList({ category, items }) {
 	const router = useRouter()
@@ -19,6 +20,9 @@ export default function ItemList({ category, items }) {
 		await axios.delete(`/api/categories/${category.id}`)
 		router.reload()
 	}
+
+	const listRef = useRef()
+	useScrollRestoration(listRef, category.id, 'category')
 
 	return (
 		<section className={classes.container}>
@@ -67,8 +71,7 @@ export default function ItemList({ category, items }) {
 					</Link>
 					<Link
 						href={{
-							pathname:
-								'[restaurantSlug]/[categorySlug]/edit',
+							pathname: '[restaurantSlug]/[categorySlug]/edit',
 							query: {
 								...router.query,
 								categorySlug: category.slug,
@@ -99,7 +102,7 @@ export default function ItemList({ category, items }) {
 					</button>
 				</Sheet>
 			</div>
-			<div className={classes.list}>
+			<div className={classes.list} ref={listRef}>
 				{items.map((item, index) => (
 					<ItemCard item={item} category={category} key={index} />
 				))}
