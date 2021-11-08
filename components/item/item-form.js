@@ -20,7 +20,7 @@ export default function ItemForm({ restaurant, item }) {
 				description: item?.description || '',
 				price: item?.price || '',
 				currency: item?.currency || 'CHF',
-				category: item?.category || '',
+				categoryId: item?.categoryId || '',
 			}}
 			validationSchema={Yup.object({
 				image: Yup.string().required('You must add an image'),

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 			const { item } = req.body
 			item.slug = slugify(item.name, { lower: true })
 
-			await createItem(item)
+			await createItem({ item })
 
 			res.status(statusCodes.ok).json({})
 			break
@@ -23,30 +23,42 @@ export default async function handler(req, res) {
 	}
 }
 
-export async function createItem(item) {
+export async function createItem({ item }) {
+	const {
+		restaurantId,
+		slug,
+		categoryId,
+		name,
+		description,
+		price,
+		currency,
+		image,
+	} = item
 	const result = await query(
 		`
 		INSERT INTO items
-			(restaurant_id, slug, category, name, description, price, currency, image)
+			(restaurant_id, slug, category_id, name, description, price, currency, image)
 		VALUES
 			($1, $2, $3, $4, $5, $6, $7, $8)
 		`,
 		[
-			item.restaurantId,
-			item.slug,
-			item.category,
-			item.name,
-			item.description,
-			item.price,
-			item.currency,
-			item.image,
+			restaurantId,
+			slug,
+			categoryId,
+			name,
+			description,
+			price,
+			currency,
+			image,
 		],
 	)
 	return result.rows[0]
 }
 
 export async function getAllItems() {
-	const result = await query(`SELECT items.*, items.category_id AS "categoryId" FROM items`)
+	const result = await query(
+		`SELECT items.*, items.category_id AS "categoryId" FROM items`,
+	)
 	return result.rows
 }
 
