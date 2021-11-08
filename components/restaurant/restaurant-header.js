@@ -20,7 +20,7 @@ export default function RestaurantHeader() {
 
 	const isFavorite = favorites.restaurantIds.includes(restaurant.id)
 
-	const handleLikeRestaurant = async () => {
+	const handleFavoriteRestaurant = async () => {
 		if (status === 'unauthenticated') {
 			return signIn()
 		}
@@ -67,10 +67,11 @@ export default function RestaurantHeader() {
 				<h1 className={classes.title}>
 					{restaurant.name}
 					<button
-						className={`${classes.like} ${
+						aria-label="Add to favorite"
+						className={`${classes.favorite} ${
 							isFavorite ? classes.active : ''
 						}`}
-						onClick={handleLikeRestaurant}
+						onClick={handleFavoriteRestaurant}
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +93,7 @@ export default function RestaurantHeader() {
 						{restaurant.description}
 					</p>
 					<a
+						aria-label="See restaurant on map"
 						href={`https://www.google.ch/maps/place/${restaurant.address}`}
 						className={classes.row}
 					>
@@ -109,11 +111,13 @@ export default function RestaurantHeader() {
 							/>
 						</svg>
 						<p>
-							{restaurant.street} {restaurant.streetNumber}, {restaurant.city}
+							{restaurant.street} {restaurant.streetNumber},{' '}
+							{restaurant.city}
 						</p>
 					</a>
 					{restaurant.phone && (
 						<a
+							aria-label="Phone restaurant"
 							href={`tel:${restaurant.phone}`}
 							className={classes.row}
 						>

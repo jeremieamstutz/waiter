@@ -15,7 +15,7 @@
 	align-items: center;
 }
 
-.like {
+.favorite {
 	padding: 0;
 	width: 3rem;
 	height: 3rem;
@@ -32,11 +32,11 @@
 	margin-top: -0.125rem;
 }
 
-.like:hover {
+.favorite:hover {
 	background: none;
 }
 
-.like.active {
+.favorite.active {
 	fill: red;
 	stroke: red;
 }
