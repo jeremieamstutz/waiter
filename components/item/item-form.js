@@ -9,7 +9,7 @@ import ImagePicker from 'components/ui/image-picker'
 import classes from './item-form.module.css'
 import sleep from 'utils/sleep'
 
-export default function ItemForm({ restaurantId, item }) {
+export default function ItemForm({ restaurant, item }) {
 	const router = useRouter()
 
 	return (
@@ -42,8 +42,8 @@ export default function ItemForm({ restaurantId, item }) {
 					await axios.post('/api/items', {
 						item: {
 							...values,
-							category: router.query.category,
-							restaurantId,
+							category: router.query.categoryId,
+							restaurant: restaurant.id,
 						},
 					})
 				} else {

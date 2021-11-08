@@ -36,8 +36,9 @@ export default function RestaurantCard({ restaurant }) {
 							alt={restaurant.name}
 							objectFit="cover"
 							layout="responsive"
-							width={176}
+							width={171}
 							height={256}
+							sizes="50vw"
 						/>
 					</div>
 					<h3 className={classes.title}>{restaurant.name}</h3>

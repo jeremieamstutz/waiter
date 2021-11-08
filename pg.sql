@@ -135,7 +135,7 @@ ALTER TABLE address
     RENAME TO addresses;
 CREATE TABLE restaurants (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    slug VARCHAR(255),
+    slug VARCHAR(255) UNIQUE,
     owner_id UUID NOT NULL REFERENCES users,
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -156,6 +156,8 @@ CREATE TABLE restaurants (
 );
 ALTER TABLE restaurants
 ALTER COLUMN cuisine DROP DEFAULT;
+ALTER TABLE restaurants
+ADD CONSTRAINT unique_slug UNIQUE (slug);
 DROP TABLE restaurants CASCADE;
 92c6e519-dc99-4778-bc73-f593e9071163
 ALTER TABLE restaurants ALTER owner_id DROP DEFAULT;
@@ -175,7 +177,7 @@ CREATE TABLE items (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
     restaurant_id UUID NOT NULL REFERENCES restaurants ON DELETE CASCADE,
     slug VARCHAR(48) NOT NULL,
-    category UUID NOT NULL,
+    category_id UUID NOT NULL REFERENCES categories,
     name VARCHAR(32) NOT NULL,
     description VARCHAR(240),
     price NUMERIC(6, 2) NOT NULL,
@@ -188,7 +190,7 @@ CREATE TABLE items (
 ALTER TABLE items
 ADD COLUMN created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE items
-    RENAME COLUMN restaurant TO restaurant_id;
+RENAME COLUMN category TO category_id;
 ALTER TABLE items
 ADD restaurantId UUID;
 DROP TABLE items;
@@ -237,13 +239,18 @@ CREATE TABLE categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
     restaurant_id UUID REFERENCES restaurants ON DELETE CASCADE,
     name VARCHAR(32) NOT NULL,
+    slug VARCHAR(48) NOT NULL DEFAULT,
     description VARCHAR(240)
 );
+ALTER TABLE categories
+ADD COLUMN slug VARCHAR(48) NOT NULL DEFAULT 'category';
 ALTER TABLE categories
 ADD restaurant UUID;
 ALTER TABLE categories DROP COLUMN slug;
 UPDATE categories
-SET restaurant = '92c6e519-dc99-4778-bc73-f593e9071163';
+SET slug = REPLACE(LOWER(name), ' ', '-');
+ALTER TABLE categories
+ALTER COLUMN slug DROP DEFAULT;
 INSERT INTO categories (slug, name, description)
 VALUES (
         'beef-burgers',

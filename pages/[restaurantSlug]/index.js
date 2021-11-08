@@ -9,7 +9,6 @@ import RestaurantHeader from 'components/restaurant/restaurant-header'
 import ItemList from 'components/item/item-list'
 
 import { RestaurantProvider } from 'contexts/restaurant'
-import { getAllRestaurantsSlugs } from 'pages/api/restaurants/'
 import {
 	getRestaurant,
 	getRestaurantItems,
@@ -18,6 +17,7 @@ import {
 
 import classes from 'styles/restaurant.module.css'
 import Container from 'components/layout/container'
+import { getAllRestaurants } from 'pages/api/restaurants'
 
 export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
@@ -82,7 +82,7 @@ export default function RestaurantPage({ restaurant }) {
 						<ItemList
 							category={category}
 							items={restaurant.items.filter(
-								(item) => item.category === category.id,
+								(item) => item.categoryId === category.id,
 							)}
 							key={index}
 						/>
@@ -135,9 +135,12 @@ export default function RestaurantPage({ restaurant }) {
 }
 
 export async function getStaticPaths() {
-	const restaurantsSlug = await getAllRestaurantsSlugs()
+	const restaurants = await getAllRestaurants()
+
 	return {
-		paths: restaurantsSlug.map((restaurant) => ({ params: restaurant })),
+		paths: restaurants.map((restaurant) => ({
+			params: { restaurantSlug: restaurant.id },
+		})),
 		fallback: 'blocking',
 	}
 }
