@@ -52,11 +52,13 @@ export default function CategoryForm({ category, restaurant }) {
 						name="name"
 						type="text"
 						placeholder="Name"
+						arial-label="Name"
 						autoComplete="off"
 					/>
 					<Textarea
 						name="description"
 						placeholder="Description"
+						arial-label="Description"
 						rows={3}
 					/>
 					<button type="submit" className="secondary">

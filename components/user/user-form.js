@@ -59,22 +59,27 @@ export default function UserForm({ user }) {
 					// url={values.image}
 					// setUrl={(url) => setFieldValue('image', url)}
 					/>
-					<input type="text" placeholder="Name" />
-					<Textarea name="bio" placeholder="Bio" rows={3} />
-					<input type="text" placeholder="Phone" />
-                    <input type="text" placeholder="Birthdate" />
-					<select>
-                        <option disabled>Sex</option>
+					<input type="text" placeholder="Name" arial-label="Name" />
+					<Textarea
+						name="bio"
+						placeholder="Bio"
+						rows={3}
+						arial-label="Biography"
+					/>
+					<input
+						type="text"
+						placeholder="Phone"
+						arial-label="Phone"
+					/>
+					<input
+						type="text"
+						placeholder="Birthdate"
+						arial-label="Birthdate"
+					/>
+					<select arial-label="Sex">
+						<option disabled>Sex</option>
 						<option>Male</option>
 						<option>Female</option>
-						<option>Other</option>
-					</select>
-                    <div>Intérêts</div>
-                    <div>Vegan</div>
-                    <select>
-                        <option disabled>Allergies</option>
-						<option>Vegan</option>
-						<option>Gluten</option>
 						<option>Other</option>
 					</select>
 					<button type="submit" className="secondary">

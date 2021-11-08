@@ -103,14 +103,16 @@ export default function RestaurantForm({ restaurant }) {
 						name="name"
 						type="text"
 						placeholder="Name"
+						arial-label="Name"
 						autoComplete="off"
 					/>
 					<Textarea
 						name="description"
 						placeholder="Description"
+						arial-label="Description"
 						rows={3}
 					/>
-					<Select name="cuisine">
+					<Select name="cuisine" arial-label="Cuisine">
 						<option value="" disabled>
 							Cuisine
 						</option>
@@ -135,39 +137,45 @@ export default function RestaurantForm({ restaurant }) {
 						name="phone"
 						type="tel"
 						placeholder="Phone"
+						arial-label="Phone"
 						autoComplete="off"
 					/>
 					<Input
 						name="street"
 						type="text"
 						placeholder="Street"
+						arial-label="Street"
 						autoComplete="off"
 					/>
 					<Input
 						name="streetNumber"
 						type="number"
 						placeholder="Number"
+						arial-label="Street's number"
 						autoComplete="off"
 					/>
 					<Input
 						name="postalCode"
 						type="number"
 						placeholder="Postal Code"
+						arial-label="Postal code"
 						autoComplete="off"
 					/>
 					<Input
 						name="city"
 						type="text"
 						placeholder="City"
+						arial-label="City"
 						autoComplete="off"
 					/>
 					<Input
 						name="region"
 						type="text"
 						placeholder="Region"
+						arial-label="Region"
 						autoComplete="off"
 					/>
-					<Select name="country">
+					<Select name="country" arial-label="Country">
 						<option value="" disabled>
 							Country
 						</option>

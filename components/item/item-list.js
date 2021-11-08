@@ -31,6 +31,7 @@ export default function ItemList({ category, items }) {
 				</div>
 				{status === 'authenticated' && (
 					<button
+						aria-label="Show more options"
 						className={classes.actions}
 						onClick={() => setShowSheet(true)}
 					>

@@ -71,17 +71,20 @@ export default function ItemForm({ restaurant, item }) {
 						name="name"
 						type="text"
 						placeholder="Name"
+						aria-label="Name"
 						autoComplete="off"
 					/>
 					<Textarea
 						name="description"
 						placeholder="Description"
+						aria-label="Description"
 						rows={3}
 					/>
 					<Input
 						name="price"
 						type="number"
 						placeholder="0.00"
+						aria-label="Price"
 						min={0}
 						max={1000}
 						step={0.05}

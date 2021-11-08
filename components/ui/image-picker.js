@@ -58,6 +58,7 @@ export default function ImagePicker({ url, setUrl }) {
 	return (
 		<>
 			<div
+				arial-label="Image" 
 				{...getRootProps({
 					className: `${classes.container} ${
 						isDragActive ? classes.active : ''

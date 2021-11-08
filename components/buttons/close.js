@@ -3,6 +3,7 @@ import classes from './close.module.css'
 export default function CloseButton({ onClick, className, ...props }) {
 	return (
 		<button
+			arial-label="Close"
 			className={`${classes.button} ${className}`}
 			onClick={onClick}
 			{...props}

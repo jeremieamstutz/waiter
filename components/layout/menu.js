@@ -25,6 +25,7 @@ export default function Menu() {
 				<nav className={classes.navbar}>
 					<Link href="/">
 						<a
+							aria-label="Home page"
 							className={
 								path === '/'
 									? classes.active
@@ -50,6 +51,7 @@ export default function Menu() {
 					</Link>
 					<Link href="/search">
 						<a
+							aria-label="Search page"
 							className={
 								path.startsWith('/search') ? classes.active : ''
 							}
@@ -73,6 +75,7 @@ export default function Menu() {
 					</Link>
 					<Link href="/account/favorites">
 						<a
+							aria-label="Favorites page"
 							className={
 								path.startsWith('/account/favorites')
 									? classes.active
@@ -98,6 +101,7 @@ export default function Menu() {
 					</Link>
 					<Link href="/account/bookings">
 						<a
+							aria-label="Bookings page"
 							className={
 								path.startsWith('/account/bookings')
 									? classes.active
@@ -123,6 +127,7 @@ export default function Menu() {
 					</Link>
 					<Link href="/account">
 						<a
+							aria-label="Account page"
 							className={
 								path.startsWith('/account') &&
 								!path.endsWith('/bookings') &&
