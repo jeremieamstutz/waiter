@@ -1,0 +1,30 @@
+.metric {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title {
+    margin: 0;
+}
+
+.body {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.value {
+    font-size: 2rem;
+}
+
+.previous {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: var(--color-text-tertiary);
+}
+
+.trend {
+    font-size: 1.125rem;
+}
