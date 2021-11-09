@@ -12,7 +12,7 @@ import useScrollRestoration from 'hooks/useScrollRestauration'
 
 export default function ItemList({ category, items }) {
 	const router = useRouter()
-	const { data: session, status } = useSession()
+	const { status } = useSession()
 
 	const [showSheet, setShowSheet] = useState(false)
 
@@ -22,7 +22,7 @@ export default function ItemList({ category, items }) {
 	}
 
 	const listRef = useRef()
-	useScrollRestoration(listRef, category.id, 'category')
+	useScrollRestoration(listRef, `${router.asPath}/${category.slug}`)
 
 	return (
 		<section className={classes.container}>

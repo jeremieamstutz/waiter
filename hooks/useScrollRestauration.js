@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-function saveScrollPos(id, list, type) {
+function saveScrollPos(id, list) {
 	const newScrollPosition = {
 		x: list.scrollLeft,
 		y: window.scrollTop,
-		type: type,
 	}
 
 	const scrollPositions =
@@ -25,7 +24,7 @@ function restoreScrollPos(id, list) {
 	}
 }
 
-export default function useScrollRestoration(element, id, type) {
+export default function useScrollRestoration(element, id) {
 	const router = useRouter()
 
 	useEffect(() => {
@@ -33,11 +32,11 @@ export default function useScrollRestoration(element, id, type) {
 			restoreScrollPos(id, element.current)
 
 			const onBeforeUnload = () => {
-				saveScrollPos(id, element.current, type)
+				saveScrollPos(id, element.current)
 			}
 
 			const onRouteChangeStart = () => {
-				saveScrollPos(id, element.current, type)
+				saveScrollPos(id, element.current)
 			}
 
 			window.addEventListener('beforeunload', onBeforeUnload)
