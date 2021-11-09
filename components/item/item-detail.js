@@ -51,7 +51,9 @@ export default function ItemDetail({ item }) {
 			</div>
 			<div className={classes.container}>
 				<h1 className={classes.name}>{item.name}</h1>
-				<p className={classes.description}>{item.description}</p>
+				{item.description && (
+					<p className={classes.description}>{item.description}</p>
+				)}
 				{item.allergies && (
 					<div className={classes.allergies}>
 						{item.allergies.map((allergy, index) => (
