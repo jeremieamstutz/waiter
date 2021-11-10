@@ -29,12 +29,12 @@ export default function Container({ children }) {
 	// 	})
 	// }, [])
 
-	const containerRef = useRef()
+	// const containerRef = useRef()
 
-	useScrollRestoration(
-		containerRef,
-		router.asPath,
-	)
+	// useScrollRestoration(
+	// 	containerRef,
+	// 	router.asPath,
+	// )
 
 	return (
 		<motion.div
