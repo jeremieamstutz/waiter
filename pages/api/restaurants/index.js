@@ -11,7 +11,8 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET':
-			res.status(statusCodes.ok).json({ status: 'success' })
+			const restaurants = await getAllRestaurants()
+			res.status(statusCodes.ok).json({ restaurants })
 			break
 		case 'POST':
 			const { restaurant } = req.body
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
 
 			restaurant.slug = slugify(restaurant.name, { lower: true })
 
-			const existingRestaurant = getRestaurant({
+			const existingRestaurant = await getRestaurant({
 				restaurantSlug: restaurant.slug,
 			})
 
@@ -97,7 +98,7 @@ export async function createRestaurant({ restaurant }) {
 export async function getAllRestaurants() {
 	const result = await query(
 		`SELECT * FROM restaurants
-        ORDER BY created_at DESC`,
+        ORDER BY created_at ASC`,
 	)
 	return result.rows
 }
