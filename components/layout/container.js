@@ -29,12 +29,12 @@ export default function Container({ children }) {
 	// 	})
 	// }, [])
 
-	const containerRef = useRef()
+	// const containerRef = useRef()
 
-	useScrollRestoration(
-		containerRef,
-		router.asPath,
-	)
+	// useScrollRestoration(
+	// 	containerRef,
+	// 	router.asPath,
+	// )
 
 	return (
 		<motion.div
@@ -43,7 +43,7 @@ export default function Container({ children }) {
 			animate="animate"
 			exit="initial"
 			variants={fadeIn}
-			ref={containerRef}
+			// ref={containerRef}
 		>
 			{children}
 		</motion.div>
