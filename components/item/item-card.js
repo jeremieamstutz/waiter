@@ -103,7 +103,7 @@ export default function ItemCard({ item, category }) {
 						objectPosition="left"
 						width={171}
 						height={256}
-						priority={true}
+						// priority={true}
 						sizes="50vw"
 					/>
 				</div>
