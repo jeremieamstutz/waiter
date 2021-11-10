@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 function saveScrollPos(id, list) {
 	const newScrollPosition = {
 		x: list.scrollLeft,
-		y: window.scrollTop,
+		y: list.scrollTop,
 	}
 
 	const scrollPositions =

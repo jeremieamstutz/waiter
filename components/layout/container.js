@@ -3,6 +3,7 @@ import { fadeIn } from 'animations'
 import { useRouter } from 'next/router'
 import { useEffect, useRef } from 'react'
 import { useAnimation } from 'contexts/animate'
+import useScrollRestoration from 'hooks/useScrollRestauration'
 
 export default function Container({ children }) {
 	const router = useRouter()
@@ -28,6 +29,13 @@ export default function Container({ children }) {
 	// 	})
 	// }, [])
 
+	const containerRef = useRef()
+
+	useScrollRestoration(
+		containerRef,
+		router.asPath,
+	)
+
 	return (
 		<motion.div
 			className="container"
@@ -35,6 +43,7 @@ export default function Container({ children }) {
 			animate="animate"
 			exit="initial"
 			variants={fadeIn}
+			ref={containerRef}
 		>
 			{children}
 		</motion.div>
