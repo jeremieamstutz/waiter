@@ -5,13 +5,15 @@ import { useEffect, useRef } from 'react'
 import { useAnimation } from 'contexts/animate'
 import useScrollRestoration from 'hooks/useScrollRestauration'
 
+import classes from './container.module.css'
+
 export default function Container({ children }) {
 	const router = useRouter()
 
 	// const [shouldAnimate, setShouldAnimate] = useAnimation()
 
 	const shouldAnimate = false
-	
+
 	// useEffect(() => {
 	// 	let popState = false
 	// 	router.beforePopState(() => {
@@ -38,7 +40,7 @@ export default function Container({ children }) {
 
 	return (
 		<motion.div
-			className="container"
+			className={classes.container}
 			initial={shouldAnimate ? 'initial' : false}
 			animate="animate"
 			exit="initial"
