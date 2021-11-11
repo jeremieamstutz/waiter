@@ -43,7 +43,7 @@ export default function ItemForm({ restaurant, item }) {
 						item: {
 							...values,
 							categoryId: router.query.categoryId,
-							restaurant: restaurant.id,
+							restaurantId: restaurant.id,
 						},
 					})
 				} else {
