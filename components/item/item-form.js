@@ -42,7 +42,7 @@ export default function ItemForm({ restaurant, item }) {
 					await axios.post('/api/items', {
 						item: {
 							...values,
-							category: router.query.categoryId,
+							categoryId: router.query.categoryId,
 							restaurant: restaurant.id,
 						},
 					})
