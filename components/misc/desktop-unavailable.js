@@ -14,7 +14,7 @@ export default function DesktopUnavailable({ url }) {
 			/>
 			<h1 className={classes.title}>Indisponible</h1>
 			<p className={classes.text}>
-				La version ordinateur/tablette de cette page n'est{' '}
+				La version ordinateur/tablette de cette page n`&apos;est{' '}
 				<span style={{ color: '#000' }}>pas encore</span> disponible.
 			</p>
 			<p className={classes.text}>
