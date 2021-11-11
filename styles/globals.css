@@ -52,6 +52,31 @@ body {
 	margin: 0;
 }
 
+.mobile {
+	inset: 0;
+}
+
+.desktop,
+.tablet {
+	display: none;
+}
+
+@media screen and (min-width: 640px) {
+	.mobile {
+		display: none;
+	}
+
+	.tablet {
+		display: unset;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.desktop {
+		display: unset;
+	}
+}
+
 #__next {
 	height: 100vh;
 	display: flex;

@@ -8,9 +8,9 @@ import * as gtag from 'utils/gtag'
 import Providers from 'components/misc/providers'
 
 import 'styles/globals.css'
-import 'styles/layout.css'
 import 'styles/ui.css'
 import { AnimatePresence } from 'framer-motion'
+import DesktopUnavailable from 'components/misc/desktop-unavailable'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -41,20 +41,25 @@ export default function Waiter({ Component, pageProps, router }) {
 					content="initial-scale=1.0, width=device-width, viewport-fit=cover"
 				/>
 			</Head>
-			<SessionProvider session={pageProps.session}>
-				<SWRConfig
-					value={{
-						fetcher: (url) =>
-							axios.get(url).then((res) => res.data),
-					}}
-				>
-					<Providers>
-						<AnimatePresence>
-							<Component {...pageProps} />
-						</AnimatePresence>
-					</Providers>
-				</SWRConfig>
-			</SessionProvider>
+			<div className="tablet desktop">
+				<DesktopUnavailable url={router.asPath} />
+			</div>
+			<div className="mobile">
+				<SessionProvider session={pageProps.session}>
+					<SWRConfig
+						value={{
+							fetcher: (url) =>
+								axios.get(url).then((res) => res.data),
+						}}
+					>
+						<Providers>
+							<AnimatePresence key="page">
+								<Component {...pageProps} />
+							</AnimatePresence>
+						</Providers>
+					</SWRConfig>
+				</SessionProvider>
+			</div>
 		</>
 	)
 }
