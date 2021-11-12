@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 		case 'GET':
 			const code = await QRCode.toString(url, {
 				errorCorrectionLevel: 'M',
+				margin: 1,
 				color: { dark: '#000000' },
 				type: 'svg',
 			})
