@@ -28,28 +28,27 @@ export default function RestaurantCard({ restaurant }) {
 				},
 			}}
 		>
-			<a>
-				<div className={classes.card}>
-					<div className={classes.image}>
-						<Image
-							src={restaurant.image}
-							alt={restaurant.name}
-							objectFit="cover"
-							layout="responsive"
-							width={171}
-							height={256}
-							sizes="50vw"
-						/>
-					</div>
-					<h3 className={classes.title}>{restaurant.name}</h3>
-					{/* <p className={classes.description}>
+			<a className={classes.card}>
+				<div className={classes.image}>
+					<Image
+						src={restaurant.image}
+						alt={restaurant.name}
+						objectFit="cover"
+						layout="responsive"
+						width={171}
+						height={256}
+						sizes="50vw"
+					/>
+				</div>
+				<h3 className={classes.title}>{restaurant.name}</h3>
+				{/* <p className={classes.description}>
 						{restaurant.description}
 					</p> */}
-					<p className={classes.description}>
-						{restaurant.cuisine} · 4.9
-					</p>
-					<p className={classes.details}>
-						{/* <span
+				<p className={classes.description}>
+					{restaurant.cuisine} · 4.9
+				</p>
+				<p className={classes.details}>
+					{/* <span
 							className={`${classes.opening} ${
 								restaurant.isOpen
 									? classes.opened
@@ -59,19 +58,18 @@ export default function RestaurantCard({ restaurant }) {
 							Opened until 23:00
 						</span>
 						· */}
-						<span
-							className={`${classes.opening} ${
-								restaurant.isOpen ? classes.open : classes.close
-							}`}
-						>
-							Ouvert jusqu&apos;à 23:00
-						</span>
-						{/* <span className={classes.rating}>
+					<span
+						className={`${classes.opening} ${
+							restaurant.isOpen ? classes.open : classes.close
+						}`}
+					>
+						Ouvert jusqu&apos;à 23:00
+					</span>
+					{/* <span className={classes.rating}>
 							{restaurant.rating.value} ({restaurant.rating.count}
 							)
 						</span> */}
-					</p>
-				</div>
+				</p>
 			</a>
 		</Link>
 	)
