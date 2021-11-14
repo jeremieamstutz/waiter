@@ -12,7 +12,6 @@ export default function DesktopUnavailable({ url }) {
 				alt="Page's QR code"
 				width={280}
 				height={280}
-				priority={true}
 			/>
 			<h1 className={classes.title}>Indisponible</h1>
 			<p className={classes.text}>
