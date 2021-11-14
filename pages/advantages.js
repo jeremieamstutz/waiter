@@ -12,8 +12,7 @@ export default function AdvantagesPage() {
 			<Container>
 				<h1>Avantages</h1>
 				<p style={{ marginTop: 0 }}>
-					Découvrez pourquoi Waiter est l&apos;outil parfait pour
-					votre restaurant.
+					Que vous soyez restaurateur ou client, Waiter saura vous accompagner.
 				</p>
 				<h2 className={classes.header}>Restaurateurs</h2>
 				<div className={classes.list}>
