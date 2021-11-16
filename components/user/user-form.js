@@ -12,7 +12,7 @@ export default function UserForm({ user, isNewUser }) {
 	return (
 		<Formik
 			initialValues={{
-				image: user?.image || '', //
+				image: user?.image || '',
 				name: user?.name || '',
 				phone: user?.phone || '',
 				birthdate: user?.birthdate || '',
