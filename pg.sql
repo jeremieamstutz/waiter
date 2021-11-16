@@ -40,6 +40,9 @@ CREATE TABLE users (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+UPDATE users
+SET role = 'admin'
+WHERE email='jeremie@waiter.so';
 DELETE FROM users WHERE email = 'radiojeje@hotmail.com'
 ALTER TABLE users
 ALTER COLUMN name DROP NOT NULL;
@@ -249,6 +252,8 @@ CREATE TABLE categories (
     slug VARCHAR(48) NOT NULL DEFAULT,
     description VARCHAR(240)
 );
+ALTER TABLE categories
+RENAME COLUMN restaurant TO restaurant_id;
 ALTER TABLE categories
 ADD COLUMN slug VARCHAR(48) NOT NULL DEFAULT 'category';
 ALTER TABLE categories
