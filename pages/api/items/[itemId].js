@@ -2,7 +2,6 @@ import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
 import slugify from 'slugify'
 import { getSession } from 'next-auth/react'
-import { getRestaurant } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -15,7 +14,10 @@ export default async function handler(req, res) {
 			const session = await getSession({ req })
 			const item = await getItem({ itemId })
 
-			if (item.ownerId !== session.user.id) {
+			if (
+				session.user.id !== item.ownerId &&
+				session.user.role !== 'admin'
+			) {
 				return res
 					.status(statusCodes.unauthorized)
 					.json({ status: 'error', message: 'Not the right owner' })
@@ -34,7 +36,10 @@ export default async function handler(req, res) {
 			const session = await getSession({ req })
 			const item = await getItem({ itemId })
 
-			if (item.ownerId !== session.user.id) {
+			if (
+				session.user.id !== item.ownerId &&
+				session.user.role !== 'admin'
+			) {
 				return res
 					.status(statusCodes.unauthorized)
 					.json({ status: 'error', message: 'Not the right owner' })

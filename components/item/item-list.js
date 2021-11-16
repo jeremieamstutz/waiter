@@ -34,7 +34,8 @@ export default function ItemList({ restaurant, category, items }) {
 					</p>
 				</div>
 				{status === 'authenticated' &&
-					restaurant.ownerId === session.user.id && (
+					(session.user.id === restaurant.ownerId ||
+						session.user.role === 'admin') && (
 						<button
 							aria-label="Show more options"
 							className={classes.actions}
@@ -113,7 +114,8 @@ export default function ItemList({ restaurant, category, items }) {
 					/>
 				))}
 				{status === 'authenticated' &&
-					restaurant.ownerId === session.user.id && (
+					(session.user.id === restaurant.ownerId ||
+						session.user.role === 'admin') && (
 						<NewItemCard category={category} />
 					)}
 			</div>

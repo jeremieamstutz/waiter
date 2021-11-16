@@ -67,7 +67,8 @@ export default function ItemDetail({ item }) {
 					CHF {parseFloat(item.price).toFixed(2)}
 				</p>
 				{status === 'authenticated' &&
-					item.ownerId === session.user.id && (
+					(session.user.id === item.ownerId ||
+						session.user.role === 'admin') && (
 						<div className={classes.actions}>
 							<Link
 								href={{

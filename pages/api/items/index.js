@@ -13,19 +13,21 @@ export default async function handler(req, res) {
 			break
 		case 'POST':
 			const { item } = req.body
-			item.slug = slugify(item.name, { lower: true })
 
 			const session = await getSession({ req })
 			const restaurant = await getRestaurant({
 				restaurantId: item.restaurantId,
 			})
 
-			if (restaurant.ownerId !== session.user.id) {
+			if (session.user.id !== restaurant.ownerId &&
+				session.user.role !== 'admin') {
 				return res
 					.status(statusCodes.unauthorized)
 					.json({ status: 'error', message: 'Not the right owner' })
 			}
 
+			item.slug = slugify(item.name, { lower: true })
+			
 			const newItem = await createItem({ item })
 
 			res.status(statusCodes.ok).json({ item: newItem })

@@ -89,7 +89,8 @@ export default function RestaurantPage({ restaurant }) {
 						/>
 					))}
 					{status === 'authenticated' &&
-						restaurant.ownerId === session.user.id && (
+						(session.user.id === restaurant.ownerId ||
+							session.user.role === 'admin') && (
 							<div className={classes.actions}>
 								<Link
 									href={{

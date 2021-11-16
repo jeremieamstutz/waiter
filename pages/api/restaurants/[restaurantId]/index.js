@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 		body,
 	} = req
 
-	const session = await getSession({ req })
+	
 
 	switch (method) {
 		case 'GET': {
@@ -26,7 +26,10 @@ export default async function handler(req, res) {
 				restaurantId,
 			})
 
-			if (restaurant.ownerId !== session.user.id) {
+			if (
+				session.user.id !== restaurant.ownerId &&
+				session.user.role !== 'admin'
+			) {
 				return res
 					.status(statusCodes.unauthorized)
 					.json({ status: 'error', message: 'Not the right owner' })
@@ -53,7 +56,9 @@ export default async function handler(req, res) {
 			newRestaurant.latitude = coordinates.lat
 			newRestaurant.longitude = coordinates.lng
 
-			newRestaurant = await updateRestaurant({ restaurant: newRestaurant })
+			newRestaurant = await updateRestaurant({
+				restaurant: newRestaurant,
+			})
 
 			res.status(statusCodes.ok).json({ restaurant: newRestaurant })
 			break
@@ -130,7 +135,7 @@ export async function getRestaurantItems({ restaurantSlug }) {
 export async function getRestaurantCategories({ restaurantSlug }) {
 	const result = await query(
 		`SELECT categories.* FROM categories 
-		JOIN restaurants ON restaurants.id = categories.restaurant 
+		JOIN restaurants ON restaurants.id = categories.restaurant_id
 		WHERE restaurants.slug = $1`,
 		[restaurantSlug],
 	)
