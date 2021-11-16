@@ -1,5 +1,6 @@
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
+import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
 	const {
@@ -15,6 +16,14 @@ export default async function handler(req, res) {
 			break
 		}
 		case 'PUT': {
+			const session = await getSession({ req })
+
+			if (session.user.id !== userId && session.user.role !== 'admin') {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
 			const { user } = req.body
 			user.id = userId
 
@@ -22,12 +31,20 @@ export default async function handler(req, res) {
 				(k) => (user[k] = user[k] === '' ? null : user[k]),
 			)
 
-			await updateUser({ user })
+			const newUser = await updateUser({ user })
 
-			res.status(statusCodes.ok).json({ status: 'success' })
+			res.status(statusCodes.ok).json({ user: newUser })
 			break
 		}
 		case 'DELETE': {
+			const session = await getSession({ req })
+
+			if (session.user.id !== userId && session.user.role !== 'admin') {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
 			await deleteUser({ userId })
 
 			res.status(statusCodes.ok).json({ status: 'success' })
@@ -50,7 +67,6 @@ export async function getUser({ userId }) {
 }
 
 export async function updateUser({ user }) {
-	console.log(user)
 	const { id, name, phone, birthdate, sex, image } = user
 	const result = await query(
 		`UPDATE users 
