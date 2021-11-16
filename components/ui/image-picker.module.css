@@ -10,6 +10,8 @@
 	aspect-ratio: 4/5;
 	overflow: hidden;
 	align-self: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .container:focus,
