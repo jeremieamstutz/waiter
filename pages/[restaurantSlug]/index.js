@@ -22,7 +22,7 @@ import { getAllRestaurants } from 'pages/api/restaurants'
 export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
 
-	const { status } = useSession()
+	const { data: session, status } = useSession()
 
 	return (
 		<RestaurantProvider initialValue={restaurant}>
@@ -80,6 +80,7 @@ export default function RestaurantPage({ restaurant }) {
 					<RestaurantHeader />
 					{restaurant.categories.map((category, index) => (
 						<ItemList
+							restaurant={restaurant}
 							category={category}
 							items={restaurant.items.filter(
 								(item) => item.categoryId === category.id,
@@ -87,20 +88,21 @@ export default function RestaurantPage({ restaurant }) {
 							key={index}
 						/>
 					))}
-					{status === 'authenticated' && (
-						<div className={classes.actions}>
-							<Link
-								href={{
-									pathname:
-										router.pathname + '/categories/new',
-									query: {
-										...router.query,
-									},
-								}}
-							>
-								<a className="button">New category</a>
-							</Link>
-							{/* <Link
+					{status === 'authenticated' &&
+						restaurant.ownerId === session.user.id && (
+							<div className={classes.actions}>
+								<Link
+									href={{
+										pathname:
+											router.pathname + '/categories/new',
+										query: {
+											...router.query,
+										},
+									}}
+								>
+									<a className="button">New category</a>
+								</Link>
+								{/* <Link
 							href={{
 								pathname: '/help',
 							}}
@@ -117,8 +119,8 @@ export default function RestaurantPage({ restaurant }) {
 						<select>
 							<option>English</option>
 						</select> */}
-						</div>
-					)}
+							</div>
+						)}
 				</main>
 			</Container>
 			<Header>

@@ -1,6 +1,8 @@
 import statusCodes from 'utils/statusCodes'
 import slugify from 'slugify'
 import { query } from 'utils/db'
+import { getSession } from 'next-auth/react'
+import { getRestaurant } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -13,9 +15,20 @@ export default async function handler(req, res) {
 			const { item } = req.body
 			item.slug = slugify(item.name, { lower: true })
 
-			await createItem({ item })
+			const session = await getSession({ req })
+			const restaurant = await getRestaurant({
+				restaurantId: item.restaurantId,
+			})
 
-			res.status(statusCodes.ok).json({})
+			if (restaurant.ownerId !== session.user.id) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
+			const newItem = await createItem({ item })
+
+			res.status(statusCodes.ok).json({ item: newItem })
 			break
 		default:
 			res.status(statusCodes.methodNotAllowed).end()
@@ -40,6 +53,7 @@ export async function createItem({ item }) {
 			(restaurant_id, slug, category_id, name, description, price, currency, image)
 		VALUES
 			($1, $2, $3, $4, $5, $6, $7, $8)
+		RETURNING *
 		`,
 		[
 			restaurantId,

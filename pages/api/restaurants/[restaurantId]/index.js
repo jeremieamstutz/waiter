@@ -21,18 +21,26 @@ export default async function handler(req, res) {
 			break
 		}
 		case 'PUT':
-			const { restaurant } = req.body
-
 			const session = await getSession({ req })
+			const restaurant = await getRestaurant({
+				restaurantId,
+			})
 
-			restaurant.id = restaurantId
-			restaurant.slug = slugify(restaurant.name, { lower: true })
-			restaurant.ownerId = session.user.id
-			restaurant.address = `${restaurant.street} ${restaurant.streetNumber}, ${restaurant.postalCode} ${restaurant.city}, ${restaurant.country}`
+			if (restaurant.ownerId !== session.user.id) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
+			let { restaurant: newRestaurant } = req.body
+			newRestaurant.id = restaurantId
+			newRestaurant.slug = slugify(restaurant.name, { lower: true })
+			newRestaurant.ownerId = session.user.id
+			newRestaurant.address = `${newRestaurant.street} ${newRestaurant.streetNumber}, ${newRestaurant.postalCode} ${newRestaurant.city}, ${newRestaurant.country}`
 
 			const response = await axios.get(
 				`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-					restaurant.address,
+					newRestaurant.address,
 				)}&key=${process.env.GOOGLE_API_KEY}`,
 			)
 			const data = response.data
@@ -42,10 +50,10 @@ export default async function handler(req, res) {
 				})
 			}
 			const coordinates = data.results[0].geometry.location
-			restaurant.latitude = coordinates.lat
-			restaurant.longitude = coordinates.lng
+			newRestaurant.latitude = coordinates.lat
+			newRestaurant.longitude = coordinates.lng
 
-			const newRestaurant = await updateRestaurant({ restaurant })
+			newRestaurant = await updateRestaurant({ restaurant: newRestaurant })
 
 			res.status(statusCodes.ok).json({ restaurant: newRestaurant })
 			break
@@ -89,8 +97,9 @@ export async function updateRestaurant({ restaurant }) {
 export async function getRestaurant({ restaurantSlug, restaurantId }) {
 	if (restaurantId) {
 		const result = await query(
-			`SELECT *, restaurants.slug AS "restaurantSlug", street_number AS "streetNumber", postal_code AS "postalCode" FROM restaurants 
-			WHERE restaurants.id = $1`,
+			`SELECT *, slug AS "restaurantSlug", owner_id AS "ownerId", street_number AS "streetNumber", postal_code AS "postalCode" 
+			FROM restaurants 
+			WHERE id = $1`,
 			[restaurantId],
 		)
 		return result.rows[0]
@@ -98,8 +107,9 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 
 	if (restaurantSlug) {
 		const result = await query(
-			`SELECT *, restaurants.slug AS "restaurantSlug", street_number AS "streetNumber", postal_code AS "postalCode" FROM restaurants 
-			WHERE restaurants.slug = $1`,
+			`SELECT *, slug AS "restaurantSlug", owner_id AS "ownerId", street_number AS "streetNumber", postal_code AS "postalCode" 
+			FROM restaurants 
+			WHERE slug = $1`,
 			[restaurantSlug],
 		)
 		return result.rows[0]

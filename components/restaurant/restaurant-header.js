@@ -11,8 +11,8 @@ import useFavorites from 'contexts/favorites'
 
 export default function RestaurantHeader() {
 	const { restaurant } = useRestaurant()
+	const { data: session, status } = useSession()
 	const router = useRouter()
-	const { status } = useSession()
 
 	const { mutate } = useSWRConfig()
 
@@ -163,48 +163,49 @@ export default function RestaurantHeader() {
 							</span>
 							</div> */}
 				</div>
-				{status === 'authenticated' && (
-					<div className={classes.actions}>
-						<Link
-							href={{
-								pathname: '/[restaurantSlug]/edit',
-								query: {
-									...router.query,
-								},
-							}}
-						>
-							<a className="button">Edit</a>
-						</Link>
-					</div>
-					// 	restaurant.allowBooking ? (
-					// 		<Link
-					// 			href={{
-					// 				pathname: router.pathname + '/booking',
-					// 				query: router.query,
-					// 			}}
-					// 		>
-					// 			<a
-					// 				className={`${classes.booking} button secondary`}
-					// 			>
-					// 				Book a table
-					// 			</a>
-					// 		</Link>
-					// 	) : null
-					// ) : (
-					// 	<Link
-					// 		href={{
-					// 			pathname: router.pathname + '/bookings',
-					// 			query: router.query,
-					// 		}}
-					// 	>
-					// 		<a
-					// 			className={`${classes.booking} button secondary`}
-					// 		>
-					// 			Bookings
-					// 		</a>
-					// 	</Link>
-					// )
-				)}
+				{status === 'authenticated' &&
+					restaurant.ownerId === session.user.id && (
+						<div className={classes.actions}>
+							<Link
+								href={{
+									pathname: '/[restaurantSlug]/edit',
+									query: {
+										...router.query,
+									},
+								}}
+							>
+								<a className="button">Edit</a>
+							</Link>
+						</div>
+						// 	restaurant.allowBooking ? (
+						// 		<Link
+						// 			href={{
+						// 				pathname: router.pathname + '/booking',
+						// 				query: router.query,
+						// 			}}
+						// 		>
+						// 			<a
+						// 				className={`${classes.booking} button secondary`}
+						// 			>
+						// 				Book a table
+						// 			</a>
+						// 		</Link>
+						// 	) : null
+						// ) : (
+						// 	<Link
+						// 		href={{
+						// 			pathname: router.pathname + '/bookings',
+						// 			query: router.query,
+						// 		}}
+						// 	>
+						// 		<a
+						// 			className={`${classes.booking} button secondary`}
+						// 		>
+						// 			Bookings
+						// 		</a>
+						// 	</Link>
+						// )
+					)}
 				{/* {restaurant.allowBooking ? (
 					<Link href="/lausanne/holycow/booking">
 						<a className={`${classes.booking} button secondary`}>

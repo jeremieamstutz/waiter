@@ -66,21 +66,25 @@ export default function ItemDetail({ item }) {
 				<p className={classes.price}>
 					CHF {parseFloat(item.price).toFixed(2)}
 				</p>
-				{status === 'authenticated' && (
-					<div className={classes.actions}>
-						<Link
-							href={{
-								pathname: router.pathname + '/edit',
-								query: router.query,
-							}}
-						>
-							<a className="button secondary">Edit</a>
-						</Link>
-						<button className="button" onClick={handleDeleteItem}>
-							Delete
-						</button>
-					</div>
-				)}
+				{status === 'authenticated' &&
+					item.ownerId === session.user.id && (
+						<div className={classes.actions}>
+							<Link
+								href={{
+									pathname: router.pathname + '/edit',
+									query: router.query,
+								}}
+							>
+								<a className="button secondary">Edit</a>
+							</Link>
+							<button
+								className="button"
+								onClick={handleDeleteItem}
+							>
+								Delete
+							</button>
+						</div>
+					)}
 			</div>
 		</>
 	)

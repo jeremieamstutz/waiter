@@ -10,9 +10,9 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import useScrollRestoration from 'hooks/useScrollRestauration'
 
-export default function ItemList({ category, items }) {
+export default function ItemList({ restaurant, category, items }) {
 	const router = useRouter()
-	const { status } = useSession()
+	const { data: session, status } = useSession()
 
 	const [showSheet, setShowSheet] = useState(false)
 
@@ -33,29 +33,30 @@ export default function ItemList({ category, items }) {
 						{category.description}
 					</p>
 				</div>
-				{status === 'authenticated' && (
-					<button
-						aria-label="Show more options"
-						className={classes.actions}
-						onClick={() => setShowSheet(true)}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width={24}
-							height={24}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
+				{status === 'authenticated' &&
+					restaurant.ownerId === session.user.id && (
+						<button
+							aria-label="Show more options"
+							className={classes.actions}
+							onClick={() => setShowSheet(true)}
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-							/>
-						</svg>
-					</button>
-				)}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width={24}
+								height={24}
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+								/>
+							</svg>
+						</button>
+					)}
 				<Sheet show={showSheet} onClose={() => setShowSheet(false)}>
 					{/* <h2 style={{margin: 0, marginBottom: '0.75rem', textAlign: 'center'}}>Options</h2> */}
 					<Link
@@ -104,11 +105,17 @@ export default function ItemList({ category, items }) {
 			</div>
 			<div className={classes.list} ref={listRef}>
 				{items.map((item, index) => (
-					<ItemCard item={item} category={category} key={index} />
+					<ItemCard
+						item={item}
+						category={category}
+						key={index}
+						index={index}
+					/>
 				))}
-				{status === 'authenticated' && (
-					<NewItemCard category={category} />
-				)}
+				{status === 'authenticated' &&
+					restaurant.ownerId === session.user.id && (
+						<NewItemCard category={category} />
+					)}
 			</div>
 		</section>
 	)

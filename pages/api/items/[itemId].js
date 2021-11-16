@@ -1,6 +1,8 @@
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
 import slugify from 'slugify'
+import { getSession } from 'next-auth/react'
+import { getRestaurant } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -9,35 +11,74 @@ export default async function handler(req, res) {
 	} = req
 
 	switch (method) {
-		case 'PUT':
-			const { item } = req.body
-			item.id = itemId
-			item.slug = slugify(item.name, { lower: true })
+		case 'PUT': {
+			const session = await getSession({ req })
+			const item = await getItem({ itemId })
 
-			await updateItem({ item })
+			if (item.ownerId !== session.user.id) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
 
-			res.status(statusCodes.ok).json({ status: 'success' })
+			let { item: newItem } = req.body
+			newItem.id = itemId
+			newItem.slug = slugify(newItem.name, { lower: true })
+
+			newItem = await updateItem({ item: newItem })
+
+			res.status(statusCodes.ok).json({ item: newItem })
 			break
-		case 'DELETE':
+		}
+		case 'DELETE': {
+			const session = await getSession({ req })
+			const item = await getItem({ itemId })
+
+			if (item.ownerId !== session.user.id) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
 			await deleteItem({ itemId })
 
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break
+		}
 		default:
 			res.status(statusCodes.methodNotAllowed).end()
 			break
 	}
 }
 
-export async function getItem({ restaurantSlug, categorySlug, itemSlug }) {
-	const result = await query(
-		`SELECT items.*, items.category_id AS "categoryId" FROM items 
-		JOIN restaurants ON restaurants.id = items.restaurant_id
-		JOIN categories ON categories.id = items.category_id
-		WHERE restaurants.slug = $1 AND categories.slug = $2 AND items.slug = $3`,
-		[restaurantSlug, categorySlug, itemSlug],
-	)
-	return result.rows[0]
+export async function getItem({
+	restaurantSlug,
+	categorySlug,
+	itemSlug,
+	itemId,
+}) {
+	if (itemId) {
+		const result = await query(
+			`SELECT items.*, items.restaurant_id AS "restaurantId", restaurants.owner_id AS "ownerId", items.category_id AS "categoryId" 
+			FROM items 
+			JOIN restaurants ON restaurants.id = items.restaurant_id
+			WHERE items.id = $1`,
+			[itemId],
+		)
+		return result.rows[0]
+	}
+	if (restaurantSlug && categorySlug && itemSlug) {
+		const result = await query(
+			`SELECT items.*, items.restaurant_id AS "restaurantId", restaurants.owner_id AS "ownerId", items.category_id AS "categoryId" 
+			FROM items 
+			JOIN restaurants ON restaurants.id = items.restaurant_id
+			JOIN categories ON categories.id = items.category_id
+			WHERE restaurants.slug = $1 AND categories.slug = $2 AND items.slug = $3`,
+			[restaurantSlug, categorySlug, itemSlug],
+		)
+		return result.rows[0]
+	}
+	return
 }
 
 export async function updateItem({ item }) {
@@ -45,7 +86,8 @@ export async function updateItem({ item }) {
 	await query(
 		`UPDATE items 
 		SET slug = $2, name = $3, description = $4, price = $5, currency = $6, image = $7
-		WHERE items.id = $1`,
+		WHERE id = $1
+		RETURNING *, restaurant_id AS "restaurantId", category_id AS "categoryId"`,
 		[id, slug, name, description, price, currency, image],
 	)
 }
