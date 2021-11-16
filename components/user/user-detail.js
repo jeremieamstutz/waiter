@@ -9,7 +9,11 @@ export default function UserDetail({ user }) {
 		<div className={classes.container}>
 			<div className={classes.image}>
 				<Image
-					src={user.image ?? '/images/defaults/user'}
+					src={
+						user.image.length > 0
+							? user.image
+							: '/images/defaults/user.png'
+					}
 					alt={user.name}
 					width={96}
 					height={96}
