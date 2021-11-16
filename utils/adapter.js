@@ -14,7 +14,7 @@ export default function Adapter(client, options = {}) {
 				[
 					user.name,
 					user.email,
-					user.emailVerified?.toString() ?? null,
+					user.emailVerified,
 					user.image,
 				],
 			)
