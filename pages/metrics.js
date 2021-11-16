@@ -5,10 +5,13 @@ import classes from 'styles/metrics.module.css'
 import { query } from 'utils/db'
 
 export default function MetricsPage({
+	newSince,
 	totalUsers,
 	newUsers,
 	totalRestaurants,
 	newRestaurants,
+	totalItems,
+	newItems,
 }) {
 	return (
 		<>
@@ -28,9 +31,13 @@ export default function MetricsPage({
 				</div>
 				<div className={classes.metric}>
 					<h2 className={classes.title}>New users</h2>
+					<p className={classes.comment}>
+						Since last {newSince} days
+					</p>
 					<div className={classes.body}>
 						<div>
 							<span className={classes.value}>{newUsers}</span>
+
 							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
 						{/* <span className={classes.trend}>+100%</span> */}
@@ -50,11 +57,38 @@ export default function MetricsPage({
 				</div>
 				<div className={classes.metric}>
 					<h2 className={classes.title}>New restaurants</h2>
+					<p className={classes.comment}>
+						Since last {newSince} days
+					</p>
 					<div className={classes.body}>
 						<div>
 							<span className={classes.value}>
 								{newRestaurants}
 							</span>
+							{/* <small className={classes.previous}>from 30</small> */}
+						</div>
+						{/* <span className={classes.trend}>+100%</span> */}
+					</div>
+				</div>
+				<div className={classes.metric}>
+					<h2 className={classes.title}>Total items</h2>
+					<div className={classes.body}>
+						<div>
+							<span className={classes.value}>{totalItems}</span>
+							{/* <small className={classes.previous}>from 504</small> */}
+						</div>
+						{/* <span className={classes.trend}>+15%</span> */}
+					</div>
+				</div>
+				<div className={classes.metric}>
+					<h2 className={classes.title}>New items</h2>
+					<p className={classes.comment}>
+						Since last {newSince} days
+					</p>
+					<div className={classes.body}>
+						<div>
+							<span className={classes.value}>{newItems}</span>
+
 							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
 						{/* <span className={classes.trend}>+100%</span> */}
@@ -77,12 +111,13 @@ export default function MetricsPage({
 }
 
 export async function getStaticProps() {
+	const newSince = 7 // days
 	const totalUsers = +(await query(`SELECT COUNT(*) FROM users`)).rows[0]
 		.count
 
 	const newUsers = +(
 		await query(
-			`SELECT COUNT(*) FROM users WHERE created_at >= current_date - 30`,
+			`SELECT COUNT(*) FROM users WHERE created_at >= current_date - ${newSince}`,
 		)
 	).rows[0].count
 
@@ -91,16 +126,28 @@ export async function getStaticProps() {
 
 	const newRestaurants = +(
 		await query(
-			`SELECT COUNT(*) FROM restaurants WHERE created_at >= current_date - 30`,
+			`SELECT COUNT(*) FROM restaurants WHERE created_at >= current_date - ${newSince}`,
+		)
+	).rows[0].count
+
+	const totalItems = +(await query(`SELECT COUNT(*) FROM items`)).rows[0]
+		.count
+
+	const newItems = +(
+		await query(
+			`SELECT COUNT(*) FROM items WHERE created_at >= current_date - ${newSince}`,
 		)
 	).rows[0].count
 
 	return {
 		props: {
+			newSince,
 			totalUsers,
 			newUsers,
 			totalRestaurants,
 			newRestaurants,
+			totalItems,
+			newItems,
 		},
 		revalidate: 5,
 	}

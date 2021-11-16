@@ -5,6 +5,11 @@
     gap: 0.5rem;
 }
 
+.comment {
+    margin: 0;
+    margin-top: -0.25rem;
+}
+
 .title {
     margin: 0;
 }
