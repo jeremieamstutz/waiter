@@ -7,7 +7,6 @@ import { Input, Select } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
 
 import classes from './user-form.module.css'
-import { getSession } from 'next-auth/react'
 
 export default function UserForm({ user, isNewUser }) {
 	return (
@@ -20,7 +19,7 @@ export default function UserForm({ user, isNewUser }) {
 				sex: user?.sex || '',
 			}}
 			validationSchema={Yup.object({
-				image: Yup.string().required('You must add an image'),
+				image: Yup.string('Image must be a string'),
 				name: Yup.string()
 					.min(3, 'Must be 3 characters or more')
 					.max(30, 'Must be 30 characters or less')
