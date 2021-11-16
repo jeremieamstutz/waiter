@@ -1,4 +1,6 @@
+import { getSession } from 'next-auth/react'
 import slugify from 'slugify'
+
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
 
@@ -15,17 +17,41 @@ export default async function handler(req, res) {
 			break
 		}
 		case 'PUT': {
-			const { category } = req.body
+			const session = await getSession({ req })
+			const category = await getCategory({ categoryId })
 
-			category.slug = slugify(category.name, { lower: true })
-			category.id = categoryId
+			if (
+				session.user.id !== category.ownerId &&
+				session.user.role !== 'admin'
+			) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
 
-			await updateCategory({ category })
+			let { category: newCategory } = req.body
 
-			res.status(statusCodes.ok).json({ status: 'success' })
+			newCategory.slug = slugify(newCategory.name, { lower: true })
+			newCategory.id = categoryId
+
+			newCategory = await updateCategory({ category: newCategory })
+
+			res.status(statusCodes.ok).json({ category: newCategory })
 			break
 		}
 		case 'DELETE': {
+			const session = await getSession({ req })
+			const category = await getCategory({ categoryId })
+
+			if (
+				session.user.id !== category.ownerId &&
+				session.user.role !== 'admin'
+			) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'Not the right owner' })
+			}
+
 			await deleteCategory({ categoryId })
 
 			res.status(statusCodes.ok).json({ status: 'success' })
@@ -38,11 +64,17 @@ export default async function handler(req, res) {
 	}
 }
 
-export async function getCategory({ categoryId, categorySlug, restaurantSlug }) {
+export async function getCategory({
+	categoryId,
+	categorySlug,
+	restaurantSlug,
+}) {
 	if (categoryId) {
 		const result = await query(
 			`
-			SELECT categories.* FROM categories 
+			SELECT categories.*, categories.restaurant_id AS "restaurantId", restaurants.owner_id AS "ownerId"
+			FROM categories 
+			JOIN restaurants ON restaurants.id = categories.restaurant_id
 			WHERE categories.id = $1
 			`,
 			[categoryId],
@@ -53,8 +85,9 @@ export async function getCategory({ categoryId, categorySlug, restaurantSlug }) 
 	if (categorySlug && restaurantSlug) {
 		const result = await query(
 			`
-			SELECT categories.* FROM categories 
-			JOIN restaurants ON restaurants.id = categories.restaurant
+			SELECT categories.*, categories.restaurant_id AS "restaurantId", restaurants.owner_id AS "ownerId" 
+			FROM categories 
+			JOIN restaurants ON restaurants.id = categories.restaurant_id
 			WHERE categories.slug = $1 AND restaurants.slug = $2
 			`,
 			[categorySlug, restaurantSlug],
@@ -71,6 +104,7 @@ export async function updateCategory({ category }) {
 		UPDATE categories 
 		SET slug = $2, name = $3, description = $4
 		WHERE categories.id = $1
+		RETURNING *
 		`,
 		[id, slug, name, description],
 	)

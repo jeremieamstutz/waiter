@@ -10,7 +10,7 @@ import axios from 'axios'
 
 export default function CategoryForm({ category, restaurant }) {
 	const router = useRouter()
-	
+
 	return (
 		<Formik
 			initialValues={{
@@ -30,8 +30,10 @@ export default function CategoryForm({ category, restaurant }) {
 			onSubmit={async (values) => {
 				if (!category) {
 					await axios.post('/api/categories', {
-						category: values,
-						restaurantId: restaurant.id,
+						category: {
+							...values,
+							restaurantId: restaurant.id,
+						},
 					})
 				} else {
 					await axios.put(`/api/categories/${category.id}`, {
