@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import classes from './restaurant-card.module.css'
 
-export default function RestaurantCard({ restaurant }) {
+export default function RestaurantCard({ restaurant, index }) {
 	restaurant.rating = {
 		value: 4.9,
 		count: 10,
@@ -38,6 +38,7 @@ export default function RestaurantCard({ restaurant }) {
 						width={171}
 						height={256}
 						sizes="50vw"
+						priority={index < 2}
 					/>
 				</div>
 				<h3 className={classes.title}>{restaurant.name}</h3>

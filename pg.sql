@@ -29,15 +29,22 @@ CREATE TABLE sessions (
 DROP TABLE users;
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NULL,
+    phone VARCHAR(255) NULL,
+    birthdate DATE NULL,
+    sex VARCHAR(32) NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     email_verified TIMESTAMP WITH TIME ZONE NULL,
-    phone VARCHAR(255) NULL,
     role VARCHAR(255) NOT NULL DEFAULT 'user',
     image VARCHAR(1024) NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+DELETE FROM users WHERE email = 'radiojeje@hotmail.com'
+ALTER TABLE users
+ALTER COLUMN name DROP NOT NULL;
+ALTER TABLE users
+ADD COLUMN birthdate DATE NULL;
 DELETE FROM users
 WHERE email = 'radiojeje@hotmail.com';
 DELETE FROM users;
@@ -287,3 +294,8 @@ CREATE TABLE schedules (
 DROP TABLE favorites
 ALTER TABLE favorites
 ADD COLUMN create_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE datname = current_database()
+  AND pid <> pg_backend_pid();

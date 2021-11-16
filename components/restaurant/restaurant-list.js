@@ -28,7 +28,11 @@ export default function RestaurantList({ list, restaurants }) {
 			</div>
 			<div className={classes.list} ref={listRef}>
 				{restaurants.map((restaurant, index) => (
-					<RestaurantCard restaurant={restaurant} key={index} />
+					<RestaurantCard
+						restaurant={restaurant}
+						key={index}
+						index={index}
+					/>
 				))}
 			</div>
 		</section>

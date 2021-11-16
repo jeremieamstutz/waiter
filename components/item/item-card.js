@@ -7,7 +7,7 @@ import useLongPress from 'hooks/useLongPress'
 
 import classes from './item-card.module.css'
 
-export default function ItemCard({ item, category }) {
+export default function ItemCard({ item, category, index }) {
 	const router = useRouter()
 
 	const [quantity, setQuantity] = useState(0)
@@ -103,7 +103,7 @@ export default function ItemCard({ item, category }) {
 						objectPosition="left"
 						width={171}
 						height={256}
-						// priority={true}
+						priority={index < 2}
 						sizes="50vw"
 					/>
 				</div>

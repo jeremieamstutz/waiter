@@ -98,7 +98,7 @@ export async function createRestaurant({ restaurant }) {
 export async function getAllRestaurants() {
 	const result = await query(
 		`SELECT * FROM restaurants
-        ORDER BY created_at ASC`,
+        ORDER BY created_at DESC`,
 	)
 	return result.rows
 }
