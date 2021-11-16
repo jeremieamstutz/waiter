@@ -16,6 +16,19 @@ class MyDocument extends Document {
 						as="font"
 						crossOrigin=""
 					/>
+					<link
+						rel="preconnect"
+						href="https://fonts.googleapis.com"
+					/>
+					<link
+						rel="preconnect"
+						href="https://fonts.gstatic.com"
+						crossOrigin
+					/>
+					<link
+						href="https://fonts.googleapis.com/css2?family=Rubik:wght@420&display=swap"
+						rel="stylesheet"
+					/>
 					<link rel="manifest" href="/manifest.json" />
 					{isProduction && (
 						<>

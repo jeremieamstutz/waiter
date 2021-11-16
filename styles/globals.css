@@ -24,11 +24,8 @@
 	font-family: 'Gilroy';
 	src: url('/fonts/Gilroy/Gilroy-SemiBold.otf');
 	font-style: normal;
-	font-weight: 500;
 	font-display: swap;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@420&display=swap');
 
 ::selection {
 	background: var(--color-primary);
@@ -39,7 +36,6 @@
 
 * {
 	box-sizing: border-box;
-	font-weight: 500;
 	font-family: 'Gilroy', -apple-system, Segoe UI, sans-serif;
 	color: var(--color-text-primary);
 	-webkit-font-smoothing: antialiased;
