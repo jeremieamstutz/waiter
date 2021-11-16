@@ -7,7 +7,7 @@ import classes from './image-picker.module.css'
 import { Ring } from './spinner'
 import sleep from 'utils/sleep'
 
-export default function ImagePicker({ url, setUrl }) {
+export default function ImagePicker({ url, setUrl, style }) {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState()
 
@@ -58,23 +58,28 @@ export default function ImagePicker({ url, setUrl }) {
 	return (
 		<>
 			<div
-				arial-label="Image" 
+				arial-label="Image"
 				{...getRootProps({
 					className: `${classes.container} ${
 						isDragActive ? classes.active : ''
 					} ${isDragReject ? classes.reject : ''}`,
 				})}
+				style={style}
 			>
 				<input {...getInputProps()} />
 				{loading ? (
 					<Ring />
-				) : error ? (
-					<p
-						className={classes.text}
-						style={{ color: 'var(--color-danger)' }}
-					>
-						An error occured. Please try again.
-					</p>
+				) : error || isDragReject ? (
+					<div className={classes.message}>
+						<p
+							className={classes.text}
+							style={{ color: 'var(--color-danger)' }}
+						>
+							{isDragReject
+								? 'This file format is not allowed'
+								: 'An error occured. Please try again.'}
+						</p>
+					</div>
 				) : url ? (
 					<div
 						style={{
@@ -90,15 +95,8 @@ export default function ImagePicker({ url, setUrl }) {
 							className={classes.image}
 						/>
 					</div>
-				) : isDragReject ? (
-					<p
-						className={classes.text}
-						style={{ color: 'var(--color-danger)' }}
-					>
-						This file format is not allowed
-					</p>
 				) : (
-					<>
+					<div className={classes.message}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width={48}
@@ -118,7 +116,7 @@ export default function ImagePicker({ url, setUrl }) {
 						<p className={classes.text}>
 							Click to select your image
 						</p>
-					</>
+					</div>
 				)}
 			</div>
 		</>

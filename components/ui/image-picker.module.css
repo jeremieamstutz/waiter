@@ -1,45 +1,51 @@
 .container {
-    cursor: pointer;
-    background: var(--color-ui-tertiary);
-    border-radius: 0.5rem;
+	cursor: pointer;
+	background: var(--color-ui-tertiary);
+	border-radius: 0.5rem;
 	font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    border: 1px solid #ddd;
-    width: 100%;
-    aspect-ratio: 4/5;
-    overflow: hidden;
+	display: flex;
+	outline: none;
+	border: 1px solid #ddd;
+	width: 100%;
+	aspect-ratio: 4/5;
+	overflow: hidden;
+	align-self: center;
 }
 
 .container:focus,
 .active {
-    outline: 2px solid var(--color-ui-hover);
+	outline: 2px solid var(--color-ui-hover);
 }
 
 .logo {
-    color: var(--color-text-secondary);
+	color: var(--color-text-secondary);
+}
+
+.message {
+    display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
 }
 
 .text {
-    margin: 0;
-    text-align: center;
-    padding: 0 1rem;
+	margin: 0;
+	text-align: center;
+	padding: 0 1rem;
 }
 
 .reject {
-    background: #ffdddd;
-    border-color: var(--color-ui-danger);
+	background: #ffdddd;
+	border-color: var(--color-ui-danger);
 }
 
 .image {
-    align-self: stretch;
-    flex: 1;
-    position: relative;
-    overflow: hidden;
-    object-fit: cover;
-    object-position: left;
+	align-self: stretch;
+	flex: 1;
+	position: relative;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: left;
 }
