@@ -24,6 +24,7 @@
 	font-family: 'Gilroy';
 	src: url('/fonts/Gilroy/Gilroy-SemiBold.otf');
 	font-style: normal;
+	font-weight: 500;
 	font-display: swap;
 }
 
@@ -37,6 +38,7 @@
 * {
 	box-sizing: border-box;
 	font-family: 'Gilroy', -apple-system, Segoe UI, sans-serif;
+	font-weight: 500;
 	color: var(--color-text-primary);
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: transparent;
