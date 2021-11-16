@@ -1,11 +1,12 @@
+import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 
 export default function OrdersPage() {
 	return (
 		<>
-			<div className="container">
+			<Container>
 				<h1>Orders</h1>
-			</div>
+			</Container>
 			<Header />
 		</>
 	)
