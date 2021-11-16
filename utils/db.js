@@ -5,7 +5,7 @@ types.setTypeParser(1082, value => value)
 
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
-	max: 5,
+	max: 1,
 	ssl: {
 		rejectUnauthorized: false,
 	},
