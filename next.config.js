@@ -1,4 +1,6 @@
-module.exports = {
+const { withSuperjson } = require('next-superjson')
+
+module.exports = withSuperjson()({
 	reactStrictMode: true,
 	poweredByHeader: false,
 	images: {
@@ -11,5 +13,6 @@ module.exports = {
 			'lh3.googleusercontent.com',
 			'platform-lookaside.fbsbx.com',
 		],
+		minimumCacheTTL: 31536000,
 	},
-}
+})
