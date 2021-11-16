@@ -15,4 +15,5 @@ module.exports = withSuperjson()({
 		],
 		minimumCacheTTL: 31536000,
 	},
+	optimizeFonts: false
 })
