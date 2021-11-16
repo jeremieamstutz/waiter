@@ -6,9 +6,11 @@ import { useRouter } from 'next/router'
 import useLongPress from 'hooks/useLongPress'
 
 import classes from './item-card.module.css'
+import { useSession } from 'next-auth/react'
 
 export default function ItemCard({ item, category, index }) {
 	const router = useRouter()
+	const { data: session } = useSession()
 
 	const [quantity, setQuantity] = useState(0)
 
@@ -38,6 +40,14 @@ export default function ItemCard({ item, category, index }) {
 		delay: 500,
 	})
 
+	if (
+		session?.user.id !== item.ownerId &&
+		session?.user.role !== 'admin' &&
+		item.available === false
+	) {
+		return null
+	}
+	
 	return (
 		<Link
 			href={{
@@ -49,7 +59,11 @@ export default function ItemCard({ item, category, index }) {
 				},
 			}}
 		>
-			<a className={classes.card}>
+			<a
+				className={`${classes.card} ${
+					item.available === false ? classes.unavailable : ''
+				}`}
+			>
 				<div className={classes.image}>
 					{/* <div
 					className={classes.picker}

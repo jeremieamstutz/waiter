@@ -10,6 +10,10 @@
 	/* margin-bottom: 0.5rem; */
 }
 
+.unavailable {
+	opacity: 0.6;
+}
+
 .image {
 	position: relative;
 }

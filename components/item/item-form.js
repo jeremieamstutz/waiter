@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-import { Input, Textarea } from 'components/ui/form-items'
+import { Input, Textarea, Select } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
 
 import classes from './item-form.module.css'
@@ -19,6 +19,7 @@ export default function ItemForm({ restaurant, item }) {
 				name: item?.name || '',
 				description: item?.description || '',
 				price: item?.price || '',
+				available: item?.available.toString() || true,
 				currency: item?.currency || 'CHF',
 				categoryId: item?.categoryId || '',
 			}}
@@ -34,6 +35,9 @@ export default function ItemForm({ restaurant, item }) {
 				),
 				price: Yup.number('Must be a number').required(
 					'Price is required',
+				),
+				available: Yup.boolean('Not a boolean').required(
+					'Availability is required',
 				),
 				currency: Yup.string().required('Currency is required'),
 			})}
@@ -90,6 +94,10 @@ export default function ItemForm({ restaurant, item }) {
 						step={0.05}
 						autoComplete="off"
 					/>
+					<Select name="available" arial-label="Available">
+						<option value="true">Available</option>
+						<option value="false">Unavailable</option>
+					</Select>
 					{/* <label>
 					<select>
 						<option value={category.slug}>Beef burgers</option>
