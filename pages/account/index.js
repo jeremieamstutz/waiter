@@ -1,23 +1,38 @@
 import Link from 'next/link'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession, signOut, getSession } from 'next-auth/react'
 
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import UserDetail from 'components/user/user-detail'
+import useSWR from 'swr'
+import { Ring } from 'components/ui/spinner'
 
 export default function AccountPage() {
-	const { status } = useSession()
-	
+	const { data: session } = useSession()
+	const {
+		data: { user },
+	} = useSWR(session?.user ? `/api/users/${session?.user.id}` : null, {
+		fallbackData: { user: {} },
+	})
+
 	return (
 		<>
 			<Container>
 				<h1>Account</h1>
-				{status === 'authenticated' && (
+				{!user.id ? (
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							flex: 1,
+						}}
+					>
+						<Ring />
+					</div>
+				) : (
 					<>
-						<UserDetail />
-						{/* <select>
-							<option>Français</option>
-						</select> */}
+						<UserDetail user={user} />
 						<div
 							style={{
 								display: 'flex',
@@ -29,7 +44,7 @@ export default function AccountPage() {
 								<a className="button">Edit profile</a>
 							</Link>
 							<Link href={{ pathname: '/terms' }}>
-								<a className="button">Terms</a>
+								<a className="button">Terms of Service</a>
 							</Link>
 							<button
 								onClick={() =>

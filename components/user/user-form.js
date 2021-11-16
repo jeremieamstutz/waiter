@@ -1,21 +1,23 @@
+import router from 'next/router'
+import axios from 'axios'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { Textarea } from 'components/ui/form-items'
+import { Input, Select } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
 
 import classes from './user-form.module.css'
+import { getSession } from 'next-auth/react'
 
-export default function UserForm({ user }) {
+export default function UserForm({ user, isNewUser }) {
 	return (
 		<Formik
 			initialValues={{
-				image: user?.image || '',
+				image: user?.image || '', //
 				name: user?.name || '',
-				description: user?.description || '',
-				price: user?.price || '',
-				currency: user?.currency || 'CHF',
-				category: user?.category || '',
+				phone: user?.phone || '',
+				birthdate: user?.birthdate || '',
+				sex: user?.sex || '',
 			}}
 			validationSchema={Yup.object({
 				image: Yup.string().required('You must add an image'),
@@ -23,67 +25,64 @@ export default function UserForm({ user }) {
 					.min(3, 'Must be 3 characters or more')
 					.max(30, 'Must be 30 characters or less')
 					.required('Name is required'),
-				description: Yup.string().max(
-					500,
-					'Must be 500 characters or less',
+				phone: Yup.string().min(8, 'Must be 8 characters or more'),
+				birthdate: Yup.date().min(
+					'1900-01-01',
+					'You must be younger than that',
 				),
-				price: Yup.number('Must be a number').required(
-					'Price is required',
+				sex: Yup.mixed().oneOf(
+					['male', 'female', 'other'],
+					'Wrong entry',
 				),
-				currency: Yup.string().required('Currency is required'),
 			})}
 			onSubmit={async (values) => {
-				if (!user) {
-					await axios.post('/api/users', {
-						user: {
-							...values,
-							category: router.query.category,
-						},
-						restaurantSlug: router.query.restaurantSlug,
-					})
-				} else {
-					await axios.put(`/api/users/${user.id}`, values)
-				}
-				// await sleep(2000)
+				await axios.put(`/api/users/${user.id}`, {
+					user: values,
+				})
 				router.push({
-					pathname: '/[restaurantSlug]',
-					query: {
-						restaurantSlug: router.query.restaurantSlug,
-					},
+					pathname: '/account',
 				})
 			}}
 		>
 			{({ values, setFieldValue, isSubmitting }) => (
 				<Form className={classes.form}>
 					<ImagePicker
-					// url={values.image}
-					// setUrl={(url) => setFieldValue('image', url)}
+						url={values.image}
+						setUrl={(url) => setFieldValue('image', url)}
+						style={{ width: 256, height: 256, borderRadius: 128 }}
 					/>
-					<input type="text" placeholder="Name" arial-label="Name" />
-					<Textarea
-						name="bio"
-						placeholder="Bio"
-						rows={3}
-						arial-label="Biography"
+					<Input
+						name="name"
+						type="text"
+						placeholder="Name"
+						arial-label="Name"
 					/>
-					<input
+					<Input
+						name="phone"
 						type="text"
 						placeholder="Phone"
 						arial-label="Phone"
 					/>
-					<input
-						type="text"
+					<Input
+						name="birthdate"
+						type="date"
 						placeholder="Birthdate"
 						arial-label="Birthdate"
 					/>
-					<select arial-label="Sex">
-						<option disabled>Sex</option>
-						<option>Male</option>
-						<option>Female</option>
-						<option>Other</option>
-					</select>
+					<Select name="sex" arial-label="Sex">
+						<option value="" disabled>
+							Sex
+						</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="other">Other</option>
+					</Select>
 					<button type="submit" className="secondary">
-						Save
+						{isSubmitting
+							? 'Loading....'
+							: !isNewUser
+							? 'Update'
+							: 'Save'}
 					</button>
 				</Form>
 			)}
