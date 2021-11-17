@@ -111,8 +111,7 @@ export default function RestaurantHeader() {
 							/>
 						</svg>
 						<p>
-							{restaurant.street} {restaurant.streetNumber},{' '}
-							{restaurant.city}
+							{restaurant.street} {restaurant.streetNumber},{' '} {restaurant.postalCode} {restaurant.city}
 						</p>
 					</a>
 					{restaurant.phone && (
