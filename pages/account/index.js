@@ -43,9 +43,6 @@ export default function AccountPage() {
 							<Link href="/account/edit">
 								<a className="button">Edit profile</a>
 							</Link>
-							<Link href={{ pathname: '/terms' }}>
-								<a className="button">Terms of Service</a>
-							</Link>
 							<button
 								onClick={() =>
 									signOut({
@@ -58,6 +55,9 @@ export default function AccountPage() {
 							>
 								Log out
 							</button>
+							<Link href={{ pathname: '/terms' }}>
+								<a style={{textAlign: 'center', marginTop: '.25rem'}}>Terms of Service</a>
+							</Link>
 						</div>
 					</>
 				)}
