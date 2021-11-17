@@ -49,7 +49,7 @@ export default function Menu() {
 							</svg>
 						</a>
 					</Link>
-					<Link href="/search">
+					{/* <Link href="/search">
 						<a
 							aria-label="Search page"
 							className={
@@ -72,7 +72,7 @@ export default function Menu() {
 								/>
 							</svg>
 						</a>
-					</Link>
+					</Link> */}
 					<Link href="/account/favorites">
 						<a
 							aria-label="Favorites page"
@@ -99,7 +99,7 @@ export default function Menu() {
 							</svg>
 						</a>
 					</Link>
-					<Link href="/account/bookings">
+					{/* <Link href="/account/bookings">
 						<a
 							aria-label="Bookings page"
 							className={
@@ -124,7 +124,7 @@ export default function Menu() {
 								/>
 							</svg>
 						</a>
-					</Link>
+					</Link> */}
 					<Link href="/account">
 						<a
 							aria-label="Account page"
