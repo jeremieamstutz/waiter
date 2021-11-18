@@ -1,5 +1,6 @@
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
+import HorizontalRule from 'components/ui/horizontal-rule'
 
 import classes from 'styles/metrics.module.css'
 import { query } from 'utils/db'
@@ -36,13 +37,14 @@ export default function MetricsPage({
 					</p>
 					<div className={classes.body}>
 						<div>
-							<span className={classes.value}>{newUsers}</span>
+							<span className={classes.value}>+{newUsers}</span>
 
 							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
 						{/* <span className={classes.trend}>+100%</span> */}
 					</div>
 				</div>
+				<HorizontalRule />
 				<div className={classes.metric}>
 					<h2 className={classes.title}>Total restaurants</h2>
 					<div className={classes.body}>
@@ -63,13 +65,14 @@ export default function MetricsPage({
 					<div className={classes.body}>
 						<div>
 							<span className={classes.value}>
-								{newRestaurants}
+								+{newRestaurants}
 							</span>
 							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
 						{/* <span className={classes.trend}>+100%</span> */}
 					</div>
 				</div>
+				<HorizontalRule />
 				<div className={classes.metric}>
 					<h2 className={classes.title}>Total items</h2>
 					<div className={classes.body}>
@@ -87,23 +90,24 @@ export default function MetricsPage({
 					</p>
 					<div className={classes.body}>
 						<div>
-							<span className={classes.value}>{newItems}</span>
+							<span className={classes.value}>+{newItems}</span>
 
 							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
 						{/* <span className={classes.trend}>+100%</span> */}
 					</div>
 				</div>
-				{/* <div className={classes.metric}>
-					<h2 className={classes.title}>Revenue</h2>
+				<HorizontalRule />
+				<div className={classes.metric}>
+					<h2 className={classes.title}>Recurring revenue</h2>
 					<div className={classes.body}>
 						<div>
-							<span className={classes.value}>562</span>
-							<small className={classes.previous}>from 30</small>
+							<span className={classes.value}>0 CHF</span>
+							{/* <small className={classes.previous}>from 30</small> */}
 						</div>
-						<span className={classes.trend}>+100%</span>
+						{/* <span className={classes.trend}>+100%</span> */}
 					</div>
-				</div> */}
+				</div>
 			</Container>
 			<Header />
 		</>
