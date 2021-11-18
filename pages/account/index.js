@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { useSession, signOut, getSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import UserDetail from 'components/user/user-detail'
 import useSWR from 'swr'
 import { Ring } from 'components/ui/spinner'
+
+import classes from 'styles/account.module.css'
 
 export default function AccountPage() {
 	const { data: session } = useSession()
@@ -56,7 +58,9 @@ export default function AccountPage() {
 								Log out
 							</button>
 							<Link href={{ pathname: '/terms' }}>
-								<a style={{textAlign: 'center', marginTop: '.25rem'}}>Terms of Service</a>
+								<a className={classes.terms}>
+									Terms of Service
+								</a>
 							</Link>
 						</div>
 					</>
