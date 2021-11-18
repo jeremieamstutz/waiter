@@ -13,7 +13,6 @@ module.exports = withSuperjson()({
 			'lh3.googleusercontent.com',
 			'platform-lookaside.fbsbx.com',
 		],
-		minimumCacheTTL: 60*60*24*30,
 	},
-	optimizeFonts: false
+	optimizeFonts: false,
 })

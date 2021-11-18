@@ -26,7 +26,8 @@ export default async function handler(req, res) {
 
 			const params = {
 				Bucket: process.env.SPACE_BUCKET,
-				Expires: 3600,
+				Expires: 31536000,
+				CacheControl: 'max-age=31536000', // 1 year
 				Key: uuid(),
 				ContentType: type,
 				ACL: 'public-read',
