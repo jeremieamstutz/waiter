@@ -12,7 +12,8 @@ export default function AdvantagesPage() {
 			<Container>
 				<h1>Avantages</h1>
 				<p style={{ marginTop: 0 }}>
-					Que vous soyez restaurateur ou client, Waiter saura vous accompagner.
+					Que vous soyez restaurateur ou client, Waiter saura vous
+					accompagner.
 				</p>
 				<h2 className={classes.header}>Restaurateurs</h2>
 				<div className={classes.list}>
@@ -64,6 +65,11 @@ export default function AdvantagesPage() {
 						</div>
 					))}
 				</div>
+				<h2 style={{ marginBottom: '0.5rem' }}>Intéressé ?</h2>
+				<p style={{ margin: 0 }}>
+					Contactez nous dès maintenant:{' '}
+					<a href="mailto:contact@waiter.so">contact@waiter.so</a>
+				</p>
 				{/* <div className={classes.cta}>
 					<h3>Convaincu ?</h3>
 					<p>Alors rejoignez Waiter sans tarder !</p>
