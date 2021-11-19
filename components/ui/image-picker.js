@@ -24,6 +24,7 @@ export default function ImagePicker({ url, setUrl, style }) {
 				headers: {
 					'Content-Type': image.type,
 					'x-amz-acl': 'public-read',
+					'Cache-Control': 'max-age=31536000',
 				},
 			})
 

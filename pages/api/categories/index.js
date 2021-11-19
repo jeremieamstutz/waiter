@@ -1,6 +1,9 @@
+import { getSession } from 'next-auth/react'
+import slugify from 'slugify'
+
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
-import slugify from 'slugify'
+import { getRestaurant } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
