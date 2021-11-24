@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 				type: 'svg',
 			})
 			res.setHeader('Content-Type', 'image/svg+xml')
+			res.setHeader('Cache-Control', 'public, max-age=31536000')
 			res.status(statusCodes.ok).send(code)
 			break
 		default:
