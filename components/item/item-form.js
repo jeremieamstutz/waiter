@@ -24,7 +24,7 @@ export default function ItemForm({ restaurant, item }) {
 				categoryId: item?.categoryId || '',
 			}}
 			validationSchema={Yup.object({
-				image: Yup.string().required('You must add an image'),
+				// image: Yup.string().required('You must add an image'),
 				name: Yup.string()
 					.min(3, 'Must be 3 characters or more')
 					.max(30, 'Must be 30 characters or less')
@@ -70,7 +70,9 @@ export default function ItemForm({ restaurant, item }) {
 						url={values.image}
 						setUrl={(url) => setFieldValue('image', url)}
 					/>
-					<ErrorMessage name="image" />
+					{/* <div style={{ color: 'var(--color-danger)' }}>
+						<ErrorMessage name="image" />
+					</div> */}
 					<Input
 						name="name"
 						type="text"

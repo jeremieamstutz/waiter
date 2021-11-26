@@ -47,7 +47,7 @@ export default function ItemCard({ item, category, index }) {
 	) {
 		return null
 	}
-	
+
 	return (
 		<Link
 			href={{
@@ -110,7 +110,7 @@ export default function ItemCard({ item, category, index }) {
 					)}
 				</div> */}
 					<Image
-						src={item.image}
+						src={item.image ? item.image : '/images/defaults/item.png'}
 						alt={item.name}
 						layout="responsive"
 						objectFit="cover"

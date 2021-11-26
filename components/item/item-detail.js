@@ -39,7 +39,7 @@ export default function ItemDetail({ item }) {
 		<>
 			<div className={classes.image}>
 				<Image
-					src={item.image}
+					src={item.image ? item.image : '/images/defaults/item.png'}
 					alt={item.name}
 					layout="responsive"
 					objectFit="cover"
