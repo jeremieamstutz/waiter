@@ -1,6 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { useSession } from 'next-auth/react'
 
 import classes from './user-detail.module.css'
 
@@ -9,11 +7,7 @@ export default function UserDetail({ user }) {
 		<div className={classes.container}>
 			<div className={classes.image}>
 				<Image
-					src={
-						user.image.length > 0
-							? user.image
-							: '/images/defaults/user.png'
-					}
+					src={user.image ? user.image : '/images/defaults/user.png'}
 					alt={user.name}
 					width={96}
 					height={96}

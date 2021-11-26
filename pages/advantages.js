@@ -11,7 +11,7 @@ export default function AdvantagesPage() {
 		<>
 			<Container>
 				<h1>Avantages</h1>
-				<p style={{ marginTop: 0 }}>
+				<p style={{ margin: '0 0 0.5rem' }}>
 					Que vous soyez restaurateur ou client, Waiter saura vous
 					accompagner.
 				</p>
@@ -65,11 +65,79 @@ export default function AdvantagesPage() {
 						</div>
 					))}
 				</div>
-				<h2 style={{ marginBottom: '0.5rem' }}>Intéressé ?</h2>
-				<p style={{ margin: 0 }}>
-					Contactez nous dès maintenant:{' '}
-					<a href="mailto:contact@waiter.so">contact@waiter.so</a>
-				</p>
+				<section className={classes.photos}>
+					<h2>Immortalisez vos produits</h2>
+					<p>
+						Afin de maximiser vos chances sur la plateforme, des
+						photographies irréprochables sont requises.
+					</p>
+					<p>
+						En passant par nous vous bénéficierez (en plus
+						d'excellentes photos) d'une présence gratuite sur
+						<Link href="/"> Waiter.so </Link>pendant 6 mois.
+					</p>
+					<h3 className={classes.prices}>Prix du shooting</h3>
+					<ul>
+						<li>
+							<p>
+								Frais de déplacement (Lausanne et environs) et
+								d'installation
+							</p>
+							<div className={classes.price}>CHF 60.-</div>
+						</li>
+						<li>
+							<p>Repérages et photographies du lieu</p>
+							<div className={classes.price}>CHF 20.-</div>
+						</li>
+						<li>
+							<p>Photos, tri et retouches des éléments</p>
+							<div className={classes.price}>
+								CHF 10.-/élément
+							</div>
+						</li>
+					</ul>
+					<p>
+						Ces photos sont les vôtres ! Utilisez les pour Waiter,
+						mais aussi vos réseaux sociaux, votre site internet, ou
+						même un service de livraison.
+					</p>
+				</section>
+				<section className={classes.subscription}>
+					<h2>Abonnement à Waiter</h2>
+					<p>
+						L'accès à la plateforme pour les restaurants se fait via
+						un abonnement dont le prix commence à 
+						<span className={classes.price}> CHF 30.-/mois</span>.
+					</p>
+					<p>
+						Le prix augmentera ensuite graduellement en fonction du
+						nombre de restaurants présents. Soyez donc parmis les
+						premiers pour bénéficier d'un prix avantageux !
+					</p>
+				</section>
+				<section className={classes.cta}>
+					<h2>Intéressé ?</h2>
+					<p>Entrez rapidement en contact avec nous !</p>
+					<a href="mailto:contact@waiter.so" className="button secondary">Nous contacter</a>
+					{/* <a href="mailto:contact@waiter.so">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width={24}
+							height={24}
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M17 8l4 4m0 0l-4 4m4-4H3"
+							/>
+						</svg>
+						contact@waiter.so
+					</a> */}
+				</section>
 				{/* <div className={classes.cta}>
 					<h3>Convaincu ?</h3>
 					<p>Alors rejoignez Waiter sans tarder !</p>

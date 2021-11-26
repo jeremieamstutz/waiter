@@ -64,7 +64,8 @@ export default function RestaurantCard({ restaurant, index }) {
 							restaurant.isOpen ? classes.open : classes.close
 						}`}
 					>
-						Ouvert jusqu&apos;à 23:00
+						{/* Ouvert jusqu&apos;à 23:00 */}
+						Ouvert · 23:30
 					</span>
 					{/* <span className={classes.rating}>
 							{restaurant.rating.value} ({restaurant.rating.count}
