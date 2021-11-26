@@ -65,7 +65,7 @@ export default function AdvantagesPage() {
 						</div>
 					))}
 				</div>
-				<section className={classes.photos}>
+				{/* <section className={classes.photos}>
 					<h2>Immortalisez vos produits</h2>
 					<p>
 						Afin de maximiser vos chances sur la plateforme, des
@@ -73,7 +73,7 @@ export default function AdvantagesPage() {
 					</p>
 					<p>
 						En passant par nous vous bénéficierez (en plus
-						d'excellentes photos) d'une présence gratuite sur
+						d&apos;excellentes photos) d&apos;une présence gratuite sur
 						<Link href="/"> Waiter.so </Link>pendant 6 mois.
 					</p>
 					<h3 className={classes.prices}>Prix du shooting</h3>
@@ -81,7 +81,7 @@ export default function AdvantagesPage() {
 						<li>
 							<p>
 								Frais de déplacement (Lausanne et environs) et
-								d'installation
+								d&apos;installation
 							</p>
 							<div className={classes.price}>CHF 60.-</div>
 						</li>
@@ -105,16 +105,16 @@ export default function AdvantagesPage() {
 				<section className={classes.subscription}>
 					<h2>Abonnement à Waiter</h2>
 					<p>
-						L'accès à la plateforme pour les restaurants se fait via
+						L&apos;accès à la plateforme pour les restaurants se fait via
 						un abonnement dont le prix commence à 
 						<span className={classes.price}> CHF 30.-/mois</span>.
 					</p>
 					<p>
 						Le prix augmentera ensuite graduellement en fonction du
 						nombre de restaurants présents. Soyez donc parmis les
-						premiers pour bénéficier d'un prix avantageux !
+						premiers pour bénéficier d&apos;un prix avantageux !
 					</p>
-				</section>
+				</section> */}
 				<section className={classes.cta}>
 					<h2>Intéressé ?</h2>
 					<p>Entrez rapidement en contact avec nous !</p>
