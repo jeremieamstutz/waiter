@@ -20,7 +20,7 @@ export default function AccountPage() {
 	return (
 		<>
 			<Container>
-				<h1>Account</h1>
+				<h1>Compte</h1>
 				{!user.id ? (
 					<div
 						style={{

@@ -21,7 +21,7 @@ export default function FavoritesPage() {
 	return (
 		<>
 			<Container>
-				<h1>Favorites</h1>
+				<h1>Favoris</h1>
 
 				{!error && !restaurants ? (
 					<div
