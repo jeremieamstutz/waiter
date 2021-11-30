@@ -46,7 +46,8 @@ export default function RestaurantCard({ restaurant, index }) {
 						{restaurant.description}
 					</p> */}
 				<p className={classes.description}>
-					{restaurant.cuisine} · 4.9
+					{restaurant.cuisine}
+					 {/* · 4.9 */}
 				</p>
 				<p className={classes.details}>
 					{/* <span
@@ -65,7 +66,23 @@ export default function RestaurantCard({ restaurant, index }) {
 						}`}
 					>
 						{/* Ouvert jusqu&apos;à 23:00 */}
-						Ouvert · 23:30
+						Ouvert{' '}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width={20}
+							height={20}
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M17 8l4 4m0 0l-4 4m4-4H3"
+							/>
+						</svg>{' '}
+						23:30
 					</span>
 					{/* <span className={classes.rating}>
 							{restaurant.rating.value} ({restaurant.rating.count}

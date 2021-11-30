@@ -18,8 +18,9 @@
     margin: 0;
     margin-top: 0.5rem;
     display: -webkit-box;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
+    word-break: break-all;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -45,11 +46,17 @@
 	font-size: 1rem;
 }
 
-.open {
+.opening {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.open, .open * {
 	color: var(--color-ok);
 }
 
-.close {
+.close, .close * {
 	color: var(--color-danger);
 }
 
