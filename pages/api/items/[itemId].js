@@ -98,10 +98,10 @@ export async function updateItem({ item }) {
 	)
 }
 
-export async function deleteItem({ id }) {
+export async function deleteItem({ itemId }) {
 	await query(
 		`DELETE FROM items 
 		WHERE items.id = $1`,
-		[id],
+		[itemId],
 	)
 }
