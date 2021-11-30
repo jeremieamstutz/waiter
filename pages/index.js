@@ -15,14 +15,22 @@ export default function HomePage({ restaurants }) {
 		<>
 			<Head>
 				<title>Waiter</title>
-				<meta
+				{/* <meta
 					name="description"
 					content="De choix du restaurant, jusqu’au règlement de l’addition, en passant par la commande, Waiter est là pour vous."
+				/> */}
+				<meta
+					name="description"
+					content="Découvrez la carte des meilleurs restaurants"
 				/>
 				<meta property="og:title" content="Waiter" />
-				<meta
+				{/* <meta
 					property="og:description"
 					content="De choix du restaurant, jusqu’au règlement de l’addition, en passant par la commande, Waiter est là pour vous."
+				/> */}
+				<meta
+					property="og:description"
+					content="Découvrez la carte des meilleurs restaurants"
 				/>
 				<meta property="og:url" content="https://www.waiter.so" />
 				<meta property="og:type" content="restaurants" />
