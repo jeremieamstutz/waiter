@@ -251,7 +251,7 @@ const DATA = {
 		  </svg>`,
 			title: 'Prenez place, <span style="text-decoration: line-through;">attendez</span>, dégustez',
 			description:
-				'Avec les commandes en ligne que vous pouvez même passer en avance, vous vous assurez d’être servi le plus rapidement possible. Idéal pour une courte de pause de midi ou lorsque vous allez manger avec vos enfants. Waiter vous offre le temps de passer un bon moment.',
+				'Avec les commandes en ligne que vous pouvez même passer en avance, vous vous assurez d’être servi le plus rapidement possible. Idéal pour une courte pause de midi ou lorsque vous allez manger avec vos enfants. Waiter vous offre le temps de passer un bon moment.',
 		},
 		{
 			icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
