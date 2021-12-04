@@ -18,8 +18,6 @@ export default function RestaurantCard({ restaurant, index }) {
 	// 		.get(`/api/restaurants/${restaurant.id}/like`)
 	// 		.then((res) => res.data),
 	// )
-
-	console.log(restaurant)
 	
 	return (
 		<Link
