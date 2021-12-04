@@ -23,7 +23,6 @@ export default function RestaurantPage({ restaurant }) {
 	const router = useRouter()
 
 	const { data: session, status } = useSession()
-
 	return (
 		<RestaurantProvider initialValue={restaurant}>
 			<Head>
@@ -122,6 +121,14 @@ export default function RestaurantPage({ restaurant }) {
 						</select> */}
 							</div>
 						)}
+					<div className={classes.disclaimer}>
+						<p>
+							Informations données à titre indicatif.
+							<p>
+								Dernière mise à jour le {restaurant.updatedAt.toLocaleDateString()}
+							</p>
+						</p>
+					</div>
 				</main>
 			</Container>
 			<Header>
@@ -142,7 +149,7 @@ export async function getStaticPaths() {
 
 	return {
 		paths: restaurants.map((restaurant) => ({
-			params: { restaurantSlug: restaurant.id },
+			params: { restaurantSlug: restaurant.slug },
 		})),
 		fallback: 'blocking',
 	}
