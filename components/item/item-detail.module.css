@@ -24,10 +24,12 @@
 
 .description {
 	margin: 0;
+	font-size: 1.25rem;
 }
 
 .price {
 	color: var(--color-primary);
+	font-size: 1.25rem;
 	margin: 0;
 }
 
