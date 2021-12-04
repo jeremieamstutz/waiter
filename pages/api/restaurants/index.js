@@ -80,7 +80,7 @@ export async function createRestaurant({ restaurant }) {
 			image,
 			name,
 			description,
-			cuisine
+			cuisine,
 			phone,
 			address,
 			street,
@@ -125,7 +125,7 @@ export async function getAllRestaurants() {
 			image,
 			name,
 			description,
-			cuisine
+			cuisine,
 			phone,
 			address,
 			street,
