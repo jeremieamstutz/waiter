@@ -14,7 +14,7 @@ export default function RestaurantList({ list, restaurants }) {
 		listRef,
 		`${router.asPath === '/' ? '/home' : router.asPath}/${slugify(
 			list.name,
-			{ lower: true },
+			{ lower: true, remove: /[*+~.()'"!:@]/g },
 		)}`,
 	)
 
