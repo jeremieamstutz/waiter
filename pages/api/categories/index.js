@@ -3,7 +3,7 @@ import slugify from 'slugify'
 
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
-import { getRestaurant } from '../restaurants/[restaurantId]'
+import { getRestaurant, markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -29,9 +29,15 @@ export default async function handler(req, res) {
 					.json({ status: 'error', message: 'Not the right owner' })
 			}
 
-			category.slug = slugify(category.name, { lower: true })
+			category.slug = slugify(category.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
 
 			const newCategory = await createCategory({ category })
+			await markRestaurantAsUpdated({
+				restaurantId: category.restaurantId,
+			})
 
 			res.status(statusCodes.ok).json({ category: newCategory })
 			break

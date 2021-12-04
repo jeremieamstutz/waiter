@@ -3,6 +3,7 @@ import slugify from 'slugify'
 
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
+import { markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -31,10 +32,14 @@ export default async function handler(req, res) {
 
 			let { category: newCategory } = req.body
 
-			newCategory.slug = slugify(newCategory.name, { lower: true })
+			newCategory.slug = slugify(newCategory.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
 			newCategory.id = categoryId
 
 			newCategory = await updateCategory({ category: newCategory })
+			await markRestaurantAsUpdated({ restaurantId: category.restaurantId })
 
 			res.status(statusCodes.ok).json({ category: newCategory })
 			break
@@ -53,6 +58,7 @@ export default async function handler(req, res) {
 			}
 
 			await deleteCategory({ categoryId })
+			await markRestaurantAsUpdated ({ restaurantId: category.restaurantId })
 
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break
@@ -104,7 +110,7 @@ export async function updateCategory({ category }) {
 		UPDATE categories 
 		SET slug = $2, name = $3, description = $4
 		WHERE categories.id = $1
-		RETURNING *
+		RETURNING *, categories.restaurant_id AS "restaurantId"
 		`,
 		[id, slug, name, description],
 	)

@@ -2,7 +2,10 @@ import statusCodes from 'utils/statusCodes'
 import slugify from 'slugify'
 import { query } from 'utils/db'
 import { getSession } from 'next-auth/react'
-import { getRestaurant } from '../restaurants/[restaurantId]'
+import {
+	getRestaurant,
+	markRestaurantAsUpdated,
+} from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -19,16 +22,22 @@ export default async function handler(req, res) {
 				restaurantId: item.restaurantId,
 			})
 
-			if (session.user.id !== restaurant.ownerId &&
-				session.user.role !== 'admin') {
+			if (
+				session.user.id !== restaurant.ownerId &&
+				session.user.role !== 'admin'
+			) {
 				return res
 					.status(statusCodes.unauthorized)
 					.json({ status: 'error', message: 'Not the right owner' })
 			}
 
-			item.slug = slugify(item.name, { lower: true })
-			
+			item.slug = slugify(item.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
+
 			const newItem = await createItem({ item })
+			await markRestaurantAsUpdated({ restaurantId: item.restaurantId })
 
 			res.status(statusCodes.ok).json({ item: newItem })
 			break

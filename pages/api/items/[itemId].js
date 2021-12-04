@@ -2,6 +2,7 @@ import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
 import slugify from 'slugify'
 import { getSession } from 'next-auth/react'
+import { markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -25,9 +26,13 @@ export default async function handler(req, res) {
 
 			let { item: newItem } = req.body
 			newItem.id = itemId
-			newItem.slug = slugify(newItem.name, { lower: true })
+			newItem.slug = slugify(newItem.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
 
 			newItem = await updateItem({ item: newItem })
+			await markRestaurantAsUpdated({ restaurantId: item.restaurantId })
 
 			res.status(statusCodes.ok).json({ item: newItem })
 			break
@@ -46,6 +51,7 @@ export default async function handler(req, res) {
 			}
 
 			await deleteItem({ itemId })
+			await markRestaurantAsUpdated({ restaurantId: item.restaurantId })
 
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break
@@ -89,13 +95,14 @@ export async function getItem({
 export async function updateItem({ item }) {
 	const { id, slug, name, description, price, available, currency, image } =
 		item
-	await query(
+	const result = await query(
 		`UPDATE items 
 		SET slug = $2, name = $3, description = $4, price = $5, available = $6, currency = $7, image = $8
 		WHERE id = $1
 		RETURNING *, restaurant_id AS "restaurantId", category_id AS "categoryId"`,
 		[id, slug, name, description, price, available, currency, image],
 	)
+	return result.rows[0]
 }
 
 export async function deleteItem({ itemId }) {
