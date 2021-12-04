@@ -18,7 +18,7 @@ export default function RestaurantCard({ restaurant, index }) {
 	// 		.get(`/api/restaurants/${restaurant.id}/like`)
 	// 		.then((res) => res.data),
 	// )
-
+	
 	return (
 		<Link
 			href={{
@@ -31,7 +31,11 @@ export default function RestaurantCard({ restaurant, index }) {
 			<a className={classes.card}>
 				<div className={classes.image}>
 					<Image
-						src={restaurant.image}
+						src={
+							restaurant.image
+								? restaurant.image
+								: '/images/defaults/item.png'
+						}
 						alt={restaurant.name}
 						objectFit="cover"
 						layout="responsive"
@@ -47,7 +51,7 @@ export default function RestaurantCard({ restaurant, index }) {
 					</p> */}
 				<p className={classes.description}>
 					{restaurant.cuisine}
-					 {/* · 4.9 */}
+					{/* · 4.9 */}
 				</p>
 				<p className={classes.details}>
 					{/* <span
