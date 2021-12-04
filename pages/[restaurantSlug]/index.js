@@ -122,11 +122,10 @@ export default function RestaurantPage({ restaurant }) {
 							</div>
 						)}
 					<div className={classes.disclaimer}>
+						<p>Informations données à titre indicatif.</p>
 						<p>
-							Informations données à titre indicatif.
-							<p>
-								Dernière mise à jour le {restaurant.updatedAt.toLocaleDateString()}
-							</p>
+							Dernière mise à jour le{' '}
+							{restaurant.updatedAt.toLocaleDateString('fr-CH')}
 						</p>
 					</div>
 				</main>
