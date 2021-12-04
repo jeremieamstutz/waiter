@@ -12,8 +12,6 @@ export default async function handler(req, res) {
 		body,
 	} = req
 
-	
-
 	switch (method) {
 		case 'GET': {
 			const restaurant = await getRestaurant({ restaurantId })
@@ -37,7 +35,10 @@ export default async function handler(req, res) {
 
 			let { restaurant: newRestaurant } = req.body
 			newRestaurant.id = restaurantId
-			newRestaurant.slug = slugify(restaurant.name, { lower: true })
+			newRestaurant.slug = slugify(restaurant.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
 			newRestaurant.ownerId = session.user.id
 			newRestaurant.address = `${newRestaurant.street} ${newRestaurant.streetNumber}, ${newRestaurant.postalCode} ${newRestaurant.city}, ${newRestaurant.country}`
 
@@ -72,9 +73,45 @@ export async function updateRestaurant({ restaurant }) {
 	const result = await query(
 		`
         UPDATE restaurants
-		SET slug = $2, owner_id = $3, image = $4, name = $5, description = $6, cuisine = $7, phone = $8, address = $9, street = $10, street_number = $11, postal_code = $12, city = $13, region = $14, country = $15, latitude = $16, longitude = $17
+		SET 
+			slug = $2, 
+			owner_id = $3, 
+			image = $4, 
+			name = $5, 
+			description = $6, 
+			cuisine = $7, 
+			phone = $8, 
+			address = $9, 
+			street = $10, 
+			street_number = $11, 
+			postal_code = $12, 
+			city = $13, 
+			region = $14, 
+			country = $15, 
+			latitude = $16, 
+			longitude = $17, 
+			updated_at = CURRENT_TIMESTAMP
 		WHERE restaurants.id = $1
-        RETURNING *
+        RETURNING 
+			id,
+			slug, 
+			owner_id AS "ownerId", 
+			image,
+			name,
+			description,
+			cuisine
+			phone,
+			address,
+			street,
+			street_number AS "streetNumber", 
+			postal_code AS "postalCode",
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
+			created_at AS "createdAt",
+			updated_at AS "updatedAt"
     `,
 		[
 			restaurant.id,
@@ -99,10 +136,39 @@ export async function updateRestaurant({ restaurant }) {
 	return result.rows[0]
 }
 
+export async function markRestaurantAsUpdated({ restaurantId }) {
+	await query(
+		`
+		UPDATE restaurants
+		SET updated_at = CURRENT_TIMESTAMP
+		WHERE restaurants.id = $1`,
+		[restaurantId],
+	)
+}
+
 export async function getRestaurant({ restaurantSlug, restaurantId }) {
 	if (restaurantId) {
 		const result = await query(
-			`SELECT *, slug AS "restaurantSlug", owner_id AS "ownerId", street_number AS "streetNumber", postal_code AS "postalCode" 
+			`SELECT 
+				id,
+				slug, 
+				owner_id AS "ownerId", 
+				image,
+				name,
+				description,
+				cuisine,
+				phone,
+				address,
+				street,
+				street_number AS "streetNumber", 
+				postal_code AS "postalCode",
+				city,
+				region,
+				country,
+				latitude,
+				longitude,
+				created_at AS "createdAt",
+				updated_at AS "updatedAt"
 			FROM restaurants 
 			WHERE id = $1`,
 			[restaurantId],
@@ -112,7 +178,26 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 
 	if (restaurantSlug) {
 		const result = await query(
-			`SELECT *, slug AS "restaurantSlug", owner_id AS "ownerId", street_number AS "streetNumber", postal_code AS "postalCode" 
+			`SELECT
+				id,
+				slug, 
+				owner_id AS "ownerId", 
+				image,
+				name,
+				description,
+				cuisine,
+				phone,
+				address,
+				street,
+				street_number AS "streetNumber", 
+				postal_code AS "postalCode",
+				city,
+				region,
+				country,
+				latitude,
+				longitude,
+				created_at AS "createdAt",
+				updated_at AS "updatedAt"
 			FROM restaurants 
 			WHERE slug = $1`,
 			[restaurantSlug],

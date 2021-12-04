@@ -19,7 +19,10 @@ export default async function handler(req, res) {
 
 			const session = await getSession({ req })
 
-			restaurant.slug = slugify(restaurant.name, { lower: true })
+			restaurant.slug = slugify(restaurant.name, {
+				lower: true,
+				remove: /[*+~.()'"!:@]/g,
+			})
 
 			const existingRestaurant = await getRestaurant({
 				restaurantSlug: restaurant.slug,
@@ -64,14 +67,32 @@ export default async function handler(req, res) {
 }
 
 export async function createRestaurant({ restaurant }) {
-	console.log(restaurant)
 	const result = await query(
 		`
         INSERT INTO restaurants
 			(slug, owner_id, image, name, description, cuisine, phone, address, street, street_number, postal_code, city, region, country, latitude, longitude)
 		VALUES
 			($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-        RETURNING *
+        RETURNING 
+			id,
+			slug, 
+			owner_id AS "ownerId", 
+			image,
+			name,
+			description,
+			cuisine
+			phone,
+			address,
+			street,
+			street_number AS "streetNumber", 
+			postal_code AS "postalCode",
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
+			created_at AS "createdAt",
+			updated_at AS "updatedAt"
     `,
 		[
 			restaurant.slug,
@@ -97,7 +118,27 @@ export async function createRestaurant({ restaurant }) {
 
 export async function getAllRestaurants() {
 	const result = await query(
-		`SELECT * FROM restaurants
+		`SELECT 
+			id,
+			slug, 
+			owner_id AS "ownerId", 
+			image,
+			name,
+			description,
+			cuisine
+			phone,
+			address,
+			street,
+			street_number AS "streetNumber", 
+			postal_code AS "postalCode",
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
+			created_at AS "createdAt",
+			updated_at AS "updatedAt"
+		FROM restaurants
         ORDER BY created_at DESC`,
 	)
 	return result.rows
