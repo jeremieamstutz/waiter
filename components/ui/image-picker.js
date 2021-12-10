@@ -94,6 +94,7 @@ export default function ImagePicker({ url, setUrl, style }) {
 							alt="File preview"
 							layout="fill"
 							className={classes.image}
+							priority={true}
 						/>
 					</div>
 				) : (
