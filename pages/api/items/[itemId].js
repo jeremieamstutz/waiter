@@ -2,7 +2,7 @@ import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
 import slugify from 'slugify'
 import { getSession } from 'next-auth/react'
-import { markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
+import { markRestaurantAsUpdated } from 'pages/api/restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -40,7 +40,6 @@ export default async function handler(req, res) {
 		case 'DELETE': {
 			const session = await getSession({ req })
 			const item = await getItem({ itemId })
-
 			if (
 				session.user.id !== item.ownerId &&
 				session.user.role !== 'admin'

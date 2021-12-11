@@ -42,7 +42,7 @@ CREATE TABLE users (
 );
 UPDATE users
 SET role = 'admin'
-WHERE email='jeremie@waiter.so';
+WHERE email='s.hachemane@gmail.com';
 DELETE FROM users WHERE email = 'radiojeje@hotmail.com'
 ALTER TABLE users
 ALTER COLUMN name DROP NOT NULL;
@@ -152,6 +152,7 @@ CREATE TABLE restaurants (
     cuisine VARCHAR(255) NOT NULL,
     image VARCHAR(500) NOT NULL,
     phone VARCHAR(255),
+    website VARCHAR(255),
     address VARCHAR(255) NOT NULL,
     street VARCHAR(255) NOT NULL,
     street_number INTEGER NOT NULL,
@@ -172,7 +173,7 @@ DROP TABLE restaurants CASCADE;
 92c6e519-dc99-4778-bc73-f593e9071163
 ALTER TABLE restaurants ALTER owner_id DROP DEFAULT;
 ALTER TABLE restaurants
-ADD address UUID;
+ADD website VARCHAR(255);
 UPDATE restaurants
 SET address = '2f124fe1-90a0-4ee3-9f91-1477b8ef4b88';
 INSERT INTO restaurants (slug, name, intro, description, image)
@@ -250,8 +251,23 @@ CREATE TABLE categories (
     restaurant_id UUID REFERENCES restaurants ON DELETE CASCADE,
     name VARCHAR(32) NOT NULL,
     slug VARCHAR(48) NOT NULL DEFAULT,
-    description VARCHAR(240)
+    description VARCHAR(240),
+    order INTEGER
 );
+
+SELECT id, ROW_NUMBER() 
+OVER (PARTITION BY restaurant_id ORDER BY id ASC) AS order
+FROM categories
+
+UPDATE categories
+    SET "order" = ordered.order
+FROM (
+    SELECT id, ROW_NUMBER() 
+    OVER (PARTITION BY restaurant_id ORDER BY id ASC) AS order
+    FROM categories
+) AS ordered
+WHERE ordered.id = categories.id;
+
 ALTER TABLE categories
 RENAME COLUMN restaurant TO restaurant_id;
 ALTER TABLE categories
@@ -304,3 +320,20 @@ SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
 WHERE datname = current_database()
   AND pid <> pg_backend_pid();
+
+SELECT restaurants.name, COUNT(*) FROM items
+JOIN restaurants ON restaurants.id = items.restaurant_id
+WHERE restaurants.city != 'Démos'
+GROUP BY restaurants.name
+
+SELECT AVG(count) FROM (
+    SELECT restaurants.name, COUNT(*) FROM items
+    JOIN restaurants ON restaurants.id = items.restaurant_id
+    WHERE restaurants.city != 'Démos'
+    GROUP BY restaurants.name
+) AS counts
+
+SELECT restaurants.name, (MAX(items.created_at) - MIN(items.created_at)) as duration FROM items
+JOIN restaurants ON restaurants.id = items.restaurant_id
+WHERE restaurants.city != 'Démos'
+GROUP BY restaurants.name
