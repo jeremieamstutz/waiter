@@ -137,7 +137,7 @@ export default function RestaurantForm({ restaurant }) {
 					</Select>
 					<Input
 						name="phone"
-						type="tel"
+						type="text"
 						placeholder="Phone"
 						arial-label="Phone"
 						autoComplete="off"
