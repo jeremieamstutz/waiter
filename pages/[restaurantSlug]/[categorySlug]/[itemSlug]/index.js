@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { getAllItemsSlugs } from 'pages/api/items'
+import { getAllItemSlugs } from 'pages/api/items'
 import { getFullItem } from 'pages/api/[restaurantSlug]/[categorySlug]/[itemSlug]'
 
 import ItemDetail from 'components/item/item-detail'
@@ -42,7 +42,7 @@ export default function ItemDetailPage({ item: fallbackData, params }) {
 }
 
 export async function getStaticPaths() {
-	const itemsSlugs = await getAllItemsSlugs()
+	const itemSlugs = await getAllItemSlugs()
 
 	return {
 		// paths: itemsSlugs.map((item) => ({
