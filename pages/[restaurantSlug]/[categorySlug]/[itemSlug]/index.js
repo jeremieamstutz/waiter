@@ -1,24 +1,33 @@
 import Head from 'next/head'
 
-import { getItem } from 'pages/api/items/[itemId]'
 import { getAllItemsSlugs } from 'pages/api/items'
-import { getRestaurant } from 'pages/api/restaurants/[restaurantId]'
+import { getFullItem } from 'pages/api/[restaurantSlug]/[categorySlug]/[itemSlug]'
 
 import ItemDetail from 'components/item/item-detail'
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
+import useSWR from 'swr'
 
-export default function ItemDetailPage({ item, restaurant }) {
+export default function ItemDetailPage({ item: fallbackData, params }) {
+	const { data: item } = useSWR(
+		`/api/${params.restaurantSlug}/${params.categorySlug}/${params.itemSlug}`,
+		{
+			fallbackData,
+		},
+	)
+
 	return (
 		<>
 			<Head>
 				<title>
-					{item.name} - {restaurant.name} - Waiter
+					{item.name} - {item.restaurant.name} - Waiter
 				</title>
 				<meta name="description" content={item.description} />
 				<meta
 					property="og:title"
-					content={item.name + ' - ' + restaurant.name + ' - Waiter'}
+					content={
+						item.name + ' - ' + item.restaurant.name + ' - Waiter'
+					}
 				/>
 				<meta property="og:description" content={item.description} />
 				<meta property="og:image" content={item.image} />
@@ -36,17 +45,17 @@ export async function getStaticPaths() {
 	const itemsSlugs = await getAllItemsSlugs()
 
 	return {
-		paths: itemsSlugs.map((item) => ({
-			params: item,
-		})),
+		// paths: itemsSlugs.map((item) => ({
+		// 	params: item,
+		// })),
+		paths: [],
 		fallback: 'blocking',
 	}
 }
 
 export async function getStaticProps({ params }) {
 	const { restaurantSlug, categorySlug, itemSlug } = params
-	const item = await getItem({ restaurantSlug, categorySlug, itemSlug })
-	const restaurant = await getRestaurant({ restaurantSlug })
+	const item = await getFullItem({ restaurantSlug, categorySlug, itemSlug })
 
 	if (!item) {
 		return {
@@ -55,7 +64,7 @@ export async function getStaticProps({ params }) {
 	}
 
 	return {
-		props: { item, restaurant },
+		props: { item, params },
 		revalidate: 5,
 	}
 }

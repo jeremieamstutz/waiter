@@ -9,18 +9,22 @@ import RestaurantHeader from 'components/restaurant/restaurant-header'
 import ItemList from 'components/item/item-list'
 
 import { RestaurantProvider } from 'contexts/restaurant'
-import {
-	getRestaurant,
-	getRestaurantItems,
-	getRestaurantCategories,
-} from 'pages/api/restaurants/[restaurantId]'
+import { getFullRestaurant } from 'pages/api/[restaurantSlug]'
 
 import classes from 'styles/restaurant.module.css'
 import Container from 'components/layout/container'
 import { getAllRestaurants } from 'pages/api/restaurants'
+import useSWR from 'swr'
 
-export default function RestaurantPage({ restaurant }) {
+export default function RestaurantPage({ restaurant: fallbackData, params }) {
 	const router = useRouter()
+
+	const { data: restaurant } = useSWR(
+		`/api/${params.restaurantSlug}`,
+		{
+			fallbackData,
+		},
+	)
 
 	const { data: session, status } = useSession()
 	return (
@@ -125,7 +129,9 @@ export default function RestaurantPage({ restaurant }) {
 						<p>Informations données à titre indicatif.</p>
 						<p>
 							Dernière mise à jour le{' '}
-							{restaurant.updatedAt.toLocaleDateString('fr-CH')}
+							{new Date(restaurant.updatedAt).toLocaleDateString(
+								'fr-CH',
+							)}
 						</p>
 					</div>
 				</main>
@@ -147,38 +153,22 @@ export async function getStaticPaths() {
 	const restaurants = await getAllRestaurants()
 
 	return {
-		paths: restaurants.map((restaurant) => ({
-			params: { restaurantSlug: restaurant.slug },
-		})),
+		// paths: restaurants.map((restaurant) => ({
+		// 	params: { restaurantSlug: restaurant.slug },
+		// })),
+		paths: [],
 		fallback: 'blocking',
 	}
 }
 
 export async function getStaticProps({ params }) {
 	const { restaurantSlug } = params
-	const restaurant = await getRestaurant({ restaurantSlug })
-
-	if (!restaurant) {
-		return {
-			notFound: true,
-		}
-	}
-	const items = await getRestaurantItems({ restaurantSlug })
-	const categories = await getRestaurantCategories({
-		restaurantSlug,
-	})
-
-	restaurant.items = items
-	restaurant.categories = categories
-	restaurant.rating = {
-		value: 4.9,
-		count: 10,
-	}
-	restaurant.isOpen = true
+	const restaurant = await getFullRestaurant({ restaurantSlug })
 
 	return {
 		props: {
 			restaurant,
+			params
 		},
 		revalidate: 5,
 	}
