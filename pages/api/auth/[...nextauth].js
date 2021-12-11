@@ -33,6 +33,7 @@ export default NextAuth({
 			clientSecret: process.env.TWITTER_SECRET,
 		}),
 	],
+	secret: process.env.NEXTAUTH_SECRET,
 	// database: {
 	// 	type: 'postgres',
 	// 	host: 'ec2-54-72-155-238.eu-west-1.compute.amazonaws.com',
