@@ -87,7 +87,7 @@ export async function getAllItems() {
 	return result.rows
 }
 
-export async function getAllItemsSlugs() {
+export async function getAllItemSlugs() {
 	const result = await query(
 		`SELECT restaurants.slug AS "restaurantSlug", categories.slug AS "categorySlug", items.slug AS "itemSlug" FROM items 
 		JOIN restaurants ON restaurants.id = items.restaurant_id

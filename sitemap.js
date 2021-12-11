@@ -1,8 +1,8 @@
 module.exports = {
-    siteUrl: 'https://www.waiter.so',
+    siteUrl: process.env.NEXTAUTH_URL,
     generateRobotsTxt: true,
     sitemapSize: 5000,
-    exclude: ['/dynamic-sitemap.xml', '/dashboard'],
+    exclude: ['/dynamic-sitemap.xml', '/account/*'],
     robotsTxtOptions: {
         policies: [
             {
@@ -11,7 +11,7 @@ module.exports = {
             }
         ],
         additionalSitemaps: [
-            'https://waiter.so/dynamic-sitemap.xml'
+            process.env.NEXTAUTH_URL + '/dynamic-sitemap.xml'
         ]
     }
 }
