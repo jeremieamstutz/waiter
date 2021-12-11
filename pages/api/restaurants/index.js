@@ -67,12 +67,31 @@ export default async function handler(req, res) {
 }
 
 export async function createRestaurant({ restaurant }) {
+	const {
+		slug,
+		ownerId,
+		image,
+		name,
+		description,
+		cuisine,
+		phone,
+		website,
+		address,
+		street,
+		streetNumber,
+		postalCode,
+		city,
+		region,
+		country,
+		latitude,
+		longitude,
+	} = restaurant
 	const result = await query(
 		`
         INSERT INTO restaurants
-			(slug, owner_id, image, name, description, cuisine, phone, address, street, street_number, postal_code, city, region, country, latitude, longitude)
+			(slug, owner_id, image, name, description, cuisine, phone, website, address, street, street_number, postal_code, city, region, country, latitude, longitude)
 		VALUES
-			($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+			($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
         RETURNING 
 			id,
 			slug, 
@@ -82,6 +101,7 @@ export async function createRestaurant({ restaurant }) {
 			description,
 			cuisine,
 			phone,
+			website,
 			address,
 			street,
 			street_number AS "streetNumber", 
@@ -95,22 +115,23 @@ export async function createRestaurant({ restaurant }) {
 			updated_at AS "updatedAt"
     `,
 		[
-			restaurant.slug,
-			restaurant.ownerId,
-			restaurant.image,
-			restaurant.name,
-			restaurant.description,
-			restaurant.cuisine,
-			restaurant.phone,
-			restaurant.address,
-			restaurant.street,
-			restaurant.streetNumber,
-			restaurant.postalCode,
-			restaurant.city,
-			restaurant.region,
-			restaurant.country,
-			restaurant.latitude,
-			restaurant.longitude,
+			slug,
+			ownerId,
+			image,
+			name,
+			description,
+			cuisine,
+			phone,
+			website,
+			address,
+			street,
+			streetNumber,
+			postalCode,
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
 		],
 	)
 	return result.rows[0]
@@ -127,6 +148,7 @@ export async function getAllRestaurants() {
 			description,
 			cuisine,
 			phone,
+			website
 			address,
 			street,
 			street_number AS "streetNumber", 
@@ -138,6 +160,15 @@ export async function getAllRestaurants() {
 			longitude,
 			created_at AS "createdAt",
 			updated_at AS "updatedAt"
+		FROM restaurants
+        ORDER BY created_at DESC`,
+	)
+	return result.rows
+}
+
+export async function getAllRestaurantSlugs() {
+	const result = await query(
+		`SELECT slug AS "restaurantSlug"
 		FROM restaurants
         ORDER BY created_at DESC`,
 	)

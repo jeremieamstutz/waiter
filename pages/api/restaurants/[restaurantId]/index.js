@@ -70,6 +70,26 @@ export default async function handler(req, res) {
 }
 
 export async function updateRestaurant({ restaurant }) {
+	const {
+		id,
+		slug,
+		ownerId,
+		image,
+		name,
+		description,
+		cuisine,
+		phone,
+		website,
+		address,
+		street,
+		streetNumber,
+		postalCode,
+		city,
+		region,
+		country,
+		latitude,
+		longitude,
+	} = restaurant
 	const result = await query(
 		`
         UPDATE restaurants
@@ -80,16 +100,17 @@ export async function updateRestaurant({ restaurant }) {
 			name = $5, 
 			description = $6, 
 			cuisine = $7, 
-			phone = $8, 
-			address = $9, 
-			street = $10, 
-			street_number = $11, 
-			postal_code = $12, 
-			city = $13, 
-			region = $14, 
-			country = $15, 
-			latitude = $16, 
-			longitude = $17, 
+			phone = $8,
+			website = $9,
+			address = $10, 
+			street = $11, 
+			street_number = $12, 
+			postal_code = $13, 
+			city = $14, 
+			region = $15, 
+			country = $16, 
+			latitude = $17, 
+			longitude = $18, 
 			updated_at = CURRENT_TIMESTAMP
 		WHERE restaurants.id = $1
         RETURNING 
@@ -99,8 +120,9 @@ export async function updateRestaurant({ restaurant }) {
 			image,
 			name,
 			description,
-			cuisine
+			cuisine,
 			phone,
+			website,
 			address,
 			street,
 			street_number AS "streetNumber", 
@@ -114,23 +136,24 @@ export async function updateRestaurant({ restaurant }) {
 			updated_at AS "updatedAt"
     `,
 		[
-			restaurant.id,
-			restaurant.slug,
-			restaurant.ownerId,
-			restaurant.image,
-			restaurant.name,
-			restaurant.description,
-			restaurant.cuisine,
-			restaurant.phone,
-			restaurant.address,
-			restaurant.street,
-			restaurant.streetNumber,
-			restaurant.postalCode,
-			restaurant.city,
-			restaurant.region,
-			restaurant.country,
-			restaurant.latitude,
-			restaurant.longitude,
+			id,
+			slug,
+			ownerId,
+			image,
+			name,
+			description,
+			cuisine,
+			phone,
+			website,
+			address,
+			street,
+			streetNumber,
+			postalCode,
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
 		],
 	)
 	return result.rows[0]
@@ -158,6 +181,7 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 				description,
 				cuisine,
 				phone,
+				website,
 				address,
 				street,
 				street_number AS "streetNumber", 
@@ -187,6 +211,7 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 				description,
 				cuisine,
 				phone,
+				website,
 				address,
 				street,
 				street_number AS "streetNumber", 
@@ -207,22 +232,20 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 	return
 }
 
-export async function getRestaurantItems({ restaurantSlug }) {
+export async function getRestaurantItems({ restaurantId }) {
 	const result = await query(
-		`SELECT items.*, items.category_id AS "categoryId" FROM items 
-		JOIN restaurants ON restaurants.id = items.restaurant_id  
-		WHERE restaurants.slug = $1`,
-		[restaurantSlug],
+		`SELECT items.*, items.category_id AS "categoryId" FROM items
+		WHERE items.restaurant_id = $1`,
+		[restaurantId],
 	)
 	return result.rows
 }
 
-export async function getRestaurantCategories({ restaurantSlug }) {
+export async function getRestaurantCategories({ restaurantId }) {
 	const result = await query(
-		`SELECT categories.* FROM categories 
-		JOIN restaurants ON restaurants.id = categories.restaurant_id
-		WHERE restaurants.slug = $1`,
-		[restaurantSlug],
+		`SELECT categories.* FROM categories
+		WHERE categories.restaurant_id = $1`,
+		[restaurantId],
 	)
 	return result.rows
 }

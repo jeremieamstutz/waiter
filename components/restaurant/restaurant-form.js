@@ -19,6 +19,7 @@ export default function RestaurantForm({ restaurant }) {
 				description: restaurant?.description || '',
 				cuisine: restaurant?.cuisine || '',
 				phone: restaurant?.phone || '',
+				website: restaurant?.website || '',
 				street: restaurant?.street || '',
 				streetNumber: restaurant?.streetNumber || '',
 				postalCode: restaurant?.postalCode || '',
@@ -41,6 +42,7 @@ export default function RestaurantForm({ restaurant }) {
 					.max(30, 'Must be 30 characters or less')
 					.required('Cuisine is required'),
 				phone: Yup.string().min(8, 'Must be 8 characters or more'),
+				website: Yup.string().url(),
 				street: Yup.string()
 					.min(3, 'Must be 3 characters or more')
 					.max(30, 'Must be 30 characters or less')
@@ -138,6 +140,13 @@ export default function RestaurantForm({ restaurant }) {
 						type="tel"
 						placeholder="Phone"
 						arial-label="Phone"
+						autoComplete="off"
+					/>
+					<Input
+						name="website"
+						type="url"
+						placeholder="Website"
+						arial-label="Website"
 						autoComplete="off"
 					/>
 					<Input
