@@ -9,13 +9,13 @@ export default async function handler(req, res) {
 			const { query, cuisine } = req.query
 
 			console.time('search')
-			
-            const restaurants = await searchRestaurants({ query, cuisine })
-			const items = await searchItems({ query })
+
+			const restaurants = await searchRestaurants({ query, cuisine })
+			const items = !cuisine ? await searchItems({ query }) : []
 
 			console.timeEnd('search')
 
-            res.status(statusCodes.ok).json({ restaurants, items })
+			res.status(statusCodes.ok).json({ restaurants, items })
 			break
 		}
 		default:
