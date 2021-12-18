@@ -53,8 +53,8 @@ export default function ItemCard({ item, category, index }) {
 			href={{
 				pathname: '/[restaurantSlug]/[categorySlug]/[itemSlug]',
 				query: {
-					...router.query,
-					categorySlug: category.slug,
+					restaurantSlug: item.restaurantSlug,
+					categorySlug: item.categorySlug,
 					itemSlug: item.slug,
 				},
 			}}
@@ -64,6 +64,20 @@ export default function ItemCard({ item, category, index }) {
 					item.available === false ? classes.unavailable : ''
 				}`}
 			>
+				{item.restaurantName && (
+					<div
+						style={{
+							paddingBottom: '0.25rem',
+							color: '#000',
+							fontSize: '1.125rem',
+							whiteSpace: 'nowrap',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+						}}
+					>
+						{item.restaurantName}
+					</div>
+				)}
 				<div className={classes.image}>
 					{/* <div
 					className={classes.picker}
@@ -110,7 +124,11 @@ export default function ItemCard({ item, category, index }) {
 					)}
 				</div> */}
 					<Image
-						src={item.image ? item.image : '/images/defaults/item.png'}
+						src={
+							item.image
+								? item.image
+								: '/images/defaults/item.png'
+						}
 						alt={item.name}
 						layout="responsive"
 						objectFit="cover"
@@ -121,6 +139,9 @@ export default function ItemCard({ item, category, index }) {
 						sizes="50vw"
 					/>
 				</div>
+				{/* {item.restaurantName && (
+					<div style={{padding: ' 0.35rem 0 0', marginBottom: '-0.15rem', color: '#666'}}>{item.restaurantName}</div>
+				)} */}
 				<h3 className={classes.title}>{item.name}</h3>
 				<p className={classes.description}>{item.description}</p>
 				<p className={classes.details}>
