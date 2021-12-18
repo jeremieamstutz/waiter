@@ -1,24 +1,29 @@
 import { motion } from 'framer-motion'
-import ItemList from 'components/item/item-list'
+import { fadeIn } from 'animations'
+import { useRef, useState } from 'react'
+import useSWR from 'swr'
+
+import { searchItems, searchRestaurants } from './api/search'
+import useSessionStorage from 'hooks/useSessionStorage'
+import useScrollRestoration from 'hooks/useScrollRestauration'
+import useDebounce from 'hooks/useDebounce'
+
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import RestaurantList from 'components/restaurant/restaurant-list'
-import useDebounce from 'hooks/useDebounce'
-import useSessionStorage from 'hooks/useSessionStorage'
-import useSWR from 'swr'
-
-import { fadeIn } from 'animations'
-import { useRef } from 'react'
-import useScrollRestoration from 'hooks/useScrollRestauration'
-import { searchItems, searchRestaurants } from './api/search'
+import ItemList from 'components/item/item-list'
 
 export default function SearchPage({ fallbackData }) {
+	const [needDebounce, setNeedDebounce] = useState(false)
 	const initialSearch = {
 		query: '',
 		cuisine: '',
+		initial: true,
 	}
 	const [search, setSearch] = useSessionStorage('search', initialSearch)
-	const debouncedSearch = useDebounce(search, 200)
+	const debouncedSearch = useDebounce(search, 200, {
+		debounce: needDebounce,
+	})
 
 	const cuisines = [
 		'Américaine',
@@ -46,6 +51,7 @@ export default function SearchPage({ fallbackData }) {
 	}
 
 	function handleInput(event) {
+		setNeedDebounce(true)
 		setSearch((search) => ({ ...search, query: event.target.value }))
 		resetScroll()
 	}
