@@ -3,7 +3,6 @@ import { fadeIn } from 'animations'
 import { useRef, useState } from 'react'
 import useSWR from 'swr'
 
-import { searchItems, searchRestaurants } from './api/search'
 import useSessionStorage from 'hooks/useSessionStorage'
 import useScrollRestoration from 'hooks/useScrollRestauration'
 import useDebounce from 'hooks/useDebounce'
@@ -12,8 +11,9 @@ import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import RestaurantList from 'components/restaurant/restaurant-list'
 import ItemList from 'components/item/item-list'
+import { Ring } from 'components/ui/spinner'
 
-export default function SearchPage({ fallbackData }) {
+export default function SearchPage() {
 	const [needDebounce, setNeedDebounce] = useState(false)
 	const initialSearch = {
 		query: '',
@@ -72,16 +72,13 @@ export default function SearchPage({ fallbackData }) {
 		resetCuisineScroll()
 	}
 
-	const {
-		data: { restaurants, items },
-	} = useSWR(
+	const { data } = useSWR(
 		debouncedSearch
 			? `/api/search?query=${debouncedSearch.query}&cuisine=${debouncedSearch.cuisine}`
 			: null,
-		{
-			fallbackData,
-		},
 	)
+
+	const { restaurants, items } = data || { restaurants: [], items: [] }
 
 	return (
 		<>
@@ -128,23 +125,39 @@ export default function SearchPage({ fallbackData }) {
 						))}
 					</div>
 				</section>
-				{search && restaurants && (
-					<RestaurantList
-						key="Restaurants"
-						restaurants={restaurants}
-						list={{
-							name: 'Restaurants',
+
+				{data == undefined ? (
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							flex: 1,
 						}}
-						ref={restaurantListRef}
-					/>
-				)}
-				{search && items && (
-					<ItemList
-						restaurant={undefined}
-						category={{ name: 'Nourriture et boissons' }}
-						items={items}
-						ref={itemListRef}
-					/>
+					>
+						<Ring />
+					</div>
+				) : (
+					<>
+						{restaurants && (
+							<RestaurantList
+								key="Restaurants"
+								restaurants={restaurants}
+								list={{
+									name: 'Restaurants',
+								}}
+								ref={restaurantListRef}
+							/>
+						)}
+						{items && (
+							<ItemList
+								restaurant={undefined}
+								category={{ name: 'Nourriture et boissons' }}
+								items={items}
+								ref={itemListRef}
+							/>
+						)}
+					</>
 				)}
 			</Container>
 			<Header>
@@ -173,18 +186,4 @@ export default function SearchPage({ fallbackData }) {
 			</Header>
 		</>
 	)
-}
-
-export async function getStaticProps() {
-	const restaurants = await searchRestaurants({ query: '', cuisine: '' })
-	const items = await searchItems({ query: '' })
-
-	return {
-		props: {
-			fallbackData: {
-				restaurants,
-				items,
-			},
-		},
-	}
 }
