@@ -41,7 +41,5 @@ export async function getFullItem({ restaurantSlug, categorySlug, itemSlug }) {
 
 	item.restaurant = restaurant
 
-	console.log(item)
-
 	return item
 }
