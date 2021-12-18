@@ -25,6 +25,8 @@
 .description {
 	margin: 0;
 	font-size: 1.25rem;
+	white-space: pre-wrap;
+	line-height: 150%;
 }
 
 .price {
