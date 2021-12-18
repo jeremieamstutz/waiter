@@ -42,10 +42,6 @@ export default function TermsPage() {
 								support@waiter.so
 							</a>
 						</li>
-						<li>
-							Numéro de téléphone:{' '}
-							<a href="tel:+41768222705">+41 76 XXX XX XX</a>
-						</li>
 					</ul>
 				</p>
 				<p>
@@ -183,11 +179,12 @@ export default function TermsPage() {
 				</p>
 				<p>Les prix sont exprimés en francs suisses (CHF.-).</p>
 				<p>
-					Le Client peut souscrire à deux formes d’abonnement:
-					<ul>
-						<li>Version d&apos;essai pour une durée de 30 jours</li>
-						<li>Abonnement standard</li>
-					</ul>
+					Pour des raisons promotionnelles, l&apos;abonnement est
+					offert jusqu&apos;au 30 juin 2022.
+				</p>
+				<p>
+					Après cette date, le Client peut souscrire à un abonnement
+					mensuel.
 				</p>
 				<p>
 					Les tarifs sont fermes et non révisables pendant leur
