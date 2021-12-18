@@ -3,31 +3,31 @@ import { Client, Pool, types } from 'pg'
 // Return date as String
 types.setTypeParser(1082, (value) => value)
 
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-	max: 1,
-	ssl: {
-		rejectUnauthorized: false,
-	},
-})
+// const pool = new Pool({
+// 	connectionString: process.env.DATABASE_URL,
+// 	max: 1,
+// 	ssl: {
+// 		rejectUnauthorized: false,
+// 	},
+// })
 
 export async function query(text, values) {
-	// const client = new Client({
-	// 	connectionString: process.env.DATABASE_URL,
-	// 	ssl: {
-	// 		rejectUnauthorized: false,
-	// 	},
-	// })
+	const client = new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+	})
 
 	try {
-		// await client.connect()
+		await client.connect()
 
 		const start = Date.now()
-		const result = await pool.query(text, values)
-		// const result = await client.query(text, values)
+		// const result = await pool.query(text, values)
+		const result = await client.query(text, values)
 		const duration = Date.now() - start
 
-		// await client.end()
+		await client.end()
 		// console.log('Query: ', {
 		// 	text,
 		// 	values,
