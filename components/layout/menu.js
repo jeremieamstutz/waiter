@@ -26,11 +26,7 @@ export default function Menu() {
 					<Link href="/">
 						<a
 							aria-label="Home page"
-							className={
-								path === '/'
-									? classes.active
-									: ''
-							}
+							className={path === '/' ? classes.active : ''}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +45,7 @@ export default function Menu() {
 							</svg>
 						</a>
 					</Link>
-					{/* <Link href="/search">
+					<Link href="/search">
 						<a
 							aria-label="Search page"
 							className={
@@ -72,7 +68,7 @@ export default function Menu() {
 								/>
 							</svg>
 						</a>
-					</Link> */}
+					</Link>
 					<Link href="/account/favorites">
 						<a
 							aria-label="Favorites page"
