@@ -122,7 +122,7 @@ export default function SearchPage({ fallbackData }) {
 						))}
 					</div>
 				</section>
-				{restaurants && (
+				{search && restaurants && (
 					<RestaurantList
 						key="Restaurants"
 						restaurants={restaurants}
@@ -132,7 +132,7 @@ export default function SearchPage({ fallbackData }) {
 						ref={restaurantListRef}
 					/>
 				)}
-				{items && (
+				{search && items && (
 					<ItemList
 						restaurant={undefined}
 						category={{ name: 'Nourriture et boissons' }}
