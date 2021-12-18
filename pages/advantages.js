@@ -117,8 +117,8 @@ export default function AdvantagesPage() {
 				</section> */}
 				<section className={classes.cta}>
 					<h2>Intéressé ?</h2>
-					<p>Entrez rapidement en contact avec nous !</p>
-					<a href="mailto:contact@waiter.so" className="button">Nous contacter</a>
+					<p>Contactez nous sans tarder !</p>
+					<a href="mailto:contact@waiter.so" className="button">Envoyer un mail</a>
 					{/* <a href="mailto:contact@waiter.so">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
