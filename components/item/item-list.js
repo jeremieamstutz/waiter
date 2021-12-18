@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import axios from 'axios'
 
 import ItemCard, { NewItemCard } from './item-card'
@@ -10,7 +10,10 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import useScrollRestoration from 'hooks/useScrollRestauration'
 
-export default function ItemList({ restaurant, category, items }) {
+export default forwardRef(function ItemList(
+	{ restaurant, category, items },
+	ref,
+) {
 	const router = useRouter()
 	const { data: session, status } = useSession()
 
@@ -22,7 +25,16 @@ export default function ItemList({ restaurant, category, items }) {
 	}
 
 	const listRef = useRef()
-	useScrollRestoration(listRef, `${router.asPath}/${category.slug}`)
+	const resetScroll = useScrollRestoration(
+		listRef,
+		`${router.asPath}/${category.slug}`,
+	)
+
+	useImperativeHandle(ref, () => ({
+		resetScroll() {
+			resetScroll()
+		},
+	}))
 
 	return (
 		<section className={classes.container}>
@@ -33,7 +45,8 @@ export default function ItemList({ restaurant, category, items }) {
 						{category.description}
 					</p>
 				</div>
-				{status === 'authenticated' &&
+				{restaurant &&
+					status === 'authenticated' &&
 					(session.user.id === restaurant.ownerId ||
 						session.user.role === 'admin') && (
 						<button
@@ -105,15 +118,20 @@ export default function ItemList({ restaurant, category, items }) {
 				</Sheet>
 			</div>
 			<div className={classes.list} ref={listRef}>
-				{items.map((item, index) => (
-					<ItemCard
-						item={item}
-						category={category}
-						key={index}
-						index={index}
-					/>
-				))}
-				{status === 'authenticated' &&
+				{items.length < 1 ? (
+					<p style={{ margin: 0 }}>Aucun élément</p>
+				) : (
+					items.map((item, index) => (
+						<ItemCard
+							item={item}
+							category={category}
+							key={index}
+							index={index}
+						/>
+					))
+				)}
+				{restaurant &&
+					status === 'authenticated' &&
 					(session.user.id === restaurant.ownerId ||
 						session.user.role === 'admin') && (
 						<NewItemCard category={category} />
@@ -121,4 +139,4 @@ export default function ItemList({ restaurant, category, items }) {
 			</div>
 		</section>
 	)
-}
+})

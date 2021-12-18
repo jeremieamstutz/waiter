@@ -24,6 +24,18 @@ function restoreScrollPos(id, list) {
 	}
 }
 
+function resetScrollPos(id, list) {
+
+	const scrollPositions =
+		JSON.parse(sessionStorage.getItem('scrollPositions')) || {}
+
+	delete scrollPositions[id]
+	sessionStorage.setItem('scrollPositions', JSON.stringify(scrollPositions))
+
+	list.scrollLeft = 0
+	list.scrollTop = 0
+}
+
 export default function useScrollRestoration(element, id) {
 	const router = useRouter()
 
@@ -48,4 +60,6 @@ export default function useScrollRestoration(element, id) {
 			}
 		}
 	}, [router])
+
+	return () => resetScrollPos(id, element.current)
 }
