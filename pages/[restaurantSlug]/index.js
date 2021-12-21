@@ -15,6 +15,7 @@ import classes from 'styles/restaurant.module.css'
 import Container from 'components/layout/container'
 import { getAllRestaurants } from 'pages/api/restaurants'
 import useSWR from 'swr'
+import BackButton from 'components/ui/back'
 
 export default function RestaurantPage({ restaurant: fallbackData, params }) {
 	const router = useRouter()
@@ -67,6 +68,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 				</Modal>
 			)}*/}
 			<Container>
+				<BackButton />
 				<div className={classes.imageWrapper}>
 					<Image
 						className={classes.image}

@@ -9,6 +9,7 @@ import useSWR from 'swr'
 import { useEffect, useRef, useState } from 'react'
 import { getFullRestaurant } from 'pages/api/[restaurantSlug]'
 import { useRouter } from 'next/router'
+import BackButton from 'components/ui/back'
 
 export default function ItemsPage({ restaurant: fallbackData }) {
 	const router = useRouter()
@@ -92,6 +93,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 				<meta property="og:type" content="restaurant.menu_item" />
 			</Head>
 			<Container>
+				<BackButton />
 				<div ref={listRef}>
 					{restaurant.items.map((item) => (
 						<div
