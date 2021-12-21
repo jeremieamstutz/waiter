@@ -86,11 +86,12 @@ export default function SearchPage() {
 				<h1>Recherche</h1>
 				<section>
 					<input
-						type="text"
+						type="search"
 						placeholder="Ville, restaurant, cuisine ou plat"
 						value={search ? search.query : ''}
 						onChange={handleInput}
-						autoFocus
+						// autoFocus
+						autoComplete="off"
 					/>
 					<div
 						style={{
