@@ -46,7 +46,7 @@ export default function ItemDetail({ item }) {
 					objectPosition="left"
 					width={375}
 					height={470} // 500
-					priority={true}
+					// priority={true}
 				/>
 			</div>
 			<div className={classes.container}>
