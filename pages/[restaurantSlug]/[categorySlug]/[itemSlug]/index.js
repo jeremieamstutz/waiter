@@ -112,6 +112,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 								marginTop: '1rem',
 								marginBottom: '2rem',
 								scrollSnapAlign: 'start',
+								scrollSnapStop: 'always',
 							}}
 						>
 							<ItemDetail item={item} />
