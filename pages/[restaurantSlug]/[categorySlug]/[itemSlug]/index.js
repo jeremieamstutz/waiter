@@ -102,7 +102,6 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 						flex: '1 1 1px',
 						margin: '-1rem',
 						padding: '1rem',
-						scrollPaddingBottom: '20vh'
 					}}
 				>
 					{restaurant.items.map((item) => (
@@ -114,6 +113,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 								marginBottom: '2rem',
 								scrollSnapAlign: 'start',
 								scrollSnapStop: 'always',
+								scrollMarginBottom: '15vh'
 							}}
 						>
 							<ItemDetail item={item} />
