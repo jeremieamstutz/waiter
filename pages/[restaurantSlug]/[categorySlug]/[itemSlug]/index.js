@@ -97,9 +97,9 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 				<div
 					ref={listRef}
 					style={{
-						scrollSnapType: 'y mandatory',
-						overflowY: 'scroll',
-						maxHeight: '100vh',
+						scrollSnapType: 'y proximity',
+						overflowY: 'auto',
+						flex: '1 1 1px',
 						margin: '-1rem',
 						padding: '1rem',
 					}}
