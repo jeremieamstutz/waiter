@@ -53,7 +53,7 @@ body {
 .mobile {
 	inset: 0;
 	height: 100vh;
-	
+	background: blue;
 }
 
 .desktop,
