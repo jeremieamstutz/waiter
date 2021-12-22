@@ -94,7 +94,16 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 			</Head>
 			<Container>
 				<BackButton />
-				<div ref={listRef}>
+				<div
+					ref={listRef}
+					style={{
+						scrollSnapType: 'y mandatory',
+						overflowY: 'scroll',
+						maxHeight: '100vh',
+						margin: '-1rem',
+						padding: '1rem',
+					}}
+				>
 					{restaurant.items.map((item) => (
 						<div
 							id={item.id}
@@ -102,7 +111,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 							style={{
 								marginTop: '1rem',
 								marginBottom: '2rem',
-								minHeight: '90vh',
+								scrollSnapAlign: 'start',
 							}}
 						>
 							<ItemDetail item={item} />
