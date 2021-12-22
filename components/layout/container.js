@@ -7,7 +7,7 @@ import useScrollRestoration from 'hooks/useScrollRestauration'
 
 import classes from './container.module.css'
 
-export default function Container({ children }) {
+export default function Container({ children, ...props }) {
 	const router = useRouter()
 
 	// const [shouldAnimate, setShouldAnimate] = useAnimation()
@@ -40,7 +40,8 @@ export default function Container({ children }) {
 
 	return (
 		<motion.div
-			className={classes.container}
+			{...props}
+			className={`${classes.container} ${props.className}`}
 			initial={shouldAnimate ? 'initial' : false}
 			animate="animate"
 			exit="initial"

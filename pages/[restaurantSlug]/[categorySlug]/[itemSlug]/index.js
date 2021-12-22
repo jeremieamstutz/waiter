@@ -92,7 +92,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 				<meta property="og:image" content={restaurant.image} />
 				<meta property="og:type" content="restaurant.menu_item" />
 			</Head>
-			<Container>
+			<Container style={{ overflow: 'hidden' }}>
 				<BackButton />
 				<div
 					ref={listRef}
@@ -113,7 +113,7 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 								marginBottom: '2rem',
 								scrollSnapAlign: 'start',
 								scrollSnapStop: 'always',
-								scrollMarginBottom: '15vh'
+								scrollMarginBottom: '15vh',
 							}}
 						>
 							<ItemDetail item={item} />
