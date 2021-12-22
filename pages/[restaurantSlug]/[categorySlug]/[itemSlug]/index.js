@@ -97,11 +97,12 @@ export default function ItemsPage({ restaurant: fallbackData }) {
 				<div
 					ref={listRef}
 					style={{
-						scrollSnapType: 'y proximity',
+						scrollSnapType: 'y mandatory',
 						overflowY: 'auto',
 						flex: '1 1 1px',
 						margin: '-1rem',
 						padding: '1rem',
+						scrollPaddingBottom: '20vh'
 					}}
 				>
 					{restaurant.items.map((item) => (
