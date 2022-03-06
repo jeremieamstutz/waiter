@@ -43,7 +43,7 @@ CREATE TABLE users (
 UPDATE users
 SET role = 'admin'
 WHERE email='s.hachemane@gmail.com';
-DELETE FROM users WHERE email = 'radiojeje@hotmail.com'
+DELETE FROM users WHERE email = 'zelod.contact@gmail.com';
 ALTER TABLE users
 ALTER COLUMN name DROP NOT NULL;
 ALTER TABLE users
@@ -52,6 +52,7 @@ DELETE FROM users
 WHERE email = 'radiojeje@hotmail.com';
 DELETE FROM users;
 DELETE FROM accounts;
+DELETE FROM accounts WHERE provider = 'facebook';
 DELETE FROM sessions;
 DROP TABLE verification_tokens;
 DELETE FROM verification_tokens;
@@ -307,7 +308,8 @@ CREATE TABLE schedules (
     day_of_week INTEGER NOT NULL,
     open TIME NOT NULL,
     close TIME NOT NULL
-) CREATE TABLE favorites (
+);
+CREATE TABLE favorites (
     user_id UUID NOT NULL REFERENCES users ON DELETE CASCADE,
     restaurant_id UUID NOT NULL REFERENCES restaurants ON DELETE CASCADE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -337,3 +339,96 @@ SELECT restaurants.name, (MAX(items.created_at) - MIN(items.created_at)) as dura
 JOIN restaurants ON restaurants.id = items.restaurant_id
 WHERE restaurants.city != 'Démos'
 GROUP BY restaurants.name
+
+CREATE EXTENSION pg_trgm;
+CREATE INDEX items_name_idx ON items USING GIN (name gin_trgm_ops);
+CREATE INDEX items_desc_idx ON items USING GIN (description gin_trgm_ops); >> Pas sur de linterêt
+
+SELECT *
+FROM restaurants
+WHERE '%burg%' % ANY(STRING_TO_ARRAY(name,' '));
+
+SELECT *
+FROM restaurants
+WHERE SIMILARITY(name,'et') > 0.2;
+
+EXPLAIN ANALYSE SELECT *
+FROM restaurants
+WHERE SIMILARITY(name,'%etoile%') > 0.1;
+
+SELECT SIMILARITY(name || ' ' || city || ' ' || cuisine,'lausanne') AS sml, *
+FROM restaurants
+WHERE SIMILARITY(name || ' ' || city || ' ' || cuisine,'lausanne') > 0.3
+ORDER BY sml DESC;
+
+
+SELECT 
+    SIMILARITY(items.name, 'Filet de Merlan') + SIMILARITY(items.description, 'Filet de Merlan') AS sml,
+    items.*, 
+    items.restaurant_id AS "restaurantId", 
+    restaurants.owner_id AS "ownerId", 
+    items.category_id AS "categoryId",
+    restaurants.slug AS "restaurantSlug",
+    categories.slug AS "categorySlug"
+FROM 
+    items
+JOIN 
+    restaurants ON restaurants.id = items.restaurant_id
+JOIN 
+    categories ON categories.id = items.category_id
+WHERE 
+    (LENGTH('Merlan') < 2 OR SIMILARITY(items.name, 'Filet de Merlan') > 0.2) OR (LENGTH('Merlan') < 2 OR SIMILARITY(items.description, 'Filet de Merlan') > 0.2)
+ORDER BY 
+    sml DESC, created_at DESC;
+
+SELECT * FROM restaurants WHERE city = 'Lausanne'
+
+SELECT *
+FROM restaurants
+WHERE name LIKE 'burgers';
+
+EXPLAIN ANALYSE SELECT 
+    SIMILARITY(items.name, '') + SIMILARITY(items.description, '') AS sml,
+    items.*, 
+    items.restaurant_id AS "restaurantId", 
+    restaurants.owner_id AS "ownerId", 
+    items.category_id AS "categoryId",
+    restaurants.slug AS "restaurantSlug",
+    categories.slug AS "categorySlug"
+FROM 
+    items
+JOIN 
+    restaurants ON restaurants.id = items.restaurant_id
+JOIN 
+    categories ON categories.id = items.category_id
+WHERE 
+    LENGTH('') < 2 OR (
+        SIMILARITY(items.name, '') > 0.2 
+        OR 
+        SIMILARITY(items.description, '') > 0.2
+    )
+ORDER BY 
+    sml DESC, created_at DESC
+LIMIT 10;
+
+
+EXPLAIN ANALYSE SELECT
+    SIMILARITY(name, '') + SIMILARITY(city, '') + SIMILARITY(cuisine, '') AS sml, *
+FROM 
+    restaurants
+WHERE 
+    (
+        LENGTH('') < 2 
+        OR (
+            SIMILARITY(name, '') > 0.2 
+            OR 
+            SIMILARITY(city, '') > 0.2 
+            OR 
+            SIMILARITY(cuisine, '') > 0.2 
+        )
+    )
+ORDER BY 
+    sml DESC, created_at DESC
+LIMIT 20;
+
+https://www.postgresql.org/docs/9.1/pgtrgm.html

@@ -30,6 +30,7 @@ button.secondary,
 a.button.secondary {
 	background: var(--color-ui-secondary);
 	color: var(--color-text-inverted);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 button.secondary *,

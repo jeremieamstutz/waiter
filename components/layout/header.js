@@ -10,6 +10,7 @@ export default function Header({ children }) {
 	const headerRef = useRef()
 
 	useEffect(() => {
+		// Verifier que ça run a chaque rerender (actuellement, quand on recharge et que le menu apparait, le spacer n'est pas à jour)
 		if (headerRef.current) {
 			const rect = headerRef.current.getBoundingClientRect()
 			spacerRef.current.style.height = rect.height + 'px'

@@ -40,12 +40,12 @@ export default function Container({ children, ...props }) {
 
 	return (
 		<motion.div
-			{...props}
 			className={`${classes.container} ${props.className}`}
 			initial={shouldAnimate ? 'initial' : false}
 			animate="animate"
 			exit="initial"
 			variants={fadeIn}
+			{...props}
 			// ref={containerRef}
 		>
 			{children}

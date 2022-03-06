@@ -15,4 +15,13 @@ module.exports = withSuperjson()({
 		],
 	},
 	optimizeFonts: false,
+	// async rewrites() {
+	// 	return [
+	// 		{
+	// 			source: '/:restaurantSlug/:categorySlug/:itemSlug',
+	// 			destination:
+	// 				'/:restaurantSlug/items?categorySlug=:categorySlug&itemSlug=:itemSlug',
+	// 		},
+	// 	]
+	// },
 })

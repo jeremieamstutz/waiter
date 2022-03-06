@@ -70,11 +70,11 @@ export function Checkbox({ children, ...props }) {
 	)
 }
 
-export function Select({ label, ...props }) {
+export function Select({ label, style, ...props }) {
 	const [field, meta] = useField(props)
 
 	return (
-		<div className={classes.group}>
+		<div className={classes.group} style={style}>
 			{label && <label htmlFor={props.id || props.name}>{label}</label>}
 			<select {...field} {...props} />
 			{meta.touched && meta.error ? (

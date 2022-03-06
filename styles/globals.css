@@ -89,12 +89,18 @@ p * {
 	color: var(--color-text-secondary);
 }
 
+a {
+	font-size: 1.125rem;
+}
+
 h1 {
 	font-size: 1.75rem;
+	margin: 0.5em 0;
 }
 
 h2 {
 	font-size: 1.375rem;
+	margin: 0.5em 0;
 }
 
 h3 {

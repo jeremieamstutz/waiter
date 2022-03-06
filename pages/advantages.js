@@ -1,4 +1,6 @@
 import Container from 'components/layout/container'
+import Header from 'components/layout/header'
+import BackButton from 'components/ui/back'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
@@ -10,6 +12,7 @@ export default function AdvantagesPage() {
 	return (
 		<>
 			<Container>
+				<BackButton />
 				<h1>Avantages</h1>
 				<p style={{ margin: '0 0 0.5rem' }}>
 					Que vous soyez restaurateur ou client, Waiter saura vous
@@ -172,6 +175,7 @@ export default function AdvantagesPage() {
 					</p>
 				</div> */}
 			</Container>
+			<Header />
 		</>
 	)
 }

@@ -8,7 +8,7 @@ export default function BackButton() {
 
 	return (
 		<div className={classes.container} onClick={() => router.back()}>
-			<CloseButton className={`${classes.button} secondary`} />
+			<CloseButton className="secondary" />
 		</div>
 	)
 }
