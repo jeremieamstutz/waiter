@@ -1,0 +1,58 @@
+.container {
+	/* background: #ddd; */
+}
+
+.month {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.previous,
+.next {
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	padding: 0 1rem;
+}
+
+.current {
+	font-size: 1.125rem;
+}
+
+.days {
+	display: flex;
+	margin-bottom: 0.5em;
+}
+
+.day {
+	flex: 1;
+	text-align: center;
+	color: var(--color-text-tertiary);
+}
+
+.dates {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 0.5rem;
+}
+
+.date {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+	aspect-ratio: 1;
+	background: #eee;
+	border: 1px solid #ddd;
+	border-radius: 0.5rem;
+	font-size: 1.125rem;
+}
+
+.date.selected {
+	background: #222;
+	color: #fff;
+}
