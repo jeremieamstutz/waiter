@@ -1,0 +1,6 @@
+{
+	"booking": true,
+	"ordering": true,
+	"messaging": true,
+	"reviewing": true
+}
