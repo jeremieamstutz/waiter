@@ -13,8 +13,8 @@ export const fadeIn = {
 	animate: {
 		opacity: 1,
 		transition: {
-			duration: 0.1,
-			ease: 'easeInOut'
+			duration: 0.25,
+			ease: 'easeInOut',
 		},
 	},
 }
@@ -25,7 +25,7 @@ export const fadeInUp = {
 		y: 20,
 		transition: {
 			duration: 0.1,
-			ease: 'easeInOut'
+			ease: 'easeInOut',
 		},
 	},
 	animate: {

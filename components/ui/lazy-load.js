@@ -13,11 +13,8 @@ export default function LazyLoad(props) {
 	)
 
 	return (
-		<Tag
-			ref={ref}
-			style={style}
-			className={className}
-			children={isIntersecting ? children : null}
-		/>
+		<Tag ref={ref} style={style} className={className}>
+			{isIntersecting ? children : null}
+		</Tag>
 	)
 }

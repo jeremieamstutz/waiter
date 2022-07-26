@@ -14,9 +14,9 @@
 	align-items: center;
 }
 
-.container:focus,
+.container:focus-visible,
 .active {
-	outline: 2px solid var(--color-ui-hover);
+	outline: 1px solid var(--color-ui-hover);
 }
 
 .logo {

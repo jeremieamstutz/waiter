@@ -166,7 +166,9 @@ export default function DatePicker({
 			</div>
 			<div className={classes.days}>
 				{DAYS_OF_WEEK.map((day) => (
-					<span className={classes.day}>{day}</span>
+					<span key={day} className={classes.day}>
+						{day}
+					</span>
 				))}
 			</div>
 			<div className={classes.dates}>

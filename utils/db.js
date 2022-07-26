@@ -14,9 +14,12 @@ types.setTypeParser(1082, (value) => value)
 export async function query(text, values) {
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: {
-			rejectUnauthorized: false,
-		},
+		ssl:
+			process.env.NODE_ENV === 'production'
+				? {
+						rejectUnauthorized: false,
+				  }
+				: undefined,
 	})
 
 	try {
