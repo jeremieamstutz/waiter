@@ -9,7 +9,7 @@ class MyDocument extends Document {
 				<Head>
 					<meta charSet="utf-8" />
 					<meta name="theme-color" content="#ffffff" />
-					<link rel="icon" href="/favicon.ico" />
+					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 					<link
 						rel="preload"
 						href="/fonts/Gilroy/Gilroy-SemiBold.otf"
@@ -26,10 +26,9 @@ class MyDocument extends Document {
 						crossOrigin=""
 					/>
 					<link
-						href="https://fonts.googleapis.com/css2?family=Rubik:wght@420&display=swap"
+						href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
 						rel="stylesheet"
 					/>
-					<link rel="manifest" href="/manifest.json" />
 					{isProduction && (
 						<>
 							<script
