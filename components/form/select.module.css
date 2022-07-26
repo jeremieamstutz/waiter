@@ -1,0 +1,10 @@
+.group {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.error {
+	color: var(--color-danger);
+}
