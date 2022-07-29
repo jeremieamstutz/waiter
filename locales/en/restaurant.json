@@ -1,0 +1,47 @@
+{
+	"actions": {
+		"addToFavorites": "Add to favorites",
+		"removeFromFavorites": "Remove from favorites",
+		"bookATable": "Book a table",
+		"seeBookings": "See all bookings",
+		"sendAMessage": "Send a message",
+		"editInfos": "Edit information"
+	},
+	"details": {
+		"openingHours": {
+			"title": "Opening hours",
+			"tip": "To mark a day as closed, please delete the range."
+		},
+		"open": "Open",
+		"openUntil": "Open until",
+		"closed": "Closed",
+		"reviews": "reviews",
+		"cuisines": {
+			"french": "French",
+			"swiss": "Swiss",
+			"italian": "Italian"
+		}
+	},
+	"cuisines": {
+		"french": "French",
+		"swiss": "Swiss",
+		"american": "American",
+		"italian": "Italian",
+		"chinese": "Chinese",
+		"japanese": "Japanese",
+		"mexican": "Mexican",
+		"mediterranean": "Mediterranean",
+		"hungarian": "Hungarian",
+		"lebanese": "Lebanese",
+		"spanish": "Spanish",
+		"moroccan": "Moroccan",
+		"thai": "Thai",
+		"indian": "Indian",
+		"portugese": "Portugese",
+		"cajun": "Cajun",
+		"caribbean": "Caribbean",
+		"greek": "Greek",
+		"german": "German",
+		"russian": "Russian"
+	}
+}

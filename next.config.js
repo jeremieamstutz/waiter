@@ -1,6 +1,9 @@
-const { withSuperjson } = require('next-superjson')
-
-module.exports = withSuperjson()({
+module.exports = {
+	i18n: {
+		locales: ['default', 'en', 'fr', 'de'],
+		defaultLocale: 'default',
+		localeDetection: false,
+	},
 	reactStrictMode: true,
 	poweredByHeader: false,
 	images: {
@@ -12,16 +15,10 @@ module.exports = withSuperjson()({
 			'www.holycow.ch',
 			'lh3.googleusercontent.com',
 			'platform-lookaside.fbsbx.com',
+			'source.unsplash.com',
+			'images.unsplash.com',
 		],
+		minimumCacheTTL: 3600,
 	},
 	optimizeFonts: false,
-	// async rewrites() {
-	// 	return [
-	// 		{
-	// 			source: '/:restaurantSlug/:categorySlug/:itemSlug',
-	// 			destination:
-	// 				'/:restaurantSlug/items?categorySlug=:categorySlug&itemSlug=:itemSlug',
-	// 		},
-	// 	]
-	// },
-})
+}

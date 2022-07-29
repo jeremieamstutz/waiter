@@ -1,0 +1,46 @@
+{
+	"misc": {
+		"actions": {
+			"save": "Enregistrer",
+			"send": "Envoyer",
+			"create": "Créer",
+			"accept": "Accepter",
+			"edit": "Modifier",
+			"update": "Mettre à jour",
+			"delete": "Supprimer",
+			"cancel": "Annuler",
+			"close": "Fermer",
+			"loading": "Chargement...",
+			"reply": "Répondre",
+			"report": "Signaler",
+			"translate": "Traduire",
+			"showOriginal": "Afficher l'original",
+			"addMore": "Ajouter plus",
+			"addOneMore": "Ajouter un autre"
+		},
+		"validations": {
+			"required": "Requis"
+		},
+		"states": {
+			"reported": "Signalé"
+		}
+	},
+	"header": {
+		"login": "Se connecter"
+	},
+	"footer": {
+		"trademark": {
+			"madeWith": "Fait avec",
+			"by": "par",
+			"inLausanne": "à Lausanne"
+		},
+		"links": {
+			"about": "A propos",
+			"help": "Aide",
+			"careers": "Carrières",
+			"privacy": "Confidentialité",
+			"terms": "Conditions",
+			"metrics": "Métriques"
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+	"header": {
+		"booking": "Réservation"
+	},
+	"body": {
+		"date": {
+			"label": "Date",
+			"placeholder": ""
+		},
+		"hour": {
+			"label": "Heure",
+			"placeholder": "",
+			"options": {
+				"breakfast": "Déjeuner",
+				"lunch": "Diner",
+				"dinner": "Souper"
+			}
+		},
+		"guests": {
+			"label": "Invités",
+			"placeholder": "",
+			"option_one": "personne",
+			"option_other": "personnes"
+		},
+		"remark": {
+			"label": "Remarque",
+			"placeholder": "Allergie, anniversaire, etc"
+		},
+		"confirmation": "Réservation enregistrée !"
+	},
+	"footer": {
+		"book": "Réserver",
+		"cancel": "Annuler"
+	}
+}

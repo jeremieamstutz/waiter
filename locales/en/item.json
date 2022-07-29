@@ -1,0 +1,43 @@
+{
+	"fields": {
+		"name": "Name",
+		"description": "Description",
+		"price": "Price",
+		"currency": "Currency",
+		"allergies": "Allergies",
+		"tags": "Tags"
+	},
+	"allergies": {
+		"moluscs": "Moluscs",
+		"eggs": "Eggs",
+		"fish": "Fish",
+		"lupin": "Lupin",
+		"soya": "Soya",
+		"milk": "Milk",
+		"peanuts": "Peanuts",
+		"gluten": "Gluten",
+		"crustaceans": "Crustaceans",
+		"mustard": "Mustard",
+		"nuts": "Nuts",
+		"sesame": "Sesame",
+		"celery": "Celery",
+		"sulphite": "Sulphite"
+	},
+	"tags": {
+		"vegan": "Vegan",
+		"vegetarian": "Vegetarian",
+		"bio": "Bio",
+		"homemade": "Home made",
+		"healthy": "Healthy"
+	},
+	"status": {
+		"available": "Available",
+		"unavailable": "Unavailable"
+	},
+	"modals": {
+		"delete": {
+			"title": "Confirmation",
+			"confirm": "Are you sure you want to delete the item: "
+		}
+	}
+}

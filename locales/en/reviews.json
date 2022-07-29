@@ -1,0 +1,12 @@
+{
+	"modal": {
+		"reviews": "Reviews",
+		"comment": {
+			"placeholder": "",
+			"validation": {
+				"min": "Please write a little more",
+				"max": "Sorry, your message is too long "
+			}
+		}
+	}
+}

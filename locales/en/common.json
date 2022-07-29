@@ -1,0 +1,46 @@
+{
+	"misc": {
+		"actions": {
+			"save": "Save",
+			"send": "Send",
+			"create": "Create",
+			"accept": "Accept",
+			"edit": "Edit",
+			"update": "Update",
+			"delete": "Delete",
+			"cancel": "Cancel",
+			"close": "Close",
+			"loading": "Loading...",
+			"reply": "Reply",
+			"report": "Report",
+			"translate": "Translate",
+			"showOriginal": "Show original",
+			"addMore": "Add more",
+			"addOneMore": "Add one more"
+		},
+		"validations": {
+			"required": "Required"
+		},
+		"states": {
+			"reported": "Reported"
+		}
+	},
+	"header": {
+		"login": "Log in"
+	},
+	"footer": {
+		"trademark": {
+			"madeWith": "Made with",
+			"by": "by",
+			"inLausanne": "in Lausanne"
+		},
+		"links": {
+			"about": "About",
+			"help": "Help",
+			"careers": "Careers",
+			"privacy": "Privacy",
+			"terms": "Terms",
+			"metrics": "Metrics"
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+	"header": {
+		"booking": "Booking"
+	},
+	"body": {
+		"date": {
+			"label": "Date",
+			"placeholder": ""
+		},
+		"hour": {
+			"label": "Hour",
+			"placeholder": "",
+			"options": {
+				"breakfast": "Breakfast",
+				"lunch": "Lunch",
+				"dinner": "Dinner"
+			}
+		},
+		"guests": {
+			"label": "Guests",
+			"placeholder": "",
+			"option_one": "person",
+			"option_other": "people"
+		},
+		"remark": {
+			"label": "Remark",
+			"placeholder": "Allergy, birthday, etc"
+		},
+		"confirmation": "Booking saved !"
+	},
+	"footer": {
+		"book": "Book",
+		"cancel": "Cancel"
+	}
+}
