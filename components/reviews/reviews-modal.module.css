@@ -1,0 +1,22 @@
+.reviews {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.review {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.actions {
+	display: flex;
+	gap: 1.5rem;
+}
+
+.actions button {
+	/* all: unset;
+	cursor: pointer; */
+	color: #666;
+}
