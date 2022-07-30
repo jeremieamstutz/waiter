@@ -4,11 +4,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import useLongPress from 'hooks/useLongPress'
+import { useSession } from 'next-auth/react'
+import { useOrder } from 'contexts/order'
 
 import classes from './item-card.module.css'
-import { useSession } from 'next-auth/react'
+import { useRestaurant } from 'contexts/restaurant'
 
-export default function ItemCard({ item, category, index }) {
+export default function ItemCard({ item, category, index, lazyRoot }) {
+	const orderContext = useOrder()
 	const router = useRouter()
 	const { data: session } = useSession()
 
@@ -40,29 +43,33 @@ export default function ItemCard({ item, category, index }) {
 		delay: 500,
 	})
 
-	if (
-		session?.user.id !== item.ownerId &&
-		session?.user.role !== 'admin' &&
-		item.available === false
-	) {
-		return null
-	}
+	// if (
+	// 	session?.user.id !== item.ownerId &&
+	// 	session?.user.role !== 'admin' &&
+	// 	item.available === false
+	// ) {
+	// 	return null
+	// }
 
 	return (
-		<Link
-			href={{
-				pathname: '/[restaurantSlug]/[categorySlug]/[itemSlug]',
-				query: {
-					restaurantSlug: item.restaurantSlug,
-					categorySlug: item.categorySlug,
-					itemSlug: item.slug,
-				},
-			}}
-		>
-			<a
+		<>
+			<div
 				className={`${classes.card} ${
 					item.available === false ? classes.unavailable : ''
 				}`}
+				onClick={() =>
+					router.push(
+						{
+							pathname: router.pathname,
+							query: {
+								...router.query,
+								item: item.id,
+							},
+						},
+						undefined,
+						{ shallow: true },
+					)
+				}
 			>
 				{item.restaurantName && (
 					<div
@@ -132,26 +139,173 @@ export default function ItemCard({ item, category, index }) {
 						alt={item.name}
 						layout="responsive"
 						objectFit="cover"
-						objectPosition="left"
-						width={171}
-						height={256}
+						// objectPosition="left"
+						width={290}
+						height={435}
 						priority={index < 2}
 						sizes="50vw"
+						lazyRoot={lazyRoot}
 					/>
+					<div
+						style={{
+							position: 'absolute',
+							top: 0,
+							bottom: 0,
+							left: 0,
+							right: 0,
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							background: 'rgba(0,0,0,0.5)',
+							boxShadow: '0 0 #aaa',
+							borderRadius: '0.75rem',
+							color: 'white',
+							fontSize: '2rem',
+							transition: '100ms',
+							// backdropFilter: 'saturate(0%)',
+							opacity:
+								orderContext.items.filter(
+									(itm) => itm.id === item.id,
+								)[0]?.quantity > 0
+									? 1
+									: 0,
+						}}
+					>
+						{
+							orderContext.items.filter(
+								(itm) => itm.id === item.id,
+							)[0]?.quantity
+						}
+					</div>
+					<div
+						style={{
+							position: 'absolute',
+							top: 0,
+							bottom: 0,
+							left: 0,
+							right: 0,
+							display: 'flex',
+							flexDirection: 'column',
+						}}
+					>
+						{/* <div
+							style={{
+								flex: 1,
+							}}
+							className={classes.bottom}
+						>
+							<div
+								className={`${classes.order} ${classes.bottom}`}
+								style={{
+									display: 'flex',
+									justifyContent: 'stretch',
+									gap: '0.5rem',
+									position: 'absolute',
+									left: '0.5rem',
+									right: '0.5rem',
+									background: '#222',
+									borderRadius: '0.75rem',
+									padding: '0.5rem',
+									boxShadow: '0 0 6rem rgba(255,255,255,0.5)',
+								}}
+							>
+								<button
+									aria-label="Remove one item"
+									onClick={(event) => {
+										event.stopPropagation()
+										orderContext.removeItem(item)
+									}}
+									className="secondary"
+									style={{
+										flex: 1,
+										minWidth: 0,
+										padding: 0,
+										cursor:
+											orderContext.items.filter(
+												(itm) => itm.id === item.id,
+											).length === 0
+												? 'not-allowed'
+												: 'pointer',
+									}}
+									disabled={
+										orderContext.items.filter(
+											(itm) => itm.id === item.id,
+										)[0]?.quantity <= 0
+									}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M18 12H6"
+										/>
+									</svg>
+								</button>
+								<button
+									aria-label="Add one item"
+									onClick={(event) => {
+										event.stopPropagation()
+										orderContext.addItem(item)
+									}}
+									style={{
+										flex: 1,
+										padding: 0,
+										minWidth: 0,
+									}}
+									className="secondary"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width={24}
+										height={24}
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+										/>
+									</svg>
+								</button>
+							</div>
+						</div> */}
+					</div>
 				</div>
-				{/* {item.restaurantName && (
-					<div style={{padding: ' 0.35rem 0 0', marginBottom: '-0.15rem', color: '#666'}}>{item.restaurantName}</div>
-				)} */}
-				<h3 className={classes.title}>{item.name}</h3>
-				<p className={classes.description}>{item.description}</p>
-				<p className={classes.details}>
-					<span className={classes.price}>
-						CHF {parseFloat(item.price).toFixed(2)}
-					</span>
-					{/* <span className={classes.grade}>
+				<div className={classes.body}>
+					{index % 7 == 0 && (
+						<div
+							style={{
+								color: '#e67e22',
+								margin: '0.125rem 0 0.25rem',
+							}}
+						>
+							Nouveau
+							{/* Sélection du chef
+							Recommandé
+							Populaire */}
+						</div>
+					)}
+					<h3 className={classes.title}>{item.name}</h3>
+					<p className={classes.description}>{item.description}</p>
+					<p className={classes.details}>
+						<span className={classes.price}>
+							CHF {parseFloat(item.price).toFixed(2)}
+						</span>
+						{/* <span className={classes.grade}>
 					{(2 * Math.random() + 3).toFixed(2)}
 				</span> */}
-					{/* {quantity > 0 ? (
+						{/* {quantity > 0 ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width={24}
@@ -186,22 +340,24 @@ export default function ItemCard({ item, category, index }) {
 						/>
 					</svg>
 				)} */}
-				</p>
-			</a>
-		</Link>
+					</p>
+				</div>
+			</div>
+		</>
 	)
 }
 
 export function NewItemCard({ category }) {
 	const router = useRouter()
+	const { restaurant } = useRestaurant()
 
 	return (
 		<div className={classes.skeleton}>
 			<Link
 				href={{
-					pathname: '/[restaurantSlug]/items/new',
+					pathname: '/items/new',
 					query: {
-						restaurantSlug: router.query.restaurantSlug,
+						restaurantId: restaurant.id,
 						categoryId: category.id,
 					},
 				}}

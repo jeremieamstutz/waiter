@@ -1,13 +1,29 @@
 .card {
 	flex-shrink: 0;
-	width: calc((100vw - 2.5rem)/2);
+	width: calc(100vw - 1.5rem);
+	/* width: auto; */
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	gap: 0.125rem;
+	gap: 0.5rem;
 	cursor: pointer;
-	scroll-snap-align: start;
-	/* margin-bottom: 0.5rem; */
+	scroll-snap-align: center;
+	user-select: none;
+}
+
+.order {
+	display: none;
+	opacity: 0;
+	transition: all 150ms;
+}
+
+.order.bottom {
+	bottom: -1rem;
+}
+
+.card:hover .order.bottom {
+	opacity: 1;
+	bottom: 0.5rem;
 }
 
 .unavailable {
@@ -16,6 +32,8 @@
 
 .image {
 	position: relative;
+	overflow: hidden;
+	border-radius: 0.75rem;
 }
 
 /* .picker {
@@ -51,9 +69,14 @@
     align-items: center;
 } */
 
+.body {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
 .title {
 	margin: 0;
-	margin-top: 0.25rem;
 	display: -webkit-box;
 	-webkit-line-clamp: 1;
 	-webkit-box-orient: vertical;
@@ -91,8 +114,68 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc((100vw - 2.5rem)*0.75);
+	aspect-ratio: 2/3;
 	border-radius: 0.5rem;
 	background: var(--color-ui-tertiary);
 	border: 1px solid #ddd;
+}
+
+@media screen and (min-width: 320px) {
+	.card {
+		width: calc((100vw - 2.75rem) / 1.5);
+	}
+}
+
+@media screen and (min-width: 480px) {
+	.card {
+		width: calc((100vw - 1 * 1rem - 2rem) / 2);
+	}
+}
+
+@media screen and (min-width: 640px) {
+	.card {
+		gap: 0.5rem;
+		/* background: #f3f3f3;
+		width: 16rem;
+		border: 1px solid #ddd;
+		padding: 1rem;
+		border-radius: 1rem; */
+	}
+	/* .body {
+		padding: 1rem;
+	} */
+
+	.order {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 640px) {
+	.card {
+		width: calc((100vw - 2 * 1rem - 2rem) / 3);
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.card {
+		width: calc((100vw - 3 * 1rem - 2rem) / 4);
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.card {
+		width: calc((100vw - 4 * 1rem - 4rem) / 5);
+	}
+}
+
+@media screen and (min-width: 1120px) {
+	.card {
+		width: calc((100vw - 5 * 1rem - 4rem) / 6);
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.card {
+		width: calc((1224px - 5 * 1rem) / 6);
+	}
 }
