@@ -43,14 +43,17 @@
 	height: 1.25rem;
 	border: 2px solid #aaa;
 	border-radius: 0.25rem;
-	transition: all 100ms;
+	transition-property: background, border;
+	transition-duration: 100ms;
 }
 
-.container input:focus-visible ~ .checkmark {
+.container .checkbox:focus-visible ~ .checkmark {
 	background: #aaa;
+	outline: 1px solid var(--color-ui-hover);
+	outline-offset: 2px;
 }
 
-.container input:checked ~ .checkmark {
+.container .checkbox:checked ~ .checkmark {
 	border: 6px solid #333;
 	background: #fff;
 }
