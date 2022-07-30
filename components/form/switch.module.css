@@ -1,0 +1,70 @@
+.group {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	cursor: pointer;
+}
+
+.label {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	align-items: center;
+	user-select: none;
+	cursor: pointer;
+}
+
+.checkbox {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.switch {
+	width: 3.5rem;
+	height: 2rem;
+	overflow: hidden;
+	cursor: pointer;
+	background: #ccc;
+	border-radius: 1.25rem;
+	position: relative;
+	transition: background 100ms;
+}
+
+.thumb {
+	position: absolute;
+	top: 0.25rem;
+	left: 0.25rem;
+	right: auto;
+	display: block;
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 1rem;
+	background: #fff;
+	transition: left 100ms;
+}
+
+.checkbox:checked + .switch {
+	background: #00aa00;
+}
+
+.checkbox:checked + .switch .thumb {
+	left: calc(100% - 1.75rem);
+}
+
+.checkbox:focus-visible + .switch {
+	outline: 1px solid #666;
+	outline-offset: 2px;
+}
+
+.error {
+	color: var(--color-danger);
+}
+
+@media screen and (hover: hover) {
+	.group:hover .checkbox:not(:checked) + .switch {
+		background: #aaa;
+	}
+}
