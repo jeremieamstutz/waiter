@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { getSession } from 'next-auth/react'
+import { getFullRestaurant } from 'pages/api/[restaurantSlug]'
 import slugify from 'slugify'
 
 import { query } from 'utils/db'
+import sleep from 'utils/sleep'
 import statusCodes from 'utils/statusCodes'
 
 export default async function handler(req, res) {
@@ -14,8 +16,8 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET': {
-			const restaurant = await getRestaurant({ restaurantId })
-			res.status(statusCodes.ok).json({ restaurant })
+			const restaurant = await getFullRestaurant({ restaurantId })
+			res.status(statusCodes.ok).json(restaurant)
 			break
 		}
 		case 'PUT':
@@ -61,7 +63,7 @@ export default async function handler(req, res) {
 				restaurant: newRestaurant,
 			})
 
-			res.status(statusCodes.ok).json({ restaurant: newRestaurant })
+			res.status(statusCodes.ok).json(newRestaurant)
 			break
 		default:
 			res.status(statusCodes.methodNotAllowed).end()

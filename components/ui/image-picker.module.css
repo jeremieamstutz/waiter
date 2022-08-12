@@ -17,6 +17,7 @@
 .container:focus-visible,
 .active {
 	outline: 1px solid var(--color-ui-hover);
+	outline-offset: 2px;
 }
 
 .logo {

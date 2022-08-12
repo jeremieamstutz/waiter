@@ -172,66 +172,6 @@ export default function OrderModal({ onClose }) {
 								</span>
 							</li>
 						))}
-						<li
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-							}}
-						>
-							<span
-								style={{
-									cursor: 'pointer',
-									fontFamily: 'Rubik',
-									fontSize: '1.125rem',
-								}}
-							>
-								Tip
-							</span>
-							<div
-								style={{
-									display: 'flex',
-									gap: '0.5rem',
-									flex: 1,
-									marginLeft: '1rem',
-								}}
-							>
-								<div
-									style={{
-										background: '#eee',
-										borderRadius: '1.5rem',
-										padding: '0.5rem 1rem',
-									}}
-								>
-									5%
-								</div>
-								<div
-									style={{
-										background: '#eee',
-										borderRadius: '1.5rem',
-										padding: '0.5rem 1rem',
-									}}
-								>
-									10%
-								</div>
-								<div
-									style={{
-										background: '#eee',
-										borderRadius: '1.5rem',
-										padding: '0.5rem 1rem',
-									}}
-								>
-									15%
-								</div>
-							</div>
-							<span
-								style={{
-									fontFamily: 'Rubik',
-									fontSize: '1.125rem',
-								}}
-							>
-								CHF 10
-							</span>
-						</li>
 					</ul>
 					<div
 						style={{

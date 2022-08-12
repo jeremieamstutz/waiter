@@ -1,34 +1,121 @@
 .menu {
-    background: #ffffff;
-    border-top: 1px solid #ddd;
-    display: flex;
-    padding-bottom: env(safe-area-inset-bottom);
-    min-height: 3rem;
+	background: #ffffff;
+	display: flex;
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+.logo {
+	display: none;
 }
 
 .navbar {
-    flex: 1;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+	flex: 1;
+	display: none;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .navbar a {
-    padding: 0 1rem;
-    height: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.125rem;
-    font-size: 0.875rem;
-    flex: 1;
+	padding: 0 1rem;
+	height: 3rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.125rem;
+	font-size: 0.875rem;
+	flex-grow: 1;
 }
 
 .navbar svg {
-    stroke: #999;
+	stroke: #333;
+	width: 1.5rem;
 }
 
 .active svg {
-    stroke: #333;
+	stroke: var(--color-primary);
+}
+
+.navbar a:hover svg {
+	stroke: var(--color-primary);
+}
+
+/* TODO: Comprendre l'heritage CSS */
+
+.cart {
+	flex-direction: row !important;
+	gap: 0.5rem !important;
+}
+
+.items {
+	font-size: 1rem;
+	background: #333;
+	color: #fff;
+	border-radius: 0.5rem;
+	padding: 0.2rem 0.5rem;
+}
+
+.navbar a:hover .items {
+	background: var(--color-primary);
+}
+
+.login {
+	margin: 0.5rem 1rem;
+}
+
+@media screen and (min-width: 640px) {
+	.menu {
+		border: none;
+		justify-content: space-between;
+		padding: 0.75rem 0;
+		align-items: center;
+		gap: 2rem;
+		min-height: 3rem;
+		/* border-bottom: 1px solid #ddd; */
+	}
+
+	.navbar {
+		display: flex;
+		flex: unset;
+	}
+
+	.logo {
+		display: block;
+		font-size: 1.5rem;
+		color: black;
+	}
+
+	.logo span {
+		color: var(--color-primary);
+		font-size: 1.5rem;
+	}
+
+	.login {
+		font-size: 1.25rem;
+		margin: 0;
+		border: none;
+		background: none;
+	}
+
+	.links {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		padding: 0.5rem;
+		background: white;
+		border: 1px solid #ccc;
+		border-radius: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		width: 20rem;
+	}
+
+	.links a {
+		background: none;
+		display: flex;
+		flex-direction: row;
+		gap: 0.5rem;
+		justify-content: flex-start;
+	}
 }

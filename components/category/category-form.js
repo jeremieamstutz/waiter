@@ -2,7 +2,8 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 
-import { Input, Textarea } from 'components/ui/form-items'
+import Input from 'components/form/input'
+import Textarea from 'components/form/textarea'
 
 import classes from './category-form.module.css'
 import sleep from 'utils/sleep'
@@ -41,7 +42,7 @@ export default function CategoryForm({ category, restaurant }) {
 					})
 				}
 				router.push({
-					pathname: '/[restaurantSlug]',
+					pathname: '/restaurants/[restaurantSlug]',
 					query: {
 						restaurantSlug: router.query.restaurantSlug,
 					},

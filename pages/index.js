@@ -2,87 +2,69 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import { getAllRestaurants } from 'pages/api/restaurants'
-import { groupBy } from 'utils/processing'
 
 import Container from 'components/layout/container'
 import RestaurantList from 'components/restaurant/restaurant-list'
 import Header from 'components/layout/header'
 
 import classes from 'styles/home.module.css'
+import Footer from 'components/layout/footer'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 export default function HomePage({ restaurants }) {
+	const { t } = useTranslation()
 	return (
 		<>
 			<Head>
-				<title>Waiter</title>
-				{/* <meta
-					name="description"
-					content="De choix du restaurant, jusqu’au règlement de l’addition, en passant par la commande, Waiter est là pour vous."
-				/> */}
-				<meta
-					name="description"
-					content="Découvrez la carte des meilleurs restaurants"
-				/>
+				<title>{t('home:meta.title')}</title>
+				<meta name="description" content={t('home:meta.description')} />
 				<meta property="og:title" content="Waiter" />
-				{/* <meta
-					property="og:description"
-					content="De choix du restaurant, jusqu’au règlement de l’addition, en passant par la commande, Waiter est là pour vous."
-				/> */}
 				<meta
 					property="og:description"
-					content="Découvrez la carte des meilleurs restaurants"
+					content={t('home:meta.description')}
 				/>
 				<meta property="og:url" content="https://www.waiter.so" />
 				<meta property="og:type" content="restaurants" />
 			</Head>
 			<Container>
-				<h1>Accueil</h1>
-				{/* <p>Commandez en ligne. Régalez vous sur place.</p> */}
-				{/* <div>Mon restaurant</div> */}
-				{/* <RestaurantList
-					list={{
-						name: 'Recommandations',
-						description: 'Ces restaurants risquent de vous plaire',
-					}}
+				<Header />
+				<h1>{t('home:title')}</h1>
+				<RestaurantList
 					restaurants={restaurants}
-				/> */}
-				{[...groupBy(restaurants, (restaurant) => restaurant.city)].map(
-					([key, value]) => (
-						<RestaurantList
-							key={key}
-							restaurants={value}
-							list={{
-								name: key,
-							}}
-						/>
-					),
-				)}
-				<div className={classes.cta}>
-					<h2>Et votre restaurant ?</h2>
-					<p>
-						Découvrez les nombreux avantages que Waiter peut vous
-						offrir
-					</p>
-					<Link
-						href={{
-							pathname: '/advantages',
-						}}
-					>
-						<a className="button secondary">Voir</a>
-					</Link>
-				</div>
+					list={{
+						name: 'Restaurants',
+					}}
+				/>
+				{/* <button
+					className="secondary"
+					style={{
+						position: 'fixed',
+						bottom: '4rem',
+						left: '50%',
+						transform: 'translateX(-50%)',
+						// padding: 0
+					}}
+				>
+					Show map
+				</button> */}
+				<Footer />
 			</Container>
-			<Header />
 		</>
 	)
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
 	const restaurants = await getAllRestaurants()
 
 	return {
 		props: {
-			restaurants,
+			restaurants: JSON.parse(JSON.stringify(restaurants)),
+			...(await serverSideTranslations(locale, [
+				'common',
+				'home',
+				'restaurant',
+			])),
 		},
 		revalidate: 5,
 	}

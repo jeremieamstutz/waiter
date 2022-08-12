@@ -216,186 +216,172 @@ export default function ItemModal({ item, onClose }) {
 							</div>
 						}
 						footer={
-							<>
-								{session?.user.id === restaurant.ownerId ||
-								session?.user.role === 'admin' ? (
-									<>
-										<Formik
-											initialValues={{ available: true }}
-											onSubmit={(values) => {
-												console.log(
-													'Changing to: ',
-													values,
-												)
-											}}
-										>
-											{({
-												values,
-												handleChange,
-												submitForm,
-											}) => (
-												<Form>
-													<Switch
-														name="available"
-														label={
-															values.available
-																? t(
-																		'item:status.available',
-																  )
-																: t(
-																		'item:status.unavailable',
-																  )
-														}
-														onChange={(event) => {
-															handleChange(event)
-															submitForm()
-														}}
-														style={{
-															flex: 0,
-														}}
-													/>
-												</Form>
-											)}
-										</Formik>
-										<button
-											className="secondary"
-											// style={{ flex: 1 }}
-											onClick={() => {
-												router.push(
-													{
-														pathname:
-															router.pathname,
-														query: {
-															restaurantSlug:
-																router.query
-																	.restaurantSlug,
-															editItem: item.id,
-														},
-													},
-													undefined,
-													{ shallow: true },
-												)
-											}}
-										>
-											{t('common:misc.actions.edit')}
-										</button>
-									</>
-								) : (
-									flags.ordering && (
-										<>
-											<div
-												style={{
-													display: 'flex',
-													alignItems: 'center',
-													justifyContent: 'center',
-													gap: '1rem',
-												}}
-											>
-												<button
-													onClick={() => {
-														if (quantity > 1) {
-															setQuantity(
-																quantity - 1,
-															)
-														}
-													}}
-													style={{
-														minWidth: 0,
-														width: '2.5rem',
-														height: '2.5rem',
-														borderRadius: '50%',
-														padding: 0,
-													}}
-													disabled={quantity <= 1}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														width={20}
-														height={20}
-														viewBox="0 0 20 20"
-														fill="currentColor"
-													>
-														<path
-															fillRule="evenodd"
-															d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
-															clipRule="evenodd"
-														/>
-													</svg>
-												</button>
-												<div
-													style={{
-														fontSize: '1.125rem',
-													}}
-												>
-													{quantity}
-												</div>
-												<button
-													onClick={() =>
-														setQuantity(
-															quantity + 1,
-														)
+							session?.user.id === restaurant.ownerId ||
+							session?.user.role === 'admin' ? (
+								<>
+									<Formik
+										initialValues={{ available: true }}
+										onSubmit={(values) => {
+											console.log('Changing to: ', values)
+										}}
+									>
+										{({
+											values,
+											handleChange,
+											submitForm,
+										}) => (
+											<Form>
+												<Switch
+													name="available"
+													label={
+														values.available
+															? t(
+																	'item:status.available',
+															  )
+															: t(
+																	'item:status.unavailable',
+															  )
 													}
-													style={{
-														minWidth: 0,
-														width: '2.5rem',
-														height: '2.5rem',
-														borderRadius: '50%',
-														padding: 0,
+													onChange={(event) => {
+														handleChange(event)
+														submitForm()
 													}}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														width={20}
-														height={20}
-														viewBox="0 0 20 20"
-														fill="currentColor"
-													>
-														<path
-															fillRule="evenodd"
-															d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-															clipRule="evenodd"
-														/>
-													</svg>
-												</button>
-											</div>
-											<button
-												className="secondary"
-												onClick={() => {
-													orderContext.addItem({
-														...item,
-														quantity,
-													})
-													onClose()
-												}}
-												style={{
-													flex: 1,
-													display: 'flex',
-													justifyContent:
-														'space-between',
-												}}
+													style={{
+														flex: 0,
+													}}
+												/>
+											</Form>
+										)}
+									</Formik>
+									<button
+										className="secondary"
+										// style={{ flex: 1 }}
+										onClick={() => {
+											router.push(
+												{
+													pathname: router.pathname,
+													query: {
+														restaurantSlug:
+															router.query
+																.restaurantSlug,
+														editItem: item.id,
+													},
+												},
+												undefined,
+												{ shallow: true },
+											)
+										}}
+									>
+										{t('common:misc.actions.edit')}
+									</button>
+								</>
+							) : flags.ordering ? (
+								<>
+									<div
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+											gap: '1rem',
+										}}
+									>
+										<button
+											onClick={() => {
+												if (quantity > 1) {
+													setQuantity(quantity - 1)
+												}
+											}}
+											style={{
+												minWidth: 0,
+												width: '2.5rem',
+												height: '2.5rem',
+												borderRadius: '50%',
+												padding: 0,
+											}}
+											disabled={quantity <= 1}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width={20}
+												height={20}
+												viewBox="0 0 20 20"
+												fill="currentColor"
 											>
-												<span
-													style={{
-														fontSize: '1.125rem',
-													}}
-												>
-													Ajouter
-												</span>
-												<span
-													style={{
-														fontSize: '1.125rem',
-													}}
-												>
-													CHF{' '}
-													{(
-														quantity * item.price
-													).toFixed(2)}
-												</span>
-											</button>
-										</>
-									)
-								)}
-							</>
+												<path
+													fillRule="evenodd"
+													d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										</button>
+										<div
+											style={{
+												fontSize: '1.125rem',
+											}}
+										>
+											{quantity}
+										</div>
+										<button
+											onClick={() =>
+												setQuantity(quantity + 1)
+											}
+											style={{
+												minWidth: 0,
+												width: '2.5rem',
+												height: '2.5rem',
+												borderRadius: '50%',
+												padding: 0,
+											}}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width={20}
+												height={20}
+												viewBox="0 0 20 20"
+												fill="currentColor"
+											>
+												<path
+													fillRule="evenodd"
+													d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										</button>
+									</div>
+									<button
+										className="secondary"
+										disabled={!item.available}
+										onClick={() => {
+											orderContext.addItem({
+												...item,
+												quantity,
+											})
+											onClose()
+										}}
+										style={{
+											flex: 1,
+											display: 'flex',
+											justifyContent: 'space-between',
+										}}
+									>
+										<span
+											style={{
+												fontSize: '1.125rem',
+											}}
+										>
+											Ajouter
+										</span>
+										<span
+											style={{
+												fontSize: '1.125rem',
+											}}
+										>
+											CHF{' '}
+											{(quantity * item.price).toFixed(2)}
+										</span>
+									</button>
+								</>
+							) : null
 						}
 					>
 						<Form className={classes.form} id={id}>

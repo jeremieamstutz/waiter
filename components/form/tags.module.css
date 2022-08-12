@@ -43,6 +43,8 @@
 
 .container input:focus-visible ~ .body {
 	background: #ddd;
+	outline: 1px solid #666;
+	outline-offset: 2px;
 }
 
 .container input:checked ~ .body {

@@ -9,10 +9,12 @@ import { useOrder } from 'contexts/order'
 
 import classes from './item-card.module.css'
 import { useRestaurant } from 'contexts/restaurant'
+import { useTranslation } from 'next-i18next'
 
 export default function ItemCard({ item, category, index, lazyRoot }) {
 	const orderContext = useOrder()
 	const router = useRouter()
+	const { t } = useTranslation()
 	const { data: session } = useSession()
 
 	const [quantity, setQuantity] = useState(0)
@@ -54,9 +56,7 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 	return (
 		<>
 			<div
-				className={`${classes.card} ${
-					item.available === false ? classes.unavailable : ''
-				}`}
+				className={classes.card}
 				onClick={() =>
 					router.push(
 						{
@@ -283,19 +283,28 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 					</div>
 				</div>
 				<div className={classes.body}>
-					{index % 7 == 0 && (
+					{!item.available ? (
+						<div
+							style={{
+								color: '#d00',
+								margin: '0.125rem 0 0.25rem',
+							}}
+						>
+							{t('item:status.unavailable')}
+						</div>
+					) : index % 7 == 0 ? (
 						<div
 							style={{
 								color: '#e67e22',
 								margin: '0.125rem 0 0.25rem',
 							}}
 						>
-							Nouveau
+							{t('item:status.new')}
 							{/* Sélection du chef
-							Recommandé
-							Populaire */}
+						Recommandé
+						Populaire */}
 						</div>
-					)}
+					) : null}
 					<h3 className={classes.title}>{item.name}</h3>
 					<p className={classes.description}>{item.description}</p>
 					<p className={classes.details}>
@@ -353,39 +362,46 @@ export function NewItemCard({ category }) {
 
 	return (
 		<div className={classes.skeleton}>
-			<Link
-				href={{
-					pathname: '/items/new',
-					query: {
-						restaurantId: restaurant.id,
-						categoryId: category.id,
-					},
-				}}
+			<div
+				className={classes.card}
+				onClick={() =>
+					router.push(
+						{
+							pathname: router.pathname,
+							query: {
+								...router.query,
+								showNewItem: true,
+								restaurantId: restaurant.id,
+								categoryId: category.id,
+							},
+						},
+						undefined,
+						{ shallow: true },
+					)
+				}
 			>
-				<a className={classes.card}>
-					<div className={classes.image}>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width={24}
-							height={24}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M12 4v16m8-8H4"
-							/>
-						</svg>
-					</div>
-					<h3 className={classes.title}>Nouvel élément</h3>
-					<p className={classes.description}>
-						Ajouter un élément à cette liste
-					</p>
-				</a>
-			</Link>
+				<div className={classes.image}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width={24}
+						height={24}
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth={2}
+							d="M12 4v16m8-8H4"
+						/>
+					</svg>
+				</div>
+				<h3 className={classes.title}>Nouvel élément</h3>
+				<p className={classes.description}>
+					Ajouter un élément à cette liste
+				</p>
+			</div>
 		</div>
 	)
 }

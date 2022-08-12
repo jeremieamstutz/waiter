@@ -3,8 +3,10 @@ import { Formik, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
-import { Input, Textarea, Select } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
+import Input from 'components/form/input'
+import Select from 'components/form/select'
+import Textarea from 'components/form/textarea'
 
 import classes from './restaurant-form.module.css'
 
@@ -87,7 +89,7 @@ export default function RestaurantForm({ restaurant }) {
 				// await sleep(2000)
 				const data = response.data
 				router.push({
-					pathname: '/[restaurantSlug]',
+					pathname: '/restaurants/[restaurantSlug]',
 					query: {
 						restaurantSlug: data.restaurant.slug,
 					},

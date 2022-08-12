@@ -31,10 +31,17 @@
 		"healthy": "Healthy"
 	},
 	"status": {
+		"new": "New",
 		"available": "Available",
 		"unavailable": "Unavailable"
 	},
 	"modals": {
+		"new": {
+			"title": "New item"
+		},
+		"edit": {
+			"title": "Edit item"
+		},
 		"delete": {
 			"title": "Confirmation",
 			"confirm": "Are you sure you want to delete the item: "

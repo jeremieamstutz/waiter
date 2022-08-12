@@ -3,8 +3,9 @@ import axios from 'axios'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
-import { Input, Select } from 'components/ui/form-items'
 import ImagePicker from 'components/ui/image-picker'
+import Input from 'components/form/input'
+import Select from 'components/form/select'
 
 import classes from './user-form.module.css'
 

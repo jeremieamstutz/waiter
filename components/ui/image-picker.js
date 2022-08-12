@@ -31,6 +31,7 @@ export default function ImagePicker({ url, setUrl, style }) {
 			const imageUrl = signedUrl.data.url.split('?')[0]
 			setUrl(imageUrl)
 		} catch (error) {
+			console.log(error)
 			setError(true)
 		}
 		setLoading(false)

@@ -53,10 +53,10 @@ export default NextAuth({
 		session: (session) => session,
 	},
 	pages: {
-		signIn: '/account/login',
-		signOut: '/account/logout',
-		error: '/account/login',
-		verifyRequest: '/account/email-sent',
-		newUser: '/account/new-user',
+		signIn: '/login',
+		signOut: '/logout',
+		error: '/login',
+		verifyRequest: '/email-sent',
+		newUser: '/new-user',
 	},
 })

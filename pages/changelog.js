@@ -1,27 +1,30 @@
+import Container from 'components/layout/container'
+import Footer from 'components/layout/footer'
+import Header from 'components/layout/header'
 import { DateTime } from 'luxon'
 
 import classes from 'styles/changelog.module.css'
 
 export default function ChangelogPage({ logs }) {
 	return (
-		<>
-			<div className={classes.container}>
-				<h1 className={classes.header}>Changelog</h1>
-				<div className={classes.logs}>
-					{logs.map((log, index) => (
-						<>
-							<article className={classes.log} key={index}>
-								<div className={classes.date}>{log.date}</div>
-								<div className={classes.image}></div>
-								<h2 className={classes.title}>{log.title}</h2>
-								<p className={classes.text}>{log.text}</p>
-							</article>
-							<div className={classes.separator} />
-						</>
-					))}
-				</div>
+		<Container>
+			<Header />
+			<h1 className={classes.header}>Changelog</h1>
+			<div className={classes.logs}>
+				{logs.map((log, index) => (
+					<>
+						<article className={classes.log} key={index}>
+							<div className={classes.date}>{log.date}</div>
+							<div className={classes.image}></div>
+							<h2 className={classes.title}>{log.title}</h2>
+							<p className={classes.text}>{log.text}</p>
+						</article>
+						<div className={classes.separator} />
+					</>
+				))}
 			</div>
-		</>
+			<Footer />
+		</Container>
 	)
 }
 
