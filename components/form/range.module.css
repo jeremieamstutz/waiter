@@ -1,0 +1,113 @@
+.group {
+	flex: 1 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.container {
+	display: grid;
+	align-items: center;
+	gap: 1rem;
+	grid-template-columns: 1fr 1fr;
+}
+
+.value {
+	flex: 0;
+	grid-row-start: 2;
+}
+
+.slider {
+	position: relative;
+	padding: 1rem 0;
+	margin-bottom: 0.5rem;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+.track,
+.range {
+	position: absolute;
+	height: 0.5rem;
+	border-radius: 0.25rem;
+}
+
+.track {
+	background: #eee;
+	width: 100%;
+	z-index: 1;
+	transition: background 150ms;
+}
+
+.slider:hover .track {
+	background: #ccc;
+}
+
+.range {
+	background: #999;
+	z-index: 2;
+	transition: background 150ms;
+}
+
+.slider:hover .range {
+	background: #333;
+}
+
+.thumb,
+.thumb::-webkit-slider-thumb {
+	appearance: none;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.thumb {
+	position: absolute;
+	pointer-events: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	height: 0.5rem;
+	background: none !important;
+	width: 100%;
+}
+
+.thumb::-webkit-slider-thumb {
+	pointer-events: all;
+	background: #fff;
+	border: 2px solid #aaa;
+	border-radius: 50%;
+	height: 1.5rem;
+	width: 1.5rem;
+	cursor: pointer;
+	user-select: none;
+	transition: all 150ms;
+}
+
+.thumb:focus-visible {
+	outline: none;
+}
+
+.thumb:focus-visible::-webkit-slider-thumb {
+	outline: 1px solid var(--color-ui-hover);
+	outline-offset: 2px;
+}
+
+.thumb:active::-webkit-slider-thumb {
+	border: 6px solid #333;
+}
+
+@media screen and (min-width: 640px) {
+	.container {
+		grid-template-columns: auto 1fr auto;
+	}
+
+    .value {
+        width: 5rem;
+        grid-row-start: 1;
+    }
+
+    .slider {
+        grid-row-start: 1;
+        grid-column-start: 2;
+    }
+}
