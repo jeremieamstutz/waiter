@@ -1,6 +1,7 @@
 {
-	"booking": true,
-	"ordering": true,
-	"messaging": true,
-	"reviewing": true
+	"booking": false,
+	"ordering": false,
+	"messaging": false,
+	"reviewing": false,
+	"analytics": false
 }
