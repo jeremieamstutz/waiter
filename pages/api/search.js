@@ -11,11 +11,10 @@ export default async function handler(req, res) {
 			console.time('search')
 
 			const restaurants = await searchRestaurants({ query, cuisine })
-			const items = !cuisine ? await searchItems({ query }) : []
 
 			console.timeEnd('search')
 
-			res.status(statusCodes.ok).json({ restaurants, items })
+			res.status(statusCodes.ok).json({ restaurants })
 			break
 		}
 		default:
@@ -46,7 +45,7 @@ export async function searchRestaurants({ query: q, cuisine }) {
             )
         ORDER BY 
             sml DESC, created_at DESC
-        LIMIT 20`,
+        LIMIT 30`,
 		[q, cuisine],
 	)
 	return result.rows
@@ -78,7 +77,7 @@ export async function searchItems({ query: q }) {
             )
         ORDER BY 
            sml DESC, created_at DESC
-        LIMIT 20`,
+        LIMIT 30`,
 		[q],
 	)
 	return result.rows
