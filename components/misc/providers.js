@@ -1,10 +1,14 @@
-import { AnimationProvider } from 'contexts/animate'
+import { AnimatePresence } from 'framer-motion'
+
 import { HistoryProvider } from 'contexts/history'
+import { OrderProvider } from 'contexts/order'
 
 export default function Providers({ children }) {
 	return (
 		<HistoryProvider>
-			<AnimationProvider>{children}</AnimationProvider>
+			<OrderProvider>
+				<AnimatePresence key="page">{children}</AnimatePresence>
+			</OrderProvider>
 		</HistoryProvider>
 	)
 }
