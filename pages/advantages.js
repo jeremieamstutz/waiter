@@ -1,74 +1,71 @@
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
-import BackButton from 'components/ui/back'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link'
+import Main from 'components/layout/main'
 
 import classes from 'styles/advantages.module.css'
 
 export default function AdvantagesPage() {
-	const { data: session, status } = useSession()
-
 	return (
 		<>
 			<Container>
-				<BackButton />
-				<h1>Avantages</h1>
-				<p style={{ margin: '0 0 0.5rem' }}>
-					Que vous soyez restaurateur ou client, Waiter saura vous
-					accompagner.
-				</p>
-				<h2 className={classes.header}>Restaurateurs</h2>
-				<div className={classes.list}>
-					{DATA['restaurateurs'].map((advantage, index) => (
-						<div className={classes.card} key={index}>
-							<div
-								className={classes.icon}
-								dangerouslySetInnerHTML={{
-									__html: advantage.icon,
-								}}
-							/>
-							<h3
-								className={classes.title}
-								dangerouslySetInnerHTML={{
-									__html: advantage.title,
-								}}
-							/>
-							<p
-								className={classes.description}
-								dangerouslySetInnerHTML={{
-									__html: advantage.description,
-								}}
-							/>
-						</div>
-					))}
-				</div>
-				<h2 className={classes.header}>Clients</h2>
-				<div className={classes.list}>
-					{DATA['customers'].map((advantage, index) => (
-						<div className={classes.card} key={index}>
-							<div
-								className={classes.icon}
-								dangerouslySetInnerHTML={{
-									__html: advantage.icon,
-								}}
-							/>
-							<h3
-								className={classes.title}
-								dangerouslySetInnerHTML={{
-									__html: advantage.title,
-								}}
-							/>
-							<p
-								className={classes.description}
-								dangerouslySetInnerHTML={{
-									__html: advantage.description,
-								}}
-							/>
-						</div>
-					))}
-				</div>
-				{/* <section className={classes.photos}>
+				<Header />
+				<Main>
+					<h1>Avantages</h1>
+					<p style={{ margin: '0 0 0.5rem' }}>
+						Que vous soyez restaurateur ou client, Waiter saura vous
+						accompagner.
+					</p>
+					<h2 className={classes.header}>Restaurateurs</h2>
+					<div className={classes.list}>
+						{DATA['restaurateurs'].map((advantage, index) => (
+							<div className={classes.card} key={index}>
+								<div
+									className={classes.icon}
+									dangerouslySetInnerHTML={{
+										__html: advantage.icon,
+									}}
+								/>
+								<h3
+									className={classes.title}
+									dangerouslySetInnerHTML={{
+										__html: advantage.title,
+									}}
+								/>
+								<p
+									className={classes.description}
+									dangerouslySetInnerHTML={{
+										__html: advantage.description,
+									}}
+								/>
+							</div>
+						))}
+					</div>
+					<h2 className={classes.header}>Clients</h2>
+					<div className={classes.list}>
+						{DATA['customers'].map((advantage, index) => (
+							<div className={classes.card} key={index}>
+								<div
+									className={classes.icon}
+									dangerouslySetInnerHTML={{
+										__html: advantage.icon,
+									}}
+								/>
+								<h3
+									className={classes.title}
+									dangerouslySetInnerHTML={{
+										__html: advantage.title,
+									}}
+								/>
+								<p
+									className={classes.description}
+									dangerouslySetInnerHTML={{
+										__html: advantage.description,
+									}}
+								/>
+							</div>
+						))}
+					</div>
+					{/* <section className={classes.photos}>
 					<h2>Immortalisez vos produits</h2>
 					<p>
 						Afin de maximiser vos chances sur la plateforme, des
@@ -118,11 +115,13 @@ export default function AdvantagesPage() {
 						premiers pour bénéficier d&apos;un prix avantageux !
 					</p>
 				</section> */}
-				<section className={classes.cta}>
-					<h2>Intéressé ?</h2>
-					<p>Contactez nous sans tarder !</p>
-					<a href="mailto:contact@waiter.so" className="button">Envoyer un mail</a>
-					{/* <a href="mailto:contact@waiter.so">
+					<section className={classes.cta}>
+						<h2>Intéressé ?</h2>
+						<p>Contactez nous sans tarder !</p>
+						<a href="mailto:contact@waiter.so" className="button">
+							Envoyer un mail
+						</a>
+						{/* <a href="mailto:contact@waiter.so">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width={24}
@@ -140,8 +139,8 @@ export default function AdvantagesPage() {
 						</svg>
 						contact@waiter.so
 					</a> */}
-				</section>
-				{/* <div className={classes.cta}>
+					</section>
+					{/* <div className={classes.cta}>
 					<h3>Convaincu ?</h3>
 					<p>Alors rejoignez Waiter sans tarder !</p>
 					<Link
@@ -165,7 +164,7 @@ export default function AdvantagesPage() {
 						</a>
 					</Link>
 				</div> */}
-				{/* <div className={classes.faq}>
+					{/* <div className={classes.faq}>
 					<h3>Une interrogation ?</h3>
 					<p>
 						{' '}
@@ -174,8 +173,8 @@ export default function AdvantagesPage() {
 						</Link>
 					</p>
 				</div> */}
+				</Main>
 			</Container>
-			<Header />
 		</>
 	)
 }

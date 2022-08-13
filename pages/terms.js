@@ -1,32 +1,43 @@
 import Container from 'components/layout/container'
+import Footer from 'components/layout/footer'
 import Header from 'components/layout/header'
-import BackButton from 'components/ui/back'
+import Main from 'components/layout/main'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+import classes from 'styles/terms.module.css'
 
 export default function TermsPage() {
 	return (
 		<>
 			<Container>
-				<BackButton />
-				<main>
-					<h1 style={{ marginRight: '4rem' }}>
+				<Header />
+				<Main
+					className={classes.terms}
+					style={{
+						maxWidth: '60rem',
+						alignSelf: 'center',
+						margin: '2rem 0',
+					}}
+				>
+					<h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>
 						Conditions Générales de Service
 					</h1>
 					<h2>Préambule</h2>
 					<p>
 						Les présentes Conditions Générales de Service (ci-après
 						CGS) sont conclues entre :
-						<ul>
-							<li>
-								Le gérant du site Web Waiter.so, ci-après
-								désigné « le Prestataire »,
-							</li>
-							<li>
-								Toute personne souhaitant accéder au site et à
-								ses services, ci-après appelé(s) « le Client ou
-								les Clients ».
-							</li>
-						</ul>
 					</p>
+					<ul>
+						<li>
+							Le gérant du site Web Waiter.so, ci-après désigné «
+							le Prestataire »,
+						</li>
+						<li>
+							Toute personne souhaitant accéder au site et à ses
+							services, ci-après appelé(s) « le Client ou les
+							Clients ».
+						</li>
+					</ul>
 					<h2>ARTICLE 1 – Principes</h2>
 					<p>
 						Les présentes Conditions Générales de Vente ont pour
@@ -35,21 +46,21 @@ export default function TermsPage() {
 						Waiter.so et de ses services selon lesquelles le
 						Prestataire s’engage auprès du Client. Les coordonnées
 						du Prestataire sont les suivantes :
-						<ul>
-							<li>Emplacement: Lausanne, Suisse</li>
-							<li>
-								Adresse URL du site:{' '}
-								<a href="https://www.waiter.so">waiter.so</a>
-							</li>
-							<li>
-								E-mail:{' '}
-								<a href="mailto:support@waiter.so">
-									{' '}
-									support@waiter.so
-								</a>
-							</li>
-						</ul>
 					</p>
+					<ul>
+						<li>Emplacement: Lausanne, Suisse</li>
+						<li>
+							Adresse URL du site:{' '}
+							<a href="https://www.waiter.so">waiter.so</a>
+						</li>
+						<li>
+							E-mail:{' '}
+							<a href="mailto:support@waiter.so">
+								{' '}
+								support@waiter.so
+							</a>
+						</li>
+					</ul>
 					<p>
 						Les caractéristiques principales des Services sont
 						présentées sur le site Web Waiter.so.
@@ -58,13 +69,11 @@ export default function TermsPage() {
 						Les présentes Conditions Générales de Service
 						s’appliquent sans limitation ni réserve à tout achat des
 						services suivants:
-						<ul>
-							<li>
-								Présence d&apos;un restaurant sur la plateforme
-							</li>
-							<li>Crédits de communication</li>
-						</ul>
 					</p>
+					<ul>
+						<li>Présence d&apos;un restaurant sur la plateforme</li>
+						<li>Crédits de communication</li>
+					</ul>
 					<p>
 						Le Client est tenu d’en prendre connaissance avant toute
 						passation de commande. Le choix et l’achat d’un service
@@ -105,13 +114,11 @@ export default function TermsPage() {
 						Prestataire, notamment lors d’une maintenance, sans
 						obligation de préavis ou de justification.
 					</p>
-					<p>
-						Les services réservés au Client sont les suivants:
-						<ul>
-							<li>Mise à jour du menu</li>
-							<li>Prise de réservations</li>
-						</ul>
-					</p>
+					<p>Les services réservés au Client sont les suivants:</p>
+					<ul>
+						<li>Mise à jour du menu</li>
+						<li>Prise de réservations</li>
+					</ul>
 					<h2>Article 3 – Responsabilités des parties</h2>
 					<h3>Prestataire</h3>
 					<p>
@@ -146,17 +153,17 @@ export default function TermsPage() {
 					<p>
 						Le Prestataire ne pourra être tenu responsable en cas de
 						poursuites judiciaires à l’encontre du Client:
-						<ul>
-							<li>
-								En raison de l’utilisation du site Web ou de
-								tout service disponible sur Internet,
-							</li>
-							<li>
-								En raison du non-respect par le Client des
-								présentes CGS.
-							</li>
-						</ul>
 					</p>
+					<ul>
+						<li>
+							En raison de l’utilisation du site Web ou de tout
+							service disponible sur Internet,
+						</li>
+						<li>
+							En raison du non-respect par le Client des présentes
+							CGS.
+						</li>
+					</ul>
 					<h3>Client</h3>
 					<p>
 						Le Client certifie, par les présentes CGS, que toutes
@@ -237,29 +244,27 @@ export default function TermsPage() {
 					<p>
 						Les données à caractère personnel qui sont collectées
 						sur le Site Web Waiter.so sont les suivantes:
-						<ul>
-							<li>
-								<strong>Ouverture de compte</strong>: lors de la
-								création du compte de l’utilisateur: nom,
-								prénom, adresse électronique, numéro de
-								téléphone;
-							</li>
-							<li>
-								<strong>Connexion</strong>: lors de la connexion
-								de l’utilisateur au site Web, celui-ci
-								enregistre, notamment, ses nom, prénom, données
-								de connexion, d’utilisation, de localisation et
-								ses données relatives au paiement;
-							</li>
-							<li>
-								<strong>Paiement</strong>: dans le cadre du
-								paiement des produits et prestations proposés
-								sur le site Web Waiter.so, celui-ci enregistre
-								des données financières relatives au compte
-								bancaire ou à la carte de crédit du Client.
-							</li>
-						</ul>
 					</p>
+					<ul>
+						<li>
+							Ouverture de compte: lors de la création du compte
+							de l’utilisateur: nom, prénom, adresse électronique,
+							numéro de téléphone;
+						</li>
+						<li>
+							Connexion: lors de la connexion de l’utilisateur au
+							site Web, celui-ci enregistre, notamment, ses nom,
+							prénom, données de connexion, d’utilisation, de
+							localisation et ses données relatives au paiement;
+						</li>
+						<li>
+							Paiement: dans le cadre du paiement des produits et
+							prestations proposés sur le site Web Waiter.so,
+							celui-ci enregistre des données financières
+							relatives au compte bancaire ou à la carte de crédit
+							du Client.
+						</li>
+					</ul>
 					<p>
 						Les données personnelles collectées auprès des Clients
 						sont destinées à fournir des services de site Web, à les
@@ -292,9 +297,17 @@ export default function TermsPage() {
 						l’amiable, le litige sera soumis à la compétence des
 						tribunaux du canton de Vaud en Suisse.
 					</p>
-				</main>
+				</Main>
+				<Footer />
 			</Container>
-			<Header />
 		</>
 	)
+}
+
+export async function getStaticProps({ locale }) {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ['common'])),
+		},
+	}
 }

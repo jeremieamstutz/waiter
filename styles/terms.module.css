@@ -1,0 +1,15 @@
+.terms ul {
+	margin-top: 0;
+	padding-left: 2rem;
+}
+
+.terms li {
+	font-family: 'Rubik';
+	line-height: 140%;
+	font-size: 1.125rem;
+	color: var(--color-text-secondary);
+}
+
+.terms a {
+	font-family: 'Rubik';
+}
