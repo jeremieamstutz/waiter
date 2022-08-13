@@ -2,25 +2,39 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import axios from 'axios'
 import { SWRConfig } from 'swr'
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider, signIn, useSession } from 'next-auth/react'
 
 import * as gtag from 'utils/gtag'
 import Providers from 'components/misc/providers'
 
 import 'styles/globals.css'
 import 'styles/ui.css'
-import { AnimatePresence } from 'framer-motion'
-import DesktopUnavailable from 'components/misc/desktop-unavailable'
+import Spinner from 'components/ui/spinner'
+import { appWithTranslation } from 'next-i18next'
 
-const isProduction = process.env.NODE_ENV === 'production'
+function Auth({ children }) {
+	const { status } = useSession()
 
-export default function Waiter({ Component, pageProps, router }) {
+	if (status === 'loading') {
+		return <Spinner />
+	}
+
+	if (status === 'unauthenticated') {
+		signIn()
+		return <Spinner />
+	}
+
+	return children
+}
+
+function App({ Component, pageProps, router }) {
 	useEffect(() => {
 		const handleRouteChange = () => {
 			const title = document.title
 			const location = window.location.href
 			const pathname = window.location.pathname
-			if (isProduction) gtag.pageview(title, location, pathname)
+			if (process.env.NODE_ENV === 'production')
+				gtag.pageview(title, location, pathname)
 		}
 		router.events.on('routeChangeComplete', handleRouteChange)
 		return () => {
@@ -34,32 +48,33 @@ export default function Waiter({ Component, pageProps, router }) {
 				<title>Waiter</title>
 				<meta
 					name="description"
-					content="Menu of your favorite restaurants"
+					content="Découvrez les meilleurs restaurants autour de vous"
 				/>
 				<meta
 					name="viewport"
 					content="initial-scale=1.0, width=device-width, viewport-fit=cover"
 				/>
 			</Head>
-			<div className="tablet desktop">
-				<DesktopUnavailable url={router.asPath} />
-			</div>
-			<div className="mobile">
-				<SessionProvider session={pageProps.session}>
-					<SWRConfig
-						value={{
-							fetcher: (url) =>
-								axios.get(url).then((res) => res.data),
-						}}
-					>
-						<Providers>
-							<AnimatePresence key="page">
+			<SessionProvider session={pageProps.session}>
+				<SWRConfig
+					value={{
+						fetcher: (url) =>
+							axios.get(url).then((res) => res.data),
+					}}
+				>
+					<Providers>
+						{Component.auth ? (
+							<Auth>
 								<Component {...pageProps} />
-							</AnimatePresence>
-						</Providers>
-					</SWRConfig>
-				</SessionProvider>
-			</div>
+							</Auth>
+						) : (
+							<Component {...pageProps} />
+						)}
+					</Providers>
+				</SWRConfig>
+			</SessionProvider>
 		</>
 	)
 }
+
+export default appWithTranslation(App)
