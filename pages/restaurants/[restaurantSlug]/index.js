@@ -412,10 +412,10 @@ export async function getStaticPaths() {
 	const restaurants = await getAllRestaurants()
 
 	return {
-		paths: restaurants.map((restaurant) => ({
-			params: { restaurantSlug: restaurant.slug },
-		})),
-		// paths: [],
+		// paths: restaurants.map((restaurant) => ({
+		// 	params: { restaurantSlug: restaurant.slug },
+		// })),
+		paths: [],
 		fallback: 'blocking',
 	}
 }
