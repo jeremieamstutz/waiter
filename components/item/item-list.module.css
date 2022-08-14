@@ -52,6 +52,11 @@
 .swiper {
 	width: 100%;
 	padding: 0.75rem 1rem !important;
+	overflow: visible !important;
+}
+
+.swiper > div {
+	overflow: visible !important;
 }
 
 @media screen and (min-width: 480px) {
