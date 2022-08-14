@@ -1,62 +1,96 @@
 .backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    background: #000000;
-    opacity: 0.5;
+	position: fixed;
+	inset: 0;
+	z-index: 20;
+	background: #000000;
+	opacity: 0.5;
+	cursor: zoom-out;
 }
 
 .container {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
+	pointer-events: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	z-index: 20;
+	max-height: 100vh;
 }
 
 .modal {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    pointer-events: all;
-    background: #ffffff;
-    /* border-radius: 1.5rem; */
-    width: 100vw;
-    max-width: 30rem;
-    height: 100vh;
-    /* overflow-y: auto; */
-}
-
-.modal.large {
-    max-width: 50rem;
-}
-
-.modal.medium {
-    max-width: 40rem;
-}
-
-.close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+	pointer-events: all;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: #ffffff;
+	width: 100%;
+	max-width: 60rem;
+	max-height: 100%;
+	overflow: hidden;
 }
 
 .title {
-    font-size: 1.5rem;
-    margin: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	padding: 1rem;
+	gap: 1rem;
+	text-align: center;
+}
+
+.title h1 {
+	margin: 0;
+	font-size: 1.5rem;
+}
+
+.close {
+	width: 2.5rem;
+	height: 2.5rem;
+	min-width: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	flex-shrink: 0;
 }
 
 .body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	flex: 1;
+	flex-shrink: 1;
+	padding: 1rem;
 }
 
 .actions {
-    align-self: flex-end;
-    display: flex;
-    gap: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid #eee;
+	padding: 1rem;
+	gap: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+	.container {
+		padding: 2rem;
+		align-items: center;
+		inset: 0;
+	}
+
+	.modal {
+		border-radius: 1rem;
+		max-width: 40rem;
+	}
+
+	.body {
+		padding: 1.5rem;
+	}
 }
