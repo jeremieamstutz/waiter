@@ -283,7 +283,7 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 					</div>
 				</div>
 				<div className={classes.body}>
-					{!item.available ? (
+					{/* {!item.available ? (
 						<div
 							style={{
 								color: '#d00',
@@ -300,11 +300,11 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 							}}
 						>
 							{t('item:status.new')}
-							{/* Sélection du chef
+							Sélection du chef
 						Recommandé
-						Populaire */}
+						Populaire
 						</div>
-					) : null}
+					) : null} */}
 					<h3 className={classes.title}>{item.name}</h3>
 					<p className={classes.description}>{item.description}</p>
 					<p className={classes.details}>
