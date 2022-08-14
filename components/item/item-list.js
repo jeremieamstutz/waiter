@@ -154,7 +154,6 @@ export default forwardRef(function ItemList(
 							type: 'fraction',
 						}}
 						centeredSlidesBounds={true}
-						cssMode={true}
 						breakpoints={{
 							0: {
 								centeredSlides: true,
