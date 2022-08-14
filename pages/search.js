@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
-import { fadeIn } from 'animations'
 import { useRef, useState } from 'react'
 import useSWR from 'swr'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import useSessionStorage from 'hooks/useSessionStorage'
 import useScrollRestoration from 'hooks/useScrollRestauration'
@@ -9,11 +9,15 @@ import useDebounce from 'hooks/useDebounce'
 
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
-import RestaurantList from 'components/restaurant/restaurant-list'
-import ItemList from 'components/item/item-list'
+import Main from 'components/layout/main'
+import Footer from 'components/layout/footer'
+
 import { Ring } from 'components/ui/spinner'
+import FiltersModal from 'components/search/filters-modal'
+import RestaurantList from 'components/restaurant/restaurant-list'
 
 export default function SearchPage() {
+	const { t } = useTranslation()
 	const [needDebounce, setNeedDebounce] = useState(false)
 	const initialSearch = {
 		query: '',
@@ -21,20 +25,9 @@ export default function SearchPage() {
 		initial: true,
 	}
 	const [search, setSearch] = useSessionStorage('search', initialSearch)
-	const debouncedSearch = useDebounce(search, 200, {
+	const debouncedSearch = useDebounce(search, 150, {
 		debounce: needDebounce,
 	})
-
-	const cuisines = [
-		'Américaine',
-		'Asiatique',
-		'Espagnole',
-		'Française',
-		'Italienne',
-		'Mexicaine',
-		'Portugaise',
-		'Suisse',
-	]
 	const cuisinesRef = useRef()
 
 	const resetCuisineScroll = useScrollRestoration(cuisinesRef, 'cuisines')
@@ -78,113 +71,143 @@ export default function SearchPage() {
 			: null,
 	)
 
-	const { restaurants, items } = data || { restaurants: [], items: [] }
+	const { restaurants } = data || { restaurants: [] }
+
+	const [showFilters, setShowFilters] = useState(false)
 
 	return (
 		<>
-			<Container>
-				<h1>Recherche</h1>
-				<section>
-					<input
-						type="search"
-						placeholder="Ville, restaurant, cuisine ou plat"
-						value={search ? search.query : ''}
-						onChange={handleInput}
-						// autoFocus
-						autoComplete="off"
-					/>
-					<div
-						style={{
-							display: 'flex',
-							gap: '0.5rem',
-							overflow: 'scroll',
-							padding: '1rem',
-							margin: '0 -1rem',
-						}}
-						ref={cuisinesRef}
-					>
-						{cuisines.map((cuisine, index) => (
-							<div
-								onClick={handleCuisineChange}
-								style={{
-									padding: '0.5rem 1rem',
-									color:
-										search?.cuisine === cuisine
-											? '#fff'
-											: '#000',
-									background:
-										search?.cuisine === cuisine
-											? '#333'
-											: '#eee',
-									borderRadius: '0.5rem',
-									border: '1px solid #ddd',
-								}}
-								key={index}
-							>
-								{cuisine}
-							</div>
-						))}
-					</div>
-				</section>
+			<Container
+				style={
+					{
+						// maxWidth: '1440px'
+					}
+				}
+			>
+				<Header />
+				<Main>
+					<h1>{t('search:title')}</h1>
+					<section>
+						<div style={{ display: 'flex', gap: '1rem' }}>
+							<input
+								type="search"
+								placeholder="Restaurant"
+								value={search ? search.query : ''}
+								onChange={handleInput}
+								autoFocus
+								autoComplete="off"
+								style={{ flex: 3 }}
+							/>
+							<input
+								type="search"
+								placeholder="Lieu"
+								style={{ flex: 3 }}
+							/>
+							<button onClick={() => setShowFilters(true)}>
+								Filters
+							</button>
+							{showFilters && (
+								<FiltersModal
+									onClose={() => setShowFilters(false)}
+								/>
+							)}
+							<button className="secondary">Rerchercher</button>
+						</div>
+					</section>
 
-				{data == undefined ? (
-					<div
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							flex: 1,
-						}}
-					>
-						<Ring />
-					</div>
-				) : (
-					<>
-						{restaurants && (
-							<RestaurantList
-								key="Restaurants"
-								restaurants={restaurants}
-								list={{
-									name: 'Restaurants',
-								}}
-								ref={restaurantListRef}
-							/>
-						)}
-						{items && (
-							<ItemList
-								restaurant={undefined}
-								category={{ name: 'Nourriture et boissons' }}
-								items={items}
-								ref={itemListRef}
-							/>
-						)}
-					</>
-				)}
-			</Container>
-			<Header>
-				{(search?.query || search?.cuisine) && (
-					<motion.div
-						style={{ padding: '1rem' }}
-						initial={'initial'}
-						animate="animate"
-						exit="initial"
-						variants={fadeIn}
-					>
-						<button
-							onClick={handleResetSearch}
+					{data == undefined ? (
+						<div
 							style={{
-								width: '100%',
-								color: 'white',
-								background: '#333',
-								border: 'none',
-								textAlign: 'left',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+								flex: 1,
 							}}
 						>
-							Réinitialiser la recherche
-						</button>
-					</motion.div>
-				)}
-			</Header>
+							<Ring />
+						</div>
+					) : (
+						<>
+							{restaurants && (
+								<>
+									<div
+										style={{
+											display: 'flex',
+											justifyContent: 'space-between',
+											alignItems: 'center',
+											marginTop: '1.5rem',
+										}}
+									>
+										<h2 style={{ fontSize: '1.25rem' }}>
+											{restaurants.length +
+												" restaurants sur 1'047"}
+										</h2>
+										<div
+											style={{
+												display: 'flex',
+												alignItems: 'center',
+												gap: '1rem',
+												margin: '0 0 1rem',
+											}}
+										>
+											<div
+												style={{
+													fontSize: '1.125rem',
+												}}
+											>
+												Trier par
+											</div>
+											<select style={{ width: '10rem' }}>
+												<option>Distance</option>
+											</select>
+										</div>
+									</div>
+									<RestaurantList
+										key="Restaurants"
+										restaurants={restaurants}
+										list={{ name: 'Restaurants' }}
+										ref={restaurantListRef}
+									/>
+									{/* <div
+										style={{
+											position: 'sticky',
+											display: 'flex',
+											justifyContent: 'center',
+											bottom: '1rem',
+											padding: '1rem',
+											// marginTop: '-2.5rem',
+										}}
+									>
+										<button
+											className="secondary"
+											style={{
+												// border: '2px solid white',
+												boxShadow:
+													'0 0 32px 4px rgba(255,255,255,0.5)',
+											}}
+										>
+											{t('search:displayMap')}
+										</button>
+									</div> */}
+								</>
+							)}
+						</>
+					)}
+				</Main>
+				<Footer />
+			</Container>
 		</>
 	)
+}
+
+export async function getStaticProps({ locale }) {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, [
+				'common',
+				'search',
+				'restaurant',
+			])),
+		},
+	}
 }
