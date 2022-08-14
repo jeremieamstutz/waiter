@@ -104,7 +104,7 @@ export default function RestaurantCard({ restaurant, index }) {
 								disabledClass: classes['button-disabled'],
 							}}
 							pagination={{ clickable: true }}
-							threshold={4}
+							cssMode={true}
 						>
 							<SwiperSlide>
 								<Image

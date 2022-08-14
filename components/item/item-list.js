@@ -147,7 +147,6 @@ export default forwardRef(function ItemList(
 							prevEl,
 							nextEl,
 						}}
-						threshold={4}
 						slidesPerView="auto"
 						spaceBetween={14}
 						pagination={{
@@ -155,6 +154,7 @@ export default forwardRef(function ItemList(
 							type: 'fraction',
 						}}
 						centeredSlidesBounds={true}
+						cssMode={true}
 						breakpoints={{
 							0: {
 								centeredSlides: true,
