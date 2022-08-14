@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import acceptLanguage from 'accept-language'
 
-import { i18n } from './next-i18next.config.js'
+import { i18n } from './next.config.js'
 
 acceptLanguage.languages(i18n.locales)
 
