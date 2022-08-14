@@ -4,7 +4,7 @@ import Header from 'components/layout/header'
 import Main from 'components/layout/main'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-export default function CareersPage() {
+export default function JobsPage() {
 	return (
 		<>
 			<Container>

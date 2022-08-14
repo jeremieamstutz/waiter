@@ -91,7 +91,7 @@ export default function Footer() {
 							{t('common:footer:links:help')}
 						</a>
 					</Link>
-					<Link href="/careers">
+					<Link href="/jobs">
 						<a
 							style={{
 								fontSize: '1.125rem',
@@ -99,7 +99,7 @@ export default function Footer() {
 								position: 'relative',
 							}}
 						>
-							{t('common:footer:links:careers')}
+							{t('common:footer:links:jobs')}
 							<div
 								style={{
 									position: 'absolute',
