@@ -27,11 +27,37 @@ export default async function handler(req, res) {
 
 export async function getAllFavoriteRestaurants({ userId }) {
 	const result = await query(
-		`
-		SELECT restaurants.* FROM restaurants
-        JOIN favorites ON favorites.restaurant_id = restaurants.id
-		WHERE favorites.user_id = $1
-        ORDER BY favorites.created_at DESC`,
+		`SELECT
+			id,
+			slug, 
+			owner_id AS "ownerId", 
+			image,
+			name,
+			description,
+			cuisine,
+			phone,
+			website
+			address,
+			street,
+			street_number AS "streetNumber", 
+			postal_code AS "postalCode",
+			city,
+			region,
+			country,
+			latitude,
+			longitude,
+			restaurants.created_at AS "createdAt",
+			updated_at AS "updatedAt"
+		FROM 
+			restaurants
+        JOIN 
+			favorites 
+		ON 
+			favorites.restaurant_id = restaurants.id
+		WHERE 
+			favorites.user_id = $1
+        ORDER BY 
+			favorites.created_at DESC`,
 		[userId],
 	)
 	return result.rows
