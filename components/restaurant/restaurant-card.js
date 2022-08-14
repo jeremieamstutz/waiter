@@ -200,6 +200,7 @@ export default function RestaurantCard({ restaurant, index }) {
 									display: 'flex',
 									alignItems: 'center',
 									borderRadius: '0.5rem',
+									background: '#fff',
 									border: '1px solid #eee',
 								}}
 							>
