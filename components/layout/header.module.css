@@ -1,29 +1,15 @@
-/* .header {
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-	z-index: 10;
-	margin: 0 -1rem 0;
-} */
-
 .header {
-	margin-bottom: 0.5rem;
-}
-
-.spacer {
-	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0.5rem 0 0.75rem;
 }
 
 @media screen and (min-width: 640px) {
 	.header {
 		position: relative;
 		top: 0;
-		margin: 0;
 		width: 100%;
 		margin-bottom: 0;
-	}
-
-	.spacer {
-		display: none;
 	}
 }
