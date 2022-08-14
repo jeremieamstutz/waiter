@@ -125,96 +125,96 @@ export default function ItemModal({ item, onClose }) {
 					<Modal
 						title={item.name}
 						onClose={onClose}
-						header={
-							<div
-								style={{
-									width: '100%',
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'space-between',
-									gap: '1rem',
-								}}
-							>
-								<button
-									style={{
-										flexShrink: 0,
-										minWidth: 0,
-										width: '2.5rem',
-										height: '2.5rem',
-										padding: 0,
-										borderRadius: '50%',
-									}}
-									onClick={handlePrevItem}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width={18}
-										height={18}
-										viewBox="0 0 20 20"
-										fill="currentColor"
-									>
-										<path
-											fillRule="evenodd"
-											d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-								</button>
-								<h1>{item.name}</h1>
-								<div style={{ display: 'flex', gap: '0.5rem' }}>
-									<button
-										style={{
-											minWidth: 0,
-											flexShrink: 0,
-											width: '2.5rem',
-											height: '2.5rem',
-											padding: 0,
-											borderRadius: '50%',
-										}}
-										onClick={handleNextItem}
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width={18}
-											height={18}
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fillRule="evenodd"
-												d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									</button>
-									<button
-										onClick={onClose}
-										style={{
-											minWidth: 0,
-											flexShrink: 0,
-											width: '2.5rem',
-											height: '2.5rem',
-											padding: 0,
-											borderRadius: '50%',
-										}}
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width={16}
-											height={16}
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fillRule="evenodd"
-												d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									</button>
-								</div>
-							</div>
-						}
+						// header={
+						// 	<div
+						// 		style={{
+						// 			width: '100%',
+						// 			display: 'flex',
+						// 			alignItems: 'center',
+						// 			justifyContent: 'space-between',
+						// 			gap: '1rem',
+						// 		}}
+						// 	>
+						// 		<button
+						// 			style={{
+						// 				flexShrink: 0,
+						// 				minWidth: 0,
+						// 				width: '2.5rem',
+						// 				height: '2.5rem',
+						// 				padding: 0,
+						// 				borderRadius: '50%',
+						// 			}}
+						// 			onClick={handlePrevItem}
+						// 		>
+						// 			<svg
+						// 				xmlns="http://www.w3.org/2000/svg"
+						// 				width={18}
+						// 				height={18}
+						// 				viewBox="0 0 20 20"
+						// 				fill="currentColor"
+						// 			>
+						// 				<path
+						// 					fillRule="evenodd"
+						// 					d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+						// 					clipRule="evenodd"
+						// 				/>
+						// 			</svg>
+						// 		</button>
+						// 		<h1>{item.name}</h1>
+						// 		<div style={{ display: 'flex', gap: '0.5rem' }}>
+						// 			<button
+						// 				style={{
+						// 					minWidth: 0,
+						// 					flexShrink: 0,
+						// 					width: '2.5rem',
+						// 					height: '2.5rem',
+						// 					padding: 0,
+						// 					borderRadius: '50%',
+						// 				}}
+						// 				onClick={handleNextItem}
+						// 			>
+						// 				<svg
+						// 					xmlns="http://www.w3.org/2000/svg"
+						// 					width={18}
+						// 					height={18}
+						// 					viewBox="0 0 20 20"
+						// 					fill="currentColor"
+						// 				>
+						// 					<path
+						// 						fillRule="evenodd"
+						// 						d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+						// 						clipRule="evenodd"
+						// 					/>
+						// 				</svg>
+						// 			</button>
+						// 			<button
+						// 				onClick={onClose}
+						// 				style={{
+						// 					minWidth: 0,
+						// 					flexShrink: 0,
+						// 					width: '2.5rem',
+						// 					height: '2.5rem',
+						// 					padding: 0,
+						// 					borderRadius: '50%',
+						// 				}}
+						// 			>
+						// 				<svg
+						// 					xmlns="http://www.w3.org/2000/svg"
+						// 					width={16}
+						// 					height={16}
+						// 					viewBox="0 0 20 20"
+						// 					fill="currentColor"
+						// 				>
+						// 					<path
+						// 						fillRule="evenodd"
+						// 						d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+						// 						clipRule="evenodd"
+						// 					/>
+						// 				</svg>
+						// 			</button>
+						// 		</div>
+						// 	</div>
+						// }
 						footer={
 							session?.user.id === restaurant.ownerId ||
 							session?.user.role === 'admin' ? (
