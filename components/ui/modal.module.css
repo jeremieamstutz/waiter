@@ -37,6 +37,7 @@
 	align-items: center;
 	border-bottom: 1px solid #eee;
 	padding: 1rem;
+	padding-top: max(1rem, env(safe-area-inset-top));
 	gap: 1rem;
 	text-align: center;
 }
@@ -75,6 +76,7 @@
 	align-items: center;
 	border-top: 1px solid #eee;
 	padding: 1rem;
+	padding-top: max(1rem, env(safe-area-inset-bottom));
 	gap: 1rem;
 }
 
