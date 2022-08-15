@@ -276,17 +276,19 @@ export default function Menu() {
 					</Link>
 				)}
 				{status === 'unauthenticated' && (
-					<button
-						onClick={signIn}
-						style={{
-							marginLeft: '1rem',
-							fontSize: '1.125rem',
-							flexShrink: 0,
-							minWidth: '6rem',
-						}}
-					>
-						{t('common:header.login')}
-					</button>
+					<Link href={`/login?callbackUrl=${window.location.href}`}>
+						<a
+							className="button"
+							style={{
+								marginLeft: '1rem',
+								fontSize: '1.125rem',
+								flexShrink: 0,
+								minWidth: '6rem',
+							}}
+						>
+							{t('common:header.login')}
+						</a>
+					</Link>
 				)}
 			</nav>
 		</div>
