@@ -397,10 +397,12 @@ export function NewItemCard({ category }) {
 						/>
 					</svg>
 				</div>
-				<h3 className={classes.title}>Nouvel élément</h3>
-				<p className={classes.description}>
-					Ajouter un élément à cette liste
-				</p>
+				<div className={classes.body}>
+					<h3 className={classes.title}>Nouvel élément</h3>
+					<p className={classes.description}>
+						Ajouter un élément à cette liste
+					</p>
+				</div>
 			</div>
 		</div>
 	)
