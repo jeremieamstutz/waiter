@@ -135,58 +135,56 @@ export default forwardRef(function ItemList(
 					</div>
 				</div>
 			</div>
-			<div className={classes.list}>
-				{items.length < 1 ? (
-					<p style={{ margin: 0 }}>Aucun élément</p>
-				) : (
-					<Swiper
-						ref={listRef}
-						modules={[Navigation, Pagination]}
-						loop={false}
-						navigation={{
-							prevEl,
-							nextEl,
-						}}
-						slidesPerView="auto"
-						spaceBetween={14}
-						threshold={4}
-						pagination={{
-							el: pagEl,
-							type: 'fraction',
-						}}
-						centeredSlidesBounds={true}
-						breakpoints={{
-							0: {
-								centeredSlides: true,
-							},
-							480: {
-								centeredSlides: false,
-							},
-						}}
-						className={classes.swiper}
-					>
-						{items.map((item, index) => (
-							<SwiperSlide key={index} style={{ width: 'auto' }}>
-								<ItemCard
-									item={item}
-									category={category}
-									key={index}
-									index={index}
-									lazyRoot={listRef}
-								/>
+			{items.length < 1 ? (
+				<p style={{ margin: 0 }}>Aucun élément</p>
+			) : (
+				<Swiper
+					ref={listRef}
+					modules={[Navigation, Pagination]}
+					loop={false}
+					navigation={{
+						prevEl,
+						nextEl,
+					}}
+					slidesPerView="auto"
+					spaceBetween={14}
+					threshold={4}
+					pagination={{
+						el: pagEl,
+						type: 'fraction',
+					}}
+					centeredSlidesBounds={true}
+					breakpoints={{
+						0: {
+							centeredSlides: true,
+						},
+						480: {
+							centeredSlides: false,
+						},
+					}}
+					className={classes.swiper}
+				>
+					{items.map((item, index) => (
+						<SwiperSlide key={index} style={{ width: 'auto' }}>
+							<ItemCard
+								item={item}
+								category={category}
+								key={index}
+								index={index}
+								lazyRoot={listRef}
+							/>
+						</SwiperSlide>
+					))}
+					{restaurant &&
+						status === 'authenticated' &&
+						(session.user.id === restaurant.ownerId ||
+							session.user.role === 'admin') && (
+							<SwiperSlide style={{ width: 'auto' }}>
+								<NewItemCard category={category} />
 							</SwiperSlide>
-						))}
-						{restaurant &&
-							status === 'authenticated' &&
-							(session.user.id === restaurant.ownerId ||
-								session.user.role === 'admin') && (
-								<SwiperSlide style={{ width: 'auto' }}>
-									<NewItemCard category={category} />
-								</SwiperSlide>
-							)}
-					</Swiper>
-				)}
-			</div>
+						)}
+				</Swiper>
+			)}
 		</section>
 	)
 })
