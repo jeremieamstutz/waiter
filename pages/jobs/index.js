@@ -11,7 +11,7 @@ export default function JobsPage() {
 			<Container>
 				<Header />
 				<Main>
-					<h1>JObs</h1>
+					<h1>Emplois</h1>
 					<p>
 						Waiter développe le futur de la restauration.
 						Rejoinez-nous dans cette aventure.

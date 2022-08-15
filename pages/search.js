@@ -15,6 +15,7 @@ import Footer from 'components/layout/footer'
 import { Ring } from 'components/ui/spinner'
 import FiltersModal from 'components/search/filters-modal'
 import RestaurantList from 'components/restaurant/restaurant-list'
+import Head from 'next/head'
 
 export default function SearchPage() {
 	const { t } = useTranslation()
@@ -77,6 +78,20 @@ export default function SearchPage() {
 
 	return (
 		<>
+			<Head>
+				<title>{`Search • Waiter`}</title>
+				{/* <meta name="description" content={restaurant.description} /> */}
+				<meta
+					property="og:title"
+					content={`Search • Waiter`}
+				/>
+				{/* <meta
+					property="og:description"
+					content={restaurant.description}
+				/> */}
+				{/* <meta property="og:image" content={restaurant.image} />
+				<meta property="og:url" content="https://www.waiter.so/search" /> */}
+			</Head>
 			<Container
 				style={
 					{

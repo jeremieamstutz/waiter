@@ -11,6 +11,7 @@ import classes from 'styles/account.module.css'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Footer from 'components/layout/footer'
 import Main from 'components/layout/main'
+import Head from 'next/head'
 
 function AccountPage() {
 	const { data: session } = useSession()
@@ -22,6 +23,17 @@ function AccountPage() {
 
 	return (
 		<>
+			<Head>
+				<title>{user.name ? `${user.name} • Waiter` : 'Waiter'}</title>
+				{/* <meta name="description" content={restaurant.description} /> */}
+				<meta property="og:title" content={`Search • Waiter`} />
+				{/* <meta
+					property="og:description"
+					content={restaurant.description}
+				/> */}
+				{/* <meta property="og:image" content={restaurant.image} />
+				<meta property="og:url" content="https://www.waiter.so/search" /> */}
+			</Head>
 			<Container>
 				<Header />
 				<Main>

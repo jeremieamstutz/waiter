@@ -125,7 +125,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 				<meta name="description" content={restaurant.description} />
 				<meta
 					property="og:title"
-					content={restaurant.name + ' - Waiter'}
+					content={`${restaurant.name} • Waiter`}
 				/>
 				<meta
 					property="og:description"
@@ -362,10 +362,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 								height: '3.5rem',
 								padding: '1.5rem',
 								justifyContent: 'space-between',
-								// background: 'rgba(0,0,0,0.6)',
-								// backdropFilter: 'blur(20px) saturate(150%)',
-								minWidth: '26rem',
-								// maxWidth: '30rem',
+								width: 'min(26rem, calc(100vw - 2rem))',
 							}}
 							className="secondary"
 						>

@@ -8,6 +8,7 @@ import Footer from 'components/layout/footer'
 
 import RestaurantList from 'components/restaurant/restaurant-list'
 import { Ring } from 'components/ui/spinner'
+import Head from 'next/head'
 
 function FavoritesPage() {
 	const {
@@ -21,6 +22,17 @@ function FavoritesPage() {
 
 	return (
 		<>
+			<Head>
+				<title>{`Favorites • Waiter`}</title>
+				{/* <meta name="description" content={restaurant.description} /> */}
+				<meta property="og:title" content={`Favorites • Waiter`} />
+				{/* <meta
+					property="og:description"
+					content={restaurant.description}
+				/> */}
+				{/* <meta property="og:image" content={restaurant.image} />
+				<meta property="og:url" content="https://www.waiter.so/search" /> */}
+			</Head>
 			<Container>
 				<Header />
 				<Main>
