@@ -2,7 +2,7 @@ module.exports = {
 	siteUrl: process.env.NEXTAUTH_URL,
 	generateRobotsTxt: true,
 	sitemapSize: 5000,
-	exclude: ['/dynamic-sitemap.xml', '/account/*', '/r/*'],
+	exclude: ['/dynamic-sitemap.xml', '/account/*', '/messages/*', '/r/*'],
 	robotsTxtOptions: {
 		policies: [
 			{
