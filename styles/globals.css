@@ -70,7 +70,8 @@ body {
 }
 
 p,
-p * {
+p *,
+.paragraph {
 	font-family: 'Rubik', sans-serif;
 	line-height: 130%;
 	line-height: 140%;
@@ -83,7 +84,7 @@ a {
 }
 
 h1 {
-	font-size: 1.75rem;
+	font-size: 1.6rem;
 	margin: 0.5em 0;
 }
 
