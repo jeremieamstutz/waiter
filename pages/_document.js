@@ -29,6 +29,7 @@ class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap"
 						rel="stylesheet"
 					/>
+					<link rel="manifest" href="/manifest.json" />
 					{isProduction && (
 						<>
 							<script
