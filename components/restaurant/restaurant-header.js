@@ -87,23 +87,26 @@ export default function RestaurantHeader() {
 							alignItems: 'end',
 						}}
 					>
-						<div>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								overflow: 'hidden',
+							}}
+						>
 							<h1 className={classes.title}>{restaurant.name}</h1>
 							<a
 								aria-label="Restaurant's location"
 								href={`https://www.google.ch/maps/place/${restaurant.address}`}
-								className="text"
-								style={{ color: 'var(--color-text-secondary)' }}
+								className="text paragraph"
+								style={{
+									whiteSpace: 'nowrap',
+									overflow: 'hidden',
+									textOverflow: 'ellipsis',
+								}}
 							>
-								<p
-									style={{
-										margin: 0,
-									}}
-								>
-									{restaurant.street}{' '}
-									{restaurant.streetNumber},{' '}
-									{restaurant.postalCode} {restaurant.city}
-								</p>
+								{restaurant.street} {restaurant.streetNumber},{' '}
+								{restaurant.postalCode} {restaurant.city}
 							</a>
 						</div>
 						<div style={{ display: 'flex', gap: '0.5rem' }}>
