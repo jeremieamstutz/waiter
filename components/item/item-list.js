@@ -149,6 +149,7 @@ export default forwardRef(function ItemList(
 						}}
 						slidesPerView="auto"
 						spaceBetween={14}
+						threshold={4}
 						pagination={{
 							el: pagEl,
 							type: 'fraction',

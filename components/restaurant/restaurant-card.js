@@ -89,7 +89,7 @@ export default function RestaurantCard({ restaurant, index }) {
 				<div
 					className={classes.image}
 					style={{
-						borderRadius: '0.75rem',
+						borderRadius: '0.5rem',
 						overflow: 'hidden',
 						transform: 'translateZ(0)', // Crap for Safari
 					}}
@@ -98,6 +98,7 @@ export default function RestaurantCard({ restaurant, index }) {
 						<Swiper
 							modules={[Navigation, Pagination]}
 							loop={false}
+							threshold={4}
 							navigation={{
 								prevEl: buttonPrev,
 								nextEl: buttonNext,
@@ -116,7 +117,7 @@ export default function RestaurantCard({ restaurant, index }) {
 									objectFit="cover"
 									layout="responsive"
 									width={400}
-									height={400}
+									height={300}
 									style={{
 										borderRadius: '0',
 									}}
@@ -136,7 +137,7 @@ export default function RestaurantCard({ restaurant, index }) {
 									objectFit="cover"
 									layout="responsive"
 									width={400}
-									height={400}
+									height={300}
 									sizes="50vw"
 									priority={index < 2}
 									style={{ borderRadius: '0' }}
