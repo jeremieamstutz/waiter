@@ -17,6 +17,8 @@ import Modal from 'components/ui/modal'
 import Input from 'components/form/input'
 
 import classes from './opening-hours-modal.module.css'
+import { useSession } from 'next-auth/react'
+import { useRestaurant } from 'contexts/restaurant'
 
 function TimeRange({ id }) {
 	const { t } = useTranslation()
@@ -105,6 +107,8 @@ function TimeRange({ id }) {
 export default function OpeningHoursModal({ onClose }) {
 	const { t } = useTranslation()
 	const router = useRouter()
+	const { restaurant } = useRestaurant()
+	const { data: session } = useSession()
 
 	const OPENING_HOURS = [
 		[
@@ -331,13 +335,16 @@ export default function OpeningHoursModal({ onClose }) {
 				title={t('restaurant:details.openingHours.title')}
 				onClose={onClose}
 				footer={
-					<button
-						onClick={() => setIsEditing(true)}
-						className="secondary"
-						style={{ marginLeft: 'auto' }}
-					>
-						{t('common:misc.actions.edit')}
-					</button>
+					session?.user.id === restaurant.ownerId ||
+					session?.user.role === 'admin' ? (
+						<button
+							onClick={() => setIsEditing(true)}
+							className="secondary"
+							style={{ marginLeft: 'auto' }}
+						>
+							{t('common:misc.actions.edit')}
+						</button>
+					) : null
 				}
 			>
 				<div
