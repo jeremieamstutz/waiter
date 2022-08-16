@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useSession, signIn } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 
 import classes from './menu.module.css'
