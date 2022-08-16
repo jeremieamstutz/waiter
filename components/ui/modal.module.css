@@ -1,7 +1,7 @@
 .backdrop {
 	position: fixed;
 	inset: 0;
-	z-index: 20;
+	z-index: 10;
 	background: #000000;
 	opacity: 0.5;
 	cursor: zoom-out;
@@ -15,8 +15,11 @@
 	right: 0;
 	display: flex;
 	justify-content: center;
-	z-index: 20;
+	z-index: 10;
 	max-height: 100vh;
+	/* ios viewport bug fix */
+	max-height: 100dvh;
+	/* max-height: calc(20dvh - (env(keyboard-inset-height) * 10)); */
 }
 
 .modal {
@@ -76,7 +79,7 @@
 	align-items: center;
 	border-top: 1px solid #eee;
 	padding: 1rem;
-	padding-top: max(1rem, env(safe-area-inset-bottom));
+	padding-bottom: max(1rem, env(safe-area-inset-bottom));
 	gap: 1rem;
 }
 
