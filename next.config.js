@@ -21,7 +21,4 @@ module.exports = {
 		minimumCacheTTL: 3600,
 	},
 	optimizeFonts: false,
-	experimental: {
-		scrollRestoration: true,
-	},
 }
