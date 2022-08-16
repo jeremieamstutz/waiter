@@ -89,6 +89,7 @@ export default forwardRef(function ItemList(
 								borderRadius: '50%',
 								marginLeft: '1rem',
 							}}
+							aria-label="Previous item"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +118,7 @@ export default forwardRef(function ItemList(
 								height: '2.5rem',
 								borderRadius: '50%',
 							}}
+							aria-label="Next item"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
