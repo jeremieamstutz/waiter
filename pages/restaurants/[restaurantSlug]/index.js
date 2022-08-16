@@ -143,45 +143,48 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 				{router.query.showOpeningHours === 'true' && (
 					<OpeningHoursModal
 						onClose={() => {
-							let { showOpeningHours, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// let { showOpeningHours, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
 				{router.query.showReviews === 'true' && (
 					<ReviewsModal
 						onClose={() => {
-							let { showReviews, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// let { showReviews, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
 				{router.query.showBooking === 'true' && (
 					<BookingModal
 						onClose={() => {
-							let { showBooking, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// let { showBooking, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
@@ -193,15 +196,16 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							)[0]
 						}
 						onClose={() => {
-							const { item, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const { item, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
@@ -213,50 +217,53 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							)[0]
 						}
 						onClose={() => {
-							const { editItem, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const { editItem, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
 				{router.query.showNewItem && (
 					<EditItemModal
 						onClose={() => {
-							const {
-								showNewItem,
-								restaurantId,
-								categoryId,
-								...query
-							} = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const {
+							// 	showNewItem,
+							// 	restaurantId,
+							// 	categoryId,
+							// 	...query
+							// } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
 				{router.query.showOrder === 'true' && (
 					<OrderModal
 						onClose={() => {
-							const { showOrder, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const { showOrder, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
@@ -268,30 +275,32 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							)[0]
 						}
 						onClose={() => {
-							const { editCategory, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const { editCategory, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
 				{router.query.showNewCategory && (
 					<CategoryModal
 						onClose={() => {
-							const { showNewCategory, ...query } = router.query
-							router.push(
-								{
-									pathname: router.pathname,
-									query: query,
-								},
-								undefined,
-								{ shallow: true },
-							)
+							// const { showNewCategory, ...query } = router.query
+							// router.push(
+							// 	{
+							// 		pathname: router.pathname,
+							// 		query: query,
+							// 	},
+							// 	undefined,
+							// 	{ shallow: true },
+							// )
+							router.back()
 						}}
 					/>
 				)}
@@ -363,6 +372,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 								padding: '1.5rem',
 								justifyContent: 'space-between',
 								width: 'min(26rem, calc(100vw - 2rem))',
+								margin: '0.5rem 0',
 							}}
 							className="secondary"
 						>
@@ -409,10 +419,10 @@ export async function getStaticPaths() {
 	const restaurants = await getAllRestaurants()
 
 	return {
-		// paths: restaurants.map((restaurant) => ({
-		// 	params: { restaurantSlug: restaurant.slug },
-		// })),
-		paths: [],
+		paths: restaurants.map((restaurant) => ({
+			params: { restaurantSlug: restaurant.slug },
+		})),
+		// paths: [],
 		fallback: 'blocking',
 	}
 }
