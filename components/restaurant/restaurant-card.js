@@ -248,7 +248,7 @@ export default function RestaurantCard({ restaurant, index }) {
 						padding: '0.125rem 0',
 					}}
 				>
-					<h3 className={classes.title}>{restaurant.name}</h3>
+					<h2 className={classes.title}>{restaurant.name}</h2>
 					{flags.reviewing && (
 						<div
 							style={{
