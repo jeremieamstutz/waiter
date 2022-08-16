@@ -1,19 +1,20 @@
-import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { getAllRestaurants } from 'pages/api/restaurants'
 
 import Container from 'components/layout/container'
-import RestaurantList from 'components/restaurant/restaurant-list'
 import Header from 'components/layout/header'
+import Footer from 'components/layout/footer'
+import RestaurantList from 'components/restaurant/restaurant-list'
 
 import classes from 'styles/home.module.css'
-import Footer from 'components/layout/footer'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 
 export default function HomePage({ restaurants }) {
 	const { t } = useTranslation()
+	const router = useRouter()
 	return (
 		<>
 			<Head>
@@ -29,7 +30,37 @@ export default function HomePage({ restaurants }) {
 			</Head>
 			<Container>
 				<Header />
-				<h1>{t('home:title')}</h1>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}
+				>
+					<h1>{t('home:title')}</h1>
+					<select
+						value={router.locale}
+						onChange={(event) =>
+							router.push(router.asPath, undefined, {
+								locale: event.target.value,
+							})
+						}
+						style={{
+							outline: 'none',
+							padding: '0.75rem 0.5rem',
+							minWidth: 'unset',
+							width: 'fit-content',
+							fontFamily: 'Gilroy',
+							color: '#222',
+							textAlign: 'right',
+							background: 'white',
+						}}
+					>
+						<option value="en">EN</option>
+						<option value="fr">FR</option>
+						<option value="de">DE</option>
+					</select>
+				</div>
 				<RestaurantList
 					restaurants={restaurants}
 					list={{

@@ -110,6 +110,28 @@ export default function RestaurantHeader() {
 							</a>
 						</div>
 						<div style={{ display: 'flex', gap: '0.5rem' }}>
+							<select
+								value={router.locale}
+								onChange={(event) =>
+									router.push(router.asPath, undefined, {
+										locale: event.target.value,
+									})
+								}
+								style={{
+									outline: 'none',
+									padding: '0.75rem 0.5rem',
+									minWidth: 'unset',
+									width: 'fit-content',
+									fontFamily: 'Gilroy',
+									color: '#222',
+									textAlign: 'right',
+									background: 'white',
+								}}
+							>
+								<option value="en">EN</option>
+								<option value="fr">FR</option>
+								<option value="de">DE</option>
+							</select>
 							{/* <button
 									aria-label="Add to favorite"
 									className="button"
