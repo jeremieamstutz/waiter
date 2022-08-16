@@ -188,7 +188,7 @@ export default function RestaurantCard({ restaurant, index }) {
 						</svg>
 					</div>
 
-					{parseInt(restaurant.id.split('-')[0], 16) % 2 === 0 &&
+					{/* {parseInt(restaurant.id.split('-')[0], 16) % 2 === 0 &&
 						parseInt(restaurant.id.split('-')[0], 16) % 3 == 0 && (
 							<div
 								style={{
@@ -206,7 +206,7 @@ export default function RestaurantCard({ restaurant, index }) {
 							>
 								Sponsored
 							</div>
-						)}
+						)} */}
 					<div
 						style={{
 							position: 'absolute',
