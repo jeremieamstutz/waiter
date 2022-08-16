@@ -117,6 +117,7 @@ select {
 	resize: none;
 	width: 100%;
 	transition: background 0.1s ease-in-out;
+	-webkit-appearance:none;
 }
 
 input::selection,
