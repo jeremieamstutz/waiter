@@ -10,7 +10,7 @@
 	},
 	"modals": {
 		"new": {
-			"title": "Nouvele catégorie"
+			"title": "Nouvelle catégorie"
 		},
 		"edit": {
 			"title": "Modifier la catégorie"
