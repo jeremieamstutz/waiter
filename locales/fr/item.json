@@ -35,6 +35,12 @@
 		"available": "Disponible",
 		"unavailable": "Indisponible"
 	},
+	"buttons": {
+		"new": {
+			"title": "Nouvel élément",
+			"description": "Ajouter un élément à cette catégorie"
+		}
+	},
 	"modals": {
 		"new": {
 			"title": "Nouvel élément"

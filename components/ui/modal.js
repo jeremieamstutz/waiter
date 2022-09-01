@@ -17,7 +17,7 @@ export default function Modal({
 	footer,
 	...props
 }) {
-	useLockBodyScroll(true)
+	useLockBodyScroll()
 
 	const modalRef = useRef()
 

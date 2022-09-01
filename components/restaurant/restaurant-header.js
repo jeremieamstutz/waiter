@@ -83,19 +83,18 @@ export default function RestaurantHeader() {
 						style={{
 							display: 'flex',
 							justifyContent: 'space-between',
-							margin: '0.5rem 0 0',
-							alignItems: 'end',
+							alignItems: 'center',
 						}}
 					>
-						<div
+						<h1 className={classes.title}>{restaurant.name}</h1>
+						{/* <div
 							style={{
 								display: 'flex',
 								flexDirection: 'column',
 								overflow: 'hidden',
 							}}
-						>
-							<h1 className={classes.title}>{restaurant.name}</h1>
-							<a
+						> */}
+							{/* <a
 								aria-label="Restaurant's location"
 								href={`https://www.google.ch/maps/place/${restaurant.address}`}
 								className="text paragraph"
@@ -107,8 +106,8 @@ export default function RestaurantHeader() {
 							>
 								{restaurant.street} {restaurant.streetNumber},{' '}
 								{restaurant.postalCode} {restaurant.city}
-							</a>
-						</div>
+							</a> */}
+						{/* </div> */}
 						<div style={{ display: 'flex', gap: '0.5rem' }}>
 							<select
 								value={router.locale}

@@ -33,11 +33,16 @@ export default function ItemModal({ item, onClose }) {
 	const itemIndex = availableItems.map((itm) => itm.id).indexOf(item.id)
 
 	const prevItemId =
-		availableItems[
-			(itemIndex - 1 + availableItems.length) % availableItems.length
-		].id
+		availableItems.length > 1
+			? availableItems[
+					(itemIndex - 1 + availableItems.length) %
+						availableItems.length
+			  ].id
+			: undefined
 	const nextItemId =
-		availableItems[(itemIndex + 1) % availableItems.length].id
+		availableItems.length > 1
+			? availableItems[(itemIndex + 1) % availableItems.length].id
+			: undefined
 
 	const handlePrevItem = () => {
 		router.replace(

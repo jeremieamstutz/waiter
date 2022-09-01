@@ -358,6 +358,8 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 
 export function NewItemCard({ category }) {
 	const router = useRouter()
+	const { t } = useTranslation()
+	
 	const { restaurant } = useRestaurant()
 
 	return (
@@ -398,9 +400,11 @@ export function NewItemCard({ category }) {
 					</svg>
 				</div>
 				<div className={classes.body}>
-					<h3 className={classes.title}>Nouvel élément</h3>
+					<h3 className={classes.title}>
+						{t('item:buttons.new.title')}
+					</h3>
 					<p className={classes.description}>
-						Ajouter un élément à cette liste
+						{t('item:buttons.new.description')}
 					</p>
 				</div>
 			</div>

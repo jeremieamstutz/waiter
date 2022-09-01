@@ -245,7 +245,7 @@ export default function RestaurantCard({ restaurant, index }) {
 						display: 'flex',
 						justifyContent: 'space-between',
 						alignItems: 'end',
-						padding: '0.125rem 0',
+						marginTop: '0.75rem',
 					}}
 				>
 					<h2 className={classes.title}>{restaurant.name}</h2>
@@ -272,27 +272,33 @@ export default function RestaurantCard({ restaurant, index }) {
 						</div>
 					)}
 				</div>
-				<p
+				{/* <p
 					className={classes.description}
 					style={{ fontSize: '1.1rem' }}
 				>
 					{restaurant.street} {restaurant.streetNumber}
-				</p>
+				</p> */}
 				<p
 					className={classes.details}
-					style={{ justifyContent: 'start', alignItems: 'center' }}
+					style={{
+						justifyContent: 'start',
+						alignItems: 'center',
+						marginTop: '0.125rem',
+					}}
 				>
 					<span
 						className={classes.description}
 						style={{
 							flex: 'unset',
-							fontSize: '1.1rem',
-							marginTop: '-0.2rem',
+							fontSize: '1.125rem',
+							// marginTop: '-0.2rem',
 						}}
 					>
 						{restaurant.cuisine}
 					</span>
-					·<span>CHF 20</span>·
+					<span style={{ color: '#ccc' }}>·</span>
+					<span>CHF 20</span>
+					<span style={{ color: '#ccc' }}>·</span>
 					<span
 						className={`${classes.opening} ${
 							restaurant.isOpen ? classes.open : classes.close

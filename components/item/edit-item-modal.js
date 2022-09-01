@@ -95,14 +95,6 @@ export default function ItemModal({ item, onClose }) {
 						item: values,
 					})
 				}
-				// await sleep(1000)
-				// router.push({
-				// 	pathname: '/restaurants/[restaurantSlug]',
-				// 	query: {
-				// 		restaurantSlug: router.query.restaurantSlug,
-				// 	},
-				// })
-				console.log(restaurant.id)
 				await mutate(`/api/restaurants/${restaurant.id}`)
 				onClose()
 			}}
@@ -175,7 +167,7 @@ export default function ItemModal({ item, onClose }) {
 								style={{ flex: 1 }}
 							>
 								{isSubmitting
-									? 'Loading....'
+									? t('common:misc.actions.loading')
 									: item
 									? t('common:misc.actions.update')
 									: t('common:misc.actions.create')}
