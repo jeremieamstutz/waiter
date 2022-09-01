@@ -28,12 +28,16 @@ export default function CategoryModal({ category, onClose }) {
 
 	const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
+	console.log(restaurant.categories.length)
+
 	return (
 		<>
 			<Formik
 				initialValues={{
 					name: category?.name || '',
 					description: category?.description || '',
+					position:
+						category?.position || restaurant.categories.length + 1,
 				}}
 				validationSchema={object({
 					name: string()
@@ -171,7 +175,7 @@ export default function CategoryModal({ category, onClose }) {
 									...Array(
 										category
 											? restaurant.categories.length
-											: restaurant.categories.length - 1,
+											: restaurant.categories.length + 1,
 									).keys(),
 								].map((number) => (
 									<option value={number + 1} key={number}>
