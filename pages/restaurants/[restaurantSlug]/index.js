@@ -27,8 +27,8 @@ const ReviewsModal = dynamic(() => import('components/reviews/reviews-modal'))
 const BookingModal = dynamic(() => import('components/booking/booking-modal'))
 const ItemModal = dynamic(() => import('components/item/item-modal'))
 const EditItemModal = dynamic(() => import('components/item/edit-item-modal'))
-const CategoryModal = dynamic(() =>
-	import('components/category/category-modal'),
+const EditCategoryModal = dynamic(() =>
+	import('components/category/edit-category-modal'),
 )
 const OrderModal = dynamic(() => import('components/order/order-modal'))
 
@@ -196,15 +196,6 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							)[0]
 						}
 						onClose={() => {
-							// const { item, ...query } = router.query
-							// router.push(
-							// 	{
-							// 		pathname: router.pathname,
-							// 		query: query,
-							// 	},
-							// 	undefined,
-							// 	{ shallow: true },
-							// )
 							router.back()
 						}}
 					/>
@@ -217,16 +208,17 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							)[0]
 						}
 						onClose={() => {
-							// const { editItem, ...query } = router.query
-							// router.push(
-							// 	{
-							// 		pathname: router.pathname,
-							// 		query: query,
-							// 	},
-							// 	undefined,
-							// 	{ shallow: true },
-							// )
-							router.back()
+							const { restaurantSlug } = router.query
+							router.push(
+								{
+									pathname: '/restaurants/[restaurantSlug]',
+									query: {
+										restaurantSlug,
+									},
+								},
+								undefined,
+								{ shallow: true },
+							)
 						}}
 					/>
 				)}
@@ -268,7 +260,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 					/>
 				)}
 				{router.query.editCategory && (
-					<CategoryModal
+					<EditCategoryModal
 						category={
 							restaurant.categories.filter(
 								(cat) => cat.id === router.query.editCategory,
@@ -289,7 +281,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 					/>
 				)}
 				{router.query.showNewCategory && (
-					<CategoryModal
+					<EditCategoryModal
 						onClose={() => {
 							// const { showNewCategory, ...query } = router.query
 							// router.push(
@@ -335,7 +327,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 									)
 								}
 							>
-								New category
+								{t('category:buttons.new.title')}
 							</button>
 						)}
 					<div className={classes.disclaimer}>
@@ -445,6 +437,7 @@ export async function getStaticProps({ params, locale }) {
 				'common',
 				'restaurant',
 				'item',
+				'category',
 				'order',
 				'booking',
 				'reviews',

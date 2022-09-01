@@ -1,0 +1,23 @@
+{
+	"fields": {
+		"name": "Nom",
+		"description": "Description"
+	},
+	"buttons": {
+		"new": {
+			"title": "Nouvelle catégorie"
+		}
+	},
+	"modals": {
+		"new": {
+			"title": "Nouvele catégorie"
+		},
+		"edit": {
+			"title": "Modifier la catégorie"
+		},
+		"delete": {
+			"title": "Confirmation",
+			"confirm": "Êtes-vous sûr de vouloir supprimer cette catégorie: "
+		}
+	}
+}
