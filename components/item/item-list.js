@@ -146,6 +146,7 @@ export default forwardRef(function ItemList(
 					nextEl,
 				}}
 				slidesPerView="auto"
+				slidesPerGroupAuto={true}
 				spaceBetween={14}
 				threshold={4}
 				pagination={{
