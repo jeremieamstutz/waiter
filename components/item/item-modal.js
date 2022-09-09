@@ -7,6 +7,7 @@ import { Form, Formik } from 'formik'
 
 import { useOrder } from 'contexts/order'
 import { useRestaurant } from 'contexts/restaurant'
+import { useFlags } from 'contexts/flags'
 
 import Modal from 'components/ui/modal'
 import RadioGroup from 'components/form/radio'
@@ -14,18 +15,18 @@ import CheckboxGroup from 'components/form/checkbox'
 import Textarea from 'components/form/textarea'
 import Switch from 'components/form/switch'
 
-import flags from 'flags.json'
-
 import classes from './item-modal.module.css'
-
-const TAGS = ['Bio', 'Fish', 'Gluten', 'Sesame']
 
 export default function ItemModal({ item, onClose }) {
 	const router = useRouter()
 	const { data: session } = useSession()
 	const { t } = useTranslation()
 	const { restaurant } = useRestaurant()
+	const { flags } = useFlags()
 	const orderContext = useOrder()
+
+	item.allergies = ['Poissson', 'Lait']
+	item.tags = ['Bio', 'Sain']
 
 	const availableItems = restaurant.items.filter(
 		(itm) => itm.category_id === item.category_id && itm.available,
@@ -460,22 +461,52 @@ export default function ItemModal({ item, onClose }) {
 								<div
 									style={{
 										display: 'flex',
-										gap: '0.5rem',
-										flexWrap: 'wrap',
+										justifyContent: 'space-between',
+										gap: '1rem',
 									}}
 								>
-									{TAGS.map((tag, index) => (
-										<div
-											key={index}
-											style={{
-												background: '#eee',
-												borderRadius: '1rem',
-												padding: '0.5rem 1rem',
-											}}
-										>
-											{tag}
-										</div>
-									))}
+									<div
+										style={{
+											display: 'flex',
+											gap: '0.5rem',
+											flexWrap: 'wrap',
+										}}
+									>
+										{item.tags.map((tag, index) => (
+											<div
+												key={index}
+												style={{
+													background: '#eee',
+													borderRadius: '1rem',
+													padding: '0.5rem 1rem',
+												}}
+											>
+												{tag}
+											</div>
+										))}
+									</div>
+									<div
+										style={{
+											display: 'flex',
+											gap: '0.5rem',
+											flexWrap: 'wrap',
+										}}
+									>
+										{item.allergies.map(
+											(allergy, index) => (
+												<div
+													key={index}
+													style={{
+														background: '#eee',
+														borderRadius: '1.5rem',
+														padding: '0.5rem 1rem',
+													}}
+												>
+													{allergy}
+												</div>
+											),
+										)}
+									</div>
 								</div>
 
 								{/* <RadioGroup
