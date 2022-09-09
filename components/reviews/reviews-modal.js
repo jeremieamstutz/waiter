@@ -339,62 +339,43 @@ export default function ReviewsModal({ onClose }) {
 	const reviews = [
 		{
 			user: {
-				name: 'Jérémie',
+				name: 'David',
 				image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
 			},
-			created_at: new Date('1998-01-27'),
-			rating: 5,
-			comment: "Fantastic restaurant ! I'll come back for sure",
+			created_at: new Date('2022-08-28'),
+			rating: 4,
+			comment:
+				'Location is great and food is good. I gave 4 stars because choice on menu is limited and price is a bit above average. All products come from Switzerland and this is pretty good!',
 		},
 		{
 			user: {
-				name: 'Huguette',
+				name: 'Elena',
 				image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
 			},
-			created_at: new Date('2001-09-06'),
-			rating: 2,
+			created_at: new Date('2022-08-23'),
+			rating: 5,
 			comment:
-				'Fusce ex ipsum, euismod eu est non, euismod elementum elit. Sed maximus molestie dolor, eget mollis nibh fermentum ut',
+				'In the company of friends we had a drink in the garden. Great location, decent service and prices too.',
 		},
 		{
 			user: {
-				name: 'Frédéric',
+				name: 'Bill',
 				image: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1023&q=80',
 			},
-			created_at: new Date('2000-04-07'),
-			rating: 3,
+			created_at: new Date('2022-08-07'),
+			rating: 5,
 			comment:
-				'Quisque in mi eget lectus commodo consequat id in nunc. Proin metus neque, volutpat sit amet nibh eget, sodales efficitur nisi.',
+				'We ate here at our last evening in Lausanne and I am so glad I chose this. It was just faboulus: the food, the view, the staff. Everything just perfect, thank you!',
 		},
 		{
 			user: {
-				name: 'Oscar',
+				name: 'Gianluca',
 				image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80',
 			},
-			created_at: new Date('1999-12-23'),
-			rating: 8,
-			comment:
-				'Sed et laoreet ipsum, sed imperdiet dolor. Mauris orci neque, eleifend ac orci quis, condimentum vehicula erat. Fusce tempor vitae nisi id venenatis.',
-		},
-		{
-			user: {
-				name: 'Gertrude',
-				image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80',
-			},
-			created_at: new Date('2003-04-10'),
+			created_at: new Date('2022-08-02'),
 			rating: 5,
 			comment:
-				'Fusce ex ipsum, euismod eu est non, euismod elementum elit. Sed maximus molestie dolor, eget mollis nibh fermentum ut',
-		},
-		{
-			user: {
-				name: 'Fred',
-				image: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1023&q=80',
-			},
-			created_at: new Date('1971-11-13'),
-			rating: 5,
-			comment:
-				'Quisque in mi eget lectus commodo consequat id in nunc. Proin metus neque, volutpat sit amet nibh eget, sodales efficitur nisi.',
+				"Love this place. Good, hearty food, nice wines and always buzzing. The ambiance is great and it's a nice place for an evening meal or business lunch. Great views too.",
 		},
 	]
 
