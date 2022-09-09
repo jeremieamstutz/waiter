@@ -1,8 +1,28 @@
-.group {
+.form-group {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+.input-group {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	background: var(--color-ui-tertiary);
+	border-radius: 0.5rem;
+	transition: background 0.1s ease-in-out;
+}
+
+.input-group:hover {
+	background: #ddd;
+}
+
+.input-group:focus-within {
+	outline: 1px solid var(--color-ui-hover);
+	outline-offset: 2px;
+	background: var(--color-ui-tertiary);
 }
 
 .error {

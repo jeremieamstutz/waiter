@@ -1,8 +1,55 @@
-.group {
+.form-group {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+.input-group {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	background: var(--color-ui-tertiary);
+	border-radius: 0.5rem;
+	transition: background 0.1s ease-in-out;
+}
+
+.input-group:hover {
+	background: #ddd;
+}
+
+.input-group:focus-within {
+	outline: 1px solid var(--color-ui-hover);
+	outline-offset: 2px;
+	background: var(--color-ui-tertiary);
+}
+
+.select select {
+	appearance: none;
+	cursor: pointer;
+}
+
+.select select,
+.select::after {
+	grid-area: select;
+}
+
+.select {
+	flex: 1;
+	display: grid;
+	grid-template-areas: 'select';
+	align-items: center;
+}
+
+.select::after {
+	content: '';
+	width: 0.8rem;
+	height: 0.4rem;
+	background: #333;
+	clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+	justify-self: end;
+	margin-right: 1rem;
 }
 
 .error {
