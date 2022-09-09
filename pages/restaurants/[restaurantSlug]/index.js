@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
@@ -5,21 +6,26 @@ import { useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import useSWR from 'swr'
+import { Form, Formik } from 'formik'
 
-import { RestaurantProvider } from 'contexts/restaurant'
-import { useOrder } from 'contexts/order'
 import { getFullRestaurant } from 'pages/api/[restaurantSlug]'
 import { getAllRestaurants } from 'pages/api/restaurants'
 
+import { useFlags } from 'contexts/flags'
+import { useOrder } from 'contexts/order'
+import { RestaurantProvider } from 'contexts/restaurant'
+
+import Main from 'components/layout/main'
 import Header from 'components/layout/header'
 import Container from 'components/layout/container'
 import Footer from 'components/layout/footer'
 import RestaurantHeader from 'components/restaurant/restaurant-header'
 import ItemList from 'components/item/item-list'
-
-import flags from 'flags.json'
+import Select from 'components/form/select'
+import Input from 'components/form/input'
 
 import classes from 'styles/restaurant.module.css'
+
 const OpeningHoursModal = dynamic(() =>
 	import('components/opening-hours/opening-hours-modal'),
 )
@@ -30,10 +36,14 @@ const EditItemModal = dynamic(() => import('components/item/edit-item-modal'))
 const EditCategoryModal = dynamic(() =>
 	import('components/category/edit-category-modal'),
 )
+const EditRestaurantModal = dynamic(() =>
+	import('components/restaurant/edit-restaurant-modal'),
+)
 const OrderModal = dynamic(() => import('components/order/order-modal'))
 
-export default function RestaurantPage({ restaurant: fallbackData, params }) {
+export default function RestaurantPage({ restaurant: fallbackData }) {
 	const router = useRouter()
+	const { flags } = useFlags()
 	const { t } = useTranslation()
 	const orderContext = useOrder()
 
@@ -42,6 +52,16 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 	})
 
 	const { data: session, status } = useSession()
+	const [query, setQuery] = useState('')
+	const filtersFormRef = useRef()
+
+	function filter(string, query) {
+		return string.toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+	}
+
+	const filteredItems = restaurant.items.filter(
+		(item) => filter(item.name, query) || filter(item.description, query),
+	)
 
 	const structuredData = {
 		'@context': 'https://schema.org',
@@ -156,7 +176,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 						}}
 					/>
 				)}
-				{router.query.showReviews === 'true' && (
+				{router.query.reviews === 'true' && (
 					<ReviewsModal
 						onClose={() => {
 							// let { showReviews, ...query } = router.query
@@ -296,18 +316,84 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 						}}
 					/>
 				)}
-				<main className={classes.container}>
+				{router.query.editRestaurant && (
+					<EditRestaurantModal
+						onClose={() => {
+							router.back()
+						}}
+					/>
+				)}
+				<Main className={classes.container}>
 					<RestaurantHeader />
-					{restaurant.categories.map((category, index) => (
-						<ItemList
-							restaurant={restaurant}
-							category={category}
-							items={restaurant.items.filter(
-								(item) => item.categoryId === category.id,
-							)}
-							key={index}
-						/>
-					))}
+					{/* <Formik
+						innerRef={filtersFormRef}
+						initialValues={{ menu: 'noon', query: '' }}
+					>
+						<Form>
+							<div
+								style={{
+									display: 'flex',
+									flexWrap: 'wrap',
+									gap: '1rem',
+									justifyContent: 'space-between',
+								}}
+							>
+								<Select
+									name="menu"
+									// style={{ flex: 0, minWidth: '30rem' }}
+								>
+									<option>Menu du midi</option>
+								</Select>
+								<Input
+									prefix={
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+											width={18}
+											height={18}
+										>
+											<path
+												fillRule="evenodd"
+												d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+												clipRule="evenodd"
+											/>
+										</svg>
+									}
+									name="query"
+									placeholder={t(
+										'common:misc.actions.search',
+									)}
+									onChange={(event) => {
+										console.log(event.target.value)
+										setQuery(event.target.value)
+									}}
+									value={query}
+									// style={{
+									// 	flex: 0,
+									// 	with: 'fit-content',
+									// 	minWidth: '30rem',
+									// }}
+									autoComplete="off"
+								/>
+							</div>
+						</Form>
+					</Formik> */}
+					{restaurant.categories.map((category, index) =>
+						query.length > 0 &&
+						filteredItems.filter(
+							(item) => item.categoryId === category.id,
+						).length == 0 ? undefined : (
+							<ItemList
+								restaurant={restaurant}
+								category={category}
+								items={filteredItems.filter(
+									(item) => item.categoryId === category.id,
+								)}
+								key={index}
+							/>
+						),
+					)}
 					{status === 'authenticated' &&
 						(session.user.id === restaurant.ownerId ||
 							session.user.role === 'admin') && (
@@ -400,7 +486,7 @@ export default function RestaurantPage({ restaurant: fallbackData, params }) {
 							</span>
 						</button>
 					)}
-				</main>
+				</Main>
 				<Footer />
 			</Container>
 		</RestaurantProvider>
@@ -432,7 +518,6 @@ export async function getStaticProps({ params, locale }) {
 	return {
 		props: {
 			restaurant: JSON.parse(JSON.stringify(restaurant)),
-			params,
 			...(await serverSideTranslations(locale, [
 				'common',
 				'restaurant',
