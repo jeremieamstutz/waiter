@@ -48,13 +48,50 @@ export default function BookingModal({ onClose }) {
 					footer={
 						<>
 							{status === 'success' ? (
-								<button
-									onClick={onClose}
-									className="secondary"
-									style={{ marginLeft: 'auto' }}
-								>
-									{t('common:misc.actions.close')}
-								</button>
+								<>
+									<div
+										style={{
+											marginLeft: '0.5rem',
+											color: '#165901',
+											fontSize: '1.125rem',
+											display: 'flex',
+											alignItems: 'center',
+											gap: '0.5rem',
+											fontFamily: 'Rubik',
+										}}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width={20}
+											height={20}
+											viewBox="0 0 20 20"
+											fill="#165901"
+										>
+											<path
+												fillRule="evenodd"
+												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										{t('booking:body.confirmation')}
+									</div>
+									<div
+										style={{
+											display: 'flex',
+											gap: '1rem',
+										}}
+									>
+										{/* <button>
+											{t('common:misc.actions.edit')}
+										</button> */}
+										<button
+											onClick={onClose}
+											className="secondary"
+										>
+											{t('common:misc.actions.close')}
+										</button>
+									</div>
+								</>
 							) : (
 								<>
 									<button onClick={onClose}>
@@ -171,39 +208,57 @@ export default function BookingModal({ onClose }) {
 								disabled={status === 'success'}
 							/>
 						</section>
-						{status === 'success' && (
+						{/* {status === 'success' && (
 							<section>
 								<div
 									style={{
 										width: '100%',
-										color: '#165901',
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'space-between',
+										gap: '0.5rem',
 										background: '#edfce8',
 										padding: '1rem',
 										borderRadius: '0.5rem',
-										fontSize: '1.125rem',
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.5rem',
-										fontFamily: 'Rubik',
 									}}
 								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width={20}
-										height={20}
-										viewBox="0 0 20 20"
-										fill="#165901"
+									<div
+										style={{
+											color: '#165901',
+											fontSize: '1.125rem',
+											display: 'flex',
+											alignItems: 'center',
+											gap: '0.5rem',
+											fontFamily: 'Rubik',
+										}}
 									>
-										<path
-											fillRule="evenodd"
-											d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-											clipRule="evenodd"
-										/>
-									</svg>
-									{t('booking:body.confirmation')}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width={20}
+											height={20}
+											viewBox="0 0 20 20"
+											fill="#165901"
+										>
+											<path
+												fillRule="evenodd"
+												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										{t('booking:body.confirmation')}
+									</div>
+									<button
+										style={{
+											background: '#165901',
+											color: '#ffffff',
+											fontSize: '1.125rem',
+										}}
+									>
+										Modifier
+									</button>
 								</div>
 							</section>
-						)}
+						)} */}
 					</Form>
 				</Modal>
 			)}
