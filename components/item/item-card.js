@@ -142,8 +142,7 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 						// objectPosition="left"
 						width={290}
 						height={435}
-						priority={index < 2}
-						sizes="50vw"
+						sizes="250px"
 						lazyRoot={lazyRoot}
 					/>
 					<div
@@ -359,7 +358,7 @@ export default function ItemCard({ item, category, index, lazyRoot }) {
 export function NewItemCard({ category }) {
 	const router = useRouter()
 	const { t } = useTranslation()
-	
+
 	const { restaurant } = useRestaurant()
 
 	return (
