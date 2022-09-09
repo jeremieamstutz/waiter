@@ -4,10 +4,14 @@ import Head from 'next/head'
 import { signIn } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { Form, Formik } from 'formik'
+import { object, string } from 'yup'
 
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import Footer from 'components/layout/footer'
+
+import Input from 'components/form/input'
 
 import classes from 'styles/login.module.css'
 
@@ -58,7 +62,6 @@ export default function LoginPage() {
 
 	const { error } = router.query
 
-	const [email, setEmail] = useState('')
 	const [loading, setLoading] = useState(false)
 
 	const providers = {
@@ -128,9 +131,14 @@ export default function LoginPage() {
 							{t('auth:pages.login.title')}
 						</h1>
 						<div className={classes.list}>
-							<form
-								onSubmit={(event) => {
-									event.preventDefault()
+							<Formik
+								initialValues={{ email: '' }}
+								validationSchema={object({
+									email: string()
+										.email('It must be a valid email')
+										.required('Your email is required'),
+								})}
+								onSubmit={({ email }) => {
 									setLoading(true)
 									signIn('email', {
 										email,
@@ -139,46 +147,60 @@ export default function LoginPage() {
 											process.env.NEXT_PUBLIC_DOMAIN,
 									})
 								}}
-								style={{
-									display: 'flex',
-									flexDirection: 'row',
-									gap: '0.5rem',
-								}}
 							>
-								<input
-									type="email"
-									name="email"
-									placeholder="Email"
-									onChange={(event) =>
-										setEmail(event.target.value)
-									}
-								/>
-								<button
-									type="submit"
-									className="secondary"
-									style={{ padding: '0 2rem' }}
+								<Form
+									style={{
+										display: 'flex',
+										flexDirection: 'row',
+										gap: '0.5rem',
+									}}
 								>
-									{loading ? (
-										<span>
-											{t('common:misc.actions.loading')}
-										</span>
-									) : (
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width={20}
-											height={20}
-											viewBox="0 0 20 20"
-											fill="currentColor"
-										>
-											<path
-												fillRule="evenodd"
-												d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-												clipRule="evenodd"
-											/>
-										</svg>
-									)}
-								</button>
-							</form>
+									<Input
+										prefix={
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 20 20"
+												fill="currentColor"
+												width={18}
+												height={18}
+											>
+												<path d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z" />
+												<path d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z" />
+											</svg>
+										}
+										type="text"
+										name="email"
+										placeholder="Email"
+									/>
+									<button
+										type="submit"
+										className="secondary"
+										style={{ padding: '0 2rem' }}
+									>
+										{loading ? (
+											<span>
+												{t(
+													'common:misc.actions.loading',
+												)}
+											</span>
+										) : (
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width={20}
+												height={20}
+												viewBox="0 0 20 20"
+												fill="currentColor"
+											>
+												<path
+													fillRule="evenodd"
+													d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+													clipRule="evenodd"
+												/>
+											</svg>
+										)}
+									</button>
+								</Form>
+							</Formik>
 							<div
 								style={{
 									fontSize: '1.25rem',
