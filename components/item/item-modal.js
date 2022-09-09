@@ -25,8 +25,8 @@ export default function ItemModal({ item, onClose }) {
 	const { flags } = useFlags()
 	const orderContext = useOrder()
 
-	item.allergies = ['Poissson', 'Lait']
-	item.tags = ['Bio', 'Sain']
+	item.allergies = ['fish', 'milk']
+	item.tags = ['bio', 'healthy']
 
 	const availableItems = restaurant.items.filter(
 		(itm) => itm.category_id === item.category_id && itm.available,
@@ -375,7 +375,7 @@ export default function ItemModal({ item, onClose }) {
 												fontSize: '1.125rem',
 											}}
 										>
-											Ajouter
+											{t('common:misc.actions.add')}
 										</span>
 										<span
 											style={{
@@ -481,11 +481,14 @@ export default function ItemModal({ item, onClose }) {
 													padding: '0.5rem 1rem',
 												}}
 											>
-												{tag}
+												{t(
+													'item:tags.' +
+														tag.toLowerCase(),
+												)}
 											</div>
 										))}
 									</div>
-									<div
+									{/* <div
 										style={{
 											display: 'flex',
 											gap: '0.5rem',
@@ -506,7 +509,7 @@ export default function ItemModal({ item, onClose }) {
 												</div>
 											),
 										)}
-									</div>
+									</div> */}
 								</div>
 
 								{/* <RadioGroup
