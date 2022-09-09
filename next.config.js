@@ -19,6 +19,7 @@ module.exports = {
 			'images.unsplash.com',
 		],
 		minimumCacheTTL: 3600,
+		deviceSizes: [240, 320, 480, 640, 960, 1080, 1240, 1400],
 	},
 	optimizeFonts: false,
 }

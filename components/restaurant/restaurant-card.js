@@ -1,21 +1,20 @@
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { mutate } from 'swr'
 import axios from 'axios'
-import { useState } from 'react'
+import { signIn, useSession } from 'next-auth/react'
+import { useTranslation } from 'next-i18next'
+
+import { useFlags } from 'contexts/flags'
+import useFavorites from 'contexts/favorites'
 
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import flags from 'flags.json'
-
 import classes from './restaurant-card.module.css'
-import useFavorites from 'contexts/favorites'
-import { signIn, useSession } from 'next-auth/react'
-import { fadeIn } from 'animations'
-import { useTranslation } from 'next-i18next'
 
 export default function RestaurantCard({ restaurant, index }) {
 	restaurant.rating = {
@@ -24,9 +23,10 @@ export default function RestaurantCard({ restaurant, index }) {
 	}
 	restaurant.isOpen = true
 
+	const { flags } = useFlags()
+	const { t } = useTranslation()
 	const { status } = useSession()
 	const { data: favorites } = useFavorites()
-	const { t } = useTranslation()
 
 	const isFavorite = favorites.restaurantIds.includes(restaurant.id)
 
@@ -118,6 +118,7 @@ export default function RestaurantCard({ restaurant, index }) {
 									layout="responsive"
 									width={400}
 									height={300}
+									sizes="(max-width: 640px) 100vw, (max-width: 910px) 50vw, (max-width: 1240px) 33vw, 25vw"
 									style={{
 										borderRadius: '0',
 									}}

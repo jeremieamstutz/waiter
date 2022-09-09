@@ -1,27 +1,26 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signIn, useSession } from 'next-auth/react'
-import useSWR, { useSWRConfig } from 'swr'
+import { useSWRConfig } from 'swr'
 import axios from 'axios'
-
-import { useRestaurant } from 'contexts/restaurant'
-
-import classes from './restaurant-header.module.css'
-import useFavorites from 'contexts/favorites'
 import Image from 'next/image'
+
+import { useFlags } from 'contexts/flags'
+import { useRestaurant } from 'contexts/restaurant'
+import useFavorites from 'contexts/favorites'
 import { useTranslation } from 'next-i18next'
 
-import flags from 'flags.json'
+import classes from './restaurant-header.module.css'
 
 export default function RestaurantHeader() {
-	const { restaurant } = useRestaurant()
+	const { flags } = useFlags()
+	const { t } = useTranslation()
 	const { data: session, status } = useSession()
 	const router = useRouter()
-	const { t } = useTranslation()
+	const { restaurant } = useRestaurant()
+	const { data: favorites } = useFavorites()
 
 	const { mutate } = useSWRConfig()
-
-	const { data: favorites } = useFavorites()
 
 	const isFavorite = favorites.restaurantIds.includes(restaurant.id)
 
@@ -94,7 +93,7 @@ export default function RestaurantHeader() {
 								overflow: 'hidden',
 							}}
 						> */}
-							{/* <a
+						{/* <a
 								aria-label="Restaurant's location"
 								href={`https://www.google.ch/maps/place/${restaurant.address}`}
 								className="text paragraph"
@@ -201,6 +200,7 @@ export default function RestaurantHeader() {
 								objectFit="cover"
 								width={400}
 								height={300} // 500
+								sizes="640px"
 								priority={true}
 							/>
 						</div>
@@ -213,7 +213,7 @@ export default function RestaurantHeader() {
 								objectFit="cover"
 								width={400}
 								height={295} // 500
-								priority={true}
+								sizes="320px"
 							/>
 							<Image
 								className={classes.image}
@@ -223,7 +223,7 @@ export default function RestaurantHeader() {
 								objectFit="cover"
 								width={400}
 								height={295} // 500
-								priority={true}
+								sizes="320px"
 							/>
 						</div>
 						<div className={classes.second}>
@@ -235,7 +235,7 @@ export default function RestaurantHeader() {
 								objectFit="cover"
 								width={400}
 								height={295} // 500
-								priority={true}
+								sizes="320px"
 							/>
 							<Image
 								className={classes.image}
@@ -245,7 +245,7 @@ export default function RestaurantHeader() {
 								objectFit="cover"
 								width={400}
 								height={295} // 500
-								priority={true}
+								sizes="320px"
 							/>
 						</div>
 					</div>
@@ -268,33 +268,34 @@ export default function RestaurantHeader() {
 								</p>
 							)}
 							<div className={classes.info}>
-								{/* {restaurant.address && (
-										<a
-											aria-label="Restaurant's location"
-											href={`https://www.google.ch/maps/place/${restaurant.address}`}
-											className={classes.row}
+								{restaurant.address && (
+									<a
+										aria-label="Restaurant's location"
+										href={`https://www.google.ch/maps/place/${restaurant.address}`}
+										className={`text ${classes.row}`}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width={20}
+											height={20}
+											viewBox="0 0 20 20"
+											fill="currentColor"
 										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width={20}
-												height={20}
-												viewBox="0 0 20 20"
-												fill="currentColor"
-											>
-												<path
-													fillRule="evenodd"
-													d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-													clipRule="evenodd"
-												/>
-											</svg>
-											<p>
-												{restaurant.street}{' '}
-												{restaurant.streetNumber},{' '}
-												{restaurant.postalCode}{' '}
-												{restaurant.city}
-											</p>
-										</a>
-									)} */}
+											<path
+												fillRule="evenodd"
+												d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										<p>
+											{restaurant.street}{' '}
+											{restaurant.streetNumber}
+											{/* ,{' '}
+											{restaurant.postalCode}{' '}
+											{restaurant.city} */}
+										</p>
+									</a>
+								)}
 								{restaurant.phone && (
 									<a
 										aria-label="Restaurant's phone"
@@ -401,7 +402,7 @@ export default function RestaurantHeader() {
 														restaurantSlug:
 															router.query
 																.restaurantSlug,
-														showReviews: true,
+														reviews: true,
 													},
 												},
 												undefined,
