@@ -109,15 +109,14 @@ select {
 	height: 3rem;
 	border: none;
 	outline: none;
-	background: var(--color-ui-tertiary);
+	background: transparent;
 	border-radius: 0.5rem;
 	line-height: 1.5rem;
 	padding: 0.75rem;
 	font-size: 1.125rem;
 	resize: none;
-	width: 100%;
 	transition: background 0.1s ease-in-out;
-	-webkit-appearance:none;
+	width: 100%;
 }
 
 input::selection,
@@ -126,26 +125,12 @@ textarea::selection {
 	background: #a00;
 }
 
-input:hover,
-textarea:hover,
-select:hover {
-	background: #ddd;
-}
-
-select {
-	min-width: 6rem;
-	cursor: pointer;
-}
-
 ::placeholder {
 	color: var(--color-text-secondary);
 }
 
 button:focus-visible,
-a.button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
+a.button:focus-visible {
 	outline: 1px solid var(--color-ui-hover);
 	outline-offset: 2px;
 	background: var(--color-ui-tertiary);
@@ -157,13 +142,6 @@ label {
 	flex-direction: column;
 	gap: 0.5rem;
 	/* pointer-events: none; */
-}
-
-.input-group {
-	display: flex;
-	gap: 0.5rem;
-	background: var(--color-ui-tertiary);
-	border-radius: 0.5rem;
 }
 
 .input-group input {

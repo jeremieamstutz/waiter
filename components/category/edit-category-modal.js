@@ -28,8 +28,6 @@ export default function CategoryModal({ category, onClose }) {
 
 	const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
-	console.log(restaurant.categories.length)
-
 	return (
 		<>
 			<Formik

@@ -43,5 +43,10 @@
 		"greek": "Greek",
 		"german": "German",
 		"russian": "Russian"
+	},
+	"modals": {
+		"new": {
+			"title": "New restaurant"
+		}
 	}
 }

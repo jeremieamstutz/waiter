@@ -81,10 +81,7 @@ export default function SearchPage() {
 			<Head>
 				<title>{`Search • Waiter`}</title>
 				{/* <meta name="description" content={restaurant.description} /> */}
-				<meta
-					property="og:title"
-					content={`Search • Waiter`}
-				/>
+				<meta property="og:title" content={`Search • Waiter`} />
 				{/* <meta
 					property="og:description"
 					content={restaurant.description}
