@@ -341,8 +341,6 @@ WHERE restaurants.city != 'Démos'
 GROUP BY restaurants.name
 
 CREATE EXTENSION pg_trgm;
-CREATE INDEX items_name_idx ON items USING GIN (name gin_trgm_ops);
-CREATE INDEX items_desc_idx ON items USING GIN (description gin_trgm_ops); >> Pas sur de linterêt
 
 SELECT *
 FROM restaurants
