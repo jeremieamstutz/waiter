@@ -12,26 +12,3 @@ export default {
 		}
 	},
 }
-
-// export default function event(props) {
-// 	if (isProduction) window.gtag(props)
-// }
-// export function pageview({ title, location, pathname, debug }) {
-// 	if (isProduction)
-// 		window.gtag('event', 'page_view', {
-// 			page_title: title,
-// 			page_location: location,
-// 			page_path: pathname,
-// 			debug_mode: debug,
-// 		})
-// }
-
-// export function event({ category, action, label, value, debug }) {
-// 	if (isProduction)
-// 		window.gtag('event', action, {
-// 			event_category: category,
-// 			event_label: label,
-// 			value: value,
-// 			debug_mode: debug,
-// 		})
-// }
