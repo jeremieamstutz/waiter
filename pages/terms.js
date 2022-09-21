@@ -10,7 +10,19 @@ export default function TermsPage() {
 	return (
 		<>
 			<Container>
-				<Header />
+				<Header>
+					<title>Terms • Waiter</title>
+					{/* <meta
+						name="description"
+						content={t('home:meta.description')}
+					/>
+					<meta property="og:title" content="Waiter" />
+					<meta
+						property="og:description"
+						content={t('home:meta.description')}
+					/>
+					<meta property="og:url" content="https://www.waiter.so" /> */}
+				</Header>
 				<Main
 					className={classes.terms}
 					style={{
