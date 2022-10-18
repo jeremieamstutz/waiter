@@ -10,12 +10,17 @@ import Select from 'components/form/select'
 import Textarea from 'components/form/textarea'
 
 import classes from './booking-modal.module.css'
+import Warning from 'components/icons/warning'
+import X from 'components/icons/x'
 
 export default function BookingModal({ onClose }) {
 	const { t } = useTranslation()
 	const router = useRouter()
 
 	const id = 'booking'
+
+	const message =
+		'Durant le week-end, les brunchs se déroulent en trois services: à 10h00, 11h30 et 13h30.'
 
 	return (
 		<Formik
@@ -112,6 +117,7 @@ export default function BookingModal({ onClose }) {
 					}
 				>
 					<Form className={classes.form} id={id}>
+						<p style={{ margin: '0 0 0.5rem' }}>{message}</p>
 						<section>
 							<Select
 								label={t('booking:body.date.label')}
@@ -196,6 +202,18 @@ export default function BookingModal({ onClose }) {
 									</option>
 								))}
 							</Select>
+							<Select
+								label={t('booking:body.location.label')}
+								name="location"
+								disabled={status === 'success'}
+							>
+								<option value="inside">
+									{t('booking:body.location.options.inside')}
+								</option>
+								<option value="outside">
+									{t('booking:body.location.options.outside')}
+								</option>
+							</Select>
 						</section>
 						<section>
 							<Textarea
@@ -208,6 +226,59 @@ export default function BookingModal({ onClose }) {
 								disabled={status === 'success'}
 							/>
 						</section>
+						{status === 'success' && (
+							<section
+								style={{
+									display: 'flex',
+									flexDirection: 'column',
+									gap: '0.5rem',
+								}}
+							>
+								<div
+									style={{
+										width: '100%',
+										display: 'flex',
+										alignItems: 'center',
+										gap: '0.5rem',
+										background: 'var(--color-ui-warning)',
+										padding: '1rem',
+										borderRadius: '0.5rem',
+									}}
+								>
+									<Warning fill="var(--color-warning)" />
+									<p
+										style={{
+											margin: 0,
+											color: 'var(--color-warning)',
+										}}
+									>
+										{t('booking:body.disclaimer')}
+									</p>
+								</div>
+								<div
+									style={{
+										width: '100%',
+										display: 'flex',
+										alignItems: 'center',
+										gap: '0.5rem',
+										background: '#ffdddd',
+										padding: '1rem',
+										borderRadius: '0.5rem',
+									}}
+								>
+									<X fill="var(--color-danger)" />
+									<p
+										style={{
+											margin: 0,
+											color: 'var(--color-danger)',
+										}}
+									>
+										Vous avez déjà une réservation à cette
+										heure
+									</p>
+								</div>
+							</section>
+						)}
 						{/* {status === 'success' && (
 							<section>
 								<div
