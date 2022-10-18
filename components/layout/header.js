@@ -1,14 +1,24 @@
-import Menu from './menu'
+import Link from 'next/link'
+import track from 'utils/track'
+
+import Menu from 'components/layout/menu'
+import Logo from 'components/icons/logo'
 
 import classes from './header.module.css'
-import Logo from 'components/icons/logo'
-import Link from 'next/link'
 
 export default function Header() {
 	return (
 		<div className={classes.header}>
 			<Link href="/">
-				<a className={classes.logo}>
+				<a
+					className={classes.logo}
+					onClick={() => {
+						track.event({
+							event_category: 'navigation',
+							event_name: 'click_on_logo',
+						})
+					}}
+				>
 					<Logo />
 				</a>
 			</Link>
