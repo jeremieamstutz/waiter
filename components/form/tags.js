@@ -28,13 +28,14 @@ function TagsGroup({ label, children, ...props }) {
 
 function TagsGroupItem({ value, children }) {
 	const { field, helpers } = useTags()
-	const checked = field.value?.find((el) => el === value)
+	const checked = field.value?.find((el) => el === value) ?? false
+
 	return (
-		<label className={classes.container} role="option">
+		<label className={classes.container}>
 			<input
-				{...field}
-				className={classes.checkbox}
 				type="checkbox"
+				name={field.name}
+				value={checked}
 				checked={checked}
 				onChange={() => {
 					if (checked) {
@@ -49,7 +50,8 @@ function TagsGroupItem({ value, children }) {
 						}
 					}
 				}}
-				aria-checked={checked}
+				onBlur={field.onBlur}
+				className={classes.checkbox}
 			/>
 			<span className={classes.body}>{children}</span>
 		</label>
