@@ -1,7 +1,5 @@
 .card {
-	flex-shrink: 0;
-	width: calc(100vw - 1.5rem);
-	/* width: auto; */
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -9,16 +7,6 @@
 	cursor: pointer;
 	scroll-snap-align: center;
 	user-select: none;
-}
-
-.order {
-	display: none;
-	opacity: 0;
-	transition: all 150ms;
-}
-
-.order.bottom {
-	bottom: -1rem;
 }
 
 .card:hover .order.bottom {
@@ -34,39 +22,6 @@
 	position: relative;
 	overflow: hidden;
 }
-
-/* .picker {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: space-between;
-	background: linear-gradient(
-		0deg,
-		rgba(0, 0, 0, 0.5) 0%,
-        rgba(0, 0, 0, 0.3) 30%,
-		rgba(0, 0, 0, 0.1) 70%,
-		rgba(0, 0, 0, 0) 100%
-	);
-    border-radius: 0.5rem;
-    z-index: 1;
-	padding-top: 1rem;
-}
-
-.picker * {
-	color: #fff;
-	font-size: 1.25rem;
-}
-
-.picker span {
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
 
 .body {
 	flex: 1;
@@ -115,66 +70,5 @@
 	justify-content: center;
 	aspect-ratio: 2/3;
 	border-radius: 0.5rem;
-	background: var(--color-ui-tertiary);
-	border: 1px solid #ddd;
-}
-
-@media screen and (min-width: 320px) {
-	.card {
-		width: calc((100vw - 2.75rem) / 1.5);
-	}
-}
-
-@media screen and (min-width: 480px) {
-	.card {
-		width: calc((100vw - 1 * 1rem - 2rem) / 2);
-	}
-}
-
-@media screen and (min-width: 640px) {
-	.card {
-		gap: 0.5rem;
-		/* background: #f3f3f3;
-		width: 16rem;
-		border: 1px solid #ddd;
-		padding: 1rem;
-		border-radius: 1rem; */
-	}
-	/* .body {
-		padding: 1rem;
-	} */
-
-	.order {
-		display: block;
-	}
-}
-
-@media screen and (min-width: 640px) {
-	.card {
-		width: calc((100vw - 2 * 1rem - 2rem) / 3);
-	}
-}
-
-@media screen and (min-width: 800px) {
-	.card {
-		width: calc((100vw - 3 * 1rem - 2rem) / 4);
-	}
-}
-
-@media screen and (min-width: 960px) {
-	.card {
-		width: calc((100vw - 4 * 1rem - 4rem) / 5);
-	}
-}
-
-@media screen and (min-width: 1120px) {
-	.card {
-		width: calc((100vw - 5 * 1rem - 4rem) / 6);
-	}
-}
-
-@media screen and (min-width: 1280px) {
-	.card {
-		width: calc((1224px - 5 * 1rem) / 6);
-	}
+	background: #eee;
 }
