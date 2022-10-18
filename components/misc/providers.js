@@ -1,14 +1,14 @@
-import { AnimatePresence } from 'framer-motion'
-
-import { OrderProvider } from 'contexts/order'
+import { RestaurantProvider } from 'contexts/restaurant'
 import { FlagsProvider } from 'contexts/flags'
+import { OrderProvider } from 'contexts/order'
 
-export default function Providers({ children }) {
+// TODO: Remove restaurant provider from here
+export default function Providers({ restaurant, flags, children }) {
 	return (
-		<FlagsProvider>
-			<OrderProvider>
-				<AnimatePresence key="page">{children}</AnimatePresence>
-			</OrderProvider>
+		<FlagsProvider initialValue={flags}>
+			<RestaurantProvider initialValue={restaurant}>
+				<OrderProvider>{children}</OrderProvider>
+			</RestaurantProvider>
 		</FlagsProvider>
 	)
 }
