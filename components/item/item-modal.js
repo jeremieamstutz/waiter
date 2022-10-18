@@ -1,9 +1,11 @@
-import { useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
 import { useSession } from 'next-auth/react'
 import { Form, Formik } from 'formik'
+
+import track from 'utils/track'
 
 import { useOrder } from 'contexts/order'
 import { useRestaurant } from 'contexts/restaurant'
@@ -23,13 +25,13 @@ export default function ItemModal({ item, onClose }) {
 	const { t } = useTranslation()
 	const { restaurant } = useRestaurant()
 	const { flags } = useFlags()
-	const orderContext = useOrder()
+	const { addItem } = useOrder()
 
 	item.allergies = ['fish', 'milk']
 	item.tags = ['bio', 'healthy']
 
 	const availableItems = restaurant.items.filter(
-		(itm) => itm.category_id === item.category_id && itm.available,
+		(itm) => itm.category_id === item.category_id,
 	)
 	const itemIndex = availableItems.map((itm) => itm.id).indexOf(item.id)
 
@@ -45,7 +47,7 @@ export default function ItemModal({ item, onClose }) {
 			? availableItems[(itemIndex + 1) % availableItems.length].id
 			: undefined
 
-	const handlePrevItem = () => {
+	const handlePrevItem = useCallback(() => {
 		router.replace(
 			{
 				pathname: router.pathname,
@@ -57,9 +59,9 @@ export default function ItemModal({ item, onClose }) {
 			undefined,
 			{ shallow: true },
 		)
-	}
+	}, [prevItemId, router])
 
-	const handleNextItem = () => {
+	const handleNextItem = useCallback(() => {
 		router.replace(
 			{
 				pathname: router.pathname,
@@ -71,22 +73,25 @@ export default function ItemModal({ item, onClose }) {
 			undefined,
 			{ shallow: true },
 		)
-	}
+	}, [nextItemId, router])
 
-	function listeners(event) {
-		switch (event.keyCode) {
-			// Previous item
-			case 37:
-				event.preventDefault()
-				handlePrevItem()
-				break
-			// Next item
-			case 39:
-				event.preventDefault()
-				handleNextItem()
-				break
-		}
-	}
+	const listeners = useCallback(
+		(event) => {
+			switch (event.keyCode) {
+				// Previous item
+				case 37:
+					event.preventDefault()
+					handlePrevItem()
+					break
+				// Next item
+				case 39:
+					event.preventDefault()
+					handleNextItem()
+					break
+			}
+		},
+		[handlePrevItem, handleNextItem],
+	)
 
 	useEffect(() => {
 		document.addEventListener('keydown', listeners)
@@ -97,6 +102,16 @@ export default function ItemModal({ item, onClose }) {
 
 	const [quantity, setQuantity] = useState(1)
 	const id = useId()
+
+	if (!item) {
+		return (
+			<Modal title="Not found" onClose={onClose}>
+				<p style={{ textAlign: 'center' }}>
+					Sorry, we couldn&apos;t find any detail for this item
+				</p>
+			</Modal>
+		)
+	}
 
 	return (
 		<>
@@ -281,7 +296,7 @@ export default function ItemModal({ item, onClose }) {
 										{t('common:misc.actions.edit')}
 									</button>
 								</>
-							) : flags.ordering ? (
+							) : flags.orders ? (
 								<>
 									<div
 										style={{
@@ -323,6 +338,8 @@ export default function ItemModal({ item, onClose }) {
 										<div
 											style={{
 												fontSize: '1.125rem',
+												width: '1rem',
+												textAlign: 'center',
 											}}
 										>
 											{quantity}
@@ -358,9 +375,15 @@ export default function ItemModal({ item, onClose }) {
 										className="secondary"
 										disabled={!item.available}
 										onClick={() => {
-											orderContext.addItem({
+											addItem({
 												...item,
 												quantity,
+											})
+											track.event({
+												event_category: 'order',
+												event_name: 'add_to_order',
+												event_label: item.name,
+												value: item.price,
 											})
 											onClose()
 										}}
@@ -405,17 +428,18 @@ export default function ItemModal({ item, onClose }) {
 									}}
 								>
 									<Image
+										alt={item.name ?? ''}
 										src={
-											item.image
-												? item.image
-												: '/images/defaults/item.png'
+											item.image ||
+											'/images/defaults/item.png'
 										}
 										layout="responsive"
 										objectFit="cover"
 										objectPosition="center"
-										width={290}
-										height={250}
+										width={640}
+										height={640}
 										priority={true}
+										sizes="640px"
 									/>
 								</div>
 								<div
@@ -426,18 +450,39 @@ export default function ItemModal({ item, onClose }) {
 										justifyContent: 'space-between',
 									}}
 								>
-									{/* <div
+									<div
 										style={{
-											color: 'white',
-											width: 'fit-content',
-											background: '#e67e22',
-											padding: '0.25rem 0.5rem',
-											borderRadius: '0.25rem',
-											margin: '0.125rem 0 0.25rem',
+											display: 'flex',
+											gap: '0.5rem',
 										}}
 									>
-										Nouveau
-									</div> */}
+										{!item.available && (
+											<div
+												style={{
+													color: 'white',
+													width: 'fit-content',
+													background: '#a00',
+													padding: '0.25rem 0.5rem',
+													borderRadius: '0.25rem',
+													margin: '0.125rem 0 0.25rem',
+												}}
+											>
+												{t('item:status.unavailable')}
+											</div>
+										)}
+										{/* <div
+											style={{
+												color: 'white',
+												width: 'fit-content',
+												background: '#e67e22',
+												padding: '0.25rem 0.5rem',
+												borderRadius: '0.25rem',
+												margin: '0.125rem 0 0.25rem',
+											}}
+										>
+											Nouveau
+										</div> */}
+									</div>
 									<p
 										style={{
 											fontSize: '1.125rem',
@@ -472,9 +517,9 @@ export default function ItemModal({ item, onClose }) {
 											flexWrap: 'wrap',
 										}}
 									>
-										{item.tags.map((tag, index) => (
+										{item.tags.map((tag) => (
 											<div
-												key={index}
+												key={tag}
 												style={{
 													background: '#eee',
 													borderRadius: '1rem',
@@ -496,9 +541,9 @@ export default function ItemModal({ item, onClose }) {
 										}}
 									>
 										{item.allergies.map(
-											(allergy, index) => (
+											(allergy) => (
 												<div
-													key={index}
+													key={allergy}
 													style={{
 														background: '#eee',
 														borderRadius: '1.5rem',
@@ -511,52 +556,58 @@ export default function ItemModal({ item, onClose }) {
 										)}
 									</div> */}
 								</div>
-
-								{/* <RadioGroup
-									label="Accompagnement"
-									name="accompagnement"
-								>
-									<RadioGroup.Item value="frites">
-										Frites allumettes
-									</RadioGroup.Item>
-									<RadioGroup.Item value="pommes">
-										Pommes vapeurs
-									</RadioGroup.Item>
-									<RadioGroup.Item value="riz">
-										Riz basmati du japon
-									</RadioGroup.Item>
-								</RadioGroup> */}
-								<CheckboxGroup
-									label="Verre de vin conseillé"
-									name="vins"
-								>
-									<CheckboxGroup.Item value="chardonnay">
-										<span>Chardonnay</span>
-										<span>+ CHF 5.00</span>
-									</CheckboxGroup.Item>
-									<CheckboxGroup.Item value="oeil de Perdrix">
-										<span>Oeil de Perdrix</span>
-										<span>+ CHF 4.00</span>
-									</CheckboxGroup.Item>
-									<CheckboxGroup.Item value="st. Saphorin">
-										<span>St. Saphorin</span>
-										<span>+ CHF 6.00</span>
-									</CheckboxGroup.Item>
-								</CheckboxGroup>
-								<RadioGroup label="Portion" name="portion">
-									<RadioGroup.Item value="petite">
-										<span>Petite portion</span>
-									</RadioGroup.Item>
-									<RadioGroup.Item value="grande">
-										<span>Grande portion</span>
-										<span>+ CHF 5.00</span>
-									</RadioGroup.Item>
-								</RadioGroup>
-								<Textarea
-									label="Remarque"
-									name="remark"
-									rows={2}
-								/>
+								{flags.modifiers && (
+									<>
+										<RadioGroup
+											label="Accompagnement"
+											name="accompagnement"
+										>
+											<RadioGroup.Item value="frites">
+												Frites allumettes
+											</RadioGroup.Item>
+											<RadioGroup.Item value="pommes">
+												Pommes vapeurs
+											</RadioGroup.Item>
+											<RadioGroup.Item value="riz">
+												Riz basmati du japon
+											</RadioGroup.Item>
+										</RadioGroup>
+										<CheckboxGroup
+											label="Verre de vin conseillé"
+											name="vins"
+										>
+											<CheckboxGroup.Item value="chardonnay">
+												<span>Chardonnay</span>
+												<span>+ CHF 5.00</span>
+											</CheckboxGroup.Item>
+											<CheckboxGroup.Item value="oeil de Perdrix">
+												<span>Oeil de Perdrix</span>
+												<span>+ CHF 4.00</span>
+											</CheckboxGroup.Item>
+											<CheckboxGroup.Item value="st. Saphorin">
+												<span>St. Saphorin</span>
+												<span>+ CHF 6.00</span>
+											</CheckboxGroup.Item>
+										</CheckboxGroup>
+										{/* <RadioGroup
+											label="Portion"
+											name="portion"
+										>
+											<RadioGroup.Item value="petite">
+												<span>Petite portion</span>
+											</RadioGroup.Item>
+											<RadioGroup.Item value="grande">
+												<span>Grande portion</span>
+												<span>+ CHF 5.00</span>
+											</RadioGroup.Item>
+										</RadioGroup> */}
+										<Textarea
+											label="Remarque"
+											name="remark"
+											rows={4}
+										/>
+									</>
+								)}
 							</div>
 						</Form>
 					</Modal>
