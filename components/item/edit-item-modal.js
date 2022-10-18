@@ -1,23 +1,25 @@
 import { useId, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
-import { useSession } from 'next-auth/react'
 import { Form, Formik } from 'formik'
+import { number, object, string } from 'yup'
+import axios from 'axios'
+import { mutate } from 'swr'
+
+import track from 'utils/track'
+import sleep from 'utils/sleep'
 
 import { useRestaurant } from 'contexts/restaurant'
 
 import Modal from 'components/ui/modal'
 
-import classes from './item-modal.module.css'
+import ImagePicker from 'components/form/image-picker'
 import Textarea from 'components/form/textarea'
 import Input from 'components/form/input'
 import Select from 'components/form/select'
 import Tags from 'components/form/tags'
-import ImagePicker from 'components/ui/image-picker'
-import { boolean, number, object, string } from 'yup'
-import axios from 'axios'
-import sleep from 'utils/sleep'
-import { mutate } from 'swr'
+
+import classes from './item-modal.module.css'
 
 const TAGS = ['vegan', 'vegetarian', 'bio', 'homemade', 'healthy']
 
@@ -48,6 +50,11 @@ export default function ItemModal({ item, onClose }) {
 		await axios.delete(`/api/items/${item.id}`)
 		setShowConfirmDelete(false)
 		await mutate(`/api/restaurants/${restaurant.id}`)
+		track.event({
+			event_category: 'item',
+			event_name: 'delete_item',
+			event_label: item.name,
+		})
 		onClose()
 	}
 
@@ -56,16 +63,16 @@ export default function ItemModal({ item, onClose }) {
 	return (
 		<Formik
 			initialValues={{
-				image: item?.image || '',
-				name: item?.name || '',
-				description: item?.description || '',
-				price: item?.price || '',
-				currency: item?.currency || 'CHF',
-				available: item?.available.toString() || true,
-				allergies: item?.allergies || [],
-				tags: item?.tags || [],
+				image: item?.image ?? '',
+				name: item?.name ?? '',
+				description: item?.description ?? '',
+				price: item?.price ?? '',
+				currency: item?.currency ?? 'CHF',
+				allergies: item?.allergies ?? [],
+				tags: item?.tags ?? [],
 			}}
 			validationSchema={object({
+				image: string(),
 				name: string()
 					.min(3, 'Must be 3 characters or more')
 					.max(30, 'Must be 30 characters or less')
@@ -76,12 +83,8 @@ export default function ItemModal({ item, onClose }) {
 				),
 				price: number('Must be a number').required('Price is required'),
 				currency: string().required('Currency is required'),
-				available: boolean('Not a boolean').required(
-					'Availability is required',
-				),
 			})}
 			onSubmit={async (values) => {
-				console.log(values)
 				if (!item) {
 					await axios.post('/api/items', {
 						item: {
@@ -90,9 +93,19 @@ export default function ItemModal({ item, onClose }) {
 							restaurantId: router.query.restaurantId,
 						},
 					})
+					track.event({
+						event_category: 'item',
+						event_name: 'create_item',
+						event_label: values.name,
+					})
 				} else {
 					await axios.put(`/api/items/${item.id}`, {
 						item: values,
+					})
+					track.event({
+						event_category: 'item',
+						event_name: 'update_item',
+						event_label: values.name,
 					})
 				}
 				await mutate(`/api/restaurants/${restaurant.id}`)
@@ -178,10 +191,7 @@ export default function ItemModal({ item, onClose }) {
 					<Form className={classes.form} id={formId}>
 						<ImagePicker
 							name="image"
-							label="Image"
-							url={values.image}
-							setUrl={(url) => setFieldValue('image', url)}
-							style={{ height: '26rem' }}
+							help="Please select an high-res image"
 						/>
 						<Input
 							type="text"
@@ -191,7 +201,7 @@ export default function ItemModal({ item, onClose }) {
 							autoComplete="off"
 						/>
 						<Textarea
-							rows={2}
+							rows={4}
 							name="description"
 							label={t('item:fields.description')}
 							placeholder={t('item:fields.description')}
@@ -219,15 +229,15 @@ export default function ItemModal({ item, onClose }) {
 							name="allergies"
 							label={t('item:fields.allergies')}
 						>
-							{ALLERGIES.map((allergy, index) => (
-								<Tags.Item value={allergy} key={index}>
+							{ALLERGIES.map((allergy) => (
+								<Tags.Item value={allergy} key={allergy}>
 									{t('item:allergies.' + allergy)}
 								</Tags.Item>
 							))}
 						</Tags>
 						<Tags name="tags" label={t('item:fields.tags')}>
-							{TAGS.map((tag, index) => (
-								<Tags.Item value={tag} key={index}>
+							{TAGS.map((tag) => (
+								<Tags.Item value={tag} key={tag}>
 									{t('item:tags.' + tag)}
 								</Tags.Item>
 							))}
