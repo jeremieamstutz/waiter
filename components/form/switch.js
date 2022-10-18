@@ -1,21 +1,23 @@
 import { useField } from 'formik'
+import { useId } from 'react'
 
 import classes from './switch.module.css'
 
 export default function Switch({ label, style, ...props }) {
 	const [field, meta] = useField({ ...props, type: 'checkbox' })
+	const inputId = useId()
 
 	return (
 		<div className={classes.group} style={style}>
-			<label htmlFor={props.name} className={classes.label}>
+			<label className={classes.label} htmlFor={inputId}>
 				<input
 					{...field}
 					{...props}
+					id={inputId}
 					type="checkbox"
-					id={props.name}
 					className={classes.checkbox}
 				/>
-				<div className={classes.switch} htmlFor={props.name}>
+				<div className={classes.switch}>
 					<span className={classes.thumb} />
 				</div>
 				{label}
