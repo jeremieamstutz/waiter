@@ -31,8 +31,9 @@ function CheckboxGroup({ label, children, ...props }) {
 function CheckboxGroupItem({ value, children, ...props }) {
 	const { field, helpers } = useCheckbox()
 	const checked = field.value?.find((el) => el === value)
+
 	return (
-		<label className={classes.container} role="option" {...props}>
+		<label className={classes.container} {...props}>
 			<input
 				{...field}
 				className={classes.checkbox}
@@ -51,7 +52,6 @@ function CheckboxGroupItem({ value, children, ...props }) {
 						}
 					}
 				}}
-				aria-checked={checked}
 			/>
 			<span className={classes.checkmark} />
 			<span className={classes.body}>{children}</span>
@@ -61,3 +61,27 @@ function CheckboxGroupItem({ value, children, ...props }) {
 
 CheckboxGroup.Item = CheckboxGroupItem
 export default CheckboxGroup
+
+export function Checkbox({ children, label, ...props }) {
+	const [field, meta] = useField({ ...props, type: 'checkbox' })
+	console.log(field)
+
+	return (
+		<div className={classes['form-group']}>
+			<div>
+				<label className={classes.container} {...props}>
+					<input
+						{...field}
+						type="checkbox"
+						className={classes.checkbox}
+					/>
+					<span className={classes.checkmark} />
+					<span className={classes.body}>{label}</span>
+				</label>
+			</div>
+			{meta.touched && meta.error && (
+				<div className={classes.error}>{meta.error}</div>
+			)}
+		</div>
+	)
+}
