@@ -1,27 +1,94 @@
 import { useId, useRef, useState } from 'react'
+import Image from 'next/image'
 import { useTranslation } from 'next-i18next'
-import { Form, Formik } from 'formik'
+import { Form, Formik, useFormikContext } from 'formik'
 import { array, number, object, string } from 'yup'
-import { mutate } from 'swr'
 import axios from 'axios'
 
+import { parseAddress } from 'utils/geocoder'
+
 import CUISINES from 'constants/cuisines'
-import { capitalizeFirstLetter } from 'utils/text'
 
 import Modal from 'components/ui/modal'
-import ImagePicker from 'components/ui/image-picker'
 import Input from 'components/form/input'
 import Select from 'components/form/select'
 import Textarea from 'components/form/textarea'
 
-import At from 'components/icons/at'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper'
-import Plus from 'components/icons/plus'
-import { parseAddress } from 'utils/geocoder'
+import { useRouter } from 'next/router'
+import { useRestaurant } from 'contexts/restaurant'
+import { mutate } from 'swr'
 
-export default function EditRestaurantModal({ restaurant, onClose }) {
+function ImagePreview({ image }) {
+	return (
+		<div
+			style={{
+				background: '#eee',
+				aspectRatio: 4 / 3,
+				borderRadius: '0.5rem',
+				position: 'relative',
+			}}
+		>
+			<Image
+				alt={image?.alt ?? ''}
+				src={image?.url ?? '/images/defaults/item.png'}
+				layout="responsive"
+				objectFit="cover"
+				width={400}
+				height={300}
+				sizes="640px"
+			/>
+		</div>
+	)
+}
+
+function Images() {
+	const router = useRouter()
 	const { t } = useTranslation()
+	const { restaurant } = useRestaurant()
+
+	return (
+		<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+			<div
+				style={{
+					display: 'grid',
+					gap: '1rem',
+					gridTemplateColumns: 'repeat(3, 1fr)',
+				}}
+			>
+				{Array.from({ ...restaurant.images, length: 3 }).map(
+					(image, index) => (
+						<ImagePreview key={index} image={image} index={index} />
+					),
+				)}
+			</div>
+			<button
+				type="button"
+				onClick={() =>
+					router.push(
+						{
+							pathname: router.pathname,
+							query: {
+								restaurantSlug: router.query.restaurantSlug,
+								editRestaurantImages: true,
+							},
+						},
+						undefined,
+						{ shallow: true },
+					)
+				}
+			>
+				{t('restaurant:actions.editImages')}
+			</button>
+		</div>
+	)
+}
+
+export default function EditRestaurantModal({ onClose }) {
+	const { t } = useTranslation()
+
+	const { restaurant } = useRestaurant()
 
 	const formId = useId()
 	const swiperRef = useRef(null)
@@ -36,11 +103,11 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 		<>
 			<Formik
 				initialValues={{
-					photos: restaurant?.image || [],
 					name: restaurant?.name || '',
 					description: restaurant?.description || '',
 					cuisine: restaurant?.cuisine || '',
 					phone: restaurant?.phone || '',
+					email: restaurant?.email || '',
 					website: restaurant?.website || '',
 					street: restaurant?.street || '',
 					streetNumber: restaurant?.streetNumber || '',
@@ -50,9 +117,6 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 					country: restaurant?.country || '',
 				}}
 				validationSchema={object({
-					photos: array(string().required('You must add 5 images'))
-						.min(5)
-						.max(20),
 					name: string()
 						.min(3, 'Must be 3 characters or more')
 						.max(30, 'Must be 30 characters or less')
@@ -66,6 +130,7 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 						.max(30, 'Must be 30 characters or less')
 						.required('Cuisine is required'),
 					phone: string().min(8, 'Must be 8 characters or more'),
+					email: string().email('Must be a valid email'),
 					website: string().url(),
 					street: string()
 						.min(3, 'Must be 3 characters or more')
@@ -93,44 +158,43 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 						.required('Country is required'),
 				})}
 				onSubmit={async (values) => {
+					console.log('SUBMITTTING', values)
 					let response
 					if (!restaurant) {
-						response = await axios.post('/api/restaurants', {
-							restaurant: {
-								...values,
-							},
-						})
+						await axios.post('/api/restaurants', values)
 					} else {
-						response = await axios.put(
+						await axios.put(
 							`/api/restaurants/${restaurant.id}`,
-							{
-								restaurant: {
-									...values,
-								},
-							},
+							values,
 						)
 					}
-					// await sleep(2000)
-					const data = response.data
-					router.push({
-						pathname: '/restaurants/[restaurantSlug]',
-						query: {
-							restaurantSlug: data.restaurant.slug,
-						},
-					})
+					await mutate(`/api/restaurants/${restaurant.id}`)
+					onClose()
 				}}
 			>
-				{({ values, setFieldValue, isSubmitting }) => (
+				{({ values, dirty, setFieldValue, isSubmitting }) => (
 					<Modal
 						title={
 							restaurant
-								? t('restaurant:modals.edit.title')
-								: t('restaurant:modals.new.title')
+								? t('restaurant:modals.editRestaurant.title')
+								: t('restaurant:modals.newRestaurant.title')
 						}
-						onClose={onClose}
+						onClose={() => {
+							if (!dirty) return onClose()
+							if (confirm('Are you sure ?')) return onClose()
+						}}
 						footer={
 							<>
-								<button type="button">Cancel</button>
+								<button
+									type="button"
+									onClick={() => {
+										if (!dirty) return onClose()
+										if (confirm('Are you sure ?'))
+											return onClose()
+									}}
+								>
+									{t('common:misc.actions.cancel')}
+								</button>
 								<button
 									type="submit"
 									form={formId}
@@ -147,229 +211,58 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 						style={{ maxWidth: '50rem' }}
 					>
 						<Form id={formId}>
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'space-between',
-									alignItems: 'end',
-									gap: '1rem',
-								}}
-							>
-								<h2>Photos</h2>
-								<div
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-									}}
-								>
-									<button type="button">Grid view</button>
-									<div
-										style={{
-											display: 'flex',
-											gap: '0.5rem',
-											alignItems: 'center',
-										}}
-									>
-										<button
-											type="button"
-											ref={(node) => setPrevEl(node)}
-											style={{
-												minWidth: 0,
-												padding: 0,
-												width: '2.5rem',
-												height: '2.5rem',
-												borderRadius: '50%',
-												marginLeft: '1rem',
-											}}
-											aria-label="Previous image"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width={20}
-												height={20}
-												viewBox="0 0 20 20"
-												fill="currentColor"
-											>
-												<path
-													fillRule="evenodd"
-													d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-													clipRule="evenodd"
-												/>
-											</svg>
-										</button>
-										<div
-											ref={(node) => setPagEl(node)}
-											style={{ width: 'auto' }}
-										/>
-										<button
-											type="button"
-											ref={(node) => setNextEl(node)}
-											style={{
-												minWidth: 0,
-												padding: 0,
-												width: '2.5rem',
-												height: '2.5rem',
-												borderRadius: '50%',
-											}}
-											aria-label="Next image"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width={20}
-												height={20}
-												viewBox="0 0 20 20"
-												fill="currentColor"
-											>
-												<path
-													fillRule="evenodd"
-													d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-													clipRule="evenodd"
-												/>
-											</svg>
-										</button>
-									</div>
-								</div>
-							</div>
-							<div style={{ display: 'flex', gap: '0.5rem' }}>
-								<Swiper
-									ref={swiperRef}
-									modules={[Navigation, Pagination]}
-									loop={false}
-									navigation={{
-										prevEl,
-										nextEl,
-									}}
-									slidesPerView="2"
-									spaceBetween={7}
-									threshold={4}
-									pagination={{
-										el: pagEl,
-										type: 'fraction',
-									}}
-									style={{ borderRadius: '0.5rem' }}
-									onSlidesLengthChange={(swiper) =>
-										swiper.slideTo(swiper.slides.length)
-									}
-								>
-									{values.photos.map((photo, index) => (
-										<SwiperSlide key={index}>
-											<div
-												style={{
-													flexShrink: 0,
-													background: '#ccc',
-													borderRadius: '0.5rem',
-													aspectRatio: 4 / 3,
-													width: 'auto',
-													minWidth: '10rem',
-													display: 'flex',
-													alignItems: 'center',
-													justifyContent: 'center',
-												}}
-											>
-												{index}
-											</div>
-										</SwiperSlide>
-									))}
-								</Swiper>
-								<div
-									style={{
-										flex: 1,
-										flexShrink: 0,
-										background: '#eee',
-										borderRadius: '0.5rem',
-										alignSelf: 'stretch',
-										minWidth: '50px',
-										minHeight: '15rem',
-										display: 'flex',
-										alignItems: 'center',
-										justifyContent: 'center',
-										cursor: 'pointer',
-									}}
-									onClick={() => {
-										setFieldValue('photos', [
-											...values.photos,
-											'',
-										])
-									}}
-								>
-									<Plus />
-								</div>
-							</div>
-							{/* <div
-								style={{
-									display: 'flex',
-									gap: '1rem',
-									overflow: 'scroll',
-									margin: '-1rem -1.5rem',
-									padding: '1rem 1.5rem',
-								}}
-							>
-								<div
-									style={{
-										flexShrink: 0,
-										background: '#ccc',
-										borderRadius: '0.5rem',
-										aspectRatio: 4 / 3,
-										width: '45%',
-									}}
-								/>
-								<div
-									style={{
-										flexShrink: 0,
-										background: '#ccc',
-										borderRadius: '0.5rem',
-										aspectRatio: 4 / 3,
-										width: '45%',
-									}}
-								/>
-								<ImagePicker
-									style={{
-										width: '45%',
-										aspectRatio: 4 / 3,
-										flexShrink: 0,
-										overflow: 'visible',
-									}}
-								/>
-							</div> */}
-							<h2>Details</h2>
+							<h2 style={{ marginBottom: 0 }}>
+								{t('restaurant:categories.images')}
+							</h2>
+							<Images />
+							<h2>{t('restaurant:categories.details')}</h2>
 							<div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
-									label="Name"
-									name="name"
 									type="text"
-									placeholder="Name"
-									arial-label="Name"
+									name="name"
+									label={t('restaurant:fields.name.label')}
+									arial-label={t(
+										'restaurant:fields.name.label',
+									)}
+									placeholder={t(
+										'restaurant:fields.name.label',
+									)}
 								/>
 								<Select
-									label="Cuisine"
 									name="cuisine"
-									arial-label="Cuisine"
+									label={t('restaurant:fields.cuisine.label')}
+									arial-label={t(
+										'restaurant:fields.name.label',
+									)}
 								>
 									<option value="" disabled>
 										Cuisine
 									</option>
-									{CUISINES.map((cuisine, index) => (
-										<option value={cuisine} key={index}>
-											{capitalizeFirstLetter(cuisine)}
+									{CUISINES.map((cuisine) => (
+										<option value={cuisine} key={cuisine}>
+											{t(
+												'restaurant:cuisines.' +
+													cuisine,
+											)}
 										</option>
 									))}
 								</Select>
 							</div>
 							<Textarea
-								label="Description"
 								name="description"
-								placeholder="Description"
-								arial-label="Description"
+								label={t('restaurant:fields.description.label')}
+								arial-label={t('restaurant:fields.name.label')}
+								placeholder={t('restaurant:fields.name.label')}
 								rows={3}
 							/>
 							<div
 								style={{
 									display: 'flex',
 									justifyContent: 'space-between',
-									alignItems: 'end',
+									alignItems: 'center',
 								}}
 							>
-								<h2>Location</h2>
+								<h2>{t('restaurant:categories.location')}</h2>
 								<button
 									type="button"
 									className="text"
@@ -433,80 +326,106 @@ export default function EditRestaurantModal({ restaurant, onClose }) {
 							</div>
 							<div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
-									label="Street"
+									type="text"
 									name="street"
-									type="text"
-									placeholder="Street"
-									arial-label="Street"
+									label={t('restaurant:fields.street.label')}
+									arial-label={t(
+										'restaurant:fields.street.label',
+									)}
+									placeholder={t(
+										'restaurant:fields.street.label',
+									)}
 									style={{ flex: 2 }}
 								/>
 								<Input
-									label="Number"
+									type="number"
 									name="streetNumber"
-									type="number"
+									label={t(
+										'restaurant:fields.streetNumber.label',
+									)}
+									arial-label={t(
+										'restaurant:fields.streetNumber.label',
+									)}
 									placeholder="12"
-									arial-label="Street's number"
 								/>
 							</div>
 							<div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
-									label="Zip"
-									name="postalCode"
 									type="number"
+									name="postalCode"
+									label={t('restaurant:fields.zip.label')}
+									arial-label={t(
+										'restaurant:fields.zip.label',
+									)}
 									placeholder="1234"
-									arial-label="Postal code"
 								/>
 								<Input
-									label="City"
-									name="city"
 									type="text"
-									placeholder="City"
-									arial-label="City"
+									name="city"
+									label={t('restaurant:fields.city.label')}
+									arial-label={t(
+										'restaurant:fields.city.label',
+									)}
+									placeholder={t(
+										'restaurant:fields.city.label',
+									)}
 									style={{ flex: 2 }}
 								/>
 							</div>
 							<div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
-									label="Region"
-									name="region"
 									type="text"
-									placeholder="Region"
-									arial-label="Region"
+									name="region"
+									label={t('restaurant:fields.region.label')}
+									arial-label={t(
+										'restaurant:fields.region.label',
+									)}
+									placeholder={t(
+										'restaurant:fields.region.label',
+									)}
 								/>
 								<Select
-									label="Country"
 									name="country"
-									arial-label="Country"
+									label={t('restaurant:fields.country.label')}
+									arial-label={t(
+										'restaurant:fields.country.label',
+									)}
 								>
 									<option value="" disabled>
-										Country
+										{t('restaurant:fields.country.label')}
 									</option>
 									<option value="Switzerland">Suisse</option>
 								</Select>
 							</div>
-							<h2>Contact</h2>
+							<h2>{t('restaurant:categories.contact')}</h2>
 							<div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
-									label="Phone"
-									name="phone"
 									type="text"
+									name="phone"
+									label={t('restaurant:fields.phone.label')}
+									arial-label={t(
+										'restaurant:fields.phone.label',
+									)}
 									placeholder="+41 12 345 67 89"
-									arial-label="Phone"
 								/>
 								<Input
-									label="Email"
-									name="email"
 									type="email"
+									name="email"
+									label={t('restaurant:fields.email.label')}
+									arial-label={t(
+										'restaurant:fields.email.label',
+									)}
 									placeholder="email@provider.com"
-									arial-label="Email"
 								/>
 							</div>
 							<Input
-								label="Website"
-								name="website"
 								type="url"
+								name="website"
+								label={t('restaurant:fields.website.label')}
+								arial-label={t(
+									'restaurant:fields.website.label',
+								)}
 								placeholder="https://yourwebsite.com"
-								arial-label="Website"
 							/>
 							{/* <div style={{ display: 'flex', gap: '1rem' }}>
 								<Input
