@@ -10,17 +10,20 @@ function useRadio() {
 	return useContext(RadioContext)
 }
 
-function RadioGroup({ label, children, ...props }) {
+function RadioGroup({ label, help, children, style, ...props }) {
 	const [field, meta, helpers] = useField({ ...props, type: 'checkbox' })
 
 	return (
 		<RadioProvider value={{ field, meta, helpers }}>
 			<div className={classes.group}>
 				{label && <label>{label}</label>}
-				<div className={classes.list}>{children}</div>
+				<div className={classes.list} style={style}>
+					{children}
+				</div>
 				{meta.touched && meta.error ? (
 					<div className={classes.error}>{meta.error}</div>
 				) : null}
+				{help && <div className={classes.help}>{help}</div>}
 			</div>
 		</RadioProvider>
 	)
@@ -29,6 +32,7 @@ function RadioGroup({ label, children, ...props }) {
 function RadioGroupItem({ value, children }) {
 	const { field, helpers } = useRadio()
 	const checked = field.value == value
+
 	return (
 		<label className={classes.container}>
 			<input

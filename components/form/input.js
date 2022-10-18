@@ -1,22 +1,35 @@
 import { useField } from 'formik'
+import { useId } from 'react'
 
 import classes from './input.module.css'
 
-export default function Input({ label, style, prefix, suffix, ...props }) {
+export default function Input({
+	label,
+	help,
+	className,
+	style,
+	prefix,
+	suffix,
+	...props
+}) {
 	const [field, meta] = useField(props)
+	const inputId = useId()
+
 	return (
-		<div className={classes['form-group']} style={style}>
-			{label && <label htmlFor={props.name}>{label}</label>}
-			<div className={classes['input-group']}>
+		<div className={`${classes['form-group']} ${className}`} style={style}>
+			{label && <label htmlFor={inputId}>{label}</label>}
+			<div
+				className={`${classes['input-group']} ${
+					meta.touched && meta.error && classes['input-error']
+				}`}
+			>
 				{prefix && (
-					<label style={{ marginLeft: '1rem' }} htmlFor={props.name}>
-						{prefix}
-					</label>
+					<label style={{ marginLeft: '1rem' }}>{prefix}</label>
 				)}
 				<input
 					{...field}
 					{...props}
-					id={props.name}
+					id={inputId}
 					className={classes.input}
 				/>
 				{suffix && (
@@ -26,6 +39,7 @@ export default function Input({ label, style, prefix, suffix, ...props }) {
 			{meta.touched && meta.error && (
 				<div className={classes.error}>{meta.error}</div>
 			)}
+			{help && <div className={classes.help}>{help}</div>}
 		</div>
 	)
 }

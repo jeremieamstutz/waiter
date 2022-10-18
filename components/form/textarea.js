@@ -3,7 +3,15 @@ import { useLayoutEffect, useRef, useState } from 'react'
 
 import classes from './textarea.module.css'
 
-export default function Textarea({ label, prefix, suffix, ...props }) {
+export default function Textarea({
+	label,
+	help,
+	className,
+	style,
+	prefix,
+	suffix,
+	...props
+}) {
 	const textAreaRef = useRef()
 	const [text, setText] = useState('')
 	const [textAreaHeight, setTextAreaHeight] = useState('auto')
@@ -19,9 +27,13 @@ export default function Textarea({ label, prefix, suffix, ...props }) {
 
 	const [field, meta] = useField(props)
 	return (
-		<div className={classes['form-group']}>
+		<div className={`${classes['form-group']} ${className}`} style={style}>
 			{label && <label htmlFor={props.id || props.name}>{label}</label>}
-			<div className={classes['input-group']}>
+			<div
+				className={`${classes['input-group']} ${
+					meta.touched && meta.error && classes['input-error']
+				}`}
+			>
 				{prefix && (
 					<label style={{ marginLeft: '1rem' }} htmlFor={props.name}>
 						{prefix}
@@ -49,6 +61,7 @@ export default function Textarea({ label, prefix, suffix, ...props }) {
 			{meta.touched && meta.error && (
 				<div className={classes.error}>{meta.error}</div>
 			)}
+			{help && <div className={classes.help}>{help}</div>}
 		</div>
 	)
 }
