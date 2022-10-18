@@ -3,34 +3,57 @@
 	align-items: center;
 }
 
-.navbar a {
-	padding: 0 1rem;
-	height: 3rem;
+.link {
+	height: 3rem !important;
+	text-decoration: none !important;
+	border-radius: 0.5rem;
 	display: flex;
-	flex-direction: column;
+	gap: 0.75rem;
 	justify-content: center;
 	align-items: center;
+	transition: all 150ms;
+	border-radius: 1.5rem;
+	padding: 0 1rem !important;
 }
 
-.navbar svg {
+.text {
+	display: none;
+	font-size: 1.125rem;
+	color: #555;
+}
+
+.link:hover,
+.link:hover .text,
+.text:hover {
+	color: #000;
+}
+
+/* .navbar svg {
 	stroke: #222;
 	width: 1.5rem;
+} */
+
+/* .link.active {
+	background: #555;
+} */
+
+.link.active .text {
+	color: #000;
 }
 
-.active svg {
-	stroke: var(--color-primary);
+.link svg {
+	stroke: #555;
 }
 
-.navbar a:hover svg {
+/* .navbar a:hover svg {
 	stroke: var(--color-primary);
+} */
+
+.feedback {
+	display: none;
 }
 
 /* TODO: Comprendre l'heritage CSS */
-
-.cart {
-	flex-direction: row !important;
-	gap: 0.5rem !important;
-}
 
 .items {
 	font-size: 1rem;
@@ -56,12 +79,6 @@
 		align-items: center;
 		gap: 2rem;
 		min-height: 3rem;
-		/* border-bottom: 1px solid #ddd; */
-	}
-
-	.navbar {
-		display: flex;
-		flex: unset;
 	}
 
 	.logo {
@@ -73,6 +90,23 @@
 	.logo span {
 		color: var(--color-primary);
 		font-size: 1.5rem;
+	}
+
+	.navbar {
+		display: flex;
+		flex: unset;
+	}
+
+	.icon {
+		display: none;
+	}
+
+	.text {
+		display: flex;
+	}
+
+	.feedback {
+		display: block;
 	}
 
 	.login {

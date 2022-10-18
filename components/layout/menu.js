@@ -1,135 +1,126 @@
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 
+import { useFlags } from 'contexts/flags'
+
+import LanguageSelector from 'components/translation/language-selector'
+
+import SearchIcon from 'components/icons/search'
+import HeartIcon from 'components/icons/heart'
+
 import classes from './menu.module.css'
-import { useRouter } from 'next/router'
 
 export default function Menu() {
 	const { t } = useTranslation()
 	const { data: session, status } = useSession()
 	const router = useRouter()
+	const { flags } = useFlags()
+
 	const path = router.pathname
 
 	return (
 		<div className={classes.menu}>
-			{/* <div
-				style={{
-					flex: 1,
-					maxWidth: '30rem',
-					display: 'flex',
-					alignItems: 'center',
-					background: '#eee',
-					borderRadius: '0.5rem',
-					padding: '0 1rem',
-				}}
-			>
-				<svg
-					style={{ flexShrink: 0 }}
-					xmlns="http://www.w3.org/2000/svg"
-					width={18}
-					height={18}
-					viewBox="0 0 20 20"
-					fill="#666"
-				>
-					<path
-						fillRule="evenodd"
-						d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-						clipRule="evenodd"
-					/>
-				</svg>
-				<input
-					type="text"
-					style={{ border: 'none', outline: 'none' }}
-					placeholder="Restaurant"
-				/>
-				<span style={{ color: '#666' }}>|</span>
-				<input
-					type="text"
-					style={{
-						border: 'none',
-						outline: 'none',
-						marginLeft: '1rem',
-					}}
-					placeholder="Lieu"
-				/>
-			</div> */}
 			<nav className={classes.navbar}>
-				{/* <Link href="/">
-					<a
-						aria-label="Home page"
-						className={path === '/' ? classes.active : ''}
+				<div className={classes.link}>
+					<LanguageSelector />
+				</div>
+				{status === 'authenticated' && session.user.role === 'admin' && (
+					<button
+						className={`text ${classes.link} ${classes.text}`}
+						onClick={() =>
+							router.push(
+								{
+									pathname: router.pathname,
+									query: { ...router.query, showFlags: true },
+								},
+								undefined,
+								{ shallow: true },
+							)
+						}
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width={24}
-							height={24}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-							/>
-						</svg>
-					</a>
-				</Link> */}
+						Flags
+					</button>
+				)}
+				{flags.feedbacks &&
+					status === 'authenticated' &&
+					(session.user.role === 'admin' ? (
+						<Link href="/feedbacks">
+							<a
+								className={`${classes.link} ${classes.text} ${
+									path.startsWith('/favorites')
+										? classes.active
+										: ''
+								}`}
+							>
+								<span className={classes.text}>Feedbacks</span>
+							</a>
+						</Link>
+					) : (
+						<>
+							<button
+								onClick={() =>
+									router.push(
+										{
+											pathname: router.pathname,
+											query: {
+												...router.query,
+												showFeedback: true,
+											},
+										},
+										undefined,
+										{ shallow: true },
+									)
+								}
+								className={`text ${classes.text} ${classes.link} ${classes.feedback}`}
+							>
+								Feedback
+							</button>
+						</>
+					))}
 				<Link href="/search">
 					<a
 						aria-label="Search page"
-						className={
+						className={`${classes.link} ${
 							path.startsWith('/search') ? classes.active : ''
-						}
+						}`}
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width={24}
-							height={24}
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-							/>
-						</svg>
+						<SearchIcon
+							type="outline"
+							width={20}
+							strokeWidth={2.2}
+							className={classes.icon}
+						/>
+						<span className={classes.text}>
+							{t('common:header.search')}
+						</span>
 					</a>
 				</Link>
-				{status === 'authenticated' && (
+				{status === 'authenticated' && flags.favorites && (
 					<>
 						<Link href="/favorites">
 							<a
 								aria-label="Favorites page"
-								className={
+								className={`${classes.link} ${
 									path.startsWith('/favorites')
 										? classes.active
 										: ''
-								}
+								}`}
 							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={24}
-									height={24}
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-									/>
-								</svg>
+								<HeartIcon
+									type="outline"
+									width={20}
+									strokeWidth={2.2}
+									className={classes.icon}
+								/>
+								<span className={classes.text}>
+									{t('common:header.favorites')}
+								</span>
 							</a>
 						</Link>
-						{/* {flags.booking && (
+						{/* {flags.bookings && (
 							<Link href="/bookings">
 								<a
 									aria-label="Bookings page"
@@ -203,43 +194,6 @@ export default function Menu() {
 						</svg>
 					</a>
 				</Link> */}
-				{/* {flags.ordering && (
-					<Link href="/checkout">
-						<a
-							aria-label="Cart page"
-							className={`${classes.cart} ${
-								path === '/checkout' ? classes.active : ''
-							}`}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width={24}
-								height={24}
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								strokeWidth="2"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-								/>
-							</svg>
-							{orderContext.items.length > 0 && (
-								<div className={classes.items}>
-									{orderContext.items
-										.reduce(
-											(count, item) =>
-												count + item.quantity,
-											0,
-										)
-										.toLocaleString()}
-								</div>
-							)}
-						</a>
-					</Link>
-				)} */}
 				{status === 'authenticated' && (
 					<Link
 						href={{
@@ -249,41 +203,41 @@ export default function Menu() {
 					>
 						<a
 							aria-label="Account page"
-							className={
-								path.startsWith('/account') &&
-								!path.endsWith('/bookings') &&
-								!path.endsWith('/favorites')
-									? classes.active
-									: ''
-							}
+							className={`${classes.link} ${
+								path.startsWith('/users') ? classes.active : ''
+							}`}
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width={24}
-								height={24}
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
+							<div
+								style={{
+									width: '2.75rem',
+									height: '2.75rem',
+									borderRadius: '50%',
+									overflow: 'hidden',
+									border: '1px solid #ddd',
+								}}
 							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+								<Image
+									alt={session.user.image.alt}
+									src={session.user.image.url}
+									width={32}
+									height={32}
+									layout="responsive"
+									sizes="32px"
 								/>
-							</svg>
+							</div>
 						</a>
 					</Link>
 				)}
 				{status === 'unauthenticated' && (
 					<Link href={`/login?callbackUrl=${window.location.href}`}>
 						<a
-							className="button"
+							className="button primary"
 							style={{
-								marginLeft: '1rem',
 								fontSize: '1.125rem',
 								flexShrink: 0,
 								minWidth: '6rem',
+								width: 'auto',
+								marginLeft: '1rem',
 							}}
 						>
 							{t('common:header.login')}
