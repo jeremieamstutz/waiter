@@ -4,29 +4,20 @@ import { useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import axios from 'axios'
 
 import ItemCard, { NewItemCard } from './item-card'
+import ChevronIcon from 'components/icons/chevron'
 
-import classes from './item-list.module.css'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-export default forwardRef(function ItemList(
-	{ restaurant, category, items },
-	ref,
-) {
+import classes from './item-list.module.css'
+
+export default function ItemList({ restaurant, category, items }) {
 	const router = useRouter()
 	const { data: session, status } = useSession()
 	const { t } = useTranslation()
-
-	const [showSheet, setShowSheet] = useState(false)
-
-	const handleDeleteCategory = async () => {
-		await axios.delete(`/api/categories/${category.id}`)
-		router.reload()
-	}
 
 	const listRef = useRef()
 
@@ -37,21 +28,13 @@ export default forwardRef(function ItemList(
 	return (
 		<section className={classes.container}>
 			<div className={classes.header}>
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						gap: '1rem',
-					}}
-				>
-					<div className={classes.body}>
-						<h2 className={classes.name}>{category.name}</h2>
-						<p className={classes.description}>
-							{category.description}
-						</p>
-					</div>
+				<div className={classes.body}>
+					<h2 className={classes.name}>{category.name}</h2>
+					<p className={classes.description}>
+						{category.description}
+					</p>
 				</div>
-				<div style={{ display: 'flex' }}>
+				<div className={classes.actions}>
 					{restaurant &&
 						status === 'authenticated' &&
 						(session.user.id === restaurant.ownerId ||
@@ -135,6 +118,33 @@ export default forwardRef(function ItemList(
 							</svg>
 						</button>
 					</div>
+					<button
+						className="text"
+						style={{
+							display: 'flex',
+							gap: '0.25rem',
+							whiteSpace: 'nowrap',
+							marginLeft: '1rem',
+							fontSize: '1.125rem',
+						}}
+						onClick={() =>
+							router.push(
+								{
+									pathname: router.pathname,
+									query: {
+										restaurantSlug:
+											router.query.restaurantSlug,
+										category: category.id,
+									},
+								},
+								undefined,
+								{ shallow: true },
+							)
+						}
+					>
+						{t('restaurant:actions.seeAll')}{' '}
+						<ChevronIcon direction="right" />
+					</button>
 				</div>
 			</div>
 			<Swiper
@@ -145,9 +155,8 @@ export default forwardRef(function ItemList(
 					prevEl,
 					nextEl,
 				}}
-				slidesPerView="auto"
 				slidesPerGroupAuto={true}
-				spaceBetween={14}
+				spaceBetween={16}
 				threshold={4}
 				pagination={{
 					el: pagEl,
@@ -157,33 +166,50 @@ export default forwardRef(function ItemList(
 				breakpoints={{
 					0: {
 						centeredSlides: true,
+						slidesPerView: 1.5,
+						slidesPerGroup: 1,
 					},
 					480: {
 						centeredSlides: false,
+						slidesPerView: 2,
+						slidesPerGroup: 2,
+					},
+					560: {
+						slidesPerView: 3,
+						slidesPerGroup: 3,
+					},
+					720: {
+						slidesPerView: 4,
+						slidesPerGroup: 4,
+					},
+					960: {
+						slidesPerView: 5,
+						slidesPerGroup: 5,
+					},
+					1120: {
+						slidesPerView: 6,
+						slidesPerGroup: 6,
 					},
 				}}
 				className={classes.swiper}
 			>
-				{items.map((item, index) => (
-					<SwiperSlide key={index} style={{ width: 'auto' }}>
+				{items.map((item) => (
+					<SwiperSlide key={item.id}>
 						<ItemCard
 							item={item}
 							category={category}
-							key={index}
-							index={index}
 							lazyRoot={listRef}
 						/>
 					</SwiperSlide>
 				))}
-				{restaurant &&
-					status === 'authenticated' &&
+				{status === 'authenticated' &&
 					(session.user.id === restaurant.ownerId ||
 						session.user.role === 'admin') && (
-						<SwiperSlide style={{ width: 'auto' }}>
+						<SwiperSlide>
 							<NewItemCard category={category} />
 						</SwiperSlide>
 					)}
 			</Swiper>
 		</section>
 	)
-})
+}

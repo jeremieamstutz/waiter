@@ -7,29 +7,30 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 1rem;
+}
+
+.body {
+	min-width: 0;
 }
 
 .name {
 	margin: 0;
+	overflow-wrap: break-word;
 }
 
 .description {
 	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	overflow-wrap: break-word;
 }
 
 .actions {
-	padding: 0;
 	display: flex;
-	border: none;
-	width: 3rem;
-	height: 3rem;
-	border-radius: 50%;
-	background: transparent;
-	margin-right: -0.25rem;
-}
-
-.actions:hover {
-	background: none;
 }
 
 .navigation {
