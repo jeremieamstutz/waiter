@@ -16,7 +16,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -44,7 +47,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -58,7 +64,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -86,7 +95,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -100,7 +112,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -114,7 +129,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -128,7 +146,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -142,7 +163,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -170,7 +194,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -184,7 +211,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -212,7 +242,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -226,7 +259,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -240,7 +276,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -254,7 +293,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -268,7 +310,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -296,7 +341,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -310,7 +358,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'pending',
 		user: {
-			image: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			image: {
+				alt: 'Jérémie Amstutz',
+				url: 'https://waiter.fra1.digitaloceanspaces.com/b99afa49-92f3-457f-9a97-0d01a14c8c59',
+			},
 			firstName: 'Jérémie',
 			lastName: 'Amstutz',
 		},
@@ -338,7 +389,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
 			firstName: 'Raphael',
 			lastName: 'Mariétan',
 		},
@@ -352,7 +406,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -366,7 +423,10 @@ const BOOKINGS = [
 		table: '',
 		status: 'accepted',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			image: {
+				alt: 'Luca Moessner',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJzPz4bpYidF0QwhVEGFm8p6FFTyUnkqfhjmfn1P=s96-c',
+			},
 			firstName: 'Luca',
 			lastName: 'Moessner',
 		},
@@ -380,8 +440,11 @@ const BOOKINGS = [
 		table: '',
 		status: 'arrived',
 		user: {
-			image: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
-			firstName: 'Raphael',
+			image: {
+				alt: 'Raphaël Mariétan',
+				url: 'https://lh3.googleusercontent.com/a/AATXAJx2hwIxjxB1KpMMTDqtCKtw1CBIOhoH8xKDChc0=s96-c',
+			},
+			firstName: 'Raphaël',
 			lastName: 'Mariétan',
 		},
 	},
@@ -389,6 +452,7 @@ const BOOKINGS = [
 
 function BookingCard({ booking }) {
 	const { user } = booking
+
 	return (
 		<div
 			style={{
