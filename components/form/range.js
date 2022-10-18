@@ -1,6 +1,6 @@
 import { useField } from 'formik'
-import { useCallback } from 'react'
-import { event } from 'utils/gtag'
+import useDebounce from 'hooks/useDebounce'
+import { useCallback, useEffect, useState } from 'react'
 
 import classes from './range.module.css'
 
@@ -12,6 +12,25 @@ export default function Range({ label, ...props }) {
 		[props.min, props.max],
 	)
 
+	const [minValue, setMinValue] = useState([field.value[0]])
+	const [maxValue, setMaxValue] = useState([field.value[1]])
+
+	const debouncedMinValue = useDebounce(minValue, 100)
+	useEffect(() => {
+		const newMin = Math.min(debouncedMinValue, field.value[1] - 1)
+		const newValues = [...field.value]
+		newValues[0] = newMin
+		helpers.setValue(newValues)
+	}, [debouncedMinValue, field.value, helpers])
+
+	const debouncedMaxValue = useDebounce(maxValue, 100)
+	useEffect(() => {
+		const newMax = Math.max(debouncedMaxValue, field.value[0] + 1)
+		const newValues = [...field.value]
+		newValues[1] = newMax
+		helpers.setValue(newValues)
+	}, [debouncedMaxValue, field.value, helpers])
+
 	return (
 		<div className={classes.group}>
 			{label && <label htmlFor={props.name}>{label}</label>}
@@ -20,16 +39,8 @@ export default function Range({ label, ...props }) {
 					name={field.name}
 					type="number"
 					className={classes.value}
-					value={field.value[0]}
-					onChange={(event) => {
-						const newMin = Math.max(
-							Math.min(+event.target.value, field.value[1] - 1),
-							props.min,
-						)
-						const newValues = [...field.value]
-						newValues[0] = newMin
-						helpers.setValue(newValues)
-					}}
+					value={minValue}
+					onChange={(event) => setMinValue(+event.target.value)}
 				/>
 				<div className={classes.slider}>
 					<input
@@ -38,16 +49,8 @@ export default function Range({ label, ...props }) {
 						className={classes.thumb}
 						type="range"
 						id={props.name}
-						value={field.value[0]}
-						onChange={(event) => {
-							const newMin = Math.min(
-								+event.target.value,
-								field.value[1] - 1,
-							)
-							const newValues = [...field.value]
-							newValues[0] = newMin
-							helpers.setValue(newValues)
-						}}
+						value={minValue}
+						onChange={(event) => setMinValue(+event.target.value)}
 						style={{ zIndex: 3 }}
 						aria-label="Range min"
 					/>
@@ -57,17 +60,8 @@ export default function Range({ label, ...props }) {
 						type="range"
 						id={props.name}
 						className={classes.thumb}
-						value={field.value[1]}
-						onChange={(event) => {
-							console.log(props.max)
-							const newMax = Math.max(
-								+event.target.value,
-								field.value[0] + 1,
-							)
-							const newValues = [...field.value]
-							newValues[1] = newMax
-							helpers.setValue(newValues)
-						}}
+						value={maxValue}
+						onChange={(event) => setMaxValue(+event.target.value)}
 						style={{ zIndex: 4 }}
 						aria-label="Range max"
 					/>
@@ -75,11 +69,9 @@ export default function Range({ label, ...props }) {
 					<div
 						className={classes.range}
 						style={{
-							left: toPercent(field.value[0]) + '%',
+							left: toPercent(minValue) + '%',
 							width:
-								toPercent(field.value[1]) -
-								toPercent(field.value[0]) +
-								'%',
+								toPercent(maxValue) - toPercent(minValue) + '%',
 						}}
 					/>
 				</div>
@@ -87,16 +79,8 @@ export default function Range({ label, ...props }) {
 					name={field.name}
 					type="number"
 					className={classes.value}
-					value={field.value[1]}
-					onChange={(event) => {
-						const newMax = Math.min(
-							Math.max(+event.target.value, field.value[0] + 1),
-							props.max,
-						)
-						const newValues = [...field.value]
-						newValues[1] = newMax
-						helpers.setValue(newValues)
-					}}
+					value={maxValue}
+					onChange={(event) => setMaxValue(+event.target.value)}
 				/>
 			</div>
 			{meta.touched && meta.error && (
