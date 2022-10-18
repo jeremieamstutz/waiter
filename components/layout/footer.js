@@ -1,27 +1,10 @@
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import classes from './footer.module.css'
 
-const LOCALES = [
-	{
-		code: 'en',
-		name: 'English',
-	},
-	{
-		code: 'fr',
-		name: 'Français',
-	},
-	{
-		code: 'de',
-		name: 'Deutsch',
-	},
-]
-
 export default function Footer() {
 	const { t } = useTranslation()
-	const router = useRouter()
 	return (
 		<>
 			{/* <footer className={classes.footer}>
@@ -86,7 +69,12 @@ export default function Footer() {
 							{t('common:footer:links:about')}
 						</a>
 					</Link>
-					<Link href="/help">
+					<Link href="/faq">
+						<a style={{ fontSize: '1.125rem', color: '#666' }}>
+							FAQ
+						</a>
+					</Link>
+					{/* <Link href="/help">
 						<a style={{ fontSize: '1.125rem', color: '#666' }}>
 							{t('common:footer:links:help')}
 						</a>
@@ -117,7 +105,7 @@ export default function Footer() {
 						<a style={{ fontSize: '1.125rem', color: '#666' }}>
 							{t('common:footer:links:privacy')}
 						</a>
-					</Link>
+					</Link> */}
 					<Link href="/terms">
 						<a style={{ fontSize: '1.125rem', color: '#666' }}>
 							{t('common:footer:links:terms')}
@@ -133,31 +121,6 @@ export default function Footer() {
 							{t('common:footer:links:metrics')}
 						</a>
 					</Link>
-					<select
-						value={router.locale}
-						onChange={(event) =>
-							router.push(router.asPath, undefined, {
-								locale: event.target.value,
-							})
-						}
-						style={{
-							flexShrink: 1,
-							outline: 'none',
-							padding: 0,
-							height: 'unset',
-							minWidth: 'unset',
-							width: 'fit-content',
-							color: '#666',
-							fontFamily: 'Gilroy',
-							background: 'transparent',
-						}}
-					>
-						{LOCALES.map((locale) => (
-							<option value={locale.code} key={locale.code}>
-								{locale.name}
-							</option>
-						))}
-					</select>
 				</div>
 			</footer>
 		</>
