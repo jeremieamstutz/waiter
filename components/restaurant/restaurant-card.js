@@ -1,28 +1,32 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import { mutate } from 'swr'
 import axios from 'axios'
 import { signIn, useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
+import { Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { useFlags } from 'contexts/flags'
 import useFavorites from 'contexts/favorites'
 
-import { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import track from 'utils/track'
+
 import 'swiper/css'
 import 'swiper/css/pagination'
 
 import classes from './restaurant-card.module.css'
 
-export default function RestaurantCard({ restaurant, index }) {
+export default function RestaurantCard({ restaurant }) {
 	restaurant.rating = {
 		value: 4.9,
 		count: 10,
 	}
 	restaurant.isOpen = true
 
+	const router = useRouter()
 	const { flags } = useFlags()
 	const { t } = useTranslation()
 	const { status } = useSession()
@@ -33,42 +37,24 @@ export default function RestaurantCard({ restaurant, index }) {
 	const handleFavoriteRestaurant = async (event) => {
 		event.preventDefault()
 
+		track.event({
+			event_category: 'restaurant',
+			event_name: 'add_to_favorite',
+			event_label: restaurant.name,
+		})
+
 		if (status === 'unauthenticated') {
 			return signIn()
 		}
-		if (isFavorite) {
-			mutate(
-				`/api/favorites`,
+
+		if (!isFavorite) {
+			router.push(
 				{
-					restaurantIds: favorites.restaurantIds.filter(
-						(favorite) => favorite !== restaurant.id,
-					),
+					pathname: router.pathname,
+					query: { ...router.query, showWishlists: true },
 				},
-				false,
-			)
-			mutate(
-				`/api/favorites`,
-				axios
-					.delete(`/api/favorites`, {
-						data: {
-							restaurantId: restaurant.id,
-						},
-					})
-					.then((res) => res.data),
-				false,
-			)
-		} else {
-			mutate(
-				`/api/favorites`,
-				{ restaurantIds: [...favorites.restaurantIds, restaurant.id] },
-				false,
-			)
-			mutate(
-				`/api/favorites`,
-				axios
-					.post(`/api/favorites`, { restaurantId: restaurant.id })
-					.then((res) => res.data),
-				false,
+				undefined,
+				{ shallow: true },
 			)
 		}
 	}
@@ -105,45 +91,50 @@ export default function RestaurantCard({ restaurant, index }) {
 								disabledClass: classes['button-disabled'],
 							}}
 							pagination={{ clickable: true }}
+							onSlideChange={() => {
+								track.event({
+									event_category: 'restaurant',
+									event_name: 'swipe_picture',
+									event_label: restaurant.name,
+								})
+							}}
 						>
-							<SwiperSlide>
-								<Image
-									src={
-										restaurant.image
-											? restaurant.image
-											: '/images/defaults/item.png'
-									}
-									alt={restaurant.name}
-									objectFit="cover"
-									layout="responsive"
-									width={400}
-									height={300}
-									sizes="(max-width: 640px) 100vw, (max-width: 910px) 50vw, (max-width: 1240px) 33vw, 25vw"
-									style={{
-										borderRadius: '0',
-									}}
-									onLoad={(event) => {
-										// TODO: detect when the image is downloaded, and doesn't come from the cache
-										// console.log(event.target.complete)
-										// setIsLoaded(true)
-									}}
-								/>
-							</SwiperSlide>
-							<SwiperSlide>
-								<Image
-									src={
-										'https://source.unsplash.com/random/900%C3%97700/?restaurant'
-									}
-									alt={restaurant.name}
-									objectFit="cover"
-									layout="responsive"
-									width={400}
-									height={300}
-									sizes="50vw"
-									priority={index < 2}
-									style={{ borderRadius: '0' }}
-								/>
-							</SwiperSlide>
+							{restaurant?.images?.length > 0 ? (
+								restaurant?.images?.map((image) => (
+									<SwiperSlide key={image.id}>
+										<Image
+											src={
+												image.url ??
+												'/images/defaults/item.png'
+											}
+											alt={image.alt}
+											objectFit="cover"
+											layout="responsive"
+											width={400}
+											height={300}
+											sizes="640px"
+											style={{
+												borderRadius: '0',
+											}}
+										/>
+									</SwiperSlide>
+								))
+							) : (
+								<SwiperSlide>
+									<Image
+										src={'/images/defaults/item.png'}
+										alt=""
+										objectFit="cover"
+										layout="responsive"
+										width={400}
+										height={300}
+										sizes="640px"
+										style={{
+											borderRadius: '0',
+										}}
+									/>
+								</SwiperSlide>
+							)}
 						</Swiper>
 					</div>
 					<div
@@ -208,38 +199,40 @@ export default function RestaurantCard({ restaurant, index }) {
 								Sponsored
 							</div>
 						)} */}
-					<div
-						style={{
-							position: 'absolute',
-							top: '1rem',
-							right: '1rem',
-							borderRadius: '0.5rem',
-							width: '2.25rem',
-							height: '2.25rem',
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							cursor: 'pointer',
-						}}
-						className={`${classes.favorite} ${
-							isFavorite ? classes.active : ''
-						}`}
-						onClick={handleFavoriteRestaurant}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width={20}
-							height={20}
-							viewBox="0 0 24 24"
-							strokeWidth={2}
+					{flags.favorites && (
+						<div
+							style={{
+								position: 'absolute',
+								top: '1rem',
+								right: '1rem',
+								borderRadius: '0.5rem',
+								width: '2.25rem',
+								height: '2.25rem',
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								cursor: 'pointer',
+							}}
+							className={`${classes.favorite} ${
+								isFavorite ? classes.active : ''
+							}`}
+							onClick={handleFavoriteRestaurant}
 						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-							/>
-						</svg>
-					</div>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width={20}
+								height={20}
+								viewBox="0 0 24 24"
+								strokeWidth={2}
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+								/>
+							</svg>
+						</div>
+					)}
 				</div>
 				<div
 					style={{
@@ -249,8 +242,8 @@ export default function RestaurantCard({ restaurant, index }) {
 						marginTop: '0.75rem',
 					}}
 				>
-					<h2 className={classes.title}>{restaurant.name}</h2>
-					{flags.reviewing && (
+					<h3 className={classes.title}>{restaurant.name}</h3>
+					{flags.reviews && (
 						<div
 							style={{
 								display: 'flex',
@@ -259,7 +252,6 @@ export default function RestaurantCard({ restaurant, index }) {
 								fontSize: '1.125rem',
 							}}
 						>
-							{/* {(3 + Math.random() * 2).toFixed(1)} */}
 							4.9
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -273,12 +265,11 @@ export default function RestaurantCard({ restaurant, index }) {
 						</div>
 					)}
 				</div>
-				{/* <p
-					className={classes.description}
-					style={{ fontSize: '1.1rem' }}
-				>
-					{restaurant.street} {restaurant.streetNumber}
-				</p> */}
+				{/* {restaurant.description && (
+					<p className={classes.description}>
+						{restaurant.description}
+					</p>
+				)} */}
 				<p
 					className={classes.details}
 					style={{
@@ -287,19 +278,10 @@ export default function RestaurantCard({ restaurant, index }) {
 						marginTop: '0.125rem',
 					}}
 				>
-					<span
-						className={classes.description}
-						style={{
-							flex: 'unset',
-							fontSize: '1.125rem',
-							// marginTop: '-0.2rem',
-						}}
-					>
-						{restaurant.cuisine}
+					<span>
+						{t('restaurant:cuisines.' + restaurant.cuisine)}
 					</span>
-					<span style={{ color: '#ccc' }}>·</span>
-					<span>CHF 20</span>
-					<span style={{ color: '#ccc' }}>·</span>
+					·<span>CHF 20</span>·
 					<span
 						className={`${classes.opening} ${
 							restaurant.isOpen ? classes.open : classes.close
