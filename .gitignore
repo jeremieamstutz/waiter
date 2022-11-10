@@ -20,6 +20,7 @@
 *.pem
 /old
 /.vscode
+/.VSCodeCounter
 
 # debug
 npm-debug.log*
