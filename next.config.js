@@ -24,5 +24,6 @@ module.exports = {
 	optimizeFonts: false,
 	experimental: {
 		scrollRestoration: true,
+		optimisticClientCache: false,
 	},
 }
