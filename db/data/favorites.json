@@ -1,0 +1,42 @@
+[
+  {
+    "user_id": "c1a404e7-d60c-467b-84e4-68622b225f6f",
+    "restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+    "created_at": "2022-06-08 01:19:44.01136+00"
+  },
+  {
+    "user_id": "5fe5a01d-dd24-406d-ad00-a5006c74dce9",
+    "restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+    "created_at": "2021-11-18 14:02:22.428574+00"
+  },
+  {
+    "user_id": "c1a404e7-d60c-467b-84e4-68622b225f6f",
+    "restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+    "created_at": "2022-06-08 12:53:14.252328+00"
+  },
+  {
+    "user_id": "0f4fd853-ed9a-4418-a78e-6e6f0d78307c",
+    "restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+    "created_at": "2021-11-30 12:30:07.684711+00"
+  },
+  {
+    "user_id": "c1a404e7-d60c-467b-84e4-68622b225f6f",
+    "restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+    "created_at": "2021-11-30 23:35:35.709561+00"
+  },
+  {
+    "user_id": "a625a5fc-941c-4991-ab67-6d80f7b1b5d8",
+    "restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+    "created_at": "2022-06-27 19:19:00.807435+00"
+  },
+  {
+    "user_id": "c1a404e7-d60c-467b-84e4-68622b225f6f",
+    "restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+    "created_at": "2021-12-28 01:05:29.241608+00"
+  },
+  {
+    "user_id": "c1a404e7-d60c-467b-84e4-68622b225f6f",
+    "restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+    "created_at": "2022-06-08 01:18:49.988417+00"
+  }
+]

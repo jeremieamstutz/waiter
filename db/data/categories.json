@@ -1,0 +1,1164 @@
+[
+	{
+		"id": "01526c4d-5289-4994-8528-f47f5c2b2d1f",
+		"name": "Desserts",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "01f1737f-7f17-4216-9702-f94bb532b79e",
+		"name": "Friandises",
+		"description": "Midi ou soir",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "035a9562-7b0c-456b-b919-de75b896d977",
+		"name": "Le Midi côté sucré",
+		"description": "",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"sequence_number": null
+	},
+	{
+		"id": "040a4bc9-4641-4128-a4ee-fa2e23e9e9e5",
+		"name": "Entrées",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "04782f81-6ab6-4f16-b4ca-faaa51e155d0",
+		"name": "Insalata",
+		"description": "",
+		"restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+		"sequence_number": 1
+	},
+	{
+		"id": "0c529d13-9135-4c8a-8e9b-261079a331bb",
+		"name": "Viandes",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "0c7bc218-007e-432d-b0ce-2ba5459c837e",
+		"name": "Les plats du moment",
+		"description": "",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "0d90ccd4-b378-4cbf-b683-d5483de6505c",
+		"name": "Canard",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "0dfd58a0-c0bd-4325-bd95-eea41324e53e",
+		"name": "Entrées et salades",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "0e2dfdd9-ee3a-4949-b3ab-64be77a78b7c",
+		"name": "Menu petit viking",
+		"description": "Pour les bout'chous, tous nos plats sont disponibles en petit format (excepté le Hot Dog Danois) !",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "105f881c-bb56-4666-b2b3-faeec0cdcc02",
+		"name": "Accompagnements",
+		"description": "",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"sequence_number": 1
+	},
+	{
+		"id": "115f5376-4621-4e55-921f-b048335de26b",
+		"name": "Les gravlax",
+		"description": "Avec du saumon de Lostallo, Grison, Suisse",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "11f5d30b-88b9-491e-b8f6-57fd6382fbea",
+		"name": "Les entrées",
+		"description": "",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"sequence_number": null
+	},
+	{
+		"id": "13e5e563-a101-4d4a-8f42-7908cce2cde8",
+		"name": "Salades et entrées",
+		"description": "",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"sequence_number": 1
+	},
+	{
+		"id": "171eb2aa-09b8-41dd-9bc9-43152a09f2f9",
+		"name": "Nos burgers",
+		"description": "Tous nos burgers sont servis avec un pain au maïs et frites",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "184ee2fa-f1bb-4e8d-a078-12417c1673b8",
+		"name": "Les desserts",
+		"description": "Faits maison",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "1bded77f-9148-424a-a618-dd2ef861b252",
+		"name": "Les Salades",
+		"description": "",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "1e9916d5-32c5-4e26-8757-641c2addbf5b",
+		"name": "Pizzas",
+		"description": "Toutes nos pizzas ont à leur base de la sauce tomate et de la mozzarella.\nRéduction de CHF 5,00 pour les pizzas à l'emporter",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "1ed9c500-84d3-40e7-a557-9a00d6e6968a",
+		"name": "Plats et viandes grillées",
+		"description": "Sauces : Café de Paris, Poivre Vert et Champignons\nGarnitures : Riz, Feijoada, Polenta, Patates, Bananes frites",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "1ede05bb-fb0f-4221-b183-4de6d5057a54",
+		"name": "Les poissons",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "21466338-eb7c-49cb-bb50-7be5cdbf3f1c",
+		"name": "Risottos",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "22783bde-f4d6-49db-8085-3909614fae43",
+		"name": "Burgers",
+		"description": "Accompagnés de pommes frites ou salade",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "233c9c77-7bec-4677-86df-bb679552c5eb",
+		"name": "Burgers Boeuf",
+		"description": "Servis avec des frites à l'ancienne et une salade. CH & 160 grammes",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"sequence_number": null
+	},
+	{
+		"id": "237226de-822f-463d-9b72-f81c3dd86dd1",
+		"name": "Potages",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "2574e5af-3edf-45f4-970c-aa9df9a6ee76",
+		"name": "Menu enfants",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "2600f616-ad10-483b-9351-19b8d0206feb",
+		"name": "Bœuf",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "2663d78d-273d-4678-b8bb-7ef50bdeb5cb",
+		"name": "Spécialités et enfants",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "26c53bf4-49e0-465b-b688-d74366768997",
+		"name": "Les pizzas",
+		"description": "Plus de choix à découvrir sur place !",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "272807d4-3619-4caa-b38f-a7542c32f47e",
+		"name": "Entrées",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "27786c39-8568-49b1-96c2-51c9dec497fb",
+		"name": "Nostri dolci",
+		"description": "Nos desserts",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"sequence_number": null
+	},
+	{
+		"id": "28d14285-680e-437a-9b91-3516bcd6f147",
+		"name": "Les petits plus",
+		"description": "",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "2a7294eb-2ee4-46c5-b463-e9bfe62e9627",
+		"name": "Burger boeuf suisse",
+		"description": "Le menu (+ CHF 6,50) est servi avec frites et sauce aïoli",
+		"restaurant_id": "159902cc-8b51-4181-96ff-530ee6df9fcd",
+		"sequence_number": null
+	},
+	{
+		"id": "2aa37907-a025-4987-8a51-f501d4bd00f2",
+		"name": "Plat principal",
+		"description": "Vous trouverez ici une partie de nos plats, le reste est à découvrir sur place !",
+		"restaurant_id": "32d44bf5-4b2a-4909-ac0b-d5798cc05e5d",
+		"sequence_number": null
+	},
+	{
+		"id": "2aadbc87-0e06-49b0-9afe-f0d6fc2067c7",
+		"name": "Les Spéciaux",
+		"description": "",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "2dc6ba54-63b9-42e2-9c81-9129d04bcb19",
+		"name": "Les boissons",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "2e2a5052-ebe8-49e4-afbb-63735f389f2c",
+		"name": "Les Bols",
+		"description": "",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "2f85d4e0-8c04-49e7-973a-c0335d42482f",
+		"name": "Carne",
+		"description": "",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "2fea0ff2-5b66-469a-a822-62596417be66",
+		"name": "Les Sandwiches Chauds",
+		"description": "Servis avec salade maison",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "30bf54c4-f7fc-4066-95da-52eedc35bab0",
+		"name": "Les autres plats",
+		"description": "Vous êtes végétarien(ne) ou préférez la volaille ou le poisson ? Nous avons pensé à vous.",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "31873322-f07c-4321-8795-4f88afb16ea0",
+		"name": "Boissons",
+		"description": "",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"sequence_number": 2
+	},
+	{
+		"id": "33024def-4d7c-4dbb-a1f0-4055d13f2227",
+		"name": "Snacks",
+		"description": "",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "34e153a9-d3e3-4227-8d7f-f56a0c863154",
+		"name": "Nos Poke Bowls",
+		"description": "",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "356d866b-3e6f-46f7-8c1d-26bec2412909",
+		"name": "Les plats",
+		"description": "Garnitures à choix : frites, risotto, purée violette et légumes",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"sequence_number": null
+	},
+	{
+		"id": "3766e957-a57b-43c2-8239-eb7128115f76",
+		"name": "Plats de viande",
+		"description": "Accompagnés avec pommes frites, pâtes ou riz sauvage et légumes de saison",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "386d7e60-a779-41de-a895-f898f2191756",
+		"name": "Les BreakfastSandwiches",
+		"description": "Servis avec salade maison et chips",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "39348db6-a099-4673-9975-382ea2b154a3",
+		"name": "Pâtes",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "3a8512fd-a96c-4733-a2ef-c3f16007b4b6",
+		"name": "Les viandes rouges",
+		"description": "Nous proposons uniquement des viandes d’Argentine (race Black Angus) et des viandes de Suisse (les meilleurs morceaux du pays).",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "3bbf72bd-5454-4741-8c9a-b15ba8766df0",
+		"name": "Le Must !",
+		"description": "Carte du soir uniquement.\nCommande 24h à l'avance et minimum 2 personnes pour la côte de boeuf",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "3d47908c-123e-4a4e-b487-6d03bcbafcf5",
+		"name": "Le Midi côté salé",
+		"description": "",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"sequence_number": null
+	},
+	{
+		"id": "3dd921a8-f098-44ad-9c3b-b71526794e42",
+		"name": "Les petits plaisirs",
+		"description": "",
+		"restaurant_id": "ea6c2a0e-a28f-4d73-9457-1799593a5918",
+		"sequence_number": null
+	},
+	{
+		"id": "3e4ffc17-b757-40e1-9f46-188667cbe05e",
+		"name": "Pâtes",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "3e9eff6b-83ab-4d02-82f3-01f2105d54ae",
+		"name": "Assiettes froides",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "3f1d16f0-fe4b-4342-80ba-ceb3898cc6e6",
+		"name": "Entrées",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "3f7fe36a-3003-4f4e-9fa3-4f3911c35e1d",
+		"name": "Sauces d'accompagnements",
+		"description": "Pour grillades uniquement",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "45c6e480-7001-435e-8cc3-54e412ab02cc",
+		"name": "Tartares",
+		"description": "Servis avec pain toast, pomme frites et salade de saison",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "4705238c-f527-4559-8e25-2cbd408d108a",
+		"name": "Suggestions du jour",
+		"description": "",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"sequence_number": 2
+	},
+	{
+		"id": "480e43ac-e330-4d8b-afeb-2a4cde8384dc",
+		"name": "Les desserts",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "48c9e095-a482-41d9-aba9-4a7a84dbb261",
+		"name": "Les viandes",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "4bed9297-50fd-4ce0-bf70-3caeda6d4023",
+		"name": "Les desserts",
+		"description": "",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "4cff1ccc-c3fb-4d0f-95d8-e174b64a283f",
+		"name": "Poissons",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "500d42e7-04f9-415d-a807-fae86d4c7420",
+		"name": "Accompagnements",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "50adcac6-cad7-4b48-8d06-f6214b4a8db6",
+		"name": "Poissons",
+		"description": "Garnitures : riz, légumes, frites",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "5170d7a1-27bf-4241-a122-e1e2d167e84e",
+		"name": "Pizzas",
+		"description": "Il migliore, senza ulteriori commenti",
+		"restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+		"sequence_number": 2
+	},
+	{
+		"id": "51a4d66c-48bf-43b1-95b4-1e7079a5d947",
+		"name": "Poulet",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "52f3e1ae-ab26-42e5-869f-9f57d5c3ce2a",
+		"name": "Viandes",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "530aca37-5c65-45ad-ab0c-7f6ee36467d0",
+		"name": "Classici italiani",
+		"description": "Suggestions du midi uniquement",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "55416193-1eba-4ede-8e16-2093a31e9c39",
+		"name": "Les entrées",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "571f36cb-aa0a-4e13-b96e-d913f05c987f",
+		"name": "Antipasti",
+		"description": "",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "57cf9e37-8fbd-4d7b-a79c-d96dd7e43dea",
+		"name": "Les smørrebrød",
+		"description": "Le smørrebrød se compose d'une tranche de rugbrød (pain de seigle) fabriqué par nos soins, sur laquelle on vient disposer une garniture.",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "58b9dc7f-faf2-4c17-877c-8da0c5f81069",
+		"name": "De la mer",
+		"description": "Salade verte servie en entrée.",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "5ac114ec-d0d7-41d2-bd64-80151958ec12",
+		"name": "Les classiques du chaud",
+		"description": "Carte de midi uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "5b51932e-5e51-407d-8b7d-eaf873ada33f",
+		"name": "Les tartares",
+		"description": "",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"sequence_number": null
+	},
+	{
+		"id": "5c5d4498-f9ec-4146-8193-1c953932af80",
+		"name": "Poissons et fruits de mer",
+		"description": "Selon arrivage",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "629a663c-d9e3-4679-84d4-7157a467b78c",
+		"name": "La nostra pasta fresca",
+		"description": "Nos pâtes fraiches, sur demande, nous servons aussi des pâtes sans gluten",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"sequence_number": null
+	},
+	{
+		"id": "6356dbb8-0f7d-4018-a5d0-60904801414e",
+		"name": "Burgers Spéciaux",
+		"description": "Servis avec des frites à l'ancienne et une salade. CH & 160 grammes",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"sequence_number": null
+	},
+	{
+		"id": "658aa8de-1acc-48e5-aa0b-6203a73d8813",
+		"name": "Pastas",
+		"description": "",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "65e383c9-5d23-4dd2-beb5-96755c2aec4f",
+		"name": "Accompagnements",
+		"description": "",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"sequence_number": 3
+	},
+	{
+		"id": "68b07f3a-67a6-4612-9e67-14b8ef670977",
+		"name": "Pâtisseries",
+		"description": "",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"sequence_number": 4
+	},
+	{
+		"id": "68b71f21-aca0-479c-a2d8-40f789422319",
+		"name": "Plats à la carte",
+		"description": "",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"sequence_number": 5
+	},
+	{
+		"id": "6ad60224-d359-4559-b259-87c15cd7b3fc",
+		"name": "Les Pains",
+		"description": "",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "6b990c01-d906-4520-b77b-55a0da900af3",
+		"name": "Entrées",
+		"description": "",
+		"restaurant_id": "ea6c2a0e-a28f-4d73-9457-1799593a5918",
+		"sequence_number": null
+	},
+	{
+		"id": "6e0deee1-476c-484d-9158-de8aa1333e49",
+		"name": "Nos entrées",
+		"description": "",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "6ff65b46-a349-44d1-9798-932092bb0739",
+		"name": "Desserts",
+		"description": "",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "723e0046-5aac-4b7c-8516-b162dbd34971",
+		"name": "Fondues",
+		"description": "Minimum 2 personnes et accompagnées d’une salade en entrée et pommes frites, ainsi que\nde diverses sauces maison (tartare, curry, ail et cocktail), sauf la fondue au fromage",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "729d7a32-277a-45b8-9cff-7dd003aed83d",
+		"name": "Kebab & Falafel",
+		"description": "Préparé avec salade, tomates, oignons, carottes, sauce blanche, cocktail et piquante",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "75ddba43-3368-4767-bbbb-c1f5a1a38cb5",
+		"name": "Fondues",
+		"description": "Minimum 2 personnes, prix p.p.",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "76272449-7e23-4600-b88b-75394a5ebb17",
+		"name": "Suggestions du moment",
+		"description": "",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "7848a5f6-de2e-48cc-9a27-5f8054bef5d3",
+		"name": "Burgers Poulet Pané",
+		"description": "Servis avec des frites à l'ancienne et une salade. CH &120 grammes",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"sequence_number": null
+	},
+	{
+		"id": "7a0eadad-4d38-437a-941e-f23c6be2ce99",
+		"name": "Nouilles et riz sauté",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "7b1d6179-9bcd-4c92-b2a5-296f43aa2b81",
+		"name": "Pasta",
+		"description": "E basta",
+		"restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+		"sequence_number": 3
+	},
+	{
+		"id": "7ba7b038-433e-4533-a8bf-8f98046b4840",
+		"name": "Il nostro risotto/pesce/carne",
+		"description": "Notre risotto/poisson/viande",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"sequence_number": null
+	},
+	{
+		"id": "7d815a4a-ca3f-42d8-ab3c-19d92a1723b1",
+		"name": "Desserts maison",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "7fd075f5-b5c3-4c44-b168-4abd5d134d47",
+		"name": "Dessert",
+		"description": "",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "80ff24f9-108e-47a4-bf71-7b7310cd7b79",
+		"name": "Pour deux personnes",
+		"description": "",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "810fc332-4854-4946-a74a-f7d802ac2d0d",
+		"name": "Desserts",
+		"description": "",
+		"restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+		"sequence_number": null
+	},
+	{
+		"id": "8152b52a-9e92-4ae3-af59-fde1688978a7",
+		"name": "Nos plats",
+		"description": "",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "817604f3-87d5-4e66-83b1-13ad62392300",
+		"name": "Classici italiani",
+		"description": "Suggestions du soir uniquement",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "82cfde2a-f440-4c4d-a840-b47e305f52c3",
+		"name": "Dessert",
+		"description": "",
+		"restaurant_id": "32d44bf5-4b2a-4909-ac0b-d5798cc05e5d",
+		"sequence_number": null
+	},
+	{
+		"id": "83d319ee-9821-4aa9-90db-6381dc5ebc52",
+		"name": "Pasta",
+		"description": "",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "877ce233-f28c-4c61-b13f-aad4787f3101",
+		"name": "Nos salades",
+		"description": "Accompagnées d'herbes fraîches, de jeunes pousses de salade et d'une vinaigrette à la grenade",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "892acdae-7e9f-4f2e-a9ac-5174889718a0",
+		"name": "Le menu du jour",
+		"description": "Le samedi, seul le menu à CHF 25.50 est disponible. En entrée, vous savourez une salade en été ou un potage en hiver. Le plat principal est toujours constitué d’une viande et de légumes de saison.",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "896afd17-684a-4895-a06a-7bee6a47bcbd",
+		"name": "Boissons chaudes",
+		"description": "",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"sequence_number": null
+	},
+	{
+		"id": "8d5485bc-cd46-4407-ba27-04bb1b4551e2",
+		"name": "Entrées et autres fraîcheurs",
+		"description": "Carte de midi uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "8ff62cbe-53cc-4ec2-adb2-86923550dd31",
+		"name": "Sashimis",
+		"description": "Par 6 pièces ",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"sequence_number": 3
+	},
+	{
+		"id": "911ed90a-f048-450a-96b4-a747d0801430",
+		"name": "Primi piatti",
+		"description": "Les prix sont affichés pour les grandes portions, pour les petites portions nous réduisons le prix de CHF 5.-",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "9298e915-e1c6-474e-89e3-ee2bd7c04faa",
+		"name": "Tartares",
+		"description": "Accompagnés de salade, pomme country et toasts",
+		"restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+		"sequence_number": null
+	},
+	{
+		"id": "93b34b82-419a-4307-bbc9-d7aeb2bbd75d",
+		"name": "Les gourmandises de saison",
+		"description": "Carte de midi uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "96cb3075-be62-4b94-9151-9a11f28295c3",
+		"name": "I nostri antipasti caldi",
+		"description": "Nos entrées chaudes",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"sequence_number": null
+	},
+	{
+		"id": "9716411a-d8ba-4dbd-b4b0-efe80688ed1b",
+		"name": "Pizzas au feu de bois",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "97973d99-dd87-42fa-8164-6f8438118710",
+		"name": "Le Matin",
+		"description": "",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"sequence_number": null
+	},
+	{
+		"id": "9998915f-89f2-4d73-b5ce-2be489ca8bb5",
+		"name": "Les entrées",
+		"description": "",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "9a87f4e5-d225-4a72-81c8-9ebca40fa955",
+		"name": "Boissons",
+		"description": "",
+		"restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+		"sequence_number": null
+	},
+	{
+		"id": "9be39f58-d745-4719-8897-2fc8dca84aa1",
+		"name": "Nigiris",
+		"description": "Par 2 pièces",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"sequence_number": 4
+	},
+	{
+		"id": "a0037195-4f02-477b-b8bd-ba59aa47d97b",
+		"name": "Salades et entrées",
+		"description": "",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "a18b1c1f-c63b-454a-981d-641e58cf9cfa",
+		"name": "Salades et hors d'oeuvres",
+		"description": "Carte du soir uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "a3dd00b0-a844-40a7-b506-c0f954bcdb51",
+		"name": "Salades",
+		"description": "",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "a4e35b24-c278-40e4-bfcf-092490b1aecd",
+		"name": "Coin des enfants",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "a74b5025-fdca-429c-9394-a4fa2b441f81",
+		"name": "Les plats végétariens",
+		"description": "",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"sequence_number": null
+	},
+	{
+		"id": "a77803fa-369e-4e4a-b5ca-955a02e4c460",
+		"name": "Les Spécialités",
+		"description": "",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "a82c3011-846f-4ea3-96a0-52f4a287dc48",
+		"name": "Plats principaux",
+		"description": "",
+		"restaurant_id": "ea6c2a0e-a28f-4d73-9457-1799593a5918",
+		"sequence_number": null
+	},
+	{
+		"id": "a86469fb-96ce-4ded-b026-eb1d355122ed",
+		"name": "Les desserts",
+		"description": "",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"sequence_number": null
+	},
+	{
+		"id": "a893faaa-ac1a-41cd-8793-4899912a86ff",
+		"name": "Risotto",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "a9022b8b-a1a2-4941-a740-f775fb415395",
+		"name": "Dolci",
+		"description": "",
+		"restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+		"sequence_number": 4
+	},
+	{
+		"id": "adcee79b-0f23-49db-896a-fd7f68759ed3",
+		"name": "Crevettes",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "ae733605-9c2d-4545-bc81-bd55844f5807",
+		"name": "Desserts",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "b50c66c4-dc1f-411f-8dfc-ef7c6fe23834",
+		"name": "Les classiques du chaud",
+		"description": "Carte du soir uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "b8649c72-b5b5-47eb-aeec-c84db2e596a9",
+		"name": "Burgers au boeuf",
+		"description": "150g de bon boeuf suisse",
+		"restaurant_id": "cd1621e4-2ba9-4e00-93d9-e8bfda0bd280",
+		"sequence_number": 1
+	},
+	{
+		"id": "b8ed8dcb-23a8-41f3-aaf1-599fb6b61c49",
+		"name": "Grillades",
+		"description": "Accompagnées de pommes frites, pâtes ou riz sauvage et légumes de saison",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"sequence_number": null
+	},
+	{
+		"id": "bc3a6565-0bb3-4598-9840-f9d30566eb82",
+		"name": "Makis",
+		"description": "Par 6 pièces",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"sequence_number": 5
+	},
+	{
+		"id": "bd184780-e448-47b9-bdb6-66e3c879ce7a",
+		"name": "Suggestions du moment",
+		"description": "",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "c0f7e5fc-b4d7-4069-8d1b-933eb5b195b4",
+		"name": "Äta'BreakFast petits plus",
+		"description": "Disponible du lundi au samedi de 9h à 11h",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "c3f1d29d-d0c4-49c6-88c6-ceb0fd80bcc6",
+		"name": "Accompagnements/Suppléments",
+		"description": "Pour compléter votre burger",
+		"restaurant_id": "159902cc-8b51-4181-96ff-530ee6df9fcd",
+		"sequence_number": null
+	},
+	{
+		"id": "c5b18534-c21b-4b26-a849-648f93118df9",
+		"name": "Äta'BreakFast formule",
+		"description": "Disponible du lundi au samedi de 9h à 11h",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "c668979f-1d30-4d55-b9fc-0bc1ae6f46af",
+		"name": "Pesce",
+		"description": "",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"sequence_number": null
+	},
+	{
+		"id": "c6efc9fa-d1d7-4341-9c5c-28c7752c9f7c",
+		"name": "Calamars",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "c88c2455-cb0c-48b4-897a-cb30752f4c1a",
+		"name": "Tout beau tout frais",
+		"description": "Carte du soir uniquement",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"sequence_number": null
+	},
+	{
+		"id": "cd654ec1-ef60-4bcb-8c4b-ab5e6b99f0f1",
+		"name": "Viandes sur ardoises",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "d03a37ad-d4ac-4eed-be6b-89620a79ce69",
+		"name": "Poissons et fruits de mer",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "d068194e-1057-4191-9842-9746e39e3689",
+		"name": "Les boissons",
+		"description": "",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"sequence_number": null
+	},
+	{
+		"id": "d0cd4157-d92f-4316-b488-ad2fdbd5f7b0",
+		"name": "Salades garnies",
+		"description": "",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"sequence_number": null
+	},
+	{
+		"id": "d48146f3-49a3-48ee-bfb9-368de0712b5b",
+		"name": "Desserts",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "d62b48b4-2e6e-4e76-a5e4-b12e6a98f56f",
+		"name": "Entrées",
+		"description": "",
+		"restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+		"sequence_number": null
+	},
+	{
+		"id": "d68b1ed3-1034-4f1e-b295-4028eeb6e184",
+		"name": "Pasta",
+		"description": "",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"sequence_number": null
+	},
+	{
+		"id": "d7e01ef8-4323-4d1d-a23a-b7f95dee4d62",
+		"name": "Les pâtes",
+		"description": "",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"sequence_number": null
+	},
+	{
+		"id": "d8ab59bc-ea61-49dd-8f90-c60c1ce3e6ce",
+		"name": "Spécialités de viandes",
+		"description": "Avec salade en entrée, pommes frites ou riz ou pâtes.",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "d8c08c6b-f782-461c-b560-b3cb9596b08d",
+		"name": "Desserts du Zoo",
+		"description": "",
+		"restaurant_id": "159902cc-8b51-4181-96ff-530ee6df9fcd",
+		"sequence_number": null
+	},
+	{
+		"id": "d94a4427-905c-49c3-bf17-208561afa29b",
+		"name": "Äta'BreakFast",
+		"description": "Disponible du lundi au samedi de 9h à 11h",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"sequence_number": null
+	},
+	{
+		"id": "da1d287e-b9da-4f1b-9ef8-09ddf989e9d1",
+		"name": "Pâtes fraîches",
+		"description": "",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"sequence_number": null
+	},
+	{
+		"id": "da352ecd-392c-41b8-9e39-19b79b299ca6",
+		"name": "Boissons sans alcool",
+		"description": "",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "db6e510f-d22a-4829-bffa-8e0434a63dc5",
+		"name": "Boissons avec alcool",
+		"description": "Tous les prix sont fixés pour 0,5 L.",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "dfa19a52-5be7-434e-8cab-2ce239b63c67",
+		"name": "Burgers végans",
+		"description": "",
+		"restaurant_id": "cd1621e4-2ba9-4e00-93d9-e8bfda0bd280",
+		"sequence_number": 2
+	},
+	{
+		"id": "dfc5b912-1c93-4cf1-8b56-af60f73fc500",
+		"name": "Burgers au poulet",
+		"description": "110g de poulet",
+		"restaurant_id": "cd1621e4-2ba9-4e00-93d9-e8bfda0bd280",
+		"sequence_number": 3
+	},
+	{
+		"id": "e1357ac8-2ca7-48a1-9f41-73fe4c8a0258",
+		"name": "I nostri antipasti freddi",
+		"description": "Nos entrées froides",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"sequence_number": null
+	},
+	{
+		"id": "e4cb789d-6d57-46ef-99b5-ddddd99c9877",
+		"name": "Végétariens",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "e555de11-dbb7-46ad-9b24-05064d31eb77",
+		"name": "Le coin des enfants",
+		"description": "Ces plats sont servis uniquement aux enfants.",
+		"restaurant_id": "ea6c2a0e-a28f-4d73-9457-1799593a5918",
+		"sequence_number": null
+	},
+	{
+		"id": "e5838c61-b481-421d-8870-e442466d5533",
+		"name": "Boissons",
+		"description": "Thé froid et limonade 0.5 L de Ciprian (Bernex)",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"sequence_number": null
+	},
+	{
+		"id": "e7b46fa7-468c-4376-831c-92b0c659808d",
+		"name": "Boissons froides",
+		"description": "",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"sequence_number": null
+	},
+	{
+		"id": "e7e068bd-47b9-49fe-b4bd-c8315ea4ad45",
+		"name": "Pizzas 30 cm",
+		"description": "Toutes nos pizzas ont la même base : sauce tomate, mozzarella et origan. Seule la Hawaïenne n'a pas d'origan.",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"sequence_number": null
+	},
+	{
+		"id": "e8e06f58-43a6-4e67-9e09-18d99f178ff2",
+		"name": "Burgers végétarien",
+		"description": "Le menu (+ CHF 6,50) est servi avec frites et sauce aïoli",
+		"restaurant_id": "159902cc-8b51-4181-96ff-530ee6df9fcd",
+		"sequence_number": null
+	},
+	{
+		"id": "e9b96afe-c563-45ed-a5c1-67190fe79e3a",
+		"name": "Salades",
+		"description": "",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"sequence_number": null
+	},
+	{
+		"id": "ea41660e-7c12-4f10-a53c-e5b3261a333f",
+		"name": "Porc",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "f0b2f64e-ccd6-47fb-96cb-422a9e32bf3b",
+		"name": "Menu enfant",
+		"description": "",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"sequence_number": null
+	},
+	{
+		"id": "f82f396f-e31f-4f24-a425-4908ba746bb8",
+		"name": "Les Oeufs",
+		"description": "",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"sequence_number": null
+	},
+	{
+		"id": "f8639358-4100-41d0-84a7-df721b81e26c",
+		"name": "Poissons",
+		"description": "",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"sequence_number": null
+	},
+	{
+		"id": "f8c9fc93-9ddf-4453-97de-381c4adca1e0",
+		"name": "Nos sucreries",
+		"description": "",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"sequence_number": null
+	},
+	{
+		"id": "fe8c2432-7159-45af-ae96-0341aaad5827",
+		"name": "Entrée",
+		"description": "",
+		"restaurant_id": "32d44bf5-4b2a-4909-ac0b-d5798cc05e5d",
+		"sequence_number": null
+	}
+]

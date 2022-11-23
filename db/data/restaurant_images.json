@@ -1,0 +1,332 @@
+[
+	{
+		"id": "0b0f796c-89ee-4802-8182-c469e40676d8",
+		"restaurant_id": "fe49f756-30a5-4e22-bccb-5b23719b1398",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/734fb559-cee1-4525-b590-bcc349cecf86",
+		"legend": "Le Carrousel de Vidy",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.287946+00",
+		"updated_at": "2022-10-10 23:15:10.287946+00"
+	},
+	{
+		"id": "0c4d3ecc-0792-4bbd-b5c7-7ec1118549e6",
+		"restaurant_id": "d960ca18-5919-4586-93b7-16853a33f417",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/bbdb64f3-f1a9-47a3-8d10-a90d85b68a2b",
+		"legend": "Ulivo",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.286611+00",
+		"updated_at": "2022-10-10 23:15:10.286611+00"
+	},
+	{
+		"id": "0e34a9c1-fb54-4a6f-aca6-6b26c5838870",
+		"restaurant_id": "ae521d81-1065-4a18-93bb-43c562e4f937",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/bb02364c-8235-454f-b96f-ee31984dd915",
+		"legend": "Tartares & Co",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.287341+00",
+		"updated_at": "2022-10-10 23:15:10.287341+00"
+	},
+	{
+		"id": "12eb2131-c0bd-417f-8ddb-884343e91c26",
+		"restaurant_id": "5c6f95e8-ba31-425b-bf8f-5d3a90fa3c04",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/2fd4b6ac-a854-47fe-92b5-a6d8df01b139",
+		"legend": "Sushi Express",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.290942+00",
+		"updated_at": "2022-10-10 23:15:10.290942+00"
+	},
+	{
+		"id": "2c59f849-7a48-4fdf-869c-d4e3660abc4d",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/f0937391-88ad-4242-b39a-f833def3c17d",
+		"legend": "Brasserie de Montbenon",
+		"sequence_number": 4,
+		"status": "visible",
+		"created_at": "2022-10-11 23:51:17.735936+00",
+		"updated_at": "2022-10-11 23:51:17.735936+00"
+	},
+	{
+		"id": "37ecc756-b1ce-4a8c-8399-e3839b703522",
+		"restaurant_id": "32d44bf5-4b2a-4909-ac0b-d5798cc05e5d",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/becdaf9c-786b-4889-a16f-029b371e7654",
+		"legend": "Little Jaffna",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.287529+00",
+		"updated_at": "2022-10-10 23:15:10.287529+00"
+	},
+	{
+		"id": "3ded9609-6a8d-48c9-b3cd-d11c30ed09df",
+		"restaurant_id": "381d16f0-618b-40d5-80f6-ad0788bb6edf",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/d48352f2-8d5d-4d6b-9a48-fda6c94eda66",
+		"legend": "L'Etoile",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.289456+00",
+		"updated_at": "2022-10-10 23:15:10.289456+00"
+	},
+	{
+		"id": "4183e245-cd57-4955-8d5f-c75a16bd793a",
+		"restaurant_id": "abe82458-9b75-465c-852c-c558aea374d9",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/8153d6f1-4b49-4e82-84ba-c80ff51b1dab",
+		"legend": "The Hideaway",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.288685+00",
+		"updated_at": "2022-10-10 23:15:10.288685+00"
+	},
+	{
+		"id": "47583b6f-d3ad-45be-8144-6a277dba8667",
+		"restaurant_id": "90f8fabb-a774-4538-b198-a886a8ba120a",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/26d305e1-e02a-45ff-bb63-bd19685190dd",
+		"legend": "Brasserie de Tivoli",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.289872+00",
+		"updated_at": "2022-10-10 23:15:10.289872+00"
+	},
+	{
+		"id": "55e6144f-537d-434d-a1bc-f44ed5f8098c",
+		"restaurant_id": "8b89deae-0d82-49d9-9369-c6ac65be554a",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/f8ce4ce6-fdf8-482a-887a-442aff0d18ba",
+		"legend": "Café des Bouchers",
+		"sequence_number": 0,
+		"status": "visible",
+		"created_at": "2022-10-16 11:19:02.963777+00",
+		"updated_at": "2022-10-16 11:19:02.963777+00"
+	},
+	{
+		"id": "563cf542-59a4-4b47-942d-b78b32362a2b",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/6a43c383-53e3-4298-aa42-f0eb5c7bab9f",
+		"legend": "La Paix",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.283912+00",
+		"updated_at": "2022-10-10 23:15:10.283912+00"
+	},
+	{
+		"id": "58f718e4-6896-45c0-b251-bed4862b470c",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/7076989a-8e12-4dcf-b44d-e56f8151a8fe",
+		"legend": "Brasserie de Montbenon",
+		"sequence_number": 2,
+		"status": "visible",
+		"created_at": "2022-10-11 23:51:00.625473+00",
+		"updated_at": "2022-10-11 23:51:00.625473+00"
+	},
+	{
+		"id": "676f8b85-c3ef-4dbc-808f-bc8d54c67b83",
+		"restaurant_id": "8fed07a2-960c-4b38-981c-d35e6c306dd0",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/bfd61c7b-528f-4776-9356-da02293abde3",
+		"legend": "Amici",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.285096+00",
+		"updated_at": "2022-10-10 23:15:10.285096+00"
+	},
+	{
+		"id": "88c05261-7969-42c4-82ae-119d142330a9",
+		"restaurant_id": "a795bc05-ba76-43be-a355-73430691579b",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/034b34c3-17d0-4cfd-867e-c1d029872558",
+		"legend": "L'Echo",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.290119+00",
+		"updated_at": "2022-10-10 23:15:10.290119+00"
+	},
+	{
+		"id": "917c4cd9-1584-4042-a98a-6d47ee37b3a6",
+		"restaurant_id": "a067629d-55da-4bee-ac6f-b368954a126a",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/cee295e3-96f6-4f36-bab6-7b0480980429",
+		"legend": "Thai au lac",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.28626+00",
+		"updated_at": "2022-10-10 23:15:10.28626+00"
+	},
+	{
+		"id": "9e88737e-e9f1-4234-a7c2-05e8555a1478",
+		"restaurant_id": "6b8b711b-7f68-4a90-834d-ba6780a33142",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/27dd262a-ee71-43c8-95ac-7ab58a82e6e0",
+		"legend": "La Paix",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-11 16:23:39.109813+00",
+		"updated_at": "2022-10-11 16:23:39.109813+00"
+	},
+	{
+		"id": "9fd00f5a-9091-4837-97df-8ecce30bfd16",
+		"restaurant_id": "ea6c2a0e-a28f-4d73-9457-1799593a5918",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/d2e480be-8434-478c-a8fd-7a33d9782ffa",
+		"legend": "L'Ardoise",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.284001+00",
+		"updated_at": "2022-10-10 23:15:10.284001+00"
+	},
+	{
+		"id": "a531127c-dfe7-4aa0-a2f9-f60a20934d6b",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/9959c454-f0ca-4bed-8f30-c04554a88e9d",
+		"legend": "Café du commerce",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.290406+00",
+		"updated_at": "2022-10-10 23:15:10.290406+00"
+	},
+	{
+		"id": "a809be40-2f7c-4775-8c7d-d3d161f29df2",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/cd814e3b-c484-45f9-833a-0abe6db6a64e",
+		"legend": "Brasserie de Montbenon",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-11 23:50:54.681934+00",
+		"updated_at": "2022-10-11 23:50:54.681934+00"
+	},
+	{
+		"id": "a8e58ecd-4608-462b-9d9b-704c0df88825",
+		"restaurant_id": "21b4dc5d-e593-4649-bce8-04cff038bfbb",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/39bb49d7-4510-4774-a104-4551b4c0fd21",
+		"legend": "Äta",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.287036+00",
+		"updated_at": "2022-10-10 23:15:10.287036+00"
+	},
+	{
+		"id": "b7a8ee8f-0a75-4283-a81c-98c037047355",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/7d3b9d8e-50e5-41f4-a278-aaee3f32bbb5",
+		"legend": "Café du commerce",
+		"sequence_number": 2,
+		"status": "visible",
+		"created_at": "2022-10-12 08:20:01.72157+00",
+		"updated_at": "2022-10-12 08:20:01.72157+00"
+	},
+	{
+		"id": "ba9a4036-ba8f-48cf-bd78-c99b5e5c918c",
+		"restaurant_id": "ac31fb36-06b6-488c-b847-ac3e60770a96",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/569a3f4b-5752-49a6-b20c-2a829e041435",
+		"legend": "Café du commerce",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-12 08:19:52.619385+00",
+		"updated_at": "2022-10-12 08:19:52.619385+00"
+	},
+	{
+		"id": "bab6ed3a-dd8f-4c0a-90f6-65dd4172f5e2",
+		"restaurant_id": "cb0cd68a-6910-447e-97cf-5d595ff0abcb",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/6a57e16a-87e8-455a-bf74-bfe0b7260f36",
+		"legend": "La Pizzeria",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.290625+00",
+		"updated_at": "2022-10-10 23:15:10.290625+00"
+	},
+	{
+		"id": "c2fd778f-2a23-47c2-b0a9-4ff869041575",
+		"restaurant_id": "159902cc-8b51-4181-96ff-530ee6df9fcd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/e44d083a-e06f-4d7d-b4c4-69f0f9456d82",
+		"legend": "Zooburger",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.28912+00",
+		"updated_at": "2022-10-10 23:15:10.28912+00"
+	},
+	{
+		"id": "c4d257ea-10a2-44c4-9103-08e261c42259",
+		"restaurant_id": "b0566a60-b7c9-40ed-aabc-1ff75cea9ca0",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/536237f9-6818-460d-900d-8030ce44de30",
+		"legend": "Il Gambero",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.284898+00",
+		"updated_at": "2022-10-10 23:15:10.284898+00"
+	},
+	{
+		"id": "caccfe5c-dbf7-46cb-9e2e-ede06e916ff8",
+		"restaurant_id": "d1b4d409-b9dc-4062-a301-1eebb009d0bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/52f22bd1-5c12-4103-ac1f-49edee4cfd2c",
+		"legend": "Petit Boeuf",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.286992+00",
+		"updated_at": "2022-10-10 23:15:10.286992+00"
+	},
+	{
+		"id": "d42bfd03-1161-4505-812d-b477e732654f",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/57aa0d10-1f41-4227-8287-eced5030c394",
+		"legend": "Brasserie de Montbenon",
+		"sequence_number": 5,
+		"status": "visible",
+		"created_at": "2022-10-11 23:51:22.441714+00",
+		"updated_at": "2022-10-11 23:51:22.441714+00"
+	},
+	{
+		"id": "daf41655-f13b-473c-97cc-d08136d3174f",
+		"restaurant_id": "0549e462-3d49-4592-be38-3e508e081e9d",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/c0d2079b-1bc5-4692-bc84-c6f85e436e15",
+		"legend": "Restaurant de l'Aéroport",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.289534+00",
+		"updated_at": "2022-10-10 23:15:10.289534+00"
+	},
+	{
+		"id": "db0bd516-5b92-4f8d-82cd-53872e000301",
+		"restaurant_id": "cd1621e4-2ba9-4e00-93d9-e8bfda0bd280",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/cf053feb-dc3f-41d4-9271-31821fe82c9f",
+		"legend": "Holy Burgers",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.290767+00",
+		"updated_at": "2022-10-10 23:15:10.290767+00"
+	},
+	{
+		"id": "e2ff5529-024b-4f9e-bdbc-f497d6427d7b",
+		"restaurant_id": "9b1c3548-846b-4059-b1ad-64d2360f70bd",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/37ff13fd-f3d2-492b-a44d-6eea72d834dc",
+		"legend": "Brasserie de Montbenon",
+		"sequence_number": 0,
+		"status": "visible",
+		"created_at": "2022-10-11 23:50:47.411385+00",
+		"updated_at": "2022-10-11 23:50:47.411385+00"
+	},
+	{
+		"id": "e8b57f41-039c-44ee-8133-303a5790839f",
+		"restaurant_id": "cb68a908-45ff-490a-9f27-0085da95765d",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/b8028af2-f818-46df-8ed0-cbf8fb7405fc",
+		"legend": "Inglewood Grancy",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.288316+00",
+		"updated_at": "2022-10-10 23:15:10.288316+00"
+	},
+	{
+		"id": "eb22b3e1-2f4a-43c4-8c7f-a2fa10ce7719",
+		"restaurant_id": "bb9542e7-8906-40a6-ba27-78aa3ca9a14e",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/8ebb7865-3a51-46b6-969a-251fee481da0",
+		"legend": "Le Mont d'Or",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.2899+00",
+		"updated_at": "2022-10-10 23:15:10.2899+00"
+	},
+	{
+		"id": "eddee2f2-77de-4bea-9665-addbe3d49100",
+		"restaurant_id": "59e046f1-6afe-4e93-8ed8-a5bc80d6514d",
+		"url": "https://waiter.fra1.digitaloceanspaces.com/7f22b8cd-8bd7-4cd1-bc2f-0e1142b92458",
+		"legend": "L'Etoile Blanche",
+		"sequence_number": 1,
+		"status": "visible",
+		"created_at": "2022-10-10 23:15:10.29027+00",
+		"updated_at": "2022-10-10 23:15:10.29027+00"
+	}
+]

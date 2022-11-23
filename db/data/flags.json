@@ -1,0 +1,52 @@
+[
+	{
+		"key": "messages",
+		"enabled": false,
+		"id": "b60719a4-15d8-49f4-98a7-279467686330"
+	},
+	{
+		"key": "reviews",
+		"enabled": false,
+		"id": "dd4eee38-b541-443b-851a-cc2d55202398"
+	},
+	{
+		"key": "favorites",
+		"enabled": false,
+		"id": "1ffd8d1c-46d3-4611-a54b-5b3cd63591fc"
+	},
+	{
+		"key": "analytics",
+		"enabled": false,
+		"id": "29e99a60-28ca-4bb4-aea9-2e8982bd3d1f"
+	},
+	{
+		"key": "menu",
+		"enabled": false,
+		"id": "7ae6ac17-2d5c-488b-a57b-1f61b1f8c01a"
+	},
+	{
+		"key": "modifiers",
+		"enabled": true,
+		"id": "1a1ddc88-403a-443d-9945-b213857ef4a2"
+	},
+	{
+		"key": "feedbacks",
+		"enabled": true,
+		"id": "23b3f9b8-3858-454a-92df-0f1c8d51c11b"
+	},
+	{
+		"key": "orders",
+		"enabled": true,
+		"id": "1dac6b4a-23ac-4201-8fc0-7595d9426048"
+	},
+	{
+		"key": "schedules",
+		"enabled": true,
+		"id": "d222c684-c1e5-4cd5-ab6c-c67e08e26c28"
+	},
+	{
+		"key": "bookings",
+		"enabled": true,
+		"id": "46aeb1da-ad9d-4b63-b646-edaf406fd5d9"
+	}
+]
