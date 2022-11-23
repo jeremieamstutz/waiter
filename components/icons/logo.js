@@ -17,7 +17,7 @@ export default function Logo() {
 				}}
 			/>
 			<div style={{ fontSize: '1.5rem' }}>waiter</div>
-			<span
+			{/* <span
 				style={{
 					position: 'absolute',
 					top: 0,
@@ -28,7 +28,7 @@ export default function Logo() {
 				}}
 			>
 				beta
-			</span>
+			</span> */}
 		</div>
 	)
 }
