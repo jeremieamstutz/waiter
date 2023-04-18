@@ -63,7 +63,7 @@ function ProfilePicture({ value, onChange }) {
 				>
 					<Image
 						alt="Image preview"
-						src={value ?? '/images/defaults/user.png'}
+						src={value || '/images/defaults/user.png'}
 						width={128}
 						height={128}
 						style={{

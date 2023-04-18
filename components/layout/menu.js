@@ -27,23 +27,27 @@ export default function Menu() {
 				<div className={classes.link}>
 					<LanguageSelector />
 				</div>
-				{status === 'authenticated' && session.user.role === 'admin' && (
-					<button
-						className={`text ${classes.link} ${classes.text}`}
-						onClick={() =>
-							router.push(
-								{
-									pathname: router.pathname,
-									query: { ...router.query, showFlags: true },
-								},
-								undefined,
-								{ shallow: true },
-							)
-						}
-					>
-						Flags
-					</button>
-				)}
+				{status === 'authenticated' &&
+					session.user.role === 'admin' && (
+						<button
+							className={`text ${classes.link} ${classes.text}`}
+							onClick={() =>
+								router.push(
+									{
+										pathname: router.pathname,
+										query: {
+											...router.query,
+											showFlags: true,
+										},
+									},
+									undefined,
+									{ shallow: true },
+								)
+							}
+						>
+							Flags
+						</button>
+					)}
 				{flags.feedbacks &&
 					status === 'authenticated' &&
 					(session.user.role === 'admin' ? (
@@ -214,7 +218,10 @@ export default function Menu() {
 							>
 								<Image
 									alt={`${session.user.firstName} ${session.user.lastName}`}
-									src={session.user.image}
+									src={
+										session.user.image ||
+										'/images/defaults/user.png'
+									}
 									width={32}
 									height={32}
 									sizes="32px"
