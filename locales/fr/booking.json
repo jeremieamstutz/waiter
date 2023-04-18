@@ -22,10 +22,19 @@
 			"option_one": "personne",
 			"option_other": "personnes"
 		},
+		"location": {
+			"label": "Emplacement",
+			"placeholder": "",
+			"options": {
+				"inside": "A l'intérieur",
+				"outside": "A l'extérieur"
+			}
+		},
 		"remark": {
 			"label": "Remarque",
 			"placeholder": "Allergie, anniversaire, etc"
 		},
+		"disclaimer": "Votre table n'est réservée que 15 min",
 		"confirmation": "Réservation enregistrée !"
 	},
 	"footer": {

@@ -1,8 +1,10 @@
 import { createContext, useReducer, useContext, useEffect } from 'react'
+import { useRestaurant } from './restaurant'
 
 export const OrderContext = createContext({
 	items: [],
 	total: 0,
+	resetCart: () => {},
 	setOrder: (order) => {},
 	addItem: (item) => {},
 	updateItem: (item) => {},
@@ -10,17 +12,35 @@ export const OrderContext = createContext({
 })
 
 const defaultOrderState = {
+	restaurantId: '',
 	items: [],
 	total: 0,
+	remark: '',
+	status: '',
+	payment: {
+		method: '',
+	},
 }
 
 const orderReducer = (state, action) => {
-	let items = [...state.items]
-	let total = state.total
+	let orders = [...state]
+	let orderIndex = orders.findIndex(
+		(order) => order.restaurantId === action.restaurantId,
+	)
+
+	let order = state[orderIndex] || {
+		...defaultOrderState,
+		restaurantId: action.restaurantId,
+	}
+
+	let restaurantId = order.restaurantId
+	let items = [...order.items]
+	let total = order.total
 
 	if (action.type === 'GENERAL') {
 		if (action.method === 'RESET') {
-			return defaultOrderState
+			items = []
+			total = 0
 		}
 
 		if (action.method === 'SET') {
@@ -29,10 +49,10 @@ const orderReducer = (state, action) => {
 	}
 
 	if (action.type === 'ITEM') {
-		const itemIndex = state.items.findIndex(
+		const itemIndex = order.items.findIndex(
 			(item) => item.id === action.item.id,
 		)
-		const existingItem = state.items[itemIndex]
+		const existingItem = order.items[itemIndex]
 
 		if (action.method === 'ADD') {
 			if (existingItem) {
@@ -47,6 +67,7 @@ const orderReducer = (state, action) => {
 					{ ...action.item, quantity: action.item.quantity || 1 },
 				]
 			}
+			restaurantId = action.item.restaurantId
 		}
 
 		if (action.method === 'UPDATE') {
@@ -78,33 +99,39 @@ const orderReducer = (state, action) => {
 
 	total = items.reduce((total, item) => total + item.price * item.quantity, 0)
 
-	return { ...state, items, total }
+	order = { ...order, restaurantId, items, total }
+
+	if (orderIndex > -1) {
+		orders[orderIndex] = order
+	} else {
+		orders = [...orders, order]
+	}
+
+	return orders
 }
 
 export const OrderProvider = ({ children }) => {
-	const [orderState, dispatchOrderAction] = useReducer(
-		orderReducer,
-		defaultOrderState,
-	)
+	const { restaurant } = useRestaurant()
+	const [ordersState, dispatchOrderAction] = useReducer(orderReducer, [])
 
 	useEffect(() => {
-		const localData = localStorage.getItem('order')
+		const localData = localStorage.getItem('orders')
 		dispatchOrderAction({
 			type: 'GENERAL',
 			method: 'SET',
-			order: localData ? JSON.parse(localData) : defaultOrderState,
+			order: localData ? JSON.parse(localData) : [],
 		})
 	}, [])
 
 	useEffect(() => {
-		if (orderState !== defaultOrderState) {
-			localStorage.setItem('order', JSON.stringify(orderState))
+		if (ordersState.length > 0) {
+			localStorage.setItem('orders', JSON.stringify(ordersState))
 		}
-	}, [orderState])
+	}, [ordersState])
 
 	async function handleSendOrder() {
 		const order = {
-			items: orderState.items.map((item) => ({
+			items: ordersState.items.map((item) => ({
 				id: item.id,
 				quantity: item.quantity,
 			})),
@@ -125,16 +152,46 @@ export const OrderProvider = ({ children }) => {
 		return data
 	}
 
+	const order =
+		restaurant &&
+		ordersState.filter((order) => order.restaurantId === restaurant.id)[0]
+
 	const orderContext = {
-		...orderState,
-		setOrder: (order) =>
-			dispatchOrderAction({ type: 'GENERAL', method: 'SET', order }),
+		order,
+		ordersState,
+		setOrders: (orders) =>
+			dispatchOrderAction({
+				type: 'GENERAL',
+				method: 'SET',
+				orders,
+			}),
+		resetCart: () =>
+			dispatchOrderAction({
+				type: 'GENERAL',
+				method: 'RESET',
+				restaurantId: restaurant.id,
+			}),
 		addItem: (item) =>
-			dispatchOrderAction({ type: 'ITEM', method: 'ADD', item }),
+			dispatchOrderAction({
+				type: 'ITEM',
+				method: 'ADD',
+				item,
+				restaurantId: restaurant.id,
+			}),
 		updateItem: (item) =>
-			dispatchOrderAction({ type: 'ITEM', method: 'UPDATE', item }),
+			dispatchOrderAction({
+				type: 'ITEM',
+				method: 'UPDATE',
+				item,
+				restaurantId: restaurant.id,
+			}),
 		removeItem: (item) =>
-			dispatchOrderAction({ type: 'ITEM', method: 'REMOVE', item }),
+			dispatchOrderAction({
+				type: 'ITEM',
+				method: 'REMOVE',
+				item,
+				restaurantId: restaurant.id,
+			}),
 		sendOrder: handleSendOrder,
 	}
 

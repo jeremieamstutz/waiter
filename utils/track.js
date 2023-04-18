@@ -11,4 +11,14 @@ export default {
 			window.gtag('event', event_name, { ...rest, debug_mode: true })
 		}
 	},
+	config: function (props) {
+		if (isProduction) {
+			window.gtag('config', GA_TRACKING_ID, props)
+		} else {
+			window.gtag('config', GA_TRACKING_ID, {
+				...props,
+				debug_mode: true,
+			})
+		}
+	},
 }

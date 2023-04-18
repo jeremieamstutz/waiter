@@ -52,19 +52,22 @@ function ImagePicker() {
 				{loading ? (
 					<div
 						style={{
-							aspectRatio: '4 / 3',
-							borderRadius: '0.5rem',
 							position: 'relative',
 						}}
 					>
 						<Image
-							alt=""
+							alt="Image preview"
 							src={preview}
-							layout="responsive"
-							objectFit="cover"
 							width={400}
 							height={300}
 							sizes="640px"
+							style={{
+								display: 'block',
+								width: '100%',
+								height: 'auto',
+								aspectRatio: 4 / 3,
+								objectFit: 'cover',
+							}}
 						/>
 						<div
 							style={{
@@ -126,19 +129,21 @@ function ImageCard({ image }) {
 	return (
 		<div
 			style={{
-				aspectRatio: 4 / 3,
-				borderRadius: '0.5rem',
 				position: 'relative',
 			}}
 		>
 			<Image
 				alt={image?.alt ?? ''}
 				src={image?.url ?? '/images/defaults/item.png'}
-				layout="responsive"
-				objectFit="cover"
 				width={400}
 				height={300}
 				sizes="640px"
+				style={{
+					display: 'block',
+					width: '100%',
+					height: 'auto',
+					aspectRatio: 4 / 3,
+				}}
 			/>
 			<button
 				style={{

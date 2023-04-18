@@ -1,7 +1,11 @@
 {
-	"meta": {
-		"title": "About • Waiter",
-		"description": "About page"
+	"head": {
+		"title": "About us • Waiter",
+		"meta": {
+			"description": "Learn more about Waiter"
+		}
 	},
-	"title": "About"
+	"title": "About us",
+	"description": "Our mission is to bring people around a good table.",
+	"joinUs": "Nous rejoindre"
 }

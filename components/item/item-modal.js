@@ -18,6 +18,11 @@ import Textarea from 'components/form/textarea'
 import Switch from 'components/form/switch'
 
 import classes from './item-modal.module.css'
+import ChevronIcon from 'components/icons/chevron'
+import VegetarianIcon from 'components/icons/vegetarian'
+import axios from 'axios'
+import { mutate } from 'swr'
+import useEventListener from 'hooks/useEventListener'
 
 export default function ItemModal({ item, onClose }) {
 	const router = useRouter()
@@ -27,12 +32,10 @@ export default function ItemModal({ item, onClose }) {
 	const { flags } = useFlags()
 	const { addItem } = useOrder()
 
-	item.allergies = ['fish', 'milk']
-	item.tags = ['bio', 'healthy']
-
 	const availableItems = restaurant.items.filter(
-		(itm) => itm.category_id === item.category_id,
+		(itm) => itm.categoryId === item.categoryId,
 	)
+
 	const itemIndex = availableItems.map((itm) => itm.id).indexOf(item.id)
 
 	const prevItemId =
@@ -75,30 +78,53 @@ export default function ItemModal({ item, onClose }) {
 		)
 	}, [nextItemId, router])
 
-	const listeners = useCallback(
-		(event) => {
-			switch (event.keyCode) {
-				// Previous item
-				case 37:
-					event.preventDefault()
-					handlePrevItem()
-					break
-				// Next item
-				case 39:
-					event.preventDefault()
-					handleNextItem()
-					break
-			}
-		},
-		[handlePrevItem, handleNextItem],
-	)
+	// const listeners = useCallback(
+	// 	(event) => {
+	// 		event.stopImmediatePropagation()
+	// 		console.log(event)
+	// 		switch (event.keyCode) {
+	// 			// Previous item
+	// 			case 37:
+	// 				event.preventDefault()
+	// 				console.log('prev')
+	// 				handlePrevItem()
+	// 				break
+	// 			// Next item
+	// 			case 39:
+	// 				event.preventDefault()
+	// 				console.log('next')
+	// 				handleNextItem()
+	// 				break
+	// 		}
+	// 	},
+	// 	[handlePrevItem, handleNextItem],
+	// )
 
-	useEffect(() => {
-		document.addEventListener('keydown', listeners)
-		return () => {
-			document.removeEventListener('keydown', listeners)
+	// useEffect(() => {
+	// 	console.log('setup listeners')
+	// 	document.addEventListener('keydown', listeners)
+	// 	return () => {
+	// 		console.log('remove listeners')
+	// 		document.removeEventListener('keydown', listeners)
+	// 	}
+	// }, [listeners])
+
+	useEventListener('keydown', (event) => {
+		switch (event.keyCode) {
+			// Previous item
+			case 37: {
+				event.preventDefault()
+				handlePrevItem()
+				break
+			}
+			// Next item
+			case 39: {
+				event.preventDefault()
+				handleNextItem()
+				break
+			}
 		}
-	}, [listeners])
+	})
 
 	const [quantity, setQuantity] = useState(1)
 	const id = useId()
@@ -116,134 +142,45 @@ export default function ItemModal({ item, onClose }) {
 	return (
 		<>
 			<Formik
-				initialValues={{ vins: [], accompagnement: '' }}
-				// initialValues={{
-				// 	date: new Date().toISOString().split('T')[0],
-				// 	hour: '20:00',
-				// 	guests: 2,
-				// 	remark: '',
-				// }}
-				// validationSchema={object({
-				// 	date: date().required('Date is required'),
-				// 	hour: string().required('Hour is required'),
-				// 	guests: number()
-				// 		.required()
-				// 		.positive()
-				// 		.integer('Number of guests is required'),
-				// 	remark: string().max(240, 'Remark is too long'),
-				// })}
-				// onSubmit={async (values, { setSubmitting, setStatus }) => {
-				// 	console.log('submitting')
-				// 	await sleep(500)
-				// 	setSubmitting(false)
-				// 	setStatus('success')
-				// }}
-				onSubmit={() => {
-					console.log('ORDERING')
+				initialValues={{ vins: [], accompagnement: '', note: '' }}
+				onSubmit={(values) => {
+					console.log('ORDERING', values)
+					addItem({
+						...item,
+						quantity,
+					})
+					track.event({
+						event_category: 'order',
+						event_name: 'add_to_order',
+						event_label: item.name,
+						value: item.price,
+					})
+					onClose()
 				}}
 			>
 				{({ status, isSubmitting, values }) => (
 					<Modal
 						title={item.name}
 						onClose={onClose}
-						// header={
-						// 	<div
-						// 		style={{
-						// 			width: '100%',
-						// 			display: 'flex',
-						// 			alignItems: 'center',
-						// 			justifyContent: 'space-between',
-						// 			gap: '1rem',
-						// 		}}
-						// 	>
-						// 		<button
-						// 			style={{
-						// 				flexShrink: 0,
-						// 				minWidth: 0,
-						// 				width: '2.5rem',
-						// 				height: '2.5rem',
-						// 				padding: 0,
-						// 				borderRadius: '50%',
-						// 			}}
-						// 			onClick={handlePrevItem}
-						// 		>
-						// 			<svg
-						// 				xmlns="http://www.w3.org/2000/svg"
-						// 				width={18}
-						// 				height={18}
-						// 				viewBox="0 0 20 20"
-						// 				fill="currentColor"
-						// 			>
-						// 				<path
-						// 					fillRule="evenodd"
-						// 					d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-						// 					clipRule="evenodd"
-						// 				/>
-						// 			</svg>
-						// 		</button>
-						// 		<h1>{item.name}</h1>
-						// 		<div style={{ display: 'flex', gap: '0.5rem' }}>
-						// 			<button
-						// 				style={{
-						// 					minWidth: 0,
-						// 					flexShrink: 0,
-						// 					width: '2.5rem',
-						// 					height: '2.5rem',
-						// 					padding: 0,
-						// 					borderRadius: '50%',
-						// 				}}
-						// 				onClick={handleNextItem}
-						// 			>
-						// 				<svg
-						// 					xmlns="http://www.w3.org/2000/svg"
-						// 					width={18}
-						// 					height={18}
-						// 					viewBox="0 0 20 20"
-						// 					fill="currentColor"
-						// 				>
-						// 					<path
-						// 						fillRule="evenodd"
-						// 						d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-						// 						clipRule="evenodd"
-						// 					/>
-						// 				</svg>
-						// 			</button>
-						// 			<button
-						// 				onClick={onClose}
-						// 				style={{
-						// 					minWidth: 0,
-						// 					flexShrink: 0,
-						// 					width: '2.5rem',
-						// 					height: '2.5rem',
-						// 					padding: 0,
-						// 					borderRadius: '50%',
-						// 				}}
-						// 			>
-						// 				<svg
-						// 					xmlns="http://www.w3.org/2000/svg"
-						// 					width={16}
-						// 					height={16}
-						// 					viewBox="0 0 20 20"
-						// 					fill="currentColor"
-						// 				>
-						// 					<path
-						// 						fillRule="evenodd"
-						// 						d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-						// 						clipRule="evenodd"
-						// 					/>
-						// 				</svg>
-						// 			</button>
-						// 		</div>
-						// 	</div>
-						// }
 						footer={
 							session?.user.id === restaurant.ownerId ||
 							session?.user.role === 'admin' ? (
 								<>
 									<Formik
-										initialValues={{ available: true }}
-										onSubmit={(values) => {
-											console.log('Changing to: ', values)
+										initialValues={{
+											available: item.available,
+										}}
+										onSubmit={async ({ available }) => {
+											await axios({
+												method: 'PUT',
+												url: `/api/items/${item.id}`,
+												data: {
+													available,
+												},
+											})
+											await mutate(
+												`/api/restaurants/${restaurant.id}`,
+											)
 										}}
 									>
 										{({
@@ -298,7 +235,7 @@ export default function ItemModal({ item, onClose }) {
 								</>
 							) : flags.orders ? (
 								<>
-									<div
+									{/* <div
 										style={{
 											display: 'flex',
 											alignItems: 'center',
@@ -370,44 +307,44 @@ export default function ItemModal({ item, onClose }) {
 												/>
 											</svg>
 										</button>
-									</div>
+									</div> */}
+									<button
+										style={{
+											flexShrink: 0,
+											minWidth: 0,
+											width: '2.5rem',
+											height: '2.5rem',
+											padding: 0,
+											borderRadius: '50%',
+										}}
+										onClick={handlePrevItem}
+									>
+										<ChevronIcon direction="left" />
+									</button>
 									<button
 										className="secondary"
 										disabled={!item.available}
-										onClick={() => {
-											addItem({
-												...item,
-												quantity,
-											})
-											track.event({
-												event_category: 'order',
-												event_name: 'add_to_order',
-												event_label: item.name,
-												value: item.price,
-											})
-											onClose()
-										}}
+										type="submit"
+										form={id}
 										style={{
 											flex: 1,
 											display: 'flex',
-											justifyContent: 'space-between',
 										}}
 									>
-										<span
-											style={{
-												fontSize: '1.125rem',
-											}}
-										>
-											{t('common:misc.actions.add')}
-										</span>
-										<span
-											style={{
-												fontSize: '1.125rem',
-											}}
-										>
-											CHF{' '}
-											{(quantity * item.price).toFixed(2)}
-										</span>
+										{t('item:actions.addToCart')}
+									</button>
+									<button
+										style={{
+											flexShrink: 0,
+											minWidth: 0,
+											width: '2.5rem',
+											height: '2.5rem',
+											padding: 0,
+											borderRadius: '50%',
+										}}
+										onClick={handleNextItem}
+									>
+										<ChevronIcon direction="right" />
 									</button>
 								</>
 							) : null
@@ -421,56 +358,46 @@ export default function ItemModal({ item, onClose }) {
 									flexDirection: 'column',
 								}}
 							>
-								<div
-									className={classes.image}
-									style={{
-										position: 'relative',
-									}}
-								>
+								{item.image && (
 									<Image
-										alt={item.name ?? ''}
-										src={
-											item.image ||
-											'/images/defaults/item.png'
-										}
-										layout="responsive"
-										objectFit="cover"
-										objectPosition="center"
+										alt={item.name}
+										src={item.image}
 										width={640}
 										height={640}
 										priority={true}
 										sizes="640px"
+										style={{
+											display: 'block',
+											width: '100%',
+											height: 'auto',
+											aspectRatio: 1,
+											objectFit: 'cover',
+										}}
 									/>
-								</div>
+								)}
 								<div
 									style={{
 										display: 'flex',
 										flexDirection: 'column',
-										gap: '0.25rem',
+										gap: '0.5rem',
 										justifyContent: 'space-between',
 									}}
 								>
-									<div
-										style={{
-											display: 'flex',
-											gap: '0.5rem',
-										}}
-									>
-										{!item.available && (
-											<div
-												style={{
-													color: 'white',
-													width: 'fit-content',
-													background: '#a00',
-													padding: '0.25rem 0.5rem',
-													borderRadius: '0.25rem',
-													margin: '0.125rem 0 0.25rem',
-												}}
-											>
-												{t('item:status.unavailable')}
-											</div>
-										)}
-										{/* <div
+									{!item.available && (
+										<div
+											style={{
+												color: 'white',
+												width: 'fit-content',
+												background: '#a00',
+												padding: '0.25rem 0.5rem',
+												borderRadius: '0.25rem',
+												margin: '0.125rem 0 0.25rem',
+											}}
+										>
+											{t('item:status.unavailable')}
+										</div>
+									)}
+									{/* <div
 											style={{
 												color: 'white',
 												width: 'fit-content',
@@ -482,80 +409,35 @@ export default function ItemModal({ item, onClose }) {
 										>
 											Nouveau
 										</div> */}
-									</div>
-									<p
-										style={{
-											fontSize: '1.125rem',
-											margin: 0,
-											lineHeight: '150%',
-											color: '#333',
-										}}
-									>
-										{item.description}
-									</p>
+									{item.description && (
+										<p
+											style={{
+												fontSize: '1.125rem',
+												margin: 0,
+												lineHeight: '150%',
+												color: '#333',
+											}}
+										>
+											{item.description}
+										</p>
+									)}
 									<div
 										style={{
 											fontFamily: 'Rubik',
 											fontSize: '1.125rem',
 											color: 'var(--color-ui-primary)',
+											// textAlign: 'right',
 										}}
 									>
-										CHF {(+item.price).toFixed(2)}
+										{(+item.price).toFixed(2)}
 									</div>
 								</div>
-								<div
-									style={{
-										display: 'flex',
-										justifyContent: 'space-between',
-										gap: '1rem',
-									}}
-								>
-									<div
-										style={{
-											display: 'flex',
-											gap: '0.5rem',
-											flexWrap: 'wrap',
-										}}
-									>
-										{item.tags.map((tag) => (
-											<div
-												key={tag}
-												style={{
-													background: '#eee',
-													borderRadius: '1rem',
-													padding: '0.5rem 1rem',
-												}}
-											>
-												{t(
-													'item:tags.' +
-														tag.toLowerCase(),
-												)}
-											</div>
-										))}
-									</div>
-									{/* <div
-										style={{
-											display: 'flex',
-											gap: '0.5rem',
-											flexWrap: 'wrap',
-										}}
-									>
-										{item.allergies.map(
-											(allergy) => (
-												<div
-													key={allergy}
-													style={{
-														background: '#eee',
-														borderRadius: '1.5rem',
-														padding: '0.5rem 1rem',
-													}}
-												>
-													{allergy}
-												</div>
-											),
-										)}
-									</div> */}
-								</div>
+								{item.tags?.length > 0 && (
+									<Tags tags={item.tags} />
+								)}
+								{item.allergies?.length > 0 && (
+									<Allergies allergies={item.allergies} />
+								)}
 								{flags.modifiers && (
 									<>
 										<RadioGroup
@@ -572,23 +454,41 @@ export default function ItemModal({ item, onClose }) {
 												Riz basmati du japon
 											</RadioGroup.Item>
 										</RadioGroup>
-										<CheckboxGroup
+										{/* <CheckboxGroup
 											label="Verre de vin conseillé"
 											name="vins"
 										>
 											<CheckboxGroup.Item value="chardonnay">
-												<span>Chardonnay</span>
-												<span>+ CHF 5.00</span>
+												<div>Chardonnay</div>
+												<div
+													style={{
+														color: '#a00',
+													}}
+												>
+													5.00
+												</div>
 											</CheckboxGroup.Item>
 											<CheckboxGroup.Item value="oeil de Perdrix">
-												<span>Oeil de Perdrix</span>
-												<span>+ CHF 4.00</span>
+												<div>Oeil de Perdrix</div>
+												<div
+													style={{
+														color: '#a00',
+													}}
+												>
+													4.00
+												</div>
 											</CheckboxGroup.Item>
 											<CheckboxGroup.Item value="st. Saphorin">
-												<span>St. Saphorin</span>
-												<span>+ CHF 6.00</span>
+												<div>St. Saphorin</div>
+												<div
+													style={{
+														color: '#a00',
+													}}
+												>
+													6.00
+												</div>
 											</CheckboxGroup.Item>
-										</CheckboxGroup>
+										</CheckboxGroup> */}
 										{/* <RadioGroup
 											label="Portion"
 											name="portion"
@@ -598,13 +498,13 @@ export default function ItemModal({ item, onClose }) {
 											</RadioGroup.Item>
 											<RadioGroup.Item value="grande">
 												<span>Grande portion</span>
-												<span>+ CHF 5.00</span>
+												<span>5.00</span>
 											</RadioGroup.Item>
 										</RadioGroup> */}
 										<Textarea
-											label="Remarque"
-											name="remark"
-											rows={4}
+											label="Note"
+											name="note"
+											rows={3}
 										/>
 									</>
 								)}
@@ -614,5 +514,102 @@ export default function ItemModal({ item, onClose }) {
 				)}
 			</Formik>
 		</>
+	)
+}
+
+function Tags({ tags }) {
+	const { t } = useTranslation()
+
+	return (
+		<div
+			style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+		>
+			<label>Tags</label>
+			<div
+				style={{
+					display: 'flex',
+					gap: '0.5rem',
+					flexWrap: 'wrap',
+				}}
+			>
+				{tags.map((tag, index) => {
+					switch (tag) {
+						case 'vegetarian': {
+							return (
+								<div
+									key={index}
+									style={{
+										display: 'flex',
+										gap: '0.5rem',
+										alignItems: 'center',
+										justifyContent: 'center',
+										background: '#017F00',
+										borderRadius: '1rem',
+										color: 'white',
+										height: '2rem',
+										padding: '0.75rem',
+									}}
+								>
+									<VegetarianIcon width={12} fill="white" />
+									Végétarien
+								</div>
+							)
+						}
+						default: {
+							return (
+								<div
+									key={index}
+									style={{
+										display: 'flex',
+										gap: '0.5rem',
+										alignItems: 'center',
+										justifyContent: 'center',
+										background: '#eee',
+										borderRadius: '1rem',
+										color: '#222',
+										height: '2rem',
+										padding: '0.75rem',
+									}}
+								>
+									{t('item:tags.' + tag)}
+								</div>
+							)
+						}
+					}
+				})}
+			</div>
+		</div>
+	)
+}
+
+function Allergies({ allergies }) {
+	const { t } = useTranslation()
+
+	return (
+		<div
+			style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
+		>
+			<label>Allergies</label>
+			<div
+				style={{
+					display: 'flex',
+					gap: '0.5rem',
+					flexWrap: 'wrap',
+				}}
+			>
+				{allergies.map((allergy) => (
+					<div
+						key={allergy}
+						style={{
+							background: '#eee',
+							borderRadius: '1.5rem',
+							padding: '0.5rem 1rem',
+						}}
+					>
+						{t('item:allergies.' + allergy)}
+					</div>
+				))}
+			</div>
+		</div>
 	)
 }

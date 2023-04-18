@@ -1,10 +1,11 @@
-import { useRef, useState } from 'react'
-import useSWR from 'swr'
+import { useEffect, useRef, useState } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { Form, Formik, useFormikContext } from 'formik'
+import track from 'utils/track'
 
-import useSessionStorage from 'hooks/useSessionStorage'
-import useScrollRestoration from 'hooks/useScrollRestauration'
 import useDebounce from 'hooks/useDebounce'
 
 import Container from 'components/layout/container'
@@ -12,67 +13,203 @@ import Header from 'components/layout/header'
 import Main from 'components/layout/main'
 import Footer from 'components/layout/footer'
 
-import { Ring } from 'components/ui/spinner'
+import { filter } from 'utils/search'
+
+import Input from 'components/form/input'
 import FiltersModal from 'components/search/filters-modal'
 import RestaurantList from 'components/restaurant/restaurant-list'
-import Head from 'next/head'
 
-export default function SearchPage() {
+import SearchIcon from 'components/icons/search'
+import XIcon from 'components/icons/x'
+import { Flag, Restaurant } from 'db/models'
+
+function FiltersSummary() {
 	const { t } = useTranslation()
-	const [needDebounce, setNeedDebounce] = useState(false)
-	const initialSearch = {
-		query: '',
-		cuisine: '',
-		initial: true,
-	}
-	const [search, setSearch] = useSessionStorage('search', initialSearch)
-	const debouncedSearch = useDebounce(search, 150, {
-		debounce: needDebounce,
-	})
-	const cuisinesRef = useRef()
+	const router = useRouter()
+	const { setFieldValue, values, dirty, resetForm } = useFormikContext()
+	const [initialized, setInitialized] = useState(false)
 
-	const resetCuisineScroll = useScrollRestoration(cuisinesRef, 'cuisines')
+	// useEffect(() => {
+	// 	const { query, cuisines } = router.query
 
-	const restaurantListRef = useRef()
-	const itemListRef = useRef()
-	function resetScroll() {
-		if (restaurantListRef.current) {
-			restaurantListRef.current.resetScroll()
+	// 	if (!router.isReady || initialized) {
+	// 		return
+	// 	}
+
+	// 	if (query) {
+	// 		setFieldValue('query', query)
+	// 		setInitialized(true)
+	// 	}
+
+	// 	if (cuisines) {
+	// 		setFieldValue(
+	// 			'cuisines',
+	// 			Array.isArray(cuisines) ? cuisines : [cuisines],
+	// 		)
+	// 		setInitialized(true)
+	// 	}
+	// }, [initialized, setFieldValue, router])
+
+	// useEffect(() => {
+	// 	const query = {
+	// 		...router.query,
+	// 		query: values.query,
+	// 		cuisines: values.cuisines,
+	// 	}
+
+	// 	if (!values.query) delete query.query
+
+	// 	router.replace(
+	// 		{
+	// 			query,
+	// 		},
+	// 		undefined,
+	// 		{ shallow: true },
+	// 	)
+	// }, [router, values])
+
+	if (!dirty) return
+
+	return (
+		<div
+			style={{
+				marginTop: '1rem',
+				display: 'flex',
+				gap: '0.5rem',
+				alignItems: 'center',
+				flexWrap: 'wrap',
+			}}
+		>
+			{Object.entries(values).map(([key, value]) => {
+				if (key === 'cuisines' && value.length > 0) {
+					return value.map((cuisine) => (
+						<div
+							key={cuisine}
+							style={{
+								padding: '0 0 0 1rem',
+								height: '2.5rem',
+								color: '#fff',
+								background: '#555',
+								borderRadius: '1.25rem',
+								display: 'flex',
+								alignItems: 'center',
+								whiteSpace: 'nowrap',
+							}}
+						>
+							{t('restaurant:cuisines.' + cuisine)}
+							<span
+								style={{
+									alignSelf: 'stretch',
+									display: 'flex',
+									alignItems: 'center',
+									padding: '1rem',
+									cursor: 'pointer',
+								}}
+								onClick={() => {
+									setFieldValue(
+										'cuisines',
+										value.filter(
+											(option) => option !== cuisine,
+										),
+									)
+								}}
+							>
+								<XIcon fill="white" width={16} height={16} />
+							</span>
+						</div>
+					))
+				}
+			})}
+			<button
+				className="text"
+				onClick={resetForm}
+				style={{ marginLeft: '0.5rem', flexShrink: 0 }}
+			>
+				Clear all
+			</button>
+		</div>
+	)
+}
+
+function FilteredRestaurantList({ restaurants }) {
+	const { t } = useTranslation()
+	const { values } = useFormikContext()
+
+	const debouncedQuery = useDebounce(values.query, 2000)
+
+	useEffect(() => {
+		if (debouncedQuery) {
+			track.event({
+				event_category: 'search',
+				event_name: 'search_query',
+				event_label: debouncedQuery,
+			})
 		}
-		if (itemListRef.current) {
-			itemListRef.current.resetScroll()
+	}, [debouncedQuery])
+
+	useEffect(() => {
+		if (values.cuisines.length > 0) {
+			track.event({
+				event_category: 'search',
+				event_name: 'search_cuisines',
+				event_label: values.cuisines,
+			})
 		}
-	}
+	}, [values.cuisines])
 
-	function handleInput(event) {
-		setNeedDebounce(true)
-		setSearch((search) => ({ ...search, query: event.target.value }))
-		resetScroll()
-	}
-
-	function handleCuisineChange(event) {
-		const selection = event.target.textContent
-		if (selection !== search.cuisine) {
-			setSearch((search) => ({ ...search, cuisine: selection }))
-		} else {
-			setSearch((search) => ({ ...search, cuisine: '' }))
-		}
-		resetScroll()
-	}
-
-	function handleResetSearch() {
-		setSearch(initialSearch)
-		resetScroll()
-		resetCuisineScroll()
-	}
-
-	const { data } = useSWR(
-		debouncedSearch
-			? `/api/search?query=${debouncedSearch.query}&cuisine=${debouncedSearch.cuisine}`
-			: null,
+	let filteredRestaurants = restaurants.filter(
+		(restaurant) =>
+			(values?.query.length > 0
+				? filter(restaurant.name, values.query) ||
+				  //   filter(restaurant.description, values.search) ||
+				  filter(restaurant.address.city, values.query)
+				: true) &&
+			(values?.cuisines.length > 0
+				? values.cuisines.includes(restaurant.cuisine)
+				: true),
 	)
 
-	const { restaurants } = data || { restaurants: [] }
+	return (
+		<>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
+			>
+				<h2 style={{ fontSize: '1.25rem', margin: '1.5rem 0 1rem' }}>
+					{filteredRestaurants.length +
+						t('search:count') +
+						restaurants.length}
+				</h2>
+				{/* <div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						gap: '1rem',
+						margin: '0 0 1rem',
+					}}
+				>
+					<div
+						style={{
+							fontSize: '1.125rem',
+						}}
+					>
+						Trier par
+					</div>
+					<select style={{ width: '10rem' }}>
+						<option>Distance</option>
+					</select>
+				</div> */}
+			</div>
+			<RestaurantList restaurants={filteredRestaurants} />
+		</>
+	)
+}
+
+export default function SearchPage({ restaurants }) {
+	const { t } = useTranslation()
 
 	const [showFilters, setShowFilters] = useState(false)
 
@@ -100,8 +237,61 @@ export default function SearchPage() {
 				<Main>
 					<h1>{t('search:title')}</h1>
 					<section>
-						<div style={{ display: 'flex', gap: '1rem' }}>
-							<input
+						<Formik
+							initialValues={{
+								query: '',
+								cuisines: [],
+								// price: [5, 70],
+							}}
+						>
+							<>
+								<Form
+									style={{
+										flexDirection: 'row',
+										flexWrap: 'wrap',
+									}}
+								>
+									<Input
+										name="query"
+										arial-label="Query"
+										placeholder={t('search:query')}
+										autoComplete="off"
+										prefix={
+											<SearchIcon
+												type="outline"
+												width={18}
+												height={18}
+											/>
+										}
+									/>
+									{showFilters && (
+										<FiltersModal
+											onClose={() =>
+												setShowFilters(false)
+											}
+										/>
+									)}
+									<button
+										type="button"
+										onClick={() => {
+											setShowFilters(true)
+											track.event({
+												event_category: 'search',
+												event_name: 'show_filters',
+											})
+										}}
+										className="secondary"
+									>
+										{t('search:filters')}
+									</button>
+								</Form>
+								<FiltersSummary />
+								<FilteredRestaurantList
+									restaurants={restaurants}
+								/>
+							</>
+						</Formik>
+						{/* <input
 								type="search"
 								placeholder="Restaurant"
 								value={search ? search.query : ''}
@@ -114,97 +304,8 @@ export default function SearchPage() {
 								type="search"
 								placeholder="Lieu"
 								style={{ flex: 3 }}
-							/>
-							<button onClick={() => setShowFilters(true)}>
-								Filters
-							</button>
-							{showFilters && (
-								<FiltersModal
-									onClose={() => setShowFilters(false)}
-								/>
-							)}
-							<button className="secondary">Rerchercher</button>
-						</div>
+							/> */}
 					</section>
-
-					{data == undefined ? (
-						<div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								flex: 1,
-							}}
-						>
-							<Ring />
-						</div>
-					) : (
-						<>
-							{restaurants && (
-								<>
-									<div
-										style={{
-											display: 'flex',
-											justifyContent: 'space-between',
-											alignItems: 'center',
-											marginTop: '1.5rem',
-										}}
-									>
-										<h2 style={{ fontSize: '1.25rem' }}>
-											{restaurants.length +
-												" restaurants sur 1'047"}
-										</h2>
-										<div
-											style={{
-												display: 'flex',
-												alignItems: 'center',
-												gap: '1rem',
-												margin: '0 0 1rem',
-											}}
-										>
-											<div
-												style={{
-													fontSize: '1.125rem',
-												}}
-											>
-												Trier par
-											</div>
-											<select style={{ width: '10rem' }}>
-												<option>Distance</option>
-											</select>
-										</div>
-									</div>
-									<RestaurantList
-										key="Restaurants"
-										restaurants={restaurants}
-										list={{ name: 'Restaurants' }}
-										ref={restaurantListRef}
-									/>
-									{/* <div
-										style={{
-											position: 'sticky',
-											display: 'flex',
-											justifyContent: 'center',
-											bottom: '1rem',
-											padding: '1rem',
-											// marginTop: '-2.5rem',
-										}}
-									>
-										<button
-											className="secondary"
-											style={{
-												// border: '2px solid white',
-												boxShadow:
-													'0 0 32px 4px rgba(255,255,255,0.5)',
-											}}
-										>
-											{t('search:displayMap')}
-										</button>
-									</div> */}
-								</>
-							)}
-						</>
-					)}
 				</Main>
 				<Footer />
 			</Container>
@@ -213,8 +314,15 @@ export default function SearchPage() {
 }
 
 export async function getStaticProps({ locale }) {
+	const restaurants = await Restaurant.findAll({
+		include: ['address', 'images'],
+	})
+	const flags = await Flag.findAll({ order: ['key'] })
+
 	return {
 		props: {
+			restaurants: JSON.parse(JSON.stringify(restaurants)),
+			flags: JSON.parse(JSON.stringify(flags)),
 			...(await serverSideTranslations(locale, [
 				'common',
 				'search',

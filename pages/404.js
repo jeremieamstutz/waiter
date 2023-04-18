@@ -7,7 +7,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 export default function Custom404Page() {
 	return (
 		<Container>
-			<Header />
+			<Header>
+				<link rel="canonical" href="/404" />
+			</Header>
 			<Main>
 				<div
 					style={{

@@ -5,7 +5,8 @@
 		"price": "Prix",
 		"currency": "Devise",
 		"allergies": "Allergies",
-		"tags": "Tags"
+		"tags": "Tags",
+		"sequenceNumber": "Position"
 	},
 	"allergies": {
 		"moluscs": "Mollusques",
@@ -35,11 +36,9 @@
 		"available": "Disponible",
 		"unavailable": "Indisponible"
 	},
-	"buttons": {
-		"new": {
-			"title": "Nouvel élément",
-			"description": "Ajouter un élément à cette catégorie"
-		}
+	"actions": {
+		"newItem": "Nouvel élément",
+		"addToCart": "Ajouter au panier"
 	},
 	"modals": {
 		"new": {

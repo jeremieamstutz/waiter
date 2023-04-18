@@ -181,6 +181,16 @@ export default function OpenPage({
 					<h1>Metrics</h1>
 					<div
 						style={{
+							flex: 1,
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<p>Work in progress</p>
+					</div>
+					<div
+						style={{
 							display: 'grid',
 							gap: '1.5rem',
 							gridTemplateColumns:

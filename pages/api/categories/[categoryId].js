@@ -1,9 +1,11 @@
-import { getSession } from 'next-auth/react'
 import slugify from 'slugify'
+import { getServerSession } from 'next-auth'
+
+import { markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
+import { query } from 'utils/db'
+import { authOptions } from '../auth/[...nextauth]'
 
 import statusCodes from 'utils/statusCodes'
-import { query } from 'utils/db'
-import { markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const {
@@ -18,7 +20,7 @@ export default async function handler(req, res) {
 			break
 		}
 		case 'PUT': {
-			const session = await getSession({ req })
+			const session = await getServerSession(req, res, authOptions)
 			const category = await getCategory({ categoryId })
 
 			if (
@@ -39,13 +41,15 @@ export default async function handler(req, res) {
 			newCategory.id = categoryId
 
 			newCategory = await updateCategory({ category: newCategory })
-			await markRestaurantAsUpdated({ restaurantId: category.restaurantId })
+			await markRestaurantAsUpdated({
+				restaurantId: category.restaurantId,
+			})
 
 			res.status(statusCodes.ok).json({ category: newCategory })
 			break
 		}
 		case 'DELETE': {
-			const session = await getSession({ req })
+			const session = await getServerSession(req, res, authOptions)
 			const category = await getCategory({ categoryId })
 
 			if (
@@ -58,7 +62,9 @@ export default async function handler(req, res) {
 			}
 
 			await deleteCategory({ categoryId })
-			await markRestaurantAsUpdated ({ restaurantId: category.restaurantId })
+			await markRestaurantAsUpdated({
+				restaurantId: category.restaurantId,
+			})
 
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break

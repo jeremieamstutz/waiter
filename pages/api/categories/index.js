@@ -1,21 +1,19 @@
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 import slugify from 'slugify'
 
+import { authOptions } from '../auth/[...nextauth]'
 import statusCodes from 'utils/statusCodes'
-import { query } from 'utils/db'
-import { getRestaurant, markRestaurantAsUpdated } from '../restaurants/[restaurantId]'
 
 export default async function handler(req, res) {
 	const { method } = req
 
 	switch (method) {
 		case 'GET':
-			res.status(statusCodes.ok).json({ status: 'success' })
-			break
+			return res.status(statusCodes.ok).json({ status: 'success' })
 		case 'POST':
 			const { category } = req.body
 
-			const session = await getSession({ req })
+			const session = await getServerSession(req, res, authOptions)
 			const restaurant = await getRestaurant({
 				restaurantId: category.restaurantId,
 			})
@@ -39,11 +37,9 @@ export default async function handler(req, res) {
 				restaurantId: category.restaurantId,
 			})
 
-			res.status(statusCodes.ok).json({ category: newCategory })
-			break
+			return res.status(statusCodes.ok).json({ category: newCategory })
 		default:
-			res.status(statusCodes.methodNotAllowed).end()
-			break
+			return res.status(statusCodes.methodNotAllowed).end()
 	}
 }
 

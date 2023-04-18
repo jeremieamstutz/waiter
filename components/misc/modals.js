@@ -7,6 +7,10 @@ const WishlistsModal = dynamic(() =>
 )
 const FlagsModal = dynamic(() => import('components/flag/flags-modal'))
 const FeedbackModal = dynamic(() => import('components/misc/feedback-modal'))
+const PaymentMethodsModal = dynamic(() =>
+	import('components/payment/payment-methods-modal'),
+)
+const AddCardModal = dynamic(() => import('components/payment/add-card-modal'))
 
 export default function Modals() {
 	const router = useRouter()
@@ -23,6 +27,12 @@ export default function Modals() {
 			)}
 			{router.query.showFlags && (
 				<FlagsModal onClose={() => router.back()} />
+			)}
+			{router.query.showPaymentMethods && (
+				<PaymentMethodsModal onClose={() => router.back()} />
+			)}
+			{router.query.showAddPaymentMethod && (
+				<AddCardModal onClose={() => router.back()} />
 			)}
 		</>
 	)

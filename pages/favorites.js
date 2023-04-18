@@ -11,13 +11,8 @@ import { Ring } from 'components/ui/spinner'
 import Head from 'next/head'
 
 function FavoritesPage() {
-	const {
-		data: { restaurants },
-		error,
-	} = useSWR('/api/restaurants/favorites', {
-		fallbackData: {
-			restaurants: undefined,
-		},
+	const { data: restaurants, error } = useSWR('/api/restaurants/favorites', {
+		fallbackData: [],
 	})
 
 	return (

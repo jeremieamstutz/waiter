@@ -1,0 +1,18 @@
+{
+	"id": "9218123",
+	"role": "owner/manager/waiter",
+	"first_name": "Jérémie",
+	"last_name": "Amstutz",
+	"date_of_birth": "1998-01-27",
+	"bio": "",
+	"language": "",
+	"country": "Suisse",
+	"gender": "male",
+	"email": "jeremie.amstutz@gmail.com",
+	"image": "https://img.allsetnow.com/media/merchant/covers/2022/6/17/menu_position_5550992.jpg",
+	"created_at": "2022-12-12",
+	"updated_at": "2022-12-12",
+	"notifications": {
+		"marketing": true
+	}
+}

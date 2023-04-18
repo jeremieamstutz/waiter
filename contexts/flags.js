@@ -3,15 +3,21 @@ import useSWR from 'swr'
 
 export const FlagsContext = createContext({ flags: {} })
 
-const defaultFlags = {}
-
-export const FlagsProvider = ({ children }) => {
-	const { data: flags } = useSWR('/api/flags', {
-		fallbackData: defaultFlags,
+export const FlagsProvider = ({ initialValue, children }) => {
+	const { data: rawFlags } = useSWR('/api/flags', {
+		fallbackData: initialValue || [],
 	})
 
+	const flags = rawFlags.reduce(
+		(obj, item) => ({
+			...obj,
+			[item.key]: item.enabled,
+		}),
+		{},
+	)
+
 	return (
-		<FlagsContext.Provider value={{ flags }}>
+		<FlagsContext.Provider value={{ rawFlags, flags }}>
 			{children}
 		</FlagsContext.Provider>
 	)

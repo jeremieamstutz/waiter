@@ -1,0 +1,52 @@
+{
+	"fields": {
+		"photo": {
+			"label": "Photo",
+			"validation": "Photo required",
+			"action": "New photo"
+		},
+		"firstName": {
+			"label": "First name"
+		},
+		"lastName": {
+			"label": "Last name"
+		},
+		"phone": {
+			"label": "Phone",
+			"help": "It helps restaurant owners to reach out to you"
+		},
+		"email": {
+			"label": "Email",
+			"validation": "Email address required"
+		},
+		"birthdate": {
+			"label": "Birthdate"
+		},
+		"bio": {
+			"label": "Bio"
+		},
+		"language": {
+			"label": "Language"
+		},
+		"country": {
+			"label": "Country"
+		},
+		"gender": {
+			"label": "Gender",
+			"options": {
+				"male": "Male",
+				"female": "Female",
+				"other": "Other"
+			}
+		}
+	},
+	"actions": {
+		"editProfile": "Edit profile",
+		"logout": "Log out"
+	},
+	"modals": {
+		"editProfile": {
+			"title": "Edit profile"
+		}
+	}
+}

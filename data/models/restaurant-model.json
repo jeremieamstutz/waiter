@@ -1,0 +1,435 @@
+{
+	"id": "JEiu4IvPa3ctKq8iWn7IlQ",
+	"visible": true,
+	"status": "approved",
+	"slug": "pizzeria-bella",
+	"name": "Pizzeria Bella",
+	"categories": ["pizza", "salad"],
+	"cuisines": ["pizza", "salad"],
+	"slogan": "",
+	"description": "Meilleure pizzeria de la ville",
+	"comments": "New restaurant",
+	"disclaimer": "Page internet non contrôlée par son propriétaire.",
+	"phone": "+41 123 45 67",
+	"email": "contat@mail.com",
+	"website": "restaurant.ch",
+	"currency": {
+		"code": "usd",
+		"symbol": "$"
+	},
+	"reservable": true,
+	"ordering": true,
+	"preordering": true,
+	"takeout": true,
+	"delivery": false,
+	"tipping": true,
+	"pets": true,
+	"accessible": true,
+	"dress_code": "none/casual/business",
+	"parking": {
+		"available": true,
+		"fee": 0,
+		"private": false,
+		"valet": false
+	},
+	"preparation_time": {},
+	"price_level": "$$",
+	"rating": 4.5,
+	"review_count": 12,
+	"reviews": [
+		{
+			"id": 1,
+			"rating": 1,
+			"language": "fr",
+			"translated": false,
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12",
+			"author": {}
+		}
+	],
+	"location": {
+		"address": "Av. des Figuiers 13",
+		"zip": "1007",
+		"postal_code": "1007",
+		"city": {
+			"id": 1,
+			"slug": "lausanne",
+			"language": "fr",
+			"name": "Lausanne",
+			"coordinates": {
+				"latitude": 25.76828540205991,
+				"longitude": -80.19114459313361
+			}
+		},
+		"state": {
+			"id": 1,
+			"slug": "vd",
+			"language": "fr",
+			"name": "Vaud"
+		},
+		"country": {
+			"id": 1,
+			"slug": "ch",
+			"language": "fr",
+			"name": "Suisse",
+			"coordinates": {
+				"latitude": 25.76828540205991,
+				"longitude": -80.19114459313361
+			}
+		},
+		"coordinates": {
+			"latitude": 25.76828540205991,
+			"longitude": -80.19114459313361
+		},
+		"timezone": 2
+	},
+	"logo": "https://s3-media1.fl.yelpcdn.com/bphoto/Thqf9JZtNNBp2tiRGdBu-g/o.jpg",
+	"images": [
+		{
+			"index": 1,
+			"visible": true,
+			"status": "approved",
+			"url": "https://s3-media1.fl.yelpcdn.com/bphoto/Thqf9JZtNNBp2tiRGdBu-g/o.jpg",
+			"legend": "Salle principale"
+		},
+		{
+			"index": 2,
+			"visible": true,
+			"status": "reported",
+			"url": "https://s3-media2.fl.yelpcdn.com/bphoto/ZtOYo2rjeBs9IuBa0UJlZA/o.jpg",
+			"legend": "Pizzeria vue de l'extérieur"
+		}
+	],
+	"socials": {
+		"facebook": "",
+		"instagram": "",
+		"twitter": "",
+		"youtube": "",
+		"pinterest": ""
+	},
+	"created_at": "2022-12-12",
+	"updated_at": "2022-12-12",
+	"opening_hours": [
+		{
+			"id": 1231231,
+			"restaurant_id": 1,
+			"type": "drive_through/happy_hour/delivery/takeout/kitchen/breakfast/lunch/dinner/brunch/puckup",
+			"periods": [
+				{
+					"start": {
+						"day": 0,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 0,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 1,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 1,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 2,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 2,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 3,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 3,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 4,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 4,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 5,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 5,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 6,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 6,
+						"time": "14:30"
+					}
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"id": 43405286,
+			"restaurant_id": 1,
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"title": "Menu du soir",
+			"description": null,
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12",
+			"schedule": [
+				{
+					"day": 0,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 1,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 2,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 3,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 4,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 5,
+					"start": "11:30",
+					"end": "23:59"
+				},
+				{
+					"day": 6,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 6,
+					"start": "16:30",
+					"end": "23:59"
+				}
+			]
+		}
+	],
+	"sections": [
+		{
+			"id": 43406583,
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "breakfast/starters/mains/sides/desserts/drinks/",
+			"language": "fr",
+			"name": "Pizzas",
+			"description": null,
+			"image": "https://img.allsetnow.com/media/merchant/covers/2022/6/17/menu_position_5550992.jpg",
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12"
+		}
+	],
+	"items": [
+		{
+			"id": 43412478,
+			"restaurant_id": 1,
+			"section_id": 1,
+			"ref": "1",
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"name": "Pizza Hawai",
+			"description": "Melted Mozzarella cheese topped with fresh Arugula, diced tomatoes, sweet red onions and black olives tossed in pure olive oil and drizzled with Balsamic glaze.",
+			"price": 2299,
+			"available": true,
+			"weight": 210,
+			"volume": 5,
+			"nutritional_info": {
+				"calories": 299,
+				"cholesterol": 20,
+				"lipids": 25,
+				"carbohydrates": 25,
+				"proteins": 25
+			},
+			"ingredients": [
+				"onion",
+				"tomato",
+				"mozzarella",
+				"sugar",
+				"oregano",
+				"basilic",
+				"flour",
+				"water",
+				"salt",
+				"pepper",
+				"olive_oil"
+			],
+			"spiciness": "none/mild/medium/hot",
+			"allergens": ["gluten", "eggs", "milk"],
+			"tags": ["vegetarian", "halal", "home_made", "bio", "high_protein"],
+			"image": "https://img.allsetnow.com/media/merchant/covers/2022/6/17/menu_position_5550992.jpg",
+			"popular": true,
+			"allow_note": true,
+			"preparation_time": {
+				"min": "",
+				"max": ""
+			},
+			"modifiers": [43412489],
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12"
+		}
+	],
+	"modifiers": [
+		{
+			"id": 43412489,
+			"restaurant_id": 1,
+			"index": 1,
+			"language": "fr",
+			"name": "Taille",
+			"description": "La grande peut être partagée à deux",
+			"min": 1,
+			"max": 1
+		}
+	],
+	"options": [
+		{
+			"id": 9324,
+			"modifier_id": 13891231,
+			"ref": "42",
+			"name": "Grande (18cm)",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 199,
+			"default": false
+		}
+	],
+	"upsell": {
+		"title": "People also added/Also popular",
+		"items": []
+	},
+	"locations": [
+		{
+			"id": 927831,
+			"name": "veranda",
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12"
+		},
+		{
+			"id": 927831,
+			"name": "indoor/outdoor/rooftop/poolside/deck/cellar/pier/veranda/porch/beach/terrace/patio/sidewalk",
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12"
+		}
+	],
+	"tables": [
+		{
+			"id": 93217,
+			"shape": "round/square/rectangular",
+			"name": "T1",
+			"seats": 4,
+			"location": 12,
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12"
+		}
+	],
+	"promotions": [
+		{
+			"id": 123123,
+			"coupon_code": "black-friday-2022",
+			"name": "Black Friday",
+			"slogan": "",
+			"description": "50% sur tout",
+			"image": "",
+			"type": "percentage/absolute",
+			"amount": 50,
+			"min_total": 100,
+			"max_discount": 20,
+			"disclaimer": "",
+			"valid_from": "2022-11-25",
+			"valid_to": null,
+			"usages": 1,
+			"max_usages": 10,
+			"active": true,
+			"schedule": [
+				{
+					"day": 0,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 1,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 2,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 3,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 4,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 5,
+					"start": "11:30",
+					"end": "14:30"
+				},
+				{
+					"day": 6,
+					"start": "16:30",
+					"end": "14:30"
+				}
+			]
+		}
+	],
+	"loyalty": {
+		"milestones": [
+			{
+				"points": 200,
+				"reward": {}
+			},
+			{
+				"points": 800,
+				"reward": {}
+			}
+		]
+	},
+	"staff": []
+}

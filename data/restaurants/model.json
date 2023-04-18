@@ -1,0 +1,239 @@
+{
+	"id": "",
+	"visible": true,
+	"status": "approved",
+	"slug": "",
+	"name": "",
+	"cuisines": [""],
+	"slogan": "",
+	"description": "",
+	"comments": "",
+	"disclaimer": "Page internet non contrôlée par son propriétaire.",
+	"phone": "",
+	"email": "",
+	"website": "",
+	"currency": {
+		"code": "chf",
+		"symbol": "chf"
+	},
+	"booking": false,
+	"ordering": false,
+	"preordering": false,
+	"takeout": false,
+	"delivery": false,
+	"tipping": false,
+	"pets": true,
+	"accessible": true,
+	"dress_code": "none/casual/business",
+	"parking": {
+		"note": "",
+		"available": true,
+		"fee": 0,
+		"private": false,
+		"valet": false
+	},
+	"preparation_time": {
+		"min": null,
+		"max": null
+	},
+	"price_level": "$$",
+	"rating": 4.5,
+	"review_count": 12,
+	"reviews": [
+		{
+			"id": 1,
+			"rating": 1,
+			"language": "fr",
+			"translated": false,
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12",
+			"author": {}
+		}
+	],
+	"location": {
+		"address": "",
+		"zip": "",
+		"city": {
+			"id": 1,
+			"slug": "lausanne",
+			"language": "fr",
+			"name": "Lausanne",
+			"coordinates": {
+				"latitude": null,
+				"longitude": null
+			}
+		},
+		"state": {
+			"id": 1,
+			"slug": "vd",
+			"language": "fr",
+			"name": "Vaud"
+		},
+		"country": {
+			"id": 1,
+			"slug": "ch",
+			"language": "fr",
+			"name": "Suisse",
+			"coordinates": {
+				"latitude": null,
+				"longitude": null
+			}
+		},
+		"coordinates": {
+			"latitude": null,
+			"longitude": null
+		},
+		"timezone": 2
+	},
+	"logo": "",
+	"images": [
+		{
+			"index": 1,
+			"visible": true,
+			"status": "approved",
+			"url": "",
+			"legend": ""
+		}
+	],
+	"socials": {
+		"facebook": "",
+		"instagram": "",
+		"twitter": "",
+		"youtube": "",
+		"pinterest": "",
+		"linkedin": ""
+	},
+	"created_at": "2022-01-01'",
+	"updated_at": "2022-01-01",
+	"opening_hours": [
+		{
+			"id": "",
+			"restaurant_id": "",
+			"type": "drive_through/happy_hour/delivery/takeout/kitchen/breakfast/lunch/dinner/brunch/puckup",
+			"periods": [
+				{
+					"start": {
+						"day": 0,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 0,
+						"time": "14:30"
+					}
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"id": "",
+			"restaurant_id": "",
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"title": "",
+			"description": null,
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01",
+			"schedule": [
+				{
+					"day": 0,
+					"start": "11:30",
+					"end": "23:59"
+				}
+			]
+		}
+	],
+	"sections": [
+		{
+			"id": "",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "breakfast/starters/mains/sides/desserts/drinks/",
+			"language": "fr",
+			"name": "",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	],
+	"items": [
+		{
+			"id": "",
+			"restaurant_id": 1,
+			"section_id": 1,
+			"ref": "",
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"name": "",
+			"description": "",
+			"price": 0,
+			"available": true,
+			"weight": null,
+			"volume": null,
+			"nutritional_info": {
+				"calories": null,
+				"cholesterol": null,
+				"lipids": null,
+				"carbohydrates": null,
+				"proteins": null
+			},
+			"ingredients": [""],
+			"spiciness": "none/mild/medium/hot",
+			"allergens": ["gluten", "eggs", "milk"],
+			"tags": ["vegetarian", "halal", "home_made", "bio", "high_protein"],
+			"image": "",
+			"new": true,
+			"popular": true,
+			"chefs_recommendation": true,
+			"allow_note": true,
+			"preparation_time": {
+				"min": null,
+				"max": null
+			},
+			"modifiers": [""],
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	],
+	"modifiers": [
+		{
+			"id": 43412489,
+			"restaurant_id": 1,
+			"index": 1,
+			"language": "fr",
+			"name": "",
+			"description": "",
+			"min": 1,
+			"max": 1
+		}
+	],
+	"options": [
+		{
+			"id": 9324,
+			"modifier_id": 13891231,
+			"ref": "",
+			"name": "",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 0,
+			"default": false
+		}
+	],
+	"upsell": {
+		"title": "",
+		"items": []
+	},
+	"locations": [
+		{
+			"id": "",
+			"name": "verandaindoor/outdoor/rooftop/poolside/deck/cellar/pier/veranda/porch/beach/terrace/patio/sidewalk",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	]
+}

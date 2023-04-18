@@ -6,7 +6,7 @@ import TwitterProvider from 'next-auth/providers/twitter'
 
 import Adapter from 'utils/adapter'
 
-export default NextAuth({
+export const authOptions = {
 	providers: [
 		EmailProvider({
 			server: {
@@ -34,20 +34,6 @@ export default NextAuth({
 		}),
 	],
 	secret: process.env.NEXTAUTH_SECRET,
-	// database: {
-	// 	type: 'postgres',
-	// 	host: 'ec2-54-72-155-238.eu-west-1.compute.amazonaws.com',
-	// 	port: 5432,
-	// 	username: 'wljmdibvoxmcey',
-	// 	password:
-	// 		'e8b359a0c3f6207781cc992aee8d26986b18a4e36ef5964083cd8e29eb2e7f17',
-	// 	database: 'd26ud75pmvi5cc',
-	// 	extra: {
-	// 		ssl: {
-	// 			rejectUnauthorized: false,
-	// 		},
-	// 	},
-	// },
 	adapter: Adapter(),
 	callbacks: {
 		session: (session) => session,
@@ -57,6 +43,8 @@ export default NextAuth({
 		signOut: '/logout',
 		error: '/login',
 		verifyRequest: '/email-sent',
-		newUser: '/new-user',
+		newUser: '/users/new',
 	},
-})
+}
+
+export default NextAuth(authOptions)

@@ -4,81 +4,64 @@ import Portal from 'components/misc/portal'
 import useLockBodyScroll from 'hooks/useLockBodyScroll'
 
 import classes from './modal.module.css'
+import useEventListener from 'hooks/useEventListener'
 
 const Backdrop = ({ onClick }) => {
 	return <div className={classes.backdrop} onClick={onClick} />
 }
 
 export default function Modal({
-	onClose,
 	title,
-	children,
 	header,
 	footer,
+	children,
+	onClose,
 	...props
 }) {
 	useLockBodyScroll()
 
 	const modalRef = useRef()
 
-	const listeners = useCallback(
-		(event) => {
-			switch (event.keyCode) {
-				// Escape
-				case 27:
-					onClose()
-					break
+	useEventListener('keydown', (event) => {
+		switch (event.keyCode) {
+			// Escape
+			case 27:
+				if (onClose) onClose()
+				break
 
-				// Trap focus
-				case 9:
-					const focusableModalElements =
-						modalRef.current.querySelectorAll(
-							'a, button, textarea, input, select',
-						)
+			// Trap focus
+			case 9:
+				const focusableModalElements =
+					modalRef.current.querySelectorAll(
+						'a, button, textarea, input, select',
+					)
 
-					const firstElement = focusableModalElements[0]
-					const lastElement =
-						focusableModalElements[
-							focusableModalElements.length - 1
-						]
+				const firstElement = focusableModalElements[0]
+				const lastElement =
+					focusableModalElements[focusableModalElements.length - 1]
 
-					// Start in the modal
-					if (
-						!Array.from(focusableModalElements).find(
-							(node) => node === document.activeElement,
-						)
-					) {
-						firstElement.focus()
-						return event.preventDefault()
-					}
+				// Start in the modal
+				if (
+					!Array.from(focusableModalElements).find(
+						(node) => node === document.activeElement,
+					)
+				) {
+					firstElement.focus()
+					return event.preventDefault()
+				}
 
-					// Loop through the elements
-					if (
-						!event.shiftKey &&
-						document.activeElement === lastElement
-					) {
-						firstElement.focus()
-						return event.preventDefault()
-					}
+				// Loop through the elements
+				if (!event.shiftKey && document.activeElement === lastElement) {
+					firstElement.focus()
+					return event.preventDefault()
+				}
 
-					if (
-						event.shiftKey &&
-						document.activeElement === firstElement
-					) {
-						lastElement.focus()
-						return event.preventDefault()
-					}
-			}
-		},
-		[onClose],
-	)
-
-	useEffect(() => {
-		document.addEventListener('keydown', listeners)
-		return () => {
-			document.removeEventListener('keydown', listeners)
+				if (event.shiftKey && document.activeElement === firstElement) {
+					lastElement.focus()
+					return event.preventDefault()
+				}
 		}
-	}, [listeners])
+	})
 
 	return (
 		<Portal selector="#modals">
@@ -92,21 +75,13 @@ export default function Modal({
 					{...props}
 				>
 					{header === false ? undefined : (
-						<header className={classes.title}>
+						<header className={classes.header}>
 							{header ? (
 								header
 							) : (
 								<>
-									<div
-										style={{
-											minWidth: '2.5rem',
-											minHeight: '2.5rem',
-											display: 'flex',
-											gap: '0.5rem',
-											flexShrink: 1,
-										}}
-									></div>
-									<h1>{title}</h1>
+									<div className={classes.spacer} />
+									<h1 className={classes.title}>{title}</h1>
 									<button
 										onClick={onClose}
 										className={classes.close}

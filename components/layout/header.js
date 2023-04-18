@@ -9,18 +9,17 @@ import classes from './header.module.css'
 export default function Header() {
 	return (
 		<div className={classes.header}>
-			<Link href="/">
-				<a
-					className={classes.logo}
-					onClick={() => {
-						track.event({
-							event_category: 'navigation',
-							event_name: 'click_on_logo',
-						})
-					}}
-				>
-					<Logo />
-				</a>
+			<Link
+				href="/"
+				className={classes.logo}
+				onClick={() => {
+					track.event({
+						event_category: 'navigation',
+						event_name: 'click_on_logo',
+					})
+				}}
+			>
+				<Logo />
 			</Link>
 			<Menu />
 		</div>

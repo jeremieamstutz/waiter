@@ -2,6 +2,7 @@
 	"misc": {
 		"actions": {
 			"save": "Save",
+			"skip": "Skip",
 			"send": "Send",
 			"create": "Create",
 			"accept": "Accept",
@@ -16,6 +17,7 @@
 			"report": "Report",
 			"translate": "Translate",
 			"showOriginal": "Show original",
+			"seeAll": "See all",
 			"add": "Add",
 			"addMore": "Add more",
 			"addOneMore": "Add one more"
@@ -28,6 +30,10 @@
 		}
 	},
 	"header": {
+		"flags": "Flags",
+		"search": "Search",
+		"favorites": "Favorites",
+		"account": "Acccount",
 		"login": "Log in"
 	},
 	"footer": {

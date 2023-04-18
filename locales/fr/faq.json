@@ -1,0 +1,24 @@
+{
+	"header": {
+		"title": "FAQ"
+	},
+	"title": "Foire aux questions",
+	"questions": [
+		{
+			"header": "Cette technologie ne risque-t-elle pas d'appauvrir les interactions avec mes clients ?",
+			"content": "Nulla at vestibulum lacus. Sed sed congue quam. Vestibulum a pellentesque risus. Aenean fermentum elit nisi, at consequat ante bibendum non. Duis lobortis justo et iaculis bibendum. Sed feugiat molestie porta. Aliquam erat volutpat. Morbi fringilla nisi suscipit mollis laoreet. Morbi varius in nulla vitae pharetra. Maecenas eget pretium diam, at commodo ligula. Curabitur blandit est a nibh consequat, a dapibus sem rhoncus."
+		},
+		{
+			"header": "J'ai déjà une QR code pour afficher le menu. A quoi sert votre produit ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		},
+		{
+			"header": "Avec quels types de paiment mes clients vont pouvoir régler ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		},
+		{
+			"header": "Et si mes clients n'ont pas de smartphone ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		}
+	]
+}

@@ -1,6 +1,5 @@
 import { v4 as uuid } from 'uuid'
 import AWS from 'aws-sdk'
-import { DateTime } from 'luxon'
 
 import statusCode from '../../utils/statusCodes'
 

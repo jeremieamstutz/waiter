@@ -1,0 +1,52 @@
+{
+	"fields": {
+		"photo": {
+			"label": "Photo",
+			"validation": "Photo requise",
+			"action": "Nouvelle photo"
+		},
+		"firstName": {
+			"label": "Prénom"
+		},
+		"lastName": {
+			"label": "Nom"
+		},
+		"phone": {
+			"label": "Téléphone",
+			"help": "Permet aux restaurateurs de vous contacter"
+		},
+		"email": {
+			"label": "Email",
+			"validation": "Adresse email requise"
+		},
+		"birthdate": {
+			"label": "Date de naissance"
+		},
+		"bio": {
+			"label": "Bio"
+		},
+		"language": {
+			"label": "Langue"
+		},
+		"country": {
+			"label": "Pays"
+		},
+		"gender": {
+			"label": "Genre",
+			"options": {
+				"male": "Homme",
+				"female": "Femme",
+				"other": "Autre"
+			}
+		}
+	},
+	"actions": {
+		"editProfile": "Modifier le profil",
+		"logout": "Se déconnecter"
+	},
+	"modals": {
+		"editProfile": {
+			"title": "Modifier le profil"
+		}
+	}
+}

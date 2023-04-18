@@ -476,6 +476,13 @@ function BookingCard({ booking }) {
 					src={user.image.url || '/images/defaults/item.png'}
 					width={64}
 					height={64}
+					style={{
+						display: 'block',
+						width: '100%',
+						height: 'auto',
+						aspectRatio: 1,
+						objectFit: 'cover',
+					}}
 				/>
 			</div>
 			<div

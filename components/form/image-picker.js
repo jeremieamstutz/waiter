@@ -41,19 +41,22 @@ export default function ImagePicker({ label, help, ...props }) {
 			{field.value ? (
 				<div
 					style={{
-						aspectRatio: 1,
-						borderRadius: '0.5rem',
 						position: 'relative',
 					}}
 				>
 					<Image
 						alt=""
 						src={field.value}
-						layout="responsive"
-						objectFit="cover"
 						width={640}
 						height={640}
 						sizes="640px"
+						style={{
+							display: 'block',
+							width: '100%',
+							height: 'auto',
+							aspectRatio: 1,
+							objectFit: 'cover',
+						}}
 					/>
 					<button
 						style={{
@@ -89,18 +92,21 @@ export default function ImagePicker({ label, help, ...props }) {
 						<div
 							style={{
 								position: 'relative',
-								aspectRatio: 1,
-								overflow: 'hidden',
 							}}
 						>
 							<Image
 								alt=""
 								src={preview}
-								layout="responsive"
-								objectFit="cover"
 								width={640}
 								height={640}
 								sizes="640px"
+								style={{
+									display: 'block',
+									width: '100%',
+									height: 'auto',
+									aspectRatio: 1,
+									objectFit: 'cover',
+								}}
 							/>
 							<div
 								style={{
@@ -125,7 +131,7 @@ export default function ImagePicker({ label, help, ...props }) {
 							style={{
 								width: '100%',
 								height: 'auto',
-								aspectRatio: 1,
+								aspectRatio: 2,
 							}}
 							className={
 								meta.touched && meta.error

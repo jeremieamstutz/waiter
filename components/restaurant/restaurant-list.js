@@ -8,10 +8,11 @@ export default function RestaurantList({ restaurants }) {
 			{restaurants.length < 1 ? (
 				<p style={{ margin: 0 }}>Aucun restaurant</p>
 			) : (
-				restaurants.map((restaurant) => (
+				restaurants.map((restaurant, index) => (
 					<RestaurantCard
-						restaurant={restaurant}
 						key={restaurant.id}
+						restaurant={restaurant}
+						index={index}
 					/>
 				))
 			)}

@@ -1,4 +1,4 @@
-import { query } from 'utils/db'
+import { query, sql } from 'utils/db'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 	switch (method) {
 		case 'GET':
 			const users = await getAllUsers()
-			res.status(statusCodes.ok).json({ users })
+			res.status(statusCodes.ok).json(users)
 			break
 		default:
 			res.status(statusCodes.methodNotAllowed).end()
@@ -16,7 +16,23 @@ export default async function handler(req, res) {
 
 export async function getAllUsers() {
 	const result = await query(
-		`SELECT id, name, email, image, created_at FROM users`,
+		sql`SELECT 
+				"id",
+				"slug",
+				"first_name" AS "firstName",
+				"last_name" AS "lastName",
+				"email",
+				"phone",
+				"role",
+				"image",
+				"gender",
+				"birthdate",
+				"created_at" AS "createdAt",
+				"updated_at" AS "updatedAt"
+			FROM 
+				"users" 
+			ORDER BY 
+				"created_at"`,
 	)
 	return result.rows
 }

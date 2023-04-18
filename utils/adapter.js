@@ -1,99 +1,50 @@
-import { query } from './db'
+import { Account, Session, User, VerificationToken } from 'db/models'
+import { getUser } from 'pages/api/users/[userId]'
+import { query, sql } from './db'
 
 export default function Adapter(client, options = {}) {
 	return {
 		async createUser(user) {
 			console.log('createUser ', user)
-			const result = await query(
-				`
-            INSERT INTO users 
-                (name, email, email_verified, image)
-            VALUES
-                ($1, $2, $3, $4)
-			RETURNING *`,
-				[
-					user.name,
-					user.email,
-					user.emailVerified,
-					user.image,
-				],
-			)
-			return result.rows[0]
+			const { name, email, emailVerified, image } = user
+			const [firstName, lastName] = name.split(' ')
+			return User.create({
+				firstName,
+				lastName,
+				email,
+				emailVerified,
+				image,
+			})
 		},
-		// 		async getUser(...props) {
-		// 			console.log('getUserById ', ...props)
-		// 		},
-		// 		async updateUser(...props) {
-		// 			console.log('updateUser ', props)
-		// 		},
-		// 		async deleteUser(...props) {
-		// 			console.log('deleteUser ', props)
-		// 		},
-		// async getUser(id) {
-		// 	console.log('getUserById ', id)
-		// 	const result = await query(
-		// 		`
-		//         SELECT * FROM users
-		//         WHERE users.id = $1`,
-		// 		[id],
-		// 	)
-		// 	return result.rows[0]
-		// },
-		async getUserByEmail(email) {
-			console.log('getUserByEmail ', email)
-			const result = await query(
-				`
-                SELECT users.* FROM users
-                WHERE email = $1`,
-				[email],
-			)
-			return result.rows[0]
-		},
-		async getUserByAccount({ provider, providerAccountId }) {
-			console.log('getUserByAccount ', provider, providerAccountId)
-			const result = await query(
-				`
-                SELECT users.* FROM accounts
-                JOIN users ON users.id = accounts.user_id
-                WHERE accounts.provider = $1 AND accounts.provider_account_id = $2`,
-				[provider, providerAccountId],
-			)
-			return result.rows[0]
+		async getUser(id) {
+			console.log('getUserById ', id)
+			return User.findOne({ where: { id } })
 		},
 		async updateUser(user) {
 			console.log('updateUser ', user)
-			const { id, emailVerified } = user
-			const result = await query(
-				`
-		        UPDATE users
-		        SET email_verified = $2
-		        WHERE id = $1
-				RETURNING *`,
-				[id, emailVerified],
-			)
-			return result.rows[0]
-			// return await query(
-			// 	`
-			//     UPDATE users
-			//     SET name = $2, email = $3, email_verified = $4, image = $5
-			//     WHERE users.id = $1`,
-			// 	[
-			// 		user.id,
-			// 		user.name,
-			// 		user.email,
-			// 		user.emailVerified?.toString() ?? null,
-			// 		user.image,
-			// 	],
-			// )
+			return User.update(user, { where: { id: user.id } })
 		},
-		async deleteUser(userId) {
-			console.log('deleteUser ', user)
-			return await query(
-				`
-		        DELETE FROM users
-		        WHERE users.id = $1`,
-				[userId],
-			)
+		async getUserByEmail(email) {
+			console.log('getUserByEmail ', email)
+			return User.findOne({ where: { email } })
+		},
+		async getUserByAccount({ provider, providerAccountId }) {
+			console.log('getUserByAccount ', provider, providerAccountId)
+			const account = await Account.findOne({
+				where: { provider, providerAccountId },
+			})
+
+			if (!account) return null
+
+			return User.findOne({ where: { id: account.userId } })
+		},
+		async updateUser(user) {
+			console.log('updateUser ', user)
+			return User.update(user, { where: { id: user.id } })
+		},
+		async deleteUser(id) {
+			console.log('deleteUser ', id)
+			return User.destroy({ where: { id } })
 		},
 		async linkAccount(account) {
 			console.log('linkAccount', account)
@@ -112,75 +63,48 @@ export default function Adapter(client, options = {}) {
 				oauth_token,
 				session_state,
 			} = account
-			return await query(
-				`
-                INSERT INTO accounts
-                    (user_id, type, provider, provider_account_id, refresh_token, access_token, expires_at, token_type, id_token, scope, oauth_token_secret, oauth_token, session_state)
-                VALUES
-                    ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-				RETURNING user_id as "userId", type, provider, provider_account_id as "providerAccountId", refresh_token, access_token, expires_at, token_type, id_token, scope, oauth_token_secret, oauth_token, session_state`,
-				[
-					userId,
-					type,
-					provider,
-					providerAccountId,
-					refresh_token,
-					access_token,
-					expires_at,
-					token_type,
-					id_token,
-					scope,
-					oauth_token_secret,
-					oauth_token,
-					session_state,
-				],
-			)
+			return Account.create({
+				userId: userId,
+				type: type,
+				provider: provider,
+				providerAccountId: providerAccountId,
+				refreshToken: refresh_token,
+				accessToken: access_token,
+				expiresAt: expires_at,
+				tokenType: token_type,
+				idToken: id_token,
+				scope: scope,
+				sessionState: session_state,
+				oauthTokenSecret: oauth_token_secret,
+				oauthToken: oauth_token,
+			})
 		},
 		async unlinkAccount(account) {
-			console.log('NOT IMPLEMENTED unlinkAccount', account)
-			// return await query(
-			// 	`
-			// DELETE FROM account
-			// WHERE accounts.provider = $1 AND accounts.provider_account_id = $2`,
-			// 	[provider, id],
-			// )
+			console.log('unlinkAccount', account)
+			const { provider, providerAccountId } = account
+			return Account.destroy({ where: { provider, providerAccountId } })
 		},
 		async createSession(session) {
 			console.log('createSession', session)
-			const { sessionToken, userId, expires } = session
-			const result = await query(
-				`
-		    INSERT INTO sessions
-		        (session_token, user_id, expires_at)
-		    VALUES
-		        ($1, $2, $3)
-			RETURNING session_token AS "sessionToken", expires_at as "expires", user_id as"userId"`,
-				[sessionToken, userId, expires],
-			)
-			return result.rows[0]
+			return await Session.create(session)
 		},
 		async getSessionAndUser(sessionToken) {
 			console.log('getSessionAndUser ', sessionToken)
-			const session = (
-				await query(
-					`
-		    SELECT session_token AS "sessionToken", expires_at as "expires", user_id as"userId" 
-			FROM sessions 
-			WHERE sessions.session_token = $1`,
-					[sessionToken],
-				)
-			).rows[0]
+
+			const session = await Session.findOne({
+				where: {
+					sessionToken,
+				},
+			})
 
 			if (!session) return null
 
-			const user = (
-				await query(
-					`
-		        SELECT * FROM users
-		        WHERE users.id = $1`,
-					[session.userId],
-				)
-			).rows[0]
+			if (new Date() > session.expires) {
+				await Session.destroy({ where: { sessionToken } })
+				return null
+			}
+
+			const user = await User.findOne({ where: { id: session.userId } })
 
 			return {
 				session,
@@ -189,53 +113,34 @@ export default function Adapter(client, options = {}) {
 		},
 		async updateSession(session) {
 			console.log('updateSession ', session)
-			const { sessionToken, expires } = session
-			return await query(
-				`
-			    UPDATE sessions
-			    SET expires_at = $2
-			    WHERE sessions.session_token = $1`,
-				[sessionToken, expires],
-			)
+			return await Session.update(session, {
+				where: { sessionToken: session.sessionToken },
+			})
 		},
 		async deleteSession(sessionToken) {
 			console.log('deleteSession', sessionToken)
-			return await query(
-				`
-		    DELETE FROM sessions
-		    WHERE sessions.session_token = $1`,
-				[sessionToken],
-			)
+			return await Session.destroy({ where: { sessionToken } })
 		},
 		async createVerificationToken(verificationToken) {
 			console.log('createVerificationToken', verificationToken)
-			const { identifier, token, expires } = verificationToken
-			const result = await query(
-				`
-			INSERT INTO verification_tokens
-				(identifier, token, expires_at)
-			VALUES
-				($1, $2, $3)
-			RETURNING *
-			`,
-				[identifier, token, expires],
-			)
-			return result.rows[0]
+
+			return VerificationToken.create(verificationToken)
 		},
 		async useVerificationToken(verificationToken) {
-			const { identifier, token } = verificationToken
+			console.log('useVerificationToken', verificationToken)
 
-			console.log('useVerificationToken', identifier, token)
-			const result = await query(
-				`
-			DELETE FROM verification_tokens
-			WHERE token = $1 AND identifier = $2
-			RETURNING identifier, token, expires_at AS expires
-			`,
-				[token, identifier],
-			)
-			console.log(result.rows[0])
-			return result.rows[0]
+			const verificationRequest = VerificationToken.findOne({
+				where: verificationToken,
+			})
+
+			if (
+				verificationRequest &&
+				new Date() > verificationRequest.expires
+			) {
+				await verificationRequest.destroy()
+				return null
+			}
+			return verificationRequest
 		},
 	}
 }

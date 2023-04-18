@@ -16,6 +16,7 @@ a.button {
 	border: none;
 	height: 3rem;
 	min-width: 6rem;
+	flex-shrink: 0;
 	padding: calc(var(--paddings) / 2) var(--paddings);
 	font-size: 1.125em;
 	border-radius: 0.5rem;
@@ -23,15 +24,14 @@ a.button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition-property: background;
-	transition-duration: 100ms;
+	transition: all 150ms;
 	outline: none;
 }
 
 button.text {
 	background: transparent !important;
 	justify-content: flex-start;
-	font-size: 1rem;
+	font-size: 1.125rem;
 	min-width: 0;
 	height: auto;
 	padding: 0;
@@ -53,14 +53,32 @@ button.text:focus-visible {
 
 :disabled {
 	opacity: 0.7;
-	cursor: not-allowed;
+	cursor: not-allowed !important;
+}
+
+button.primary,
+a.button.primary {
+	background: #b00;
+	color: white;
+}
+
+button:focus-visible,
+a.button:focus-visible {
+	box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+	scale: 1.05;
+}
+
+button.primary:hover:not(:disabled),
+button.primary:focus-visible,
+a.button.primary:hover:not(:disabled),
+a.button.primary:focus-visible {
+	background: #d00;
 }
 
 button.secondary,
 a.button.secondary {
 	background: var(--color-ui-secondary);
 	color: var(--color-text-inverted);
-	/* border: 1px solid rgba(255, 255, 255, 0.2); */
 }
 
 button.secondary *,
@@ -72,13 +90,6 @@ button.danger,
 a.button.danger {
 	background: #d00;
 	color: white;
-}
-
-button:hover:not(:disabled),
-button:focus-visible,
-a.button:hover:not(:disabled),
-a.button:focus-visible {
-	background: #ddd;
 }
 
 button.secondary:hover:not(:disabled),
@@ -111,7 +122,7 @@ select {
 	outline: none;
 	background: transparent;
 	border-radius: 0.5rem;
-	line-height: 1.5rem;
+	line-height: 1.75rem;
 	padding: 0.75rem;
 	font-size: 1.125rem;
 	resize: none;
@@ -127,13 +138,6 @@ textarea::selection {
 
 ::placeholder {
 	color: var(--color-text-secondary);
-}
-
-button:focus-visible,
-a.button:focus-visible {
-	outline: 1px solid var(--color-ui-hover);
-	outline-offset: 2px;
-	background: var(--color-ui-tertiary);
 }
 
 label {

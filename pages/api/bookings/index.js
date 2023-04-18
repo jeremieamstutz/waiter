@@ -1,43 +1,26 @@
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+
+import { authOptions } from '../auth/[...nextauth]'
+
 import statusCodes from 'utils/statusCodes'
-import { Sequelize, DataType } from 'sequelize'
-
-const sequelize = new Sequelize('database', 'username', 'password', {
-	host: 'localhost',
-	dialect: 'postgres',
-})
-
-const User = sequelize.define('User', {
-	firstName: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-	lastName: {
-		type: DataTypes.STRING,
-	},
-})
 
 export default async function handler(req, res) {
 	const { method } = req
 
 	switch (method) {
-		case 'GET':
-			// const restaurants = await getAllRestaurants()
-			// res.status(statusCodes.ok).json({ restaurants })
-			break
-		case 'POST':
-			const { booking } = req.body
+		case 'GET': {
+			return
+		}
+		case 'POST': {
+			const session = await getServerSession(req, res, authOptions)
 
-			const session = await getSession({ req })
+			const booking = req.body
 
-			res.status(statusCodes.ok).json({})
-			break
-		default:
-			res.status(statusCodes.methodNotAllowed).end()
-			break
+			return res.status(statusCodes.ok).json({})
+		}
+
+		default: {
+			return res.status(statusCodes.methodNotAllowed).end()
+		}
 	}
-}
-
-export async function createBooking() {
-	return
 }

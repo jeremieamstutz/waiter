@@ -1,11 +1,13 @@
 import statusCodes from 'utils/statusCodes'
 import slugify from 'slugify'
-import { query } from 'utils/db'
-import { getSession } from 'next-auth/react'
+import { query, sql } from 'utils/db'
 import {
 	getRestaurant,
 	markRestaurantAsUpdated,
 } from '../restaurants/[restaurantId]'
+import { Item } from 'db/models'
+import { authOptions } from '../auth/[...nextauth]'
+import { getServerSession } from 'next-auth'
 
 export default async function handler(req, res) {
 	const { method } = req
@@ -15,9 +17,9 @@ export default async function handler(req, res) {
 			res.status(statusCodes.ok).json({ status: 'success' })
 			break
 		case 'POST':
-			const { item } = req.body
+			const item = req.body
 
-			const session = await getSession({ req })
+			const session = await getServerSession(req, res, authOptions)
 			const restaurant = await getRestaurant({
 				restaurantId: item.restaurantId,
 			})
@@ -36,8 +38,13 @@ export default async function handler(req, res) {
 				remove: /[*+~.()'"!:@]/g,
 			})
 
-			const newItem = await createItem({ item })
-			await markRestaurantAsUpdated({ restaurantId: item.restaurantId })
+			const itemCount = await Item.count({
+				where: { categoryId: item.categoryId },
+			})
+			const newItem = await Item.create({
+				...item,
+				sequenceNumber: itemCount + 1,
+			})
 
 			res.status(statusCodes.ok).json({ item: newItem })
 			break
@@ -50,33 +57,27 @@ export default async function handler(req, res) {
 export async function createItem({ item }) {
 	const {
 		restaurantId,
-		slug,
 		categoryId,
 		name,
 		description,
 		price,
 		currency,
+		tags,
+		allergies,
 		image,
 	} = item
 	const result = await query(
-		`
-		INSERT INTO items
-			(restaurant_id, slug, category_id, name, description, price, currency, image)
-		VALUES
-			($1, $2, $3, $4, $5, $6, $7, $8)
-		RETURNING *
+		sql`INSERT INTO 
+				items (restaurant_id, category_id, name, description, price, currency, image)
+			VALUES
+				(${restaurantId}, ${categoryId}, ${name}, ${description}, ${price}, ${currency}, ${image})
+			RETURNING *
 		`,
-		[
-			restaurantId,
-			slug,
-			categoryId,
-			name,
-			description,
-			price,
-			currency,
-			image,
-		],
 	)
+	// await query(
+	// 	sql`INSERT INTO
+	// 			tags (item_id, key)`,
+	// )
 	return result.rows[0]
 }
 

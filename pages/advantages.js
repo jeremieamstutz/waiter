@@ -1,6 +1,8 @@
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import Main from 'components/layout/main'
+import LanguageSelector from 'components/translation/language-selector'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import classes from 'styles/advantages.module.css'
 
@@ -10,7 +12,15 @@ export default function AdvantagesPage() {
 			<Container>
 				<Header />
 				<Main>
-					<h1>Avantages</h1>
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-between',
+						}}
+					>
+						<h1>Avantages</h1>
+						<LanguageSelector />
+					</div>
 					<p style={{ margin: '0 0 0.5rem' }}>
 						Que vous soyez restaurateur ou client, Waiter saura vous
 						accompagner.
@@ -25,18 +35,12 @@ export default function AdvantagesPage() {
 										__html: advantage.icon,
 									}}
 								/>
-								<h3
-									className={classes.title}
-									dangerouslySetInnerHTML={{
-										__html: advantage.title,
-									}}
-								/>
-								<p
-									className={classes.description}
-									dangerouslySetInnerHTML={{
-										__html: advantage.description,
-									}}
-								/>
+								<h3 className={classes.title}>
+									{advantage.title}
+								</h3>
+								<p className={classes.description}>
+									{advantage.description}
+								</p>
 							</div>
 						))}
 					</div>
@@ -177,6 +181,14 @@ export default function AdvantagesPage() {
 			</Container>
 		</>
 	)
+}
+
+export async function getStaticProps({ locale }) {
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ['common'])),
+		},
+	}
 }
 
 const DATA = {

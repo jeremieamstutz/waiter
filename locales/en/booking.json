@@ -22,10 +22,19 @@
 			"option_one": "person",
 			"option_other": "people"
 		},
+		"location": {
+			"label": "Location",
+			"placeholder": "",
+			"options": {
+				"inside": "Inside",
+				"outside": "Outside"
+			}
+		},
 		"remark": {
 			"label": "Remark",
 			"placeholder": "Allergy, birthday, etc"
 		},
+		"disclaimer": "Your table is only reserved for 15 min",
 		"confirmation": "Booking saved !"
 	},
 	"footer": {

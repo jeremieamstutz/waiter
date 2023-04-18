@@ -1,21 +1,28 @@
+import { getServerSession } from 'next-auth'
+
+import { Favorite } from 'db/models'
+
 import statusCodes from 'utils/statusCodes'
 import { query } from 'utils/db'
-import { getSession } from 'next-auth/react'
+import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(req, res) {
 	const { method } = req
 
-	const session = await getSession({ req })
+	const session = await getServerSession(req, res, authOptions)
 
 	if (!session) return res.status(statusCodes.forbidden).end()
 
 	switch (method) {
 		case 'GET': {
-			const favorites = await getAllFavorites({
-				userId: session.user.id,
+			const favorites = await Favorite.findAll({
+				where: { userId: session.user.id },
 			})
+
 			res.status(statusCodes.ok).json({
-				restaurantIds: favorites.map((favorite) => favorite.restaurantId),
+				restaurantIds: favorites.map(
+					(favorite) => favorite.restaurantId,
+				),
 			})
 			break
 		}
@@ -29,7 +36,9 @@ export default async function handler(req, res) {
 				userId: session.user.id,
 			})
 			res.status(statusCodes.ok).json({
-				restaurantIds: favorites.map((favorite) => favorite.restaurantId),
+				restaurantIds: favorites.map(
+					(favorite) => favorite.restaurantId,
+				),
 			})
 			break
 		}
@@ -43,7 +52,9 @@ export default async function handler(req, res) {
 				userId: session.user.id,
 			})
 			res.status(statusCodes.ok).json({
-				restaurantIds: favorites.map((favorite) => favorite.restaurantId),
+				restaurantIds: favorites.map(
+					(favorite) => favorite.restaurantId,
+				),
 			})
 			break
 		}

@@ -3,5 +3,23 @@
 		"title": "Rechercher • Waiter"
 	},
 	"title": "Rechercher",
-	"displayMap": "Afficher la carte"
+	"query": "Rechercher restaurants, villes et plus",
+	"filters": "Filtres",
+	"count": " restaurants sur ",
+	"modals": {
+		"filters": {
+			"title": "Filtres",
+
+			"cuisines": {
+				"label": "Cuisines",
+				"actions": {
+					"showMore": "Afficher plus de cuisines",
+					"showLess": "Afficher moins de cuisines"
+				}
+			},
+			"actions": {
+				"showRestaurants": "Afficher les restaurants"
+			}
+		}
+	}
 }

@@ -1,0 +1,28 @@
+{
+	"header": {
+		"title": "FAQ"
+	},
+	"title": "Frequently asked questions",
+	"questions": [
+		{
+			"header": "J'ai un problème avec Waiter. Que faire ?",
+			"content": "Envoyer nous un message ! Nous arriverons peut être à le résoudre grâce à une mise à jour"
+		},
+		{
+			"header": "Quelle-est la différence entre Waiter et TheFork ?",
+			"content": "Nulla at vestibulum lacus. Sed sed congue quam. Vestibulum a pellentesque risus. Aenean fermentum elit nisi, at consequat ante bibendum non. Duis lobortis justo et iaculis bibendum. Sed feugiat molestie porta. Aliquam erat volutpat. Morbi fringilla nisi suscipit mollis laoreet. Morbi varius in nulla vitae pharetra. Maecenas eget pretium diam, at commodo ligula. Curabitur blandit est a nibh consequat, a dapibus sem rhoncus."
+		},
+		{
+			"header": "Faut-il une application pour accéder à Waiter ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		},
+		{
+			"header": "Combien coûte Waiter ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		},
+		{
+			"header": "Combien de temps est-il nécessaire à l'installation ?",
+			"content": "Curabitur feugiat quam nec enim rhoncus ullamcorper. Phasellus quis est et magna tincidunt feugiat. Aenean sit amet libero id velit viverra rhoncus. In a est auctor, volutpat ipsum laoreet, ornare velit."
+		}
+	]
+}

@@ -47,16 +47,15 @@ export default function Menu() {
 				{flags.feedbacks &&
 					status === 'authenticated' &&
 					(session.user.role === 'admin' ? (
-						<Link href="/feedbacks">
-							<a
-								className={`${classes.link} ${classes.text} ${
-									path.startsWith('/favorites')
-										? classes.active
-										: ''
-								}`}
-							>
-								<span className={classes.text}>Feedbacks</span>
-							</a>
+						<Link
+							href="/feedbacks"
+							className={`${classes.link} ${classes.text} ${
+								path.startsWith('/favorites')
+									? classes.active
+									: ''
+							}`}
+						>
+							<span className={classes.text}>Feedbacks</span>
 						</Link>
 					) : (
 						<>
@@ -80,45 +79,26 @@ export default function Menu() {
 							</button>
 						</>
 					))}
-				<Link href="/search">
-					<a
-						aria-label="Search page"
-						className={`${classes.link} ${
-							path.startsWith('/search') ? classes.active : ''
-						}`}
-					>
-						<SearchIcon
-							type="outline"
-							width={20}
-							strokeWidth={2.2}
-							className={classes.icon}
-						/>
-						<span className={classes.text}>
-							{t('common:header.search')}
-						</span>
-					</a>
-				</Link>
 				{status === 'authenticated' && flags.favorites && (
 					<>
-						<Link href="/favorites">
-							<a
-								aria-label="Favorites page"
-								className={`${classes.link} ${
-									path.startsWith('/favorites')
-										? classes.active
-										: ''
-								}`}
-							>
-								<HeartIcon
-									type="outline"
-									width={20}
-									strokeWidth={2.2}
-									className={classes.icon}
-								/>
-								<span className={classes.text}>
-									{t('common:header.favorites')}
-								</span>
-							</a>
+						<Link
+							href="/favorites"
+							aria-label="Favorites page"
+							className={`${classes.link} ${
+								path.startsWith('/favorites')
+									? classes.active
+									: ''
+							}`}
+						>
+							<HeartIcon
+								type="outline"
+								width={20}
+								strokeWidth={2.2}
+								className={classes.icon}
+							/>
+							<span className={classes.text}>
+								{t('common:header.favorites')}
+							</span>
 						</Link>
 						{/* {flags.bookings && (
 							<Link href="/bookings">
@@ -195,13 +175,29 @@ export default function Menu() {
 					</a>
 				</Link> */}
 				{status === 'authenticated' && (
-					<Link
-						href={{
-							pathname: '/users/[userSlug]',
-							query: { userSlug: session.user.id },
-						}}
-					>
-						<a
+					<>
+						<Link
+							href="/search"
+							aria-label="Search page"
+							className={`${classes.link} ${
+								path.startsWith('/search') ? classes.active : ''
+							}`}
+						>
+							<SearchIcon
+								type="outline"
+								width={20}
+								strokeWidth={2.2}
+								className={classes.icon}
+							/>
+							<span className={classes.text}>
+								{t('common:header.search')}
+							</span>
+						</Link>
+						<Link
+							href={{
+								pathname: '/users/[userSlug]',
+								query: { userSlug: session.user.id },
+							}}
 							aria-label="Account page"
 							className={`${classes.link} ${
 								path.startsWith('/users') ? classes.active : ''
@@ -217,31 +213,36 @@ export default function Menu() {
 								}}
 							>
 								<Image
-									alt={session.user.image.alt}
-									src={session.user.image.url}
+									alt={`${session.user.firstName} ${session.user.lastName}`}
+									src={session.user.image}
 									width={32}
 									height={32}
-									layout="responsive"
 									sizes="32px"
+									style={{
+										display: 'block',
+										width: '100%',
+										height: 'auto',
+										aspectRatio: 1,
+										objectFit: 'cover',
+									}}
 								/>
 							</div>
-						</a>
-					</Link>
+						</Link>
+					</>
 				)}
 				{status === 'unauthenticated' && (
-					<Link href={`/login?callbackUrl=${window.location.href}`}>
-						<a
-							className="button primary"
-							style={{
-								fontSize: '1.125rem',
-								flexShrink: 0,
-								minWidth: '6rem',
-								width: 'auto',
-								marginLeft: '1rem',
-							}}
-						>
-							{t('common:header.login')}
-						</a>
+					<Link
+						href={`/login?callbackUrl=${window.location.href}`}
+						className="button primary"
+						style={{
+							fontSize: '1.125rem',
+							flexShrink: 0,
+							minWidth: '6rem',
+							width: 'auto',
+							marginLeft: '1rem',
+						}}
+					>
+						{t('common:header.login')}
 					</Link>
 				)}
 			</nav>

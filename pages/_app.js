@@ -1,19 +1,23 @@
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
-import axios from 'axios'
-import { SWRConfig } from 'swr'
 import { SessionProvider, signIn, useSession } from 'next-auth/react'
+import { appWithTranslation } from 'next-i18next'
+import { SWRConfig } from 'swr'
+import axios from 'axios'
 
-import * as gtag from 'utils/gtag'
+import track from 'utils/track'
+
 import Providers from 'components/misc/providers'
+import Modals from 'components/misc/modals'
+import Spinner from 'components/ui/spinner'
 
 import 'styles/globals.css'
 import 'styles/ui.css'
-import Spinner from 'components/ui/spinner'
-import { appWithTranslation } from 'next-i18next'
 
-function Auth({ children }) {
-	const { status } = useSession()
+function Auth({ auth, children }) {
+	const { data: session, status } = useSession()
+	const router = useRouter()
 
 	if (status === 'loading') {
 		return <Spinner />
@@ -24,23 +28,33 @@ function Auth({ children }) {
 		return <Spinner />
 	}
 
+	if (auth.role && auth.role !== session?.user?.role) {
+		router.push(auth.unauthorized ?? '/')
+	}
+
 	return children
 }
 
-function App({ Component, pageProps, router }) {
+function App({ Component, pageProps: { session, ...pageProps } }) {
 	useEffect(() => {
-		const handleRouteChange = () => {
-			const title = document.title
-			const location = window.location.href
-			const pathname = window.location.pathname
-			if (process.env.NODE_ENV === 'production')
-				gtag.pageview(title, location, pathname)
+		if (window.performance) {
+			const pageLoadDuration = Math.round(performance.now())
+
+			track.event({
+				event_category: 'general',
+				event_name: 'loading_complete',
+				value: pageLoadDuration,
+				non_interaction: true,
+			})
 		}
-		router.events.on('routeChangeComplete', handleRouteChange)
-		return () => {
-			router.events.off('routeChangeComplete', handleRouteChange)
-		}
-	}, [router.events])
+	}, [])
+
+	useEffect(() => {
+		// Manual doesn't work well on iOS Safari https://github.com/vercel/next.js/issues/20951#issuecomment-1231966865
+		const ua = window.navigator.userAgent.toLowerCase()
+		const isMobileSafari = /safari/.test(ua) && /iphone|ipod|ipad/.test(ua)
+		window.history.scrollRestoration = isMobileSafari ? 'auto' : 'manual'
+	}, [])
 
 	return (
 		<>
@@ -55,16 +69,17 @@ function App({ Component, pageProps, router }) {
 					content="initial-scale=1.0, width=device-width, viewport-fit=cover"
 				/>
 			</Head>
-			<SessionProvider session={pageProps.session}>
+			<SessionProvider session={session}>
 				<SWRConfig
 					value={{
 						fetcher: (url) =>
 							axios.get(url).then((res) => res.data),
 					}}
 				>
-					<Providers>
+					<Providers {...pageProps}>
+						<Modals />
 						{Component.auth ? (
-							<Auth>
+							<Auth auth={Component.auth}>
 								<Component {...pageProps} />
 							</Auth>
 						) : (

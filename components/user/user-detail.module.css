@@ -1,32 +1,52 @@
+.header {
+	display: flex;
+	flex-direction: column;
+}
+
 .container {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    align-items: center;
+	flex: 1;
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	align-items: center;
 }
 
 .image {
-    flex-shrink: 0;
+	flex-shrink: 0;
 }
 
 .image img {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	flex: 1;
 }
 
 .name {
-    margin: 0;
+	margin: 0;
 }
 
 .email {
-    margin: 0;
+	margin: 0;
 }
 
-.edit {
-    font-size: 1.125rem;
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+@media screen and (min-width: 640px) {
+	.header {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.actions {
+		flex-direction: row;
+	}
 }

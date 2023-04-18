@@ -1,11 +1,65 @@
 {
+	"categories": {
+		"images": "Images",
+		"details": "Details",
+		"location": "Location",
+		"contact": "Contact"
+	},
+	"fields": {
+		"name": {
+			"label": "Name",
+			"validation": "Name required"
+		},
+		"cuisine": {
+			"label": "Cuisine",
+			"validation": "Cuisine required"
+		},
+		"description": {
+			"label": "Description"
+		},
+		"street": {
+			"label": "Street",
+			"validation": "Street required"
+		},
+		"streetNumber": {
+			"label": "Number"
+		},
+		"zip": {
+			"label": "Zip",
+			"validation": "Zip code required"
+		},
+		"city": {
+			"label": "City",
+			"validation": "City required"
+		},
+		"region": {
+			"label": "Region",
+			"validation": "Region required"
+		},
+		"country": {
+			"label": "Country",
+			"validation": "Country required"
+		},
+		"phone": {
+			"label": "Phone"
+		},
+		"email": {
+			"label": "Email"
+		},
+		"website": {
+			"label": "Website"
+		}
+	},
 	"actions": {
+		"editImages": "Edit images",
 		"addToFavorites": "Add to favorites",
 		"removeFromFavorites": "Remove from favorites",
 		"bookATable": "Book a table",
 		"seeBookings": "See all bookings",
 		"sendAMessage": "Send a message",
-		"editInfos": "Edit information"
+		"editInfos": "Edit information",
+		"seeAllImages": "See all images",
+		"seeAllItems": "See all"
 	},
 	"details": {
 		"openingHours": {
@@ -15,14 +69,13 @@
 		"open": "Open",
 		"openUntil": "Open until",
 		"closed": "Closed",
-		"reviews": "reviews",
-		"cuisines": {
-			"french": "French",
-			"swiss": "Swiss",
-			"italian": "Italian"
-		}
+		"reviews": "reviews"
 	},
 	"cuisines": {
+		"healthy": "Healthy",
+		"vegetarian": "Vegetarian",
+		"homemade": "Home made",
+		"brunch": "Brunch",
 		"french": "French",
 		"swiss": "Swiss",
 		"american": "American",
@@ -30,11 +83,15 @@
 		"chinese": "Chinese",
 		"japanese": "Japanese",
 		"mexican": "Mexican",
+		"british": "British",
 		"mediterranean": "Mediterranean",
 		"hungarian": "Hungarian",
 		"lebanese": "Lebanese",
+		"vietnamese": "Vietnamese",
 		"spanish": "Spanish",
+		"korean": "Korean",
 		"moroccan": "Moroccan",
+		"hawaiian": "Hawaiian",
 		"thai": "Thai",
 		"indian": "Indian",
 		"portugese": "Portugese",
@@ -42,11 +99,22 @@
 		"caribbean": "Caribbean",
 		"greek": "Greek",
 		"german": "German",
-		"russian": "Russian"
+		"peruvian": "Peruvian",
+		"russian": "Russian",
+		"australian": "Australian"
 	},
 	"modals": {
-		"new": {
+		"newRestaurant": {
 			"title": "New restaurant"
+		},
+		"editRestaurant": {
+			"title": "Edit restaurant"
+		},
+		"editRestaurantImages": {
+			"title": "Edit images",
+			"actions": {
+				"addImage": "Add an image"
+			}
 		}
 	}
 }

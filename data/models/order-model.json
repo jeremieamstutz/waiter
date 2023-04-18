@@ -1,0 +1,62 @@
+{
+	"id": 1,
+	"items": [
+		{
+			"id": 1,
+			"details": {
+				"ref": "1",
+				"index": 1,
+				"visible": true,
+				"language": "fr",
+				"name": "Pizza Hawai",
+				"description": "Melted Mozzarella cheese topped with fresh Arugula, diced tomatoes, sweet red onions and black olives tossed in pure olive oil and drizzled with Balsamic glaze.",
+				"price": 2299,
+				"available": true,
+				"weight": 210,
+				"volume": 5
+			},
+			"quantity": 1,
+			"price": 12,
+			"note": "Not too spicy"
+		}
+	],
+	"scheduled_for": "2022-12-12 18:00",
+	"total": {
+		"subtotal": 100,
+		"service_fee": 10,
+		"service_fee_amount": 10,
+		"service_fee_type": "percentage",
+		"loyalty_discount": 9,
+		"loyalty_discount_amount": 10,
+		"loyalty_discount_type": "percentage",
+		"tip": 10,
+		"tip_amount": 10,
+		"tip_type": "absolute",
+		"promotion": 10,
+		"promotion_amount": 10,
+		"promotion_type": "absolute",
+		"voucher": 0,
+		"tax": 10,
+		"tax_rate": 3,
+		"payment_processing_fee": 0,
+		"payment_processing_fee_fixed": 0,
+		"payment_processing_fee_percentage": 0,
+		"manual_price": null,
+		"manual_price_reason": "Friend",
+		"total": 120
+	},
+	"timestamps": {
+		"ordered_at": "",
+		"accepted_at": "",
+		"delivered_at": "",
+		"paid_at": "",
+		"cancelled_at": ""
+	},
+	"preparation_time": {
+		"min": "",
+		"max": ""
+	},
+	"note": "Please provide ustensils.",
+	"notification": "",
+	"coupon_code": ""
+}

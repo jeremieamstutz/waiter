@@ -1,0 +1,489 @@
+{
+	"id": "leonardo",
+	"visible": true,
+	"status": "approved",
+	"slug": "leonardo",
+	"name": "Leonardo",
+	"cuisines": ["italian"],
+	"slogan": "La cuisine italienne au cœur du quartier du Flon !",
+	"description": "Depuis plus de 10 ans, le Leonardo et toute son équipe vit autour de sa devise “Mangi Sano Vivi Bene”, manger sain et bien vivre. Chaque jour, notre chef vous propose de déguster nos spécialités italiennes ou nos pizzas napolitaines préparées dans les règles de l’art, le tout dans un cadre moderne et lumineux au cœur de Lausanne.",
+	"comments": "",
+	"disclaimer": "Page internet non contrôlée par son propriétaire.",
+	"phone": "+41 21 311 49 70",
+	"email": "info@leonardo-barandfood.com",
+	"website": "http://leonardo-barandfood.com",
+	"currency": {
+		"code": "chf",
+		"symbol": "CHF"
+	},
+	"booking": false,
+	"ordering": false,
+	"preordering": false,
+	"takeout": false,
+	"delivery": false,
+	"tipping": false,
+	"pets": true,
+	"accessible": true,
+	"dress_code": null,
+	"parking": {
+		"note": null,
+		"available": true,
+		"fee": 0,
+		"private": false,
+		"valet": false
+	},
+	"preparation_time": {
+		"min": null,
+		"max": null
+	},
+	"price_level": "$$",
+	"rating": 4.3,
+	"review_count": 1136,
+	"reviews": [
+		{
+			"id": 1,
+			"rating": 1,
+			"language": "fr",
+			"translated": false,
+			"created_at": "2022-12-12",
+			"updated_at": "2022-12-12",
+			"author": {}
+		}
+	],
+	"location": {
+		"address": "Voie-du-chariot 6",
+		"zip": "1003",
+		"city": {
+			"id": "lausanne",
+			"slug": "lausanne",
+			"language": "fr",
+			"name": "Lausanne",
+			"coordinates": {
+				"latitude": null,
+				"longitude": null
+			}
+		},
+		"state": {
+			"id": "vd",
+			"slug": "vd",
+			"language": "fr",
+			"name": "Vaud"
+		},
+		"country": {
+			"id": "ch",
+			"slug": "ch",
+			"language": "fr",
+			"name": "Suisse",
+			"coordinates": {
+				"latitude": null,
+				"longitude": null
+			}
+		},
+		"coordinates": {
+			"latitude": null,
+			"longitude": null
+		},
+		"timezone": 2
+	},
+	"logo": "http://leonardo-barandfood.com/wp-content/uploads/2022/05/Logo_Leonardo.png",
+	"images": [
+		{
+			"index": 1,
+			"visible": true,
+			"status": "approved",
+			"url": "",
+			"legend": ""
+		}
+	],
+	"socials": {
+		"facebook": "https://www.facebook.com/leonardolausanne",
+		"instagram": "https://www.instagram.com/leonardobarandfood"
+	},
+	"created_at": "2022-01-01'",
+	"updated_at": "2022-01-01",
+	"opening_hours": [
+		{
+			"id": "",
+			"restaurant_id": "",
+			"type": "restaurant",
+			"periods": [
+				{
+					"start": {
+						"day": 0,
+						"time": "09:30"
+					},
+					"end": {
+						"day": 0,
+						"time": "23:30"
+					}
+				},
+				{
+					"start": {
+						"day": 1,
+						"time": "09:30"
+					},
+					"end": {
+						"day": 1,
+						"time": "23:30"
+					}
+				},
+				{
+					"start": {
+						"day": 2,
+						"time": "09:30"
+					},
+					"end": {
+						"day": 2,
+						"time": "23:30"
+					}
+				},
+				{
+					"start": {
+						"day": 3,
+						"time": "09:30"
+					},
+					"end": {
+						"day": 3,
+						"time": "23:30"
+					}
+				},
+				{
+					"start": {
+						"day": 4,
+						"time": "09:30"
+					},
+					"end": {
+						"day": 4,
+						"time": "23:00"
+					}
+				},
+				{
+					"start": {
+						"day": 5,
+						"time": "10:30"
+					},
+					"end": {
+						"day": 5,
+						"time": "23:00"
+					}
+				}
+			]
+		},
+		{
+			"id": "",
+			"restaurant_id": "",
+			"type": "kitchen",
+			"periods": [
+				{
+					"start": {
+						"day": 0,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 0,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 0,
+						"time": "18:30"
+					},
+					"end": {
+						"day": 0,
+						"time": "22:30"
+					}
+				},
+				{
+					"start": {
+						"day": 1,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 1,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 1,
+						"time": "18:30"
+					},
+					"end": {
+						"day": 1,
+						"time": "22:30"
+					}
+				},
+				{
+					"start": {
+						"day": 2,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 2,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 2,
+						"time": "18:30"
+					},
+					"end": {
+						"day": 2,
+						"time": "22:30"
+					}
+				},
+				{
+					"start": {
+						"day": 3,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 3,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 4,
+						"time": "18:30"
+					},
+					"end": {
+						"day": 4,
+						"time": "22:30"
+					}
+				},
+				{
+					"start": {
+						"day": 5,
+						"time": "11:30"
+					},
+					"end": {
+						"day": 5,
+						"time": "14:30"
+					}
+				},
+				{
+					"start": {
+						"day": 5,
+						"time": "18:30"
+					},
+					"end": {
+						"day": 5,
+						"time": "22:30"
+					}
+				}
+			]
+		}
+	],
+	"menus": [
+		{
+			"id": "",
+			"restaurant_id": "",
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"title": "Carte des mets",
+			"description": null,
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01",
+			"schedule": [
+				{
+					"day": 0,
+					"start": "11:30",
+					"end": "23:59"
+				}
+			]
+		}
+	],
+	"sections": [
+		{
+			"id": "tapas",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "starters",
+			"language": "fr",
+			"name": "Tapas",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		},
+		{
+			"id": "plats",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "mains",
+			"language": "fr",
+			"name": "Plats",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		},
+		{
+			"id": "pizzas",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "mains",
+			"language": "fr",
+			"name": "Pizzas",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		},
+		{
+			"id": "Desserts",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "desserts",
+			"language": "fr",
+			"name": "Desserts",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		},
+		{
+			"id": "boissons",
+			"restaurant_id": 1,
+			"menu_id": 1,
+			"index": 1,
+			"type": "drinks",
+			"language": "fr",
+			"name": "Boissons",
+			"description": null,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	],
+	"items": [
+		{
+			"id": "",
+			"restaurant_id": "le-ticino",
+			"section_id": "bruschette",
+			"ref": "",
+			"index": 1,
+			"visible": true,
+			"language": "fr",
+			"name": "Pomodori e origano",
+			"description": null,
+			"price": 650,
+			"available": true,
+			"image": "",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	],
+	"modifiers": [
+		{
+			"id": "sauce",
+			"restaurant_id": 1,
+			"index": 1,
+			"language": "fr",
+			"name": "Sauce",
+			"description": null,
+			"min": 0,
+			"max": 1
+		},
+		{
+			"id": "garniture",
+			"restaurant_id": 1,
+			"index": 1,
+			"language": "fr",
+			"name": "Garniture",
+			"description": null,
+			"min": 1,
+			"max": 1
+		}
+	],
+	"options": [
+		{
+			"id": 9324,
+			"modifier_id": "sauce",
+			"ref": "",
+			"name": "Sauces poivre vert, ticino, café de paris",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 470,
+			"default": false
+		},
+		{
+			"id": 9324,
+			"modifier_id": "sauce",
+			"ref": "",
+			"name": "Sauce au balsamico, champignons frais",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 570,
+			"default": false
+		},
+		{
+			"id": 9324,
+			"modifier_id": "sauce",
+			"ref": "",
+			"name": "Sauce aux morilles",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 890,
+			"default": false
+		},
+		{
+			"id": 9324,
+			"modifier_id": "garniture",
+			"ref": "",
+			"name": "Pommes frites",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 0,
+			"default": false
+		},
+		{
+			"id": 9324,
+			"modifier_id": "garniture",
+			"ref": "",
+			"name": "Pommes nature",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 0,
+			"default": false
+		},
+		{
+			"id": 9324,
+			"modifier_id": "garniture",
+			"ref": "",
+			"name": "Riz",
+			"description": null,
+			"min": null,
+			"max": null,
+			"price": 0,
+			"default": false
+		}
+	],
+	"upsell": {
+		"title": "",
+		"items": []
+	},
+	"locations": [
+		{
+			"id": "",
+			"name": "verandaindoor/outdoor/rooftop/poolside/deck/cellar/pier/veranda/porch/beach/terrace/patio/sidewalk",
+			"created_at": "2022-01-01",
+			"updated_at": "2022-01-01"
+		}
+	]
+}
+
+// Commentaires:

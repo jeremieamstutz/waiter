@@ -70,6 +70,7 @@ export default function ItemModal({ item, onClose }) {
 				currency: item?.currency ?? 'CHF',
 				allergies: item?.allergies ?? [],
 				tags: item?.tags ?? [],
+				sequenceNumber: item?.sequenceNumber,
 			}}
 			validationSchema={object({
 				image: string(),
@@ -81,13 +82,17 @@ export default function ItemModal({ item, onClose }) {
 					500,
 					'Must be 500 characters or less',
 				),
-				price: number('Must be a number').required('Price is required'),
+				price: number('Must be a number')
+					.positive('Must be a positive number')
+					.required('Price is required'),
 				currency: string().required('Currency is required'),
 			})}
 			onSubmit={async (values) => {
 				if (!item) {
-					await axios.post('/api/items', {
-						item: {
+					await axios({
+						method: 'POST',
+						url: '/api/items',
+						data: {
 							...values,
 							categoryId: router.query.categoryId,
 							restaurantId: router.query.restaurantId,
@@ -99,8 +104,10 @@ export default function ItemModal({ item, onClose }) {
 						event_label: values.name,
 					})
 				} else {
-					await axios.put(`/api/items/${item.id}`, {
-						item: values,
+					await axios({
+						method: 'PUT',
+						url: `/api/items/${item.id}`,
+						data: values,
 					})
 					track.event({
 						event_category: 'item',
@@ -112,7 +119,7 @@ export default function ItemModal({ item, onClose }) {
 				onClose()
 			}}
 		>
-			{({ status, isSubmitting, values, setFieldValue }) => (
+			{({ isSubmitting }) => (
 				<Modal
 					title={
 						item
@@ -177,7 +184,10 @@ export default function ItemModal({ item, onClose }) {
 								type="submit"
 								form={formId}
 								className="secondary"
-								style={{ flex: 1 }}
+								// style={{ flex: 1 }}
+								style={{
+									marginLeft: 'auto',
+								}}
 							>
 								{isSubmitting
 									? t('common:misc.actions.loading')
@@ -189,10 +199,7 @@ export default function ItemModal({ item, onClose }) {
 					}
 				>
 					<Form className={classes.form} id={formId}>
-						<ImagePicker
-							name="image"
-							help="Please select an high-res image"
-						/>
+						<ImagePicker name="image" />
 						<Input
 							type="text"
 							name="name"
@@ -206,25 +213,16 @@ export default function ItemModal({ item, onClose }) {
 							label={t('item:fields.description')}
 							placeholder={t('item:fields.description')}
 						/>
-						<div style={{ display: 'flex', gap: '1rem' }}>
-							<Input
-								type="number"
-								name="price"
-								label={t('item:fields.price')}
-								style={{ flex: 1 }}
-								placeholder="0.00"
-								step="0.05"
-							/>
-							<Select
-								name="currency"
-								label={t('item:fields.currency')}
-								style={{ maxWidth: '10rem' }}
-							>
-								<option value="chf">CHF</option>
-								<option value="eur">EUR</option>
-								<option value="usd">USD</option>
-							</Select>
-						</div>
+						<Input
+							type="number"
+							name="price"
+							label={t('item:fields.price')}
+							style={{ flex: 1 }}
+							suffix="CHF"
+							placeholder="0.00"
+							step="0.05"
+							min="0"
+						/>
 						<Tags
 							name="allergies"
 							label={t('item:fields.allergies')}
@@ -242,6 +240,11 @@ export default function ItemModal({ item, onClose }) {
 								</Tags.Item>
 							))}
 						</Tags>
+						<Input
+							name="position"
+							type="number"
+							label={t('item:fields.sequenceNumber')}
+						/>
 					</Form>
 				</Modal>
 			)}

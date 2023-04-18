@@ -19,6 +19,7 @@ import Input from 'components/form/input'
 import classes from './opening-hours-modal.module.css'
 import { useSession } from 'next-auth/react'
 import { useRestaurant } from 'contexts/restaurant'
+import Accordion from 'components/ui/accordion'
 
 function TimeRange({ id }) {
 	const { t } = useTranslation()
@@ -347,93 +348,137 @@ export default function OpeningHoursModal({ onClose }) {
 					) : null
 				}
 			>
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						margin: '0 -0.5rem',
-					}}
-				>
-					{OPENING_HOURS.map((ranges, weekday) => (
+				<Accordion
+					header="Restaurant"
+					initial={true}
+					content={
 						<div
-							key={weekday}
 							style={{
 								display: 'flex',
-								justifyContent: 'space-between',
-								padding: '1rem',
-								borderRadius: '0.5rem',
-								background:
-									weekday === today
-										? isOpen
-											? '#edfce8'
-											: '#fee'
-										: '',
-								border:
-									weekday === today
-										? isOpen
-											? '1px solid #c5edb9'
-											: '1px solid #fcc'
-										: '',
+								flexDirection: 'column',
 							}}
 						>
-							<div
-								style={{
-									fontSize: '1.125rem',
-									color:
-										weekday === today
-											? isOpen
-												? '#165901'
-												: '#a00'
-											: '#333',
-								}}
-							>
-								{getWeekdays(router.locale)[weekday]}
-							</div>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									gap: '0.5rem',
-								}}
-							>
-								{ranges.length === 0 ? (
+							{OPENING_HOURS.map((ranges, weekday) => (
+								<div
+									key={weekday}
+									style={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										borderRadius: '0.5rem',
+										padding: '1rem 0',
+									}}
+								>
 									<div
 										style={{
-											fontFamily: 'Rubik',
 											fontSize: '1.125rem',
-											color:
-												weekday === today
-													? '#a00'
-													: '#333',
 										}}
 									>
-										{t('restaurant:details.closed')}
+										{getWeekdays(router.locale)[weekday]}
 									</div>
-								) : (
-									ranges.map((hours, index) => (
-										<div
-											key={index}
-											style={{
-												fontFamily: 'Rubik',
-												fontSize: '1.125rem',
-												color:
-													weekday === today
-														? isOpen
-															? '#165901'
-															: '#a00'
-														: '#333',
-											}}
-										>
-											{`${minutesToTime(
-												hours.start,
-											)} - ${minutesToTime(hours.end)}`}
-										</div>
-									))
-								)}
-							</div>
+									<div
+										style={{
+											display: 'flex',
+											flexDirection: 'column',
+											gap: '0.5rem',
+										}}
+									>
+										{ranges.length === 0 ? (
+											<div
+												style={{
+													fontFamily: 'Rubik',
+													fontSize: '1.125rem',
+												}}
+											>
+												{t('restaurant:details.closed')}
+											</div>
+										) : (
+											ranges.map((hours, index) => (
+												<div
+													key={index}
+													style={{
+														fontFamily: 'Rubik',
+														fontSize: '1.125rem',
+													}}
+												>
+													{`${minutesToTime(
+														hours.start,
+													)} - ${minutesToTime(
+														hours.end,
+													)}`}
+												</div>
+											))
+										)}
+									</div>
+								</div>
+							))}
 						</div>
-					))}
-				</div>
+					}
+				/>
+				<Accordion
+					header="Cuisine"
+					content={
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+							}}
+						>
+							{OPENING_HOURS.map((ranges, weekday) => (
+								<div
+									key={weekday}
+									style={{
+										display: 'flex',
+										justifyContent: 'space-between',
+										borderRadius: '0.5rem',
+										padding: '1rem 0',
+									}}
+								>
+									<div
+										style={{
+											fontSize: '1.125rem',
+										}}
+									>
+										{getWeekdays(router.locale)[weekday]}
+									</div>
+									<div
+										style={{
+											display: 'flex',
+											flexDirection: 'column',
+											gap: '0.5rem',
+										}}
+									>
+										{ranges.length === 0 ? (
+											<div
+												style={{
+													fontFamily: 'Rubik',
+													fontSize: '1.125rem',
+												}}
+											>
+												{t('restaurant:details.closed')}
+											</div>
+										) : (
+											ranges.map((hours, index) => (
+												<div
+													key={index}
+													style={{
+														fontFamily: 'Rubik',
+														fontSize: '1.125rem',
+													}}
+												>
+													{`${minutesToTime(
+														hours.start,
+													)} - ${minutesToTime(
+														hours.end,
+													)}`}
+												</div>
+											))
+										)}
+									</div>
+								</div>
+							))}
+						</div>
+					}
+				/>
 			</Modal>
 		)
 	}

@@ -29,9 +29,6 @@ export default function Layout({ head, children }) {
 				{head?.meta?.image && (
 					<meta property="og:image" content={head.meta.image} />
 				)}
-				{head?.meta?.url && (
-					<meta property="og:url" content={head.meta.url} />
-				)}
 				{head?.meta?.type && (
 					<meta property="og:type" content={head.meta.type} />
 				)}

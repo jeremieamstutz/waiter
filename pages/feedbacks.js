@@ -1,19 +1,22 @@
-import Container from 'components/layout/container'
-import Footer from 'components/layout/footer'
-import Header from 'components/layout/header'
-import Main from 'components/layout/main'
-import { getSession } from 'next-auth/react'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import Image from 'next/image'
-import { getAllFeedbacks } from './api/feedbacks'
+import { getServerSession } from 'next-auth'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+import { Feedback } from 'db/models'
+import { authOptions } from './api/auth/[...nextauth]'
+
+import Container from 'components/layout/container'
+import Header from 'components/layout/header'
+import Main from 'components/layout/main'
+import Footer from 'components/layout/footer'
 
 const EMOTIONS = {
 	up: '👍',
 	down: '👎',
 }
 
-function Feedback({ feedback }) {
+function FeedbackItem({ feedback }) {
 	return (
 		<div
 			style={{
@@ -81,10 +84,9 @@ function Feedback({ feedback }) {
 					>
 						{new Date(feedback.createdAt).toLocaleDateString()}
 					</div>
-
-					{/* <div>
+					<div>
 						<span>{feedback.url}</span>-
-					</div> */}
+					</div>
 				</div>
 			</div>
 			<p style={{ margin: 0, color: '#333' }}>{feedback.message}</p>
@@ -113,7 +115,7 @@ export default function FeedbacksPage({ feedbacks }) {
 							}}
 						>
 							{feedbacks.map((feedback) => (
-								<Feedback
+								<FeedbackItem
 									feedback={feedback}
 									key={feedback.id}
 								/>
@@ -127,10 +129,12 @@ export default function FeedbacksPage({ feedbacks }) {
 	)
 }
 
-export async function getServerSideProps({ req, locale }) {
-	const feedbacks = await getAllFeedbacks()
+export async function getServerSideProps({ req, res, locale }) {
+	const feedbacks = await Feedback.findAll({
+		include: ['user'],
+	})
 
-	const session = await getSession({ req })
+	const session = await getServerSession(req, res, authOptions)
 
 	if (session?.user?.role === 'admin') {
 		return {

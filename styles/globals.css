@@ -1,8 +1,8 @@
 :root {
 	--color-primary: #aa0000;
 	--color-ok: green;
-	--color-warning: #f08800;
-	--color-danger: #aa0000;
+	--color-warning: #ce7500;
+	--color-danger: #dd0000;
 	--color-text-primary: #222222;
 	--color-text-secondary: #666666;
 	--color-text-tertiary: #999999;
@@ -12,8 +12,8 @@
 	--color-ui-tertiary: #eeeeee;
 	--color-ui-hover: #666;
 	--color-ui-ok: green;
-	--color-ui-warning: orange;
-	--color-ui-danger: red;
+	--color-ui-warning: #ffeece;
+	--color-ui-danger: #dd0000;
 
 	--margins: 1rem;
 	--paddings: 1rem;
@@ -40,7 +40,7 @@
 	color: var(--color-text-primary);
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: transparent;
-	font-size: 16px;
+	font-size: 15px;
 }
 
 html,
@@ -85,16 +85,16 @@ a {
 
 h1 {
 	font-size: 1.6rem;
-	margin: 0.5em 0;
+	margin: 0.5rem 0 0;
 }
 
 h2 {
-	font-size: 1.25rem;
-	margin: 0.5em 0;
+	font-size: 1.35rem;
+	margin: 0;
 }
 
 h3 {
-	font-size: 1.125rem;
+	font-size: 1.2rem;
 }
 
 .danger {

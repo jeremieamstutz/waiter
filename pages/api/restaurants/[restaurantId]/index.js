@@ -1,11 +1,14 @@
+import { getServerSession } from 'next-auth'
 import axios from 'axios'
-import { getSession } from 'next-auth/react'
-import { getFullRestaurant } from 'pages/api/[restaurantSlug]'
 import slugify from 'slugify'
 
-import { query } from 'utils/db'
+import { Restaurant } from 'db/models'
+
+import { query, sql } from 'utils/db'
 import sleep from 'utils/sleep'
 import statusCodes from 'utils/statusCodes'
+import { getAllRestaurantImages } from './images'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
 
 export default async function handler(req, res) {
 	const {
@@ -16,14 +19,32 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET': {
-			const restaurant = await getFullRestaurant({ restaurantId })
+			const restaurant = await Restaurant.findOne({
+				where: { id: restaurantId },
+				include: ['address', 'images', 'categories', 'items'],
+				order: [
+					['images', 'id', 'ASC'],
+					['categories', 'id', 'ASC'],
+					['items', 'id', 'ASC'],
+				],
+			})
+
 			res.status(statusCodes.ok).json(restaurant)
 			break
 		}
-		case 'PUT':
-			const session = await getSession({ req })
-			const restaurant = await getRestaurant({
-				restaurantId,
+		case 'PUT': {
+			const session = await getServerSession(req, res, authOptions)
+
+			if (!session) {
+				return res
+					.status(statusCodes.unauthorized)
+					.json({ status: 'error', message: 'You are not connected' })
+			}
+
+			const restaurant = await Restaurant.findOne({
+				where: {
+					id: restaurantId,
+				},
 			})
 
 			if (
@@ -32,21 +53,24 @@ export default async function handler(req, res) {
 			) {
 				return res
 					.status(statusCodes.unauthorized)
-					.json({ status: 'error', message: 'Not the right owner' })
+					.json({ status: 'error', message: 'You are not the owner' })
 			}
 
-			let { restaurant: newRestaurant } = req.body
-			newRestaurant.id = restaurantId
+			let newRestaurant = {
+				...restaurant,
+				...body,
+			}
+
 			newRestaurant.slug = slugify(restaurant.name, {
 				lower: true,
 				remove: /[*+~.()'"!:@]/g,
 			})
-			newRestaurant.ownerId = session.user.id
-			newRestaurant.address = `${newRestaurant.street} ${newRestaurant.streetNumber}, ${newRestaurant.postalCode} ${newRestaurant.city}, ${newRestaurant.country}`
+
+			const address = `${newRestaurant.street} ${newRestaurant.streetNumber}, ${newRestaurant.postalCode} ${newRestaurant.city}, ${newRestaurant.country}`
 
 			const response = await axios.get(
 				`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-					newRestaurant.address,
+					address,
 				)}&key=${process.env.GOOGLE_API_KEY}`,
 			)
 			const data = response.data
@@ -55,28 +79,27 @@ export default async function handler(req, res) {
 					error: 'Address not found',
 				})
 			}
+
 			const coordinates = data.results[0].geometry.location
 			newRestaurant.latitude = coordinates.lat
 			newRestaurant.longitude = coordinates.lng
 
-			newRestaurant = await updateRestaurant({
-				restaurant: newRestaurant,
-			})
+			newRestaurant = await updateRestaurant(newRestaurant)
 
-			res.status(statusCodes.ok).json(newRestaurant)
-			break
-		default:
+			return res.status(statusCodes.ok).json(newRestaurant)
+		}
+		default: {
 			res.status(statusCodes.methodNotAllowed).end()
 			break
+		}
 	}
 }
 
-export async function updateRestaurant({ restaurant }) {
+export async function updateRestaurant(restaurant) {
 	const {
 		id,
 		slug,
 		ownerId,
-		image,
 		name,
 		description,
 		cuisine,
@@ -93,33 +116,30 @@ export async function updateRestaurant({ restaurant }) {
 		longitude,
 	} = restaurant
 	const result = await query(
-		`
-        UPDATE restaurants
-		SET 
-			slug = $2, 
-			owner_id = $3, 
-			image = $4, 
-			name = $5, 
-			description = $6, 
-			cuisine = $7, 
-			phone = $8,
-			website = $9,
-			address = $10, 
-			street = $11, 
-			street_number = $12, 
-			postal_code = $13, 
-			city = $14, 
-			region = $15, 
-			country = $16, 
-			latitude = $17, 
-			longitude = $18, 
+		sql`UPDATE restaurants
+			SET 
+			slug = ${slug}, 
+			owner_id = ${ownerId}, 
+			name = ${name}, 
+			description = ${description}, 
+			cuisine = ${cuisine}, 
+			phone = ${phone},
+			website = ${website},
+			address = ${address}, 
+			street = ${street}, 
+			street_number = ${streetNumber}, 
+			postal_code = ${postalCode}, 
+			city = ${city}, 
+			region = ${region}, 
+			country = ${country}, 
+			latitude = ${latitude}, 
+			longitude = ${longitude}, 
 			updated_at = CURRENT_TIMESTAMP
-		WHERE restaurants.id = $1
+		WHERE id = ${id}
         RETURNING 
 			id,
 			slug, 
-			owner_id AS "ownerId", 
-			image,
+			owner_id AS "ownerId",
 			name,
 			description,
 			cuisine,
@@ -137,48 +157,26 @@ export async function updateRestaurant({ restaurant }) {
 			created_at AS "createdAt",
 			updated_at AS "updatedAt"
     `,
-		[
-			id,
-			slug,
-			ownerId,
-			image,
-			name,
-			description,
-			cuisine,
-			phone,
-			website,
-			address,
-			street,
-			streetNumber,
-			postalCode,
-			city,
-			region,
-			country,
-			latitude,
-			longitude,
-		],
 	)
 	return result.rows[0]
 }
 
 export async function markRestaurantAsUpdated({ restaurantId }) {
 	await query(
-		`
-		UPDATE restaurants
-		SET updated_at = CURRENT_TIMESTAMP
-		WHERE restaurants.id = $1`,
-		[restaurantId],
+		sql`UPDATE restaurants
+			SET updated_at = CURRENT_TIMESTAMP
+			WHERE restaurants.id = ${restaurantId}`,
 	)
 }
 
 export async function getRestaurant({ restaurantSlug, restaurantId }) {
+	let restaurant
 	if (restaurantId) {
 		const result = await query(
 			`SELECT 
 				id,
 				slug, 
-				owner_id AS "ownerId", 
-				image,
+				owner_id AS "ownerId",
 				name,
 				description,
 				cuisine,
@@ -199,7 +197,7 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 			WHERE id = $1`,
 			[restaurantId],
 		)
-		return result.rows[0]
+		restaurant = result.rows[0]
 	}
 
 	if (restaurantSlug) {
@@ -208,7 +206,6 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 				id,
 				slug, 
 				owner_id AS "ownerId", 
-				image,
 				name,
 				description,
 				cuisine,
@@ -229,9 +226,13 @@ export async function getRestaurant({ restaurantSlug, restaurantId }) {
 			WHERE slug = $1`,
 			[restaurantSlug],
 		)
-		return result.rows[0]
+		restaurant = result.rows[0]
 	}
-	return
+
+	if (!restaurant) return null
+
+	restaurant.images = await getAllRestaurantImages(restaurant.id)
+	return restaurant
 }
 
 export async function getRestaurantItems({ restaurantId }) {

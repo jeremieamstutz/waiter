@@ -1,215 +1,113 @@
-import { forwardRef, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
-import { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
 
 import ItemCard, { NewItemCard } from './item-card'
-import ChevronIcon from 'components/icons/chevron'
 
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import { useRestaurant } from 'contexts/restaurant'
+
+const NUM_PREVIEW = 5
 
 import classes from './item-list.module.css'
 
-export default function ItemList({ restaurant, category, items }) {
-	const router = useRouter()
+export default function ItemList({ category }) {
 	const { data: session, status } = useSession()
 	const { t } = useTranslation()
+	const router = useRouter()
+	const { restaurant } = useRestaurant()
 
-	const listRef = useRef()
-
-	const [prevEl, setPrevEl] = useState(null)
-	const [nextEl, setNextEl] = useState(null)
-	const [pagEl, setPagEl] = useState(null)
+	const items = restaurant.filteredItems.filter(
+		(item) => item.categoryId === category.id,
+	)
 
 	return (
-		<section className={classes.container}>
+		<section>
 			<div className={classes.header}>
-				<div className={classes.body}>
-					<h2 className={classes.name}>{category.name}</h2>
-					<p className={classes.description}>
-						{category.description}
-					</p>
+				<div classes={classes.body}>
+					<h2 className={classes.title}>{category.name}</h2>
+					{category.description && (
+						<p className={classes.description}>
+							{category.description}
+						</p>
+					)}
 				</div>
-				<div className={classes.actions}>
-					{restaurant &&
-						status === 'authenticated' &&
-						(session.user.id === restaurant.ownerId ||
-							session.user.role === 'admin') && (
-							<div style={{ display: 'flex', gap: '0.5rem' }}>
-								<button
-									onClick={() =>
-										router.push(
-											{
-												pathname: router.pathname,
-												query: {
-													restaurantSlug:
-														router.query
-															.restaurantSlug,
-													editCategory: category.id,
-												},
+				{status === 'authenticated' &&
+					(session.user.id === restaurant.ownerId ||
+						session.user.role === 'admin') && (
+						<div style={{ display: 'flex', gap: '0.5rem' }}>
+							{/* <button
+								onClick={() =>
+									router.push(
+										{
+											pathname: router.pathname,
+											query: {
+												...router.query,
+												showNewItem: true,
+												restaurantId: restaurant.id,
+												categoryId: category.id,
 											},
-											undefined,
-											{ shallow: true },
-										)
-									}
-								>
-									{t('common:misc.actions.edit')}
-								</button>
-							</div>
-						)}
-					<div className={classes.navigation}>
-						<button
-							ref={(node) => setPrevEl(node)}
-							style={{
-								minWidth: 0,
-								padding: 0,
-								width: '2.5rem',
-								height: '2.5rem',
-								borderRadius: '50%',
-								marginLeft: '1rem',
-							}}
-							aria-label="Previous item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width={20}
-								height={20}
-								viewBox="0 0 20 20"
-								fill="currentColor"
+										},
+										undefined,
+										{ shallow: true },
+									)
+								}
+								style={{ minHeight: '3rem', height: 'auto' }}
 							>
-								<path
-									fillRule="evenodd"
-									d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-									clipRule="evenodd"
-								/>
-							</svg>
-						</button>
-						<div
-							ref={(node) => setPagEl(node)}
-							style={{ width: 'auto' }}
-						></div>
-						<button
-							ref={(node) => setNextEl(node)}
-							style={{
-								minWidth: 0,
-								padding: 0,
-								width: '2.5rem',
-								height: '2.5rem',
-								borderRadius: '50%',
-							}}
-							aria-label="Next item"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width={20}
-								height={20}
-								viewBox="0 0 20 20"
-								fill="currentColor"
+								Ajouter un élément
+								{t('item:actions.newItem')}
+							</button> */}
+							<button
+								onClick={() =>
+									router.push(
+										{
+											pathname: router.pathname,
+											query: {
+												restaurantSlug:
+													router.query.restaurantSlug,
+												editCategory: category.id,
+											},
+										},
+										undefined,
+										{ shallow: true },
+									)
+								}
 							>
-								<path
-									fillRule="evenodd"
-									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-									clipRule="evenodd"
-								/>
-							</svg>
-						</button>
-					</div>
-					<button
-						className="text"
-						style={{
-							display: 'flex',
-							gap: '0.25rem',
-							whiteSpace: 'nowrap',
-							marginLeft: '1rem',
-							fontSize: '1.125rem',
-						}}
-						onClick={() =>
-							router.push(
-								{
-									pathname: router.pathname,
-									query: {
-										restaurantSlug:
-											router.query.restaurantSlug,
-										category: category.id,
-									},
-								},
-								undefined,
-								{ shallow: true },
-							)
-						}
-					>
-						{t('restaurant:actions.seeAll')}{' '}
-						<ChevronIcon direction="right" />
-					</button>
-				</div>
+								Modifier la section
+								{/* {t('common:misc.actions.edit')} */}
+							</button>
+						</div>
+					)}
 			</div>
-			<Swiper
-				ref={listRef}
-				modules={[Navigation, Pagination]}
-				loop={false}
-				navigation={{
-					prevEl,
-					nextEl,
-				}}
-				slidesPerGroupAuto={true}
-				spaceBetween={16}
-				threshold={4}
-				pagination={{
-					el: pagEl,
-					type: 'fraction',
-				}}
-				centeredSlidesBounds={true}
-				breakpoints={{
-					0: {
-						centeredSlides: true,
-						slidesPerView: 1.5,
-						slidesPerGroup: 1,
-					},
-					480: {
-						centeredSlides: false,
-						slidesPerView: 2,
-						slidesPerGroup: 2,
-					},
-					560: {
-						slidesPerView: 3,
-						slidesPerGroup: 3,
-					},
-					720: {
-						slidesPerView: 4,
-						slidesPerGroup: 4,
-					},
-					960: {
-						slidesPerView: 5,
-						slidesPerGroup: 5,
-					},
-					1120: {
-						slidesPerView: 6,
-						slidesPerGroup: 6,
-					},
-				}}
-				className={classes.swiper}
-			>
+			<div className={classes.items}>
 				{items.map((item) => (
-					<SwiperSlide key={item.id}>
-						<ItemCard
-							item={item}
-							category={category}
-							lazyRoot={listRef}
-						/>
-					</SwiperSlide>
+					<ItemCard key={item.id} item={item} />
 				))}
 				{status === 'authenticated' &&
 					(session.user.id === restaurant.ownerId ||
 						session.user.role === 'admin') && (
-						<SwiperSlide>
-							<NewItemCard category={category} />
-						</SwiperSlide>
+						<button
+							onClick={() =>
+								router.push(
+									{
+										pathname: router.pathname,
+										query: {
+											...router.query,
+											showNewItem: true,
+											restaurantId: restaurant.id,
+											categoryId: category.id,
+										},
+									},
+									undefined,
+									{ shallow: true },
+								)
+							}
+							style={{ minHeight: '3rem', height: 'auto' }}
+						>
+							{t('item:actions.newItem')}
+						</button>
 					)}
-			</Swiper>
+			</div>
 		</section>
 	)
 }

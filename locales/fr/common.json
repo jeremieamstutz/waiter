@@ -2,6 +2,7 @@
 	"misc": {
 		"actions": {
 			"save": "Enregistrer",
+			"skip": "Passer",
 			"send": "Envoyer",
 			"create": "Créer",
 			"accept": "Accepter",
@@ -16,6 +17,7 @@
 			"report": "Signaler",
 			"translate": "Traduire",
 			"showOriginal": "Afficher l'original",
+			"seeAll": "Voir tout",
 			"add": "Ajouter",
 			"addMore": "Ajouter plus",
 			"addOneMore": "Ajouter un autre"
@@ -28,6 +30,10 @@
 		}
 	},
 	"header": {
+		"flags": "Drapeaux",
+		"search": "Rechercher",
+		"favorites": "Favoris",
+		"account": "Compte",
 		"login": "Se connecter"
 	},
 	"footer": {

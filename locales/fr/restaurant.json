@@ -1,11 +1,65 @@
 {
+	"categories": {
+		"images": "Images",
+		"details": "Détails",
+		"location": "Emplacement",
+		"contact": "Contact"
+	},
+	"fields": {
+		"name": {
+			"label": "Nom",
+			"validation": "Nom requis"
+		},
+		"cuisine": {
+			"label": "Cuisine",
+			"validation": "Cuisine requise"
+		},
+		"description": {
+			"label": "Description"
+		},
+		"street": {
+			"label": "Rue",
+			"validation": "Rue requise"
+		},
+		"streetNumber": {
+			"label": "Numéro"
+		},
+		"zip": {
+			"label": "Code postal",
+			"validation": "Code postal requis"
+		},
+		"city": {
+			"label": "Ville",
+			"validation": "Ville requise"
+		},
+		"region": {
+			"label": "Région",
+			"validation": "Région requise"
+		},
+		"country": {
+			"label": "Pays",
+			"validation": "Pays requis"
+		},
+		"phone": {
+			"label": "Téléphone"
+		},
+		"email": {
+			"label": "Email"
+		},
+		"website": {
+			"label": "Site internet"
+		}
+	},
 	"actions": {
+		"editImages": "Modifier les images",
 		"addToFavorites": "Ajouter aux favoris",
 		"removeFromFavorites": "Retirer des favoris",
 		"bookATable": "Réserver une table",
 		"seeBookings": "Voir les réservations",
 		"sendAMessage": "Envoyer un message",
-		"editInfos": "Modifier les infos"
+		"editInfos": "Modifier les infos",
+		"seeAllImages": "Voir toutes les photos",
+		"seeAllItems": "Voir tout"
 	},
 	"details": {
 		"openingHours": {
@@ -15,14 +69,13 @@
 		"open": "Ouvert",
 		"openUntil": "Ouvert jusqu'à",
 		"closed": "Fermé",
-		"reviews": "évaluations",
-		"cuisines": {
-			"french": "Française",
-			"swiss": "Suisse",
-			"italian": "Italienne"
-		}
+		"reviews": "évaluations"
 	},
 	"cuisines": {
+		"healthy": "Saine",
+		"vegetarian": "Végétarienne",
+		"homemade": "Faite maison",
+		"brunch": "Brunch",
 		"french": "Française",
 		"swiss": "Suisse",
 		"american": "Américaine",
@@ -30,11 +83,15 @@
 		"chinese": "Chinoise",
 		"japanese": "Japonaise",
 		"mexican": "Mexicaine",
+		"british": "Anglais",
 		"mediterranean": "Méditerranéenne",
 		"hungarian": "Hongroise",
 		"lebanese": "Libanaise",
+		"vietnamese": "Vietnamienne",
 		"spanish": "Espagnole",
+		"korean": "Coréenne",
 		"moroccan": "Marocaine",
+		"hawaiian": "Hawaiienne",
 		"thai": "Thaïlandaise",
 		"indian": "Indienne",
 		"portugese": "Portugaise",
@@ -42,11 +99,22 @@
 		"caribbean": "Caraïbe",
 		"greek": "Grecque",
 		"german": "Allemande",
-		"russian": "Russe"
+		"peruvian": "Peruvienne",
+		"russian": "Russe",
+		"australian": "Australienne"
 	},
 	"modals": {
-		"new": {
+		"newRestaurant": {
 			"title": "Nouveau restaurant"
+		},
+		"editRestaurant": {
+			"title": "Modifier le restaurant"
+		},
+		"editRestaurantImages": {
+			"title": "Modifier les images",
+			"actions": {
+				"addImage": "Ajouter une image"
+			}
 		}
 	}
 }

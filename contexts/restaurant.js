@@ -1,17 +1,20 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
+import useSWR from 'swr'
 
 export const RestaurantContext = createContext({
-	restaurant: undefined,
-	setRestaurant: () => {},
+	restaurant: {},
 })
 
 export const RestaurantProvider = ({ initialValue, children }) => {
-	const [restaurant, setRestaurant] = useState(initialValue)
-
-	const restaurantContext = { restaurant, setRestaurant }
+	const { data: restaurant } = useSWR(
+		initialValue ? `/api/restaurants/${initialValue.id}` : null,
+		{
+			fallbackData: initialValue || {},
+		},
+	)
 
 	return (
-		<RestaurantContext.Provider value={restaurantContext}>
+		<RestaurantContext.Provider value={{ restaurant }}>
 			{children}
 		</RestaurantContext.Provider>
 	)

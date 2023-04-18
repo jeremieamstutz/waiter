@@ -28,7 +28,8 @@
 	display: flex;
 	flex-direction: column;
 	background: #ffffff;
-	width: 100%;
+	/* width: 100%; */
+	flex: 1;
 	max-width: 60rem;
 	max-height: 100%;
 	overflow: hidden;
@@ -36,7 +37,7 @@
 	padding-bottom: env(safe-area-inset-bottom);
 }
 
-.title {
+.header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -46,9 +47,15 @@
 	text-align: center;
 }
 
-.title h1 {
+.spacer {
+	display: none;
+}
+
+.title {
+	flex: 1;
 	margin: 0;
 	font-size: 1.5rem;
+	text-align: start;
 }
 
 .close {
@@ -93,6 +100,16 @@
 	.modal {
 		border-radius: 1rem;
 		max-width: 40rem;
+	}
+
+	.spacer {
+		display: block;
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	.title {
+		text-align: center;
 	}
 
 	.body {

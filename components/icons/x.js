@@ -1,4 +1,4 @@
-export default function X(props) {
+export default function XIcon(props) {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

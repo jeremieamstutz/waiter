@@ -8,6 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Container from 'components/layout/container'
 import Header from 'components/layout/header'
 import Footer from 'components/layout/footer'
+import track from 'utils/track'
 
 export default function LogoutPage() {
 	const { t } = useTranslation()
@@ -47,18 +48,20 @@ export default function LogoutPage() {
 							Es-tu sûr de vouloir te déconnecter ?
 						</p> */}
 						<div style={{ display: 'flex', gap: '1rem' }}>
-							<Link href="/">
-								<a className="button">
-									{t('auth:pages.logout.actions.no')}
-								</a>
+							<Link href="/" className="button">
+								{t('auth:pages.logout.actions.no')}
 							</Link>
 							<button
-								onClick={() =>
+								onClick={() => {
 									signOut({
 										callbackUrl:
 											process.env.NEXT_PUBLIC_DOMAIN,
 									})
-								}
+									track.event({
+										event_category: 'auth',
+										event_name: 'logout',
+									})
+								}}
 								className="secondary"
 								style={{ alignSelf: 'stretch' }}
 							>

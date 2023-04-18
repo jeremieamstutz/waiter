@@ -1,3 +1,11 @@
 {
-	"title": "A propos"
+	"head": {
+		"title": "A propos de nous • Waiter",
+		"meta": {
+			"description": "Apprenez-en plus sur Waiter"
+		}
+	},
+	"title": "A propos de nous",
+	"description": "Notre mission est de rassembler les gens autour d'une bonne table.",
+	"joinUs": "Nous rejoindre"
 }

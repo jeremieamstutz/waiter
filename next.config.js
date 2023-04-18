@@ -22,6 +22,17 @@ module.exports = {
 		deviceSizes: [240, 320, 480, 640, 960, 1080, 1240, 1400],
 	},
 	optimizeFonts: false,
+	async rewrites() {
+		return {
+			beforeFiles: [
+				{
+					source: '/fr/a-propos',
+					destination: '/fr/about',
+					locale: false,
+				},
+			],
+		}
+	},
 	experimental: {
 		scrollRestoration: true,
 		optimisticClientCache: false,

@@ -1,31 +1,35 @@
-import { getSession } from 'next-auth/react'
 import slugify from 'slugify'
 import axios from 'axios'
 
-import { query } from 'utils/db'
+import { query, sql } from 'utils/db'
 import statusCodes from 'utils/statusCodes'
-import { getRestaurant } from './[restaurantId]'
+
+import { Restaurant } from 'db/models'
+import { authOptions } from '../auth/[...nextauth]'
+import { getServerSession } from 'next-auth'
 
 export default async function handler(req, res) {
 	const { method } = req
 
 	switch (method) {
 		case 'GET':
-			const restaurants = await getAllRestaurants()
+			const restaurants = await Restaurant.findAll({
+				include: ['address', 'images'],
+			})
 			res.status(statusCodes.ok).json({ restaurants })
 			break
 		case 'POST':
 			const { restaurant } = req.body
 
-			const session = await getSession({ req })
+			const session = await getServerSession(req, res, authOptions)
 
 			restaurant.slug = slugify(restaurant.name, {
 				lower: true,
 				remove: /[*+~.()'"!:@]/g,
 			})
 
-			const existingRestaurant = await getRestaurant({
-				restaurantSlug: restaurant.slug,
+			const existingRestaurant = await Restaurant.findOne({
+				where: { slug: restaurant.slug },
 			})
 
 			if (existingRestaurant) {
@@ -35,8 +39,6 @@ export default async function handler(req, res) {
 			}
 
 			restaurant.ownerId = session.user.id
-
-			restaurant.address = `${restaurant.street} ${restaurant.streetNumber}, ${restaurant.postalCode} ${restaurant.city}, ${restaurant.country}`
 
 			const response = await axios.get(
 				`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
@@ -53,12 +55,34 @@ export default async function handler(req, res) {
 
 			const coordinates = data.results[0].geometry.location
 
-			restaurant.latitude = coordinates.lat
-			restaurant.longitude = coordinates.lng
+			const createdRestaurant = await Restaurant.create(
+				{
+					slug: restaurant.slug,
+					status: 'hidden',
+					name: restaurant.name,
+					slogan: restaurant.slogan,
+					description: restaurant.description,
+					phone: restaurant.phone,
+					email: restaurant.email,
+					website: restaurant.website,
+					currency: 'CHF',
+					allowBooking: true,
+					address: {
+						street: restaurant.street,
+						streetNumber: restaurant.streetNumber,
+						postalCode: restaurant.postalCode,
+						city: restaurant.city,
+						region: restaurant.region,
+						country: restaurant.country,
+						coordinates: [coordinates.lat, coordinates.lng],
+					},
+				},
+				{
+					include: ['address'],
+				},
+			)
 
-			const newRestaurant = await createRestaurant({ restaurant })
-
-			res.status(statusCodes.ok).json({ restaurant: newRestaurant })
+			res.status(statusCodes.ok).json(createdRestaurant)
 			break
 		default:
 			res.status(statusCodes.methodNotAllowed).end()
@@ -142,8 +166,7 @@ export async function getAllRestaurants() {
 		`SELECT 
 			id,
 			slug, 
-			owner_id AS "ownerId", 
-			image,
+			owner_id AS "ownerId",
 			name,
 			description,
 			cuisine,
@@ -163,14 +186,26 @@ export async function getAllRestaurants() {
 		FROM restaurants
         ORDER BY created_at DESC`,
 	)
-	return result.rows
+	let restaurants = result.rows
+
+	restaurants = await Promise.all(
+		restaurants.map(async (restaurant) => ({
+			...restaurant,
+			images: await getAllRestaurantImages(restaurant.id),
+		})),
+	)
+
+	return restaurants
 }
 
 export async function getAllRestaurantSlugs() {
 	const result = await query(
-		`SELECT slug AS "restaurantSlug"
-		FROM restaurants
-        ORDER BY created_at DESC`,
+		sql`SELECT 
+				"slug" AS "restaurantSlug"
+			FROM 
+				"restaurants"
+        	ORDER BY 
+				"created_at" DESC`,
 	)
 	return result.rows
 }

@@ -4,9 +4,14 @@ import configs from 'db/config'
 let sequelize
 
 if (!sequelize) {
-	console.log('New sequelize instance')
 	sequelize = new Sequelize(configs[process.env.NODE_ENV])
-	sequelize.sync()
+	// sequelize.sync()
+} else {
+	sequelize.connectionManager.initPools()
+
+	if (sequelize.connectionManager.hasOwnProperty('getConnection')) {
+		delete sequelize.connectionManager.getConnection
+	}
 }
 
 export default sequelize
