@@ -32,25 +32,17 @@ module.exports = {
 			underscored: true,
 			paranoid: true,
 		},
+		pool: {
+			max: 3,
+			min: 0,
+			idle: 0,
+			acquire: 3000,
+		},
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			},
+		},
 	},
-	// production: {
-	// 	username: process.env.DB_USER,
-	// 	password: process.env.DB_PASS,
-	// 	database: process.env.DB_NAME,
-	// 	host: process.env.DB_HOST,
-	// 	pool: {
-	// 		max: 3,
-	// 		min: 0,
-	// 		idle: 0,
-	// 		acquire: 3000,
-	// 	},
-	// 	logging: false,
-	// 	dialect: 'postgres',
-	// 	dialectOptions: {
-	// 		ssl: {
-	// 			require: true,
-	// 			rejectUnauthorized: false,
-	// 		},
-	// 	},
-	// },
 }
