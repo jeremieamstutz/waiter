@@ -7,8 +7,11 @@ export default function Adapter(client, options = {}) {
 		async createUser(user) {
 			console.log('createUser ', user)
 			const { name, email, emailVerified, image } = user
-			const [firstName, lastName] = name.split(' ')
+			const [firstName, lastName] = name ? name.split(' ') : ['', '']
+			const slug = email.split('@')[0]
+
 			return User.create({
+				slug,
 				firstName,
 				lastName,
 				email,
