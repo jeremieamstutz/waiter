@@ -10,12 +10,6 @@ module.exports = {
 		database: process.env.DB_NAME,
 		host: process.env.DB_HOST,
 		port: process.env.DB_PORT,
-		pool: {
-			max: 3,
-			min: 0,
-			idle: 0,
-			acquire: 3000,
-		},
 		logging: false,
 		define: {
 			underscored: true,
@@ -34,12 +28,6 @@ module.exports = {
 		define: {
 			underscored: true,
 			paranoid: true,
-		},
-		pool: {
-			max: 3,
-			min: 0,
-			idle: 0,
-			acquire: 3000,
 		},
 		dialectModule: pg,
 		dialectOptions: {
