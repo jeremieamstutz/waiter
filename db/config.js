@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const pg = require('pg')
+
 module.exports = {
 	development: {
 		dialect: 'postgres',
@@ -19,6 +21,7 @@ module.exports = {
 			underscored: true,
 			paranoid: true,
 		},
+		dialectModule: pg,
 	},
 	production: {
 		dialect: 'postgres',
@@ -38,6 +41,7 @@ module.exports = {
 			idle: 0,
 			acquire: 3000,
 		},
+		dialectModule: pg,
 		dialectOptions: {
 			ssl: {
 				require: true,
