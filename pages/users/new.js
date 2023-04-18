@@ -52,7 +52,23 @@ export default function NewUserPage({ user }) {
 
 export async function getServerSideProps({ req, res, locale }) {
 	const session = await getServerSession(req, res, authOptions)
+
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/login',
+				permanent: false,
+			},
+		}
+	}
+
 	const user = await User.findOne({ where: { id: session.user.id } })
+
+	if (!user) {
+		return {
+			notFound: true,
+		}
+	}
 
 	return {
 		props: {
