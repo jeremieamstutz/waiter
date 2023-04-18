@@ -67,6 +67,7 @@ export default function LoginPage() {
 	const { t } = useTranslation()
 
 	const { error } = router.query
+	console.error(error)
 
 	const [loading, setLoading] = useState(false)
 
