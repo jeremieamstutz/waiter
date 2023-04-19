@@ -4,7 +4,6 @@
 	flex-direction: column;
 	cursor: pointer;
 	user-select: none;
-	padding: 1rem;
 	border-radius: 1rem;
 	outline: none;
 	transition: all 150ms;

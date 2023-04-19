@@ -36,9 +36,8 @@
 	margin-top: 1.5rem;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-	gap: 0.25rem;
-	margin: 0.5rem -1rem -1rem;
-
+	gap: 1.5rem;
+	margin: 1.5rem 0 0;
 	overflow: visible;
 }
 

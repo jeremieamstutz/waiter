@@ -5,10 +5,10 @@
 	max-width: 1280px;
 	width: 100%;
 	margin: 0 auto;
-	padding-top: env(safe-area-inset-top);
-	padding-bottom: env(safe-area-inset-bottom);
-	padding-left: max(2rem, env(safe-area-inset-left));
-	padding-right: max(2rem, env(safe-area-inset-right));
+	padding-top: max(1rem, env(safe-area-inset-top));
+	padding-bottom: max(1rem, env(safe-area-inset-bottom));
+	padding-left: max(1rem, env(safe-area-inset-left));
+	padding-right: max(1rem, env(safe-area-inset-right));
 }
 
 @media screen and (min-width: 960px) {
